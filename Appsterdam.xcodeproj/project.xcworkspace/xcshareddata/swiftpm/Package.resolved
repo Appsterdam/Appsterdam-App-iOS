@@ -1,0 +1,16 @@
+{
+  "object": {
+    "pins": [
+      {
+        "package": "Aurora",
+        "repositoryURL": "https://github.com/AuroraFramework/Aurora.swift",
+        "state": {
+          "branch": "master",
+          "revision": "15b0c16b34adb4929e14441e00dd15aeb84e12e2",
+          "version": null
+        }
+      }
+    ]
+  },
+  "version": 1
+}
