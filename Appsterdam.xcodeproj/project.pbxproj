@@ -7,64 +7,74 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2BE69E50279AEBAE0024D241 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E4F279AEBAE0024D241 /* AppDelegate.swift */; };
-		2BE69E52279AEBAE0024D241 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E51279AEBAE0024D241 /* ViewController.swift */; };
-		2BE69E54279AEBB00024D241 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE69E53279AEBB00024D241 /* Assets.xcassets */; };
-		2BE69E57279AEBB00024D241 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE69E55279AEBB00024D241 /* Main.storyboard */; };
-		2BE69E62279AEBB00024D241 /* AppsterdamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E61279AEBB00024D241 /* AppsterdamTests.swift */; };
-		2BE69E6C279AEBB00024D241 /* AppsterdamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E6B279AEBB00024D241 /* AppsterdamUITests.swift */; };
-		2BE69E6E279AEBB00024D241 /* AppsterdamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E6D279AEBB00024D241 /* AppsterdamUITestsLaunchTests.swift */; };
-		2BE69E7C279AEC590024D241 /* Aurora in Frameworks */ = {isa = PBXBuildFile; productRef = 2BE69E7B279AEC590024D241 /* Aurora */; };
+		2BE69E8A279AF0190024D241 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E89279AF0190024D241 /* AppDelegate.swift */; };
+		2BE69E8C279AF0190024D241 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E8B279AF0190024D241 /* SceneDelegate.swift */; };
+		2BE69E8E279AF0190024D241 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E8D279AF0190024D241 /* HomeViewController.swift */; };
+		2BE69E91279AF0190024D241 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE69E8F279AF0190024D241 /* Main.storyboard */; };
+		2BE69E93279AF01B0024D241 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BE69E92279AF01B0024D241 /* Assets.xcassets */; };
+		2BE69E96279AF01B0024D241 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2BE69E94279AF01B0024D241 /* LaunchScreen.storyboard */; };
+		2BE69EA1279AF01B0024D241 /* AppsterdamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69EA0279AF01B0024D241 /* AppsterdamTests.swift */; };
+		2BE69EAB279AF01B0024D241 /* AppsterdamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69EAA279AF01B0024D241 /* AppsterdamUITests.swift */; };
+		2BE69EAD279AF01B0024D241 /* AppsterdamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69EAC279AF01B0024D241 /* AppsterdamUITestsLaunchTests.swift */; };
+		2BE69EBB279AF0770024D241 /* Aurora in Frameworks */ = {isa = PBXBuildFile; productRef = 2BE69EBA279AF0770024D241 /* Aurora */; };
+		2BE69EBD279AF0C50024D241 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69EBC279AF0C50024D241 /* EventViewController.swift */; };
+		2BE69EBF279AF0DA0024D241 /* AboutViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69EBE279AF0DA0024D241 /* AboutViewController.swift */; };
+		2BE69EC1279B00FE0024D241 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69EC0279B00FE0024D241 /* Settings.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		2BE69E5E279AEBB00024D241 /* PBXContainerItemProxy */ = {
+		2BE69E9D279AF01B0024D241 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2BE69E44279AEBAE0024D241 /* Project object */;
+			containerPortal = 2BE69E7E279AF0190024D241 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2BE69E4B279AEBAE0024D241;
+			remoteGlobalIDString = 2BE69E85279AF0190024D241;
 			remoteInfo = Appsterdam;
 		};
-		2BE69E68279AEBB00024D241 /* PBXContainerItemProxy */ = {
+		2BE69EA7279AF01B0024D241 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 2BE69E44279AEBAE0024D241 /* Project object */;
+			containerPortal = 2BE69E7E279AF0190024D241 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 2BE69E4B279AEBAE0024D241;
+			remoteGlobalIDString = 2BE69E85279AF0190024D241;
 			remoteInfo = Appsterdam;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2BE69E4C279AEBAE0024D241 /* Appsterdam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appsterdam.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BE69E4F279AEBAE0024D241 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		2BE69E51279AEBAE0024D241 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		2BE69E53279AEBB00024D241 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		2BE69E56279AEBB00024D241 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		2BE69E58279AEBB00024D241 /* Appsterdam.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Appsterdam.entitlements; sourceTree = "<group>"; };
-		2BE69E5D279AEBB00024D241 /* AppsterdamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppsterdamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BE69E61279AEBB00024D241 /* AppsterdamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamTests.swift; sourceTree = "<group>"; };
-		2BE69E67279AEBB00024D241 /* AppsterdamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppsterdamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		2BE69E6B279AEBB00024D241 /* AppsterdamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITests.swift; sourceTree = "<group>"; };
-		2BE69E6D279AEBB00024D241 /* AppsterdamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2BE69E86279AF0190024D241 /* Appsterdam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appsterdam.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BE69E89279AF0190024D241 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		2BE69E8B279AF0190024D241 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
+		2BE69E8D279AF0190024D241 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
+		2BE69E90279AF0190024D241 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		2BE69E92279AF01B0024D241 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		2BE69E95279AF01B0024D241 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		2BE69E97279AF01B0024D241 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2BE69E9C279AF01B0024D241 /* AppsterdamTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppsterdamTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BE69EA0279AF01B0024D241 /* AppsterdamTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamTests.swift; sourceTree = "<group>"; };
+		2BE69EA6279AF01B0024D241 /* AppsterdamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppsterdamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		2BE69EAA279AF01B0024D241 /* AppsterdamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITests.swift; sourceTree = "<group>"; };
+		2BE69EAC279AF01B0024D241 /* AppsterdamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2BE69EBC279AF0C50024D241 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
+		2BE69EBE279AF0DA0024D241 /* AboutViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutViewController.swift; sourceTree = "<group>"; };
+		2BE69EC0279B00FE0024D241 /* Settings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2BE69E49279AEBAE0024D241 /* Frameworks */ = {
+		2BE69E83279AF0190024D241 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BE69E7C279AEC590024D241 /* Aurora in Frameworks */,
+				2BE69EBB279AF0770024D241 /* Aurora in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2BE69E5A279AEBB00024D241 /* Frameworks */ = {
+		2BE69E99279AF01B0024D241 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2BE69E64279AEBB00024D241 /* Frameworks */ = {
+		2BE69EA3279AF01B0024D241 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -74,65 +84,78 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2BE69E43279AEBAE0024D241 = {
+		2BE69E7D279AF0190024D241 = {
 			isa = PBXGroup;
 			children = (
-				2BE69E4E279AEBAE0024D241 /* Appsterdam */,
-				2BE69E60279AEBB00024D241 /* AppsterdamTests */,
-				2BE69E6A279AEBB00024D241 /* AppsterdamUITests */,
-				2BE69E4D279AEBAE0024D241 /* Products */,
+				2BE69E88279AF0190024D241 /* Appsterdam */,
+				2BE69E9F279AF01B0024D241 /* AppsterdamTests */,
+				2BE69EA9279AF01B0024D241 /* AppsterdamUITests */,
+				2BE69E87279AF0190024D241 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		2BE69E4D279AEBAE0024D241 /* Products */ = {
+		2BE69E87279AF0190024D241 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				2BE69E4C279AEBAE0024D241 /* Appsterdam.app */,
-				2BE69E5D279AEBB00024D241 /* AppsterdamTests.xctest */,
-				2BE69E67279AEBB00024D241 /* AppsterdamUITests.xctest */,
+				2BE69E86279AF0190024D241 /* Appsterdam.app */,
+				2BE69E9C279AF01B0024D241 /* AppsterdamTests.xctest */,
+				2BE69EA6279AF01B0024D241 /* AppsterdamUITests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		2BE69E4E279AEBAE0024D241 /* Appsterdam */ = {
+		2BE69E88279AF0190024D241 /* Appsterdam */ = {
 			isa = PBXGroup;
 			children = (
-				2BE69E4F279AEBAE0024D241 /* AppDelegate.swift */,
-				2BE69E51279AEBAE0024D241 /* ViewController.swift */,
-				2BE69E53279AEBB00024D241 /* Assets.xcassets */,
-				2BE69E55279AEBB00024D241 /* Main.storyboard */,
-				2BE69E58279AEBB00024D241 /* Appsterdam.entitlements */,
+				2BE69E89279AF0190024D241 /* AppDelegate.swift */,
+				2BE69E8B279AF0190024D241 /* SceneDelegate.swift */,
+				2BE69EC0279B00FE0024D241 /* Settings.swift */,
+				2BE69EC2279B03740024D241 /* View Controllers */,
+				2BE69E8F279AF0190024D241 /* Main.storyboard */,
+				2BE69E92279AF01B0024D241 /* Assets.xcassets */,
+				2BE69E94279AF01B0024D241 /* LaunchScreen.storyboard */,
+				2BE69E97279AF01B0024D241 /* Info.plist */,
 			);
 			path = Appsterdam;
 			sourceTree = "<group>";
 		};
-		2BE69E60279AEBB00024D241 /* AppsterdamTests */ = {
+		2BE69E9F279AF01B0024D241 /* AppsterdamTests */ = {
 			isa = PBXGroup;
 			children = (
-				2BE69E61279AEBB00024D241 /* AppsterdamTests.swift */,
+				2BE69EA0279AF01B0024D241 /* AppsterdamTests.swift */,
 			);
 			path = AppsterdamTests;
 			sourceTree = "<group>";
 		};
-		2BE69E6A279AEBB00024D241 /* AppsterdamUITests */ = {
+		2BE69EA9279AF01B0024D241 /* AppsterdamUITests */ = {
 			isa = PBXGroup;
 			children = (
-				2BE69E6B279AEBB00024D241 /* AppsterdamUITests.swift */,
-				2BE69E6D279AEBB00024D241 /* AppsterdamUITestsLaunchTests.swift */,
+				2BE69EAA279AF01B0024D241 /* AppsterdamUITests.swift */,
+				2BE69EAC279AF01B0024D241 /* AppsterdamUITestsLaunchTests.swift */,
 			);
 			path = AppsterdamUITests;
+			sourceTree = "<group>";
+		};
+		2BE69EC2279B03740024D241 /* View Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				2BE69E8D279AF0190024D241 /* HomeViewController.swift */,
+				2BE69EBC279AF0C50024D241 /* EventViewController.swift */,
+				2BE69EBE279AF0DA0024D241 /* AboutViewController.swift */,
+			);
+			path = "View Controllers";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		2BE69E4B279AEBAE0024D241 /* Appsterdam */ = {
+		2BE69E85279AF0190024D241 /* Appsterdam */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2BE69E71279AEBB00024D241 /* Build configuration list for PBXNativeTarget "Appsterdam" */;
+			buildConfigurationList = 2BE69EB0279AF01B0024D241 /* Build configuration list for PBXNativeTarget "Appsterdam" */;
 			buildPhases = (
-				2BE69E48279AEBAE0024D241 /* Sources */,
-				2BE69E49279AEBAE0024D241 /* Frameworks */,
-				2BE69E4A279AEBAE0024D241 /* Resources */,
+				2BE69E82279AF0190024D241 /* Sources */,
+				2BE69E83279AF0190024D241 /* Frameworks */,
+				2BE69E84279AF0190024D241 /* Resources */,
 			);
 			buildRules = (
 			);
@@ -140,72 +163,72 @@
 			);
 			name = Appsterdam;
 			packageProductDependencies = (
-				2BE69E7B279AEC590024D241 /* Aurora */,
+				2BE69EBA279AF0770024D241 /* Aurora */,
 			);
 			productName = Appsterdam;
-			productReference = 2BE69E4C279AEBAE0024D241 /* Appsterdam.app */;
+			productReference = 2BE69E86279AF0190024D241 /* Appsterdam.app */;
 			productType = "com.apple.product-type.application";
 		};
-		2BE69E5C279AEBB00024D241 /* AppsterdamTests */ = {
+		2BE69E9B279AF01B0024D241 /* AppsterdamTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2BE69E74279AEBB00024D241 /* Build configuration list for PBXNativeTarget "AppsterdamTests" */;
+			buildConfigurationList = 2BE69EB3279AF01B0024D241 /* Build configuration list for PBXNativeTarget "AppsterdamTests" */;
 			buildPhases = (
-				2BE69E59279AEBB00024D241 /* Sources */,
-				2BE69E5A279AEBB00024D241 /* Frameworks */,
-				2BE69E5B279AEBB00024D241 /* Resources */,
+				2BE69E98279AF01B0024D241 /* Sources */,
+				2BE69E99279AF01B0024D241 /* Frameworks */,
+				2BE69E9A279AF01B0024D241 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2BE69E5F279AEBB00024D241 /* PBXTargetDependency */,
+				2BE69E9E279AF01B0024D241 /* PBXTargetDependency */,
 			);
 			name = AppsterdamTests;
 			productName = AppsterdamTests;
-			productReference = 2BE69E5D279AEBB00024D241 /* AppsterdamTests.xctest */;
+			productReference = 2BE69E9C279AF01B0024D241 /* AppsterdamTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		2BE69E66279AEBB00024D241 /* AppsterdamUITests */ = {
+		2BE69EA5279AF01B0024D241 /* AppsterdamUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 2BE69E77279AEBB00024D241 /* Build configuration list for PBXNativeTarget "AppsterdamUITests" */;
+			buildConfigurationList = 2BE69EB6279AF01B0024D241 /* Build configuration list for PBXNativeTarget "AppsterdamUITests" */;
 			buildPhases = (
-				2BE69E63279AEBB00024D241 /* Sources */,
-				2BE69E64279AEBB00024D241 /* Frameworks */,
-				2BE69E65279AEBB00024D241 /* Resources */,
+				2BE69EA2279AF01B0024D241 /* Sources */,
+				2BE69EA3279AF01B0024D241 /* Frameworks */,
+				2BE69EA4279AF01B0024D241 /* Resources */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				2BE69E69279AEBB00024D241 /* PBXTargetDependency */,
+				2BE69EA8279AF01B0024D241 /* PBXTargetDependency */,
 			);
 			name = AppsterdamUITests;
 			productName = AppsterdamUITests;
-			productReference = 2BE69E67279AEBB00024D241 /* AppsterdamUITests.xctest */;
+			productReference = 2BE69EA6279AF01B0024D241 /* AppsterdamUITests.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		2BE69E44279AEBAE0024D241 /* Project object */ = {
+		2BE69E7E279AF0190024D241 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
 				TargetAttributes = {
-					2BE69E4B279AEBAE0024D241 = {
+					2BE69E85279AF0190024D241 = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
-					2BE69E5C279AEBB00024D241 = {
+					2BE69E9B279AF01B0024D241 = {
 						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 2BE69E4B279AEBAE0024D241;
+						TestTargetID = 2BE69E85279AF0190024D241;
 					};
-					2BE69E66279AEBB00024D241 = {
+					2BE69EA5279AF01B0024D241 = {
 						CreatedOnToolsVersion = 13.2.1;
-						TestTargetID = 2BE69E4B279AEBAE0024D241;
+						TestTargetID = 2BE69E85279AF0190024D241;
 					};
 				};
 			};
-			buildConfigurationList = 2BE69E47279AEBAE0024D241 /* Build configuration list for PBXProject "Appsterdam" */;
+			buildConfigurationList = 2BE69E81279AF0190024D241 /* Build configuration list for PBXProject "Appsterdam" */;
 			compatibilityVersion = "Xcode 13.0";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -213,39 +236,40 @@
 				en,
 				Base,
 			);
-			mainGroup = 2BE69E43279AEBAE0024D241;
+			mainGroup = 2BE69E7D279AF0190024D241;
 			packageReferences = (
-				2BE69E7A279AEC580024D241 /* XCRemoteSwiftPackageReference "Aurora" */,
+				2BE69EB9279AF0770024D241 /* XCRemoteSwiftPackageReference "Aurora" */,
 			);
-			productRefGroup = 2BE69E4D279AEBAE0024D241 /* Products */;
+			productRefGroup = 2BE69E87279AF0190024D241 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				2BE69E4B279AEBAE0024D241 /* Appsterdam */,
-				2BE69E5C279AEBB00024D241 /* AppsterdamTests */,
-				2BE69E66279AEBB00024D241 /* AppsterdamUITests */,
+				2BE69E85279AF0190024D241 /* Appsterdam */,
+				2BE69E9B279AF01B0024D241 /* AppsterdamTests */,
+				2BE69EA5279AF01B0024D241 /* AppsterdamUITests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		2BE69E4A279AEBAE0024D241 /* Resources */ = {
+		2BE69E84279AF0190024D241 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BE69E54279AEBB00024D241 /* Assets.xcassets in Resources */,
-				2BE69E57279AEBB00024D241 /* Main.storyboard in Resources */,
+				2BE69E96279AF01B0024D241 /* LaunchScreen.storyboard in Resources */,
+				2BE69E93279AF01B0024D241 /* Assets.xcassets in Resources */,
+				2BE69E91279AF0190024D241 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2BE69E5B279AEBB00024D241 /* Resources */ = {
+		2BE69E9A279AF01B0024D241 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2BE69E65279AEBB00024D241 /* Resources */ = {
+		2BE69EA4279AF01B0024D241 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -255,63 +279,76 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		2BE69E48279AEBAE0024D241 /* Sources */ = {
+		2BE69E82279AF0190024D241 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BE69E52279AEBAE0024D241 /* ViewController.swift in Sources */,
-				2BE69E50279AEBAE0024D241 /* AppDelegate.swift in Sources */,
+				2BE69EC1279B00FE0024D241 /* Settings.swift in Sources */,
+				2BE69EBD279AF0C50024D241 /* EventViewController.swift in Sources */,
+				2BE69E8E279AF0190024D241 /* HomeViewController.swift in Sources */,
+				2BE69E8A279AF0190024D241 /* AppDelegate.swift in Sources */,
+				2BE69EBF279AF0DA0024D241 /* AboutViewController.swift in Sources */,
+				2BE69E8C279AF0190024D241 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2BE69E59279AEBB00024D241 /* Sources */ = {
+		2BE69E98279AF01B0024D241 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BE69E62279AEBB00024D241 /* AppsterdamTests.swift in Sources */,
+				2BE69EA1279AF01B0024D241 /* AppsterdamTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		2BE69E63279AEBB00024D241 /* Sources */ = {
+		2BE69EA2279AF01B0024D241 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BE69E6C279AEBB00024D241 /* AppsterdamUITests.swift in Sources */,
-				2BE69E6E279AEBB00024D241 /* AppsterdamUITestsLaunchTests.swift in Sources */,
+				2BE69EAB279AF01B0024D241 /* AppsterdamUITests.swift in Sources */,
+				2BE69EAD279AF01B0024D241 /* AppsterdamUITestsLaunchTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		2BE69E5F279AEBB00024D241 /* PBXTargetDependency */ = {
+		2BE69E9E279AF01B0024D241 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2BE69E4B279AEBAE0024D241 /* Appsterdam */;
-			targetProxy = 2BE69E5E279AEBB00024D241 /* PBXContainerItemProxy */;
+			target = 2BE69E85279AF0190024D241 /* Appsterdam */;
+			targetProxy = 2BE69E9D279AF01B0024D241 /* PBXContainerItemProxy */;
 		};
-		2BE69E69279AEBB00024D241 /* PBXTargetDependency */ = {
+		2BE69EA8279AF01B0024D241 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 2BE69E4B279AEBAE0024D241 /* Appsterdam */;
-			targetProxy = 2BE69E68279AEBB00024D241 /* PBXContainerItemProxy */;
+			target = 2BE69E85279AF0190024D241 /* Appsterdam */;
+			targetProxy = 2BE69EA7279AF01B0024D241 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		2BE69E55279AEBB00024D241 /* Main.storyboard */ = {
+		2BE69E8F279AF0190024D241 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				2BE69E56279AEBB00024D241 /* Base */,
+				2BE69E90279AF0190024D241 /* Base */,
 			);
 			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		2BE69E94279AF01B0024D241 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				2BE69E95279AF01B0024D241 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		2BE69E6F279AEBB00024D241 /* Debug */ = {
+		2BE69EAE279AF01B0024D241 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -359,20 +396,21 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
-		2BE69E70279AEBB00024D241 /* Release */ = {
+		2BE69EAF279AF01B0024D241 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -414,70 +452,73 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
-				SDKROOT = macosx;
+				SDKROOT = iphoneos;
 				SWIFT_COMPILATION_MODE = wholemodule;
 				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		2BE69E72279AEBB00024D241 /* Debug */ = {
+		2BE69EB1279AF01B0024D241 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Appsterdam/Appsterdam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4V2D72S45C;
-				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
-				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				INFOPLIST_FILE = Appsterdam/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../Frameworks",
+					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rs.Appsterdam.Appsterdam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		2BE69E73279AEBB00024D241 /* Release */ = {
+		2BE69EB2279AF01B0024D241 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
-				CODE_SIGN_ENTITLEMENTS = Appsterdam/Appsterdam.entitlements;
 				CODE_SIGN_STYLE = Automatic;
-				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4V2D72S45C;
-				ENABLE_HARDENED_RUNTIME = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_KEY_NSHumanReadableCopyright = "";
-				INFOPLIST_KEY_NSMainStoryboardFile = Main;
-				INFOPLIST_KEY_NSPrincipalClass = NSApplication;
+				INFOPLIST_FILE = Appsterdam/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
+				INFOPLIST_KEY_UIMainStoryboardFile = Main;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
-					"@executable_path/../Frameworks",
+					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rs.Appsterdam.Appsterdam;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};
-		2BE69E75279AEBB00024D241 /* Debug */ = {
+		2BE69EB4279AF01B0024D241 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -486,17 +527,18 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4V2D72S45C;
 				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rs.Appsterdam.AppsterdamTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Appsterdam.app/Contents/MacOS/Appsterdam";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Appsterdam.app/Appsterdam";
 			};
 			name = Debug;
 		};
-		2BE69E76279AEBB00024D241 /* Release */ = {
+		2BE69EB5279AF01B0024D241 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -505,17 +547,18 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4V2D72S45C;
 				GENERATE_INFOPLIST_FILE = YES;
-				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.2;
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = rs.Appsterdam.AppsterdamTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Appsterdam.app/Contents/MacOS/Appsterdam";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Appsterdam.app/Appsterdam";
 			};
 			name = Release;
 		};
-		2BE69E78279AEBB00024D241 /* Debug */ = {
+		2BE69EB7279AF01B0024D241 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -528,11 +571,12 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Appsterdam;
 			};
 			name = Debug;
 		};
-		2BE69E79279AEBB00024D241 /* Release */ = {
+		2BE69EB8279AF01B0024D241 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
@@ -545,6 +589,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_TARGET_NAME = Appsterdam;
 			};
 			name = Release;
@@ -552,38 +597,38 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		2BE69E47279AEBAE0024D241 /* Build configuration list for PBXProject "Appsterdam" */ = {
+		2BE69E81279AF0190024D241 /* Build configuration list for PBXProject "Appsterdam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2BE69E6F279AEBB00024D241 /* Debug */,
-				2BE69E70279AEBB00024D241 /* Release */,
+				2BE69EAE279AF01B0024D241 /* Debug */,
+				2BE69EAF279AF01B0024D241 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2BE69E71279AEBB00024D241 /* Build configuration list for PBXNativeTarget "Appsterdam" */ = {
+		2BE69EB0279AF01B0024D241 /* Build configuration list for PBXNativeTarget "Appsterdam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2BE69E72279AEBB00024D241 /* Debug */,
-				2BE69E73279AEBB00024D241 /* Release */,
+				2BE69EB1279AF01B0024D241 /* Debug */,
+				2BE69EB2279AF01B0024D241 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2BE69E74279AEBB00024D241 /* Build configuration list for PBXNativeTarget "AppsterdamTests" */ = {
+		2BE69EB3279AF01B0024D241 /* Build configuration list for PBXNativeTarget "AppsterdamTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2BE69E75279AEBB00024D241 /* Debug */,
-				2BE69E76279AEBB00024D241 /* Release */,
+				2BE69EB4279AF01B0024D241 /* Debug */,
+				2BE69EB5279AF01B0024D241 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		2BE69E77279AEBB00024D241 /* Build configuration list for PBXNativeTarget "AppsterdamUITests" */ = {
+		2BE69EB6279AF01B0024D241 /* Build configuration list for PBXNativeTarget "AppsterdamUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				2BE69E78279AEBB00024D241 /* Debug */,
-				2BE69E79279AEBB00024D241 /* Release */,
+				2BE69EB7279AF01B0024D241 /* Debug */,
+				2BE69EB8279AF01B0024D241 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -591,7 +636,7 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2BE69E7A279AEC580024D241 /* XCRemoteSwiftPackageReference "Aurora" */ = {
+		2BE69EB9279AF0770024D241 /* XCRemoteSwiftPackageReference "Aurora" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/AuroraFramework/Aurora.swift";
 			requirement = {
@@ -602,12 +647,12 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2BE69E7B279AEC590024D241 /* Aurora */ = {
+		2BE69EBA279AF0770024D241 /* Aurora */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2BE69E7A279AEC580024D241 /* XCRemoteSwiftPackageReference "Aurora" */;
+			package = 2BE69EB9279AF0770024D241 /* XCRemoteSwiftPackageReference "Aurora" */;
 			productName = Aurora;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
-	rootObject = 2BE69E44279AEBAE0024D241 /* Project object */;
+	rootObject = 2BE69E7E279AF0190024D241 /* Project object */;
 }
