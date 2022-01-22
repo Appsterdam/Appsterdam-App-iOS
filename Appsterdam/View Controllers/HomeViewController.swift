@@ -8,12 +8,15 @@
 import UIKit
 
 class HomeViewController: UIViewController {
-
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+
+        // Custom function, to add swifUI view as subview.
+        self.addSubview(
+            HomeView(),
+            to: self.view
+        )
     }
-
-
 }
 

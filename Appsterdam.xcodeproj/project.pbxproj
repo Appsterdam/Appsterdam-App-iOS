@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B1F7E19279C09DC000B163A /* SwiftUI.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2B1F7E18279C09DC000B163A /* SwiftUI.framework */; };
+		2B1F7E1C279C18E4000B163A /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F7E1B279C18E4000B163A /* AboutView.swift */; };
+		2B1F7E1E279C1968000B163A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F7E1D279C1968000B163A /* HomeView.swift */; };
 		2BE69E8A279AF0190024D241 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E89279AF0190024D241 /* AppDelegate.swift */; };
 		2BE69E8C279AF0190024D241 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E8B279AF0190024D241 /* SceneDelegate.swift */; };
 		2BE69E8E279AF0190024D241 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E8D279AF0190024D241 /* HomeViewController.swift */; };
@@ -40,6 +43,9 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2B1F7E18279C09DC000B163A /* SwiftUI.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SwiftUI.framework; path = System/Library/Frameworks/SwiftUI.framework; sourceTree = SDKROOT; };
+		2B1F7E1B279C18E4000B163A /* AboutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		2B1F7E1D279C1968000B163A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2BE69E86279AF0190024D241 /* Appsterdam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appsterdam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE69E89279AF0190024D241 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BE69E8B279AF0190024D241 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -63,6 +69,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2B1F7E19279C09DC000B163A /* SwiftUI.framework in Frameworks */,
 				2BE69EBB279AF0770024D241 /* Aurora in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -84,6 +91,23 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B1F7E17279C09DC000B163A /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				2B1F7E18279C09DC000B163A /* SwiftUI.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		2B1F7E1A279C18BF000B163A /* SwiftUI VC */ = {
+			isa = PBXGroup;
+			children = (
+				2B1F7E1D279C1968000B163A /* HomeView.swift */,
+				2B1F7E1B279C18E4000B163A /* AboutView.swift */,
+			);
+			path = "SwiftUI VC";
+			sourceTree = "<group>";
+		};
 		2BE69E7D279AF0190024D241 = {
 			isa = PBXGroup;
 			children = (
@@ -91,6 +115,7 @@
 				2BE69E9F279AF01B0024D241 /* AppsterdamTests */,
 				2BE69EA9279AF01B0024D241 /* AppsterdamUITests */,
 				2BE69E87279AF0190024D241 /* Products */,
+				2B1F7E17279C09DC000B163A /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -112,6 +137,7 @@
 				2BE69EC0279B00FE0024D241 /* Settings.swift */,
 				2BE69EC2279B03740024D241 /* View Controllers */,
 				2BE69E8F279AF0190024D241 /* Main.storyboard */,
+				2B1F7E1A279C18BF000B163A /* SwiftUI VC */,
 				2BE69E92279AF01B0024D241 /* Assets.xcassets */,
 				2BE69E94279AF01B0024D241 /* LaunchScreen.storyboard */,
 				2BE69E97279AF01B0024D241 /* Info.plist */,
@@ -284,9 +310,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BE69EC1279B00FE0024D241 /* Settings.swift in Sources */,
+				2B1F7E1C279C18E4000B163A /* AboutView.swift in Sources */,
 				2BE69EBD279AF0C50024D241 /* EventViewController.swift in Sources */,
 				2BE69E8E279AF0190024D241 /* HomeViewController.swift in Sources */,
 				2BE69E8A279AF0190024D241 /* AppDelegate.swift in Sources */,
+				2B1F7E1E279C1968000B163A /* HomeView.swift in Sources */,
 				2BE69EBF279AF0DA0024D241 /* AboutViewController.swift in Sources */,
 				2BE69E8C279AF0190024D241 /* SceneDelegate.swift in Sources */,
 			);
