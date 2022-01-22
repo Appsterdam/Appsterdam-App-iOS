@@ -50,7 +50,6 @@
 		2B1F7E1D279C1968000B163A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2B1F7E1F279C1D5F000B163A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2B1F7E21279C1DEF000B163A /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
-		2B1F7E3C279C1F40000B163A /* Appsterdam copy-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = "Appsterdam copy-Info.plist"; path = "/Users/wesley/Cloud/Apps/iOS/Appsterdam/Appsterdam copy-Info.plist"; sourceTree = "<absolute>"; };
 		2BE69E86279AF0190024D241 /* Appsterdam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appsterdam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE69E89279AF0190024D241 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BE69E8B279AF0190024D241 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -122,7 +121,6 @@
 				2BE69EA9279AF01B0024D241 /* AppsterdamUITests */,
 				2BE69E87279AF0190024D241 /* Products */,
 				2B1F7E17279C09DC000B163A /* Frameworks */,
-				2B1F7E3C279C1F40000B163A /* Appsterdam copy-Info.plist */,
 			);
 			sourceTree = "<group>";
 		};
