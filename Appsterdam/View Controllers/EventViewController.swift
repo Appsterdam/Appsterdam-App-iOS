@@ -8,7 +8,9 @@
 import UIKit
 import Aurora
 
-struct event: Codable {
+struct event: Codable, Identifiable {
+    /// id = for identifable.
+    var id = UUID()
     var name: String
     var description: String
     var date: Date
@@ -17,6 +19,20 @@ struct event: Codable {
 }
 
 class EventViewController: UIViewController {
+    @IBOutlet weak var tableView: UITableView!
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+
+        // Custom function, to add swifUI view as subview.
+        self.addSubview(
+            EventView(),
+            to: self.view
+        )
+    }
+}
+
+class xEventViewController: UIViewController {
     @IBOutlet weak var tableView: UITableView!
 
     // Need to come from internet
@@ -61,7 +77,7 @@ class EventViewController: UIViewController {
     }
 }
 
-extension EventViewController: UITableViewDelegate, UITableViewDataSource {
+extension xEventViewController: UITableViewDelegate, UITableViewDataSource {
 //    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
 //        <#code#>
 //    }

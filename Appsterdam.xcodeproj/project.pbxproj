@@ -12,6 +12,7 @@
 		2B1F7E1E279C1968000B163A /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F7E1D279C1968000B163A /* HomeView.swift */; };
 		2B1F7E20279C1D5F000B163A /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F7E1F279C1D5F000B163A /* MainView.swift */; };
 		2B1F7E22279C1DEF000B163A /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F7E21279C1DEF000B163A /* EventView.swift */; };
+		2B1F7E3E279D9C34000B163A /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B1F7E3D279D9C33000B163A /* EventCell.swift */; };
 		2BE69E8A279AF0190024D241 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E89279AF0190024D241 /* AppDelegate.swift */; };
 		2BE69E8C279AF0190024D241 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E8B279AF0190024D241 /* SceneDelegate.swift */; };
 		2BE69E8E279AF0190024D241 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BE69E8D279AF0190024D241 /* HomeViewController.swift */; };
@@ -50,6 +51,7 @@
 		2B1F7E1D279C1968000B163A /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		2B1F7E1F279C1D5F000B163A /* MainView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2B1F7E21279C1DEF000B163A /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
+		2B1F7E3D279D9C33000B163A /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
 		2BE69E86279AF0190024D241 /* Appsterdam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appsterdam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BE69E89279AF0190024D241 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2BE69E8B279AF0190024D241 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -109,6 +111,7 @@
 				2B1F7E1B279C18E4000B163A /* AboutView.swift */,
 				2B1F7E1D279C1968000B163A /* HomeView.swift */,
 				2B1F7E21279C1DEF000B163A /* EventView.swift */,
+				2B1F7E3D279D9C33000B163A /* EventCell.swift */,
 			);
 			path = "SwiftUI VC";
 			sourceTree = "<group>";
@@ -322,6 +325,7 @@
 				2BE69EBD279AF0C50024D241 /* EventViewController.swift in Sources */,
 				2BE69E8E279AF0190024D241 /* HomeViewController.swift in Sources */,
 				2BE69E8A279AF0190024D241 /* AppDelegate.swift in Sources */,
+				2B1F7E3E279D9C34000B163A /* EventCell.swift in Sources */,
 				2B1F7E1E279C1968000B163A /* HomeView.swift in Sources */,
 				2BE69EBF279AF0DA0024D241 /* AboutViewController.swift in Sources */,
 				2BE69E8C279AF0190024D241 /* SceneDelegate.swift in Sources */,
