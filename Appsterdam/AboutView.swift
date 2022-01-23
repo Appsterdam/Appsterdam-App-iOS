@@ -11,7 +11,6 @@ import SwiftUI
 struct AboutView: View {
     var body: some View {
         VStack {
-            let _ = print("Loading view...")
             Image("Appsterdam_logo", bundle: nil, label: Text("Appsterdam Logo"))
                 .resizable()
                 .scaledToFit()
@@ -57,7 +56,6 @@ struct AboutView: View {
             }.padding()
 
             Text("© 2012-2022 Stichting Appsterdam. All rights reserved").padding()
-            let _ = print("View loaded.")
         }
     }
 }

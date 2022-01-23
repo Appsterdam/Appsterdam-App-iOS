@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Aurora
 
 struct EventView: View {
     var events: [event] = [
@@ -30,8 +31,9 @@ struct EventView: View {
             ForEach(events) { event in
                 EventCell(event: event)
                     .onTapGesture {
-                        let _ = print("Tapped event \(event.name)")
-
+                        let _ = print(
+                            "Tapped event \(event)"
+                        )
                     }
             }
         }
