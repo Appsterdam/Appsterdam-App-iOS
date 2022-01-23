@@ -119,8 +119,8 @@
 			isa = PBXGroup;
 			children = (
 				2BEBC0D7279DA1E5001E962F /* AppsterdamApp.swift */,
-				2BB690F9279DA24E003B4A00 /* AboutView.swift */,
 				2BB690FC279DA24E003B4A00 /* HomeView.swift */,
+				2BB690F9279DA24E003B4A00 /* AboutView.swift */,
 				2BB69108279DA292003B4A00 /* Event */,
 				2BB690FA279DA24E003B4A00 /* MainView.swift */,
 				2BB690FB279DA24E003B4A00 /* Settings.swift */,

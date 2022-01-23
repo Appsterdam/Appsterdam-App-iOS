@@ -7,6 +7,35 @@
 
 import SwiftUI
 import Aurora
+import UIKit
+
+class alertView {
+    @discardableResult
+    init(title: String, message: String) {
+        let alert = UIAlertController.init(
+            title: title,
+            message: message,
+            preferredStyle: .alert
+        )
+
+        alert.addAction(
+            .init(title: "Ok",
+                  style: .default,
+                  handler: nil)
+        )
+
+//         UIApplication.shared.windows.first { $0.isKeyWindow }
+        // to
+        UIApplication
+            .shared
+            .connectedScenes
+            .compactMap { $0 as? UIWindowScene }
+            .flatMap { $0.windows }
+            .first { $0.isKeyWindow }?
+            .rootViewController?
+            .present(alert, animated: true, completion: nil)
+    }
+}
 
 struct EventView: View {
     var events: [event] = [
@@ -34,6 +63,14 @@ struct EventView: View {
                         let _ = print(
                             "Tapped event \(event)"
                         )
+
+                        alertView(
+                            title: "Tapped event",
+                            message: """
+id: \(event.id)
+name: \(event.name)
+description: \(event.description)
+""")
                     }
             }
         }

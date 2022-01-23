@@ -6,9 +6,14 @@
 //
 
 import SwiftUI
+import Aurora
 
 // MARK: - View
 struct AboutView: View {
+    var releaseVersionNumber: String {
+        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+    }
+
     var body: some View {
         VStack {
             Image("Appsterdam_logo", bundle: nil, label: Text("Appsterdam Logo"))
@@ -18,7 +23,7 @@ struct AboutView: View {
 
             Text("Appsterdam")
                 .bold()
-            Text("Version 1.0")
+            Text("Version \(releaseVersionNumber)")
                 .padding(.bottom)
 
             Text("“If you want to make movies, go to Hollywood.\nIf you want to make musicals, go to Broadway.\nIf you want to make apps, go to Appsterdam.”")
