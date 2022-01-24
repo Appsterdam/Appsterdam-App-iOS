@@ -9,9 +9,7 @@
 import Foundation
 
 struct event: Codable, Identifiable {
-    // id = for swiftUI
-    var id = UUID()
-    
+    var id: String // meetup id.
     var name: String
     var description: String
     var date: Date

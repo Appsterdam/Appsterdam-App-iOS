@@ -8,7 +8,8 @@
 import SwiftUI
 import Aurora
 
-// MARK: - View
+// MARK: - AboutView
+// MARK: View
 struct AboutView: View {
     // whether or not to show the Safari ViewController
     @State var showSafari = false
@@ -86,7 +87,7 @@ struct AboutView: View {
     }
 }
 
-// MARK: - Preview
+// MARK: Preview
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
         AboutView()
@@ -96,6 +97,8 @@ struct AboutView_Previews: PreviewProvider {
     }
 }
 
+// MARK: - PersonView
+// MARK: View
 struct personView: View {
     let person: Person
 
@@ -127,3 +130,18 @@ struct personView: View {
     }
 }
 
+// MARK: Preview
+struct PersonView_Previews: PreviewProvider {
+    static var previews: some View {
+        VStack {
+            personView(person: .init(
+                name: "Appsterdam",
+                picture: nil,
+                function: "Test")
+            )
+        }
+        .previewLayout(PreviewLayout.sizeThatFits)
+        .padding()
+        .previewDisplayName("PersonView")
+    }
+}
