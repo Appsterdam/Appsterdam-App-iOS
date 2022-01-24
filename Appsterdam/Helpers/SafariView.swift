@@ -8,6 +8,7 @@
 import SwiftUI
 import SafariServices
 import UIKit
+import Aurora
 
 /// Make a Safari View for SwiftUI
 struct SafariView: UIViewControllerRepresentable {
@@ -16,9 +17,12 @@ struct SafariView: UIViewControllerRepresentable {
     @Binding var urlString: String
 
     func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
-        guard let url = URL(string: urlString) else {
+        guard let url = URL(string: urlString.latinized) else {
             fatalError("Invalid urlString: \(urlString)")
         }
+
+        // TODO: Remove this debug line
+        Aurora.shared.log("SFSafari: \(url.relativeString)")
 
         let safariViewController = SFSafariViewController(url: url)
         safariViewController.preferredControlTintColor = UIColor(Color.accentColor)
