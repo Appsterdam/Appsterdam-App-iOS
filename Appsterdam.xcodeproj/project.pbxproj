@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2BA33D4F279F02FF0073BC8B /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D4E279F02FE0073BC8B /* SafariView.swift */; };
 		2BB690FD279DA24E003B4A00 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB690F9279DA24E003B4A00 /* AboutView.swift */; };
 		2BB690FE279DA24E003B4A00 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB690FA279DA24E003B4A00 /* MainView.swift */; };
 		2BB690FF279DA24E003B4A00 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB690FB279DA24E003B4A00 /* Settings.swift */; };
@@ -41,6 +42,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		2BA33D4E279F02FE0073BC8B /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		2BB690F9279DA24E003B4A00 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		2BB690FA279DA24E003B4A00 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2BB690FB279DA24E003B4A00 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -121,6 +123,7 @@
 				2BEBC0D7279DA1E5001E962F /* AppsterdamApp.swift */,
 				2BB690FC279DA24E003B4A00 /* HomeView.swift */,
 				2BB690F9279DA24E003B4A00 /* AboutView.swift */,
+				2BA33D4E279F02FE0073BC8B /* SafariView.swift */,
 				2BB69108279DA292003B4A00 /* Event */,
 				2BB690FA279DA24E003B4A00 /* MainView.swift */,
 				2BB690FB279DA24E003B4A00 /* Settings.swift */,
@@ -292,6 +295,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2BB690FE279DA24E003B4A00 /* MainView.swift in Sources */,
+				2BA33D4F279F02FF0073BC8B /* SafariView.swift in Sources */,
 				2BB690FD279DA24E003B4A00 /* AboutView.swift in Sources */,
 				2BB6910D279DA2B4003B4A00 /* EventData.swift in Sources */,
 				2BB69100279DA24E003B4A00 /* HomeView.swift in Sources */,

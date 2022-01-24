@@ -10,6 +10,11 @@ import Aurora
 
 // MARK: - View
 struct AboutView: View {
+    // whether or not to show the Safari ViewController
+    @State var showSafari = false
+    // initial URL string
+    @State var urlString = "https://appsterdam.rs"
+
     var releaseVersionNumber: String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
     }
@@ -49,19 +54,24 @@ struct AboutView: View {
             }
 
             Button("Code of Conduct") {
-                if let url = URL(string: "https://appsterdam.rs/code-of-conduct/") {
-                    UIApplication.shared.open(url)
-                }
-            }.padding()
+                self.urlString = "https://appsterdam.rs/code-of-conduct/"
+
+                showSafari = true
+            }
+            .padding()
 
             Button("Privacy Policy") {
-                if let url = URL(string: "https://appsterdam.rs/privacy-policy/") {
-                    UIApplication.shared.open(url)
-                }
-            }.padding()
+                self.urlString = "https://appsterdam.rs/privacy-policy/"
+
+                showSafari = true
+            }
+            .padding()
 
             Text("© 2012-2022 Stichting Appsterdam. All rights reserved").padding()
         }
+        .popover(isPresented: $showSafari, content: {
+            SafariView(urlString: $urlString)
+        })
     }
 }
 
