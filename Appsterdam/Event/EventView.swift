@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct EventView: View {
+    // To dismiss this screen using the button.
     @Environment(\.presentationMode) var presentationMode
+
+    // whether or not to show the Safari ViewController
+    @State var showSafari = false
+    // initial URL string
+    @State var urlString = "https://appsterdam.rs"
 
     @Binding var displayEvent: event
 
@@ -68,9 +74,14 @@ struct EventView: View {
             }
             GroupBox() {
                 Button ("Attend \(displayEvent.name)") {
+                    self.urlString = "https://www.meetup.com/nl-NL/Appsterdam/events/280861388/"
 
+                    showSafari = true
                 }
             }
+            .popover(isPresented: $showSafari, content: {
+                SafariView(urlString: $urlString)
+            })
         }
     }
 }
