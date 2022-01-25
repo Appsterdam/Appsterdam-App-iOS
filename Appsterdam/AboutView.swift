@@ -43,47 +43,76 @@ struct AboutView: View {
                 Text("Appsterdam Team")
                     .padding(.top)
 
-                ScrollView(.horizontal, showsIndicators: false) {
-                    HStack(spacing: 20) {
-                        let _ = print(persons)
 
-                        ForEach(persons) { person in
-                            VStack {
-                                personView(person: person)
-                                    .onTapGesture {
-                                        self.urlString = "https://appsterdam.rs/team-\(person.name.lowercased().replace(" ", withString: "-"))/"
+                VStack(spacing: 20) {
+                    let _ = print(persons)
 
-                                        showSafari = true
+                    ForEach(persons) { team in
+                        GroupBox(team.team) {
+
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 20) {
+                                    ForEach(team.members) { member in
+                                        personView(person: member)
+                                            .onTapGesture {
+                                                self.urlString = "https://appsterdam.rs/team-\(member.name.lowercased().replace(" ", withString: "-"))/"
+
+                                                showSafari = true
+                                            }
                                     }
+                                }
                             }
                         }
                     }
-                }.padding(.bottom)
+                }
+            }.padding(.bottom)
 
-                HStack {
-                    Button("Code of Conduct") {
-                        self.urlString = "https://appsterdam.rs/code-of-conduct/"
+            VStack {
+            Button("Discord") {
+                self.urlString = "https://discord.gg/HNqZPUy7An"
 
-                        showSafari = true
-                    }
-                    .padding()
+                showSafari = true
+            }.padding(.top)
+            Divider()
+            Button("Facebook") {
+                self.urlString = "https://www.facebook.com/appsterdam"
 
-                    Button("Privacy Policy") {
-                        self.urlString = "https://appsterdam.rs/privacy-policy/"
-
-                        showSafari = true
-                    }
-                    .padding()
-                }.padding(.top)
-
-                Text("© 2012-2022 Stichting Appsterdam. All rights reserved")
-                    .font(.caption)
-                    .padding()
+                showSafari = true
             }
-            .popover(isPresented: $showSafari, content: {
-                SafariView(urlString: $urlString)
-            })
+            Divider()
+            Button("Twitter") {
+                self.urlString = "https://www.twitter.com/appsterdam"
+
+                showSafari = true
+            }
+            Divider()
+            Button("YouTube") {
+                self.urlString = "https://www.youtube.com/appsterdam"
+
+                showSafari = true
+            }.padding(.bottom)
+
+            Button("Code of Conduct") {
+                self.urlString = "https://appsterdam.rs/code-of-conduct/"
+
+                showSafari = true
+            }.padding(.top)
+            Divider()
+
+            Button("Privacy Policy") {
+                self.urlString = "https://appsterdam.rs/privacy-policy/"
+
+                showSafari = true
+            }
         }
+
+            Text("© 2012-2022 Stichting Appsterdam. All rights reserved")
+                .font(.caption)
+                .padding()
+        }
+        .popover(isPresented: $showSafari, content: {
+            SafariView(urlString: $urlString)
+        })
     }
 }
 
@@ -103,30 +132,32 @@ struct personView: View {
     let person: Person
 
     var body: some View {
-        if let picture = person.picture, picture.length > 0 {
-            // picture
-            RemoteImageView(
-                url: URL(string: picture)!,
-                placeholder: {
-                    Image(systemName: "person.circle")
-                },
-                image: {
-                    $0.resizable()
-                        .scaledToFit()
-                        .clipShape(Circle())
-                }
-            ).frame(width: 100, height: 100)
-        } else {
-            Image(systemName: "person.circle")
-                .resizable()
-                .frame(width: 100, height: 100)
+        VStack {
+            if let picture = person.picture, picture.length > 0 {
+                // picture
+                RemoteImageView(
+                    url: URL(string: picture)!,
+                    placeholder: {
+                        Image(systemName: "person.circle")
+                    },
+                    image: {
+                        $0.resizable()
+                            .scaledToFit()
+                            .clipShape(Circle())
+                    }
+                ).frame(width: 100, height: 100)
+            } else {
+                Image(systemName: "person.circle")
+                    .resizable()
+                    .frame(width: 100, height: 100)
+            }
+
+            Text(person.name)
+                .foregroundColor(Color.accentColor)
+
+            Text(person.function)
+                .font(.caption)
         }
-
-        Text(person.name)
-            .foregroundColor(Color.accentColor)
-
-        Text(person.function)
-            .font(.caption)
     }
 }
 
@@ -143,5 +174,13 @@ struct PersonView_Previews: PreviewProvider {
         .previewLayout(PreviewLayout.sizeThatFits)
         .padding()
         .previewDisplayName("PersonView")
+    }
+}
+
+struct Cell: View {
+    let text: String
+
+    var body: some View {
+        Text(text)
     }
 }

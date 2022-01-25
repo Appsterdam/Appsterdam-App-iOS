@@ -21,12 +21,24 @@ extension Person: Identifiable {
     }
 }
 
+struct PersonArray: Codable {
+    var team: String
+    var members: [Person]
+}
+
+// Make it work in SwiftUI Views
+extension PersonArray: Identifiable {
+    var id: UUID {
+        return UUID()
+    }
+}
+
 class PersonModel {
     init() {
 
     }
 
-    func load() -> [Person] {
+    func load() -> [PersonArray] {
         // Reload (in background)
         DispatchQueue.global(qos: .background).async {
             self.reloadFromWebsite()
@@ -37,11 +49,13 @@ class PersonModel {
             Aurora.shared.log("This should never happen, something is corrupt.\ndelivering a empty person")
 
             return [
-                .init(
-                    name: "Error",
-                    picture: nil,
-                    function: "Failed to load"
-                )
+                .init(team: "_", members: [
+                    .init(
+                        name: "Error",
+                        picture: nil,
+                        function: "Failed to load"
+                    )
+                ])
             ]
         }
 
@@ -49,7 +63,7 @@ class PersonModel {
         return persons
     }
 
-    private func loadFromCache() -> [Person]? {
+    private func loadFromCache() -> [PersonArray]? {
         // Load from cache, and refresh in background.
         guard let url = Bundle.main.url(forResource: "test-people", withExtension: "json") else {
             Aurora.shared.log("Could't find test-people.json")
@@ -70,10 +84,10 @@ class PersonModel {
         // TODO: Fetch real data.
     }
 
-    private func parse(json: Data) -> [Person]? {
+    private func parse(json: Data) -> [PersonArray]? {
         let decoder = JSONDecoder()
 
-        if let persons = try? decoder.decode([Person].self, from: json) {
+        if let persons = try? decoder.decode([PersonArray].self, from: json) {
             return persons
         }
 

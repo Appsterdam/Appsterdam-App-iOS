@@ -9,7 +9,7 @@
 import Foundation
 
 struct event: Codable, Identifiable {
-    var id: String // meetup id.
+    var id = UUID() // String // meetup id.
     var name: String
     var description: String
     var date: Date
