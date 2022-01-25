@@ -77,8 +77,12 @@ struct EventListView: View {
             .headerProminence(.increased)
 
             Section(header: Text("Past")) {
-                ForEach(events) {
-                    EventCell(event: $0)
+                ForEach(events) { event in
+                    EventCell(event: event)
+                        .onTapGesture {
+                            self.showEvent = event
+                            self.showsEvent = true
+                        }
                 }
             }
             .headerProminence(.increased)
