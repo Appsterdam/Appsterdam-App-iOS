@@ -15,7 +15,7 @@ struct MainView: View {
                     Label("Home", systemImage: "house.fill")
                 }
 
-            EventView()
+            EventListView()
                 .tabItem {
                     Label("Events", systemImage: "person.3.fill")
                 }

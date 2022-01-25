@@ -2,93 +2,137 @@
 //  EventView.swift
 //  Appsterdam
 //
-//  Created by Wesley de Groot on 22/01/2022.
+//  Created by Wesley de Groot on 25/01/2022.
 //
 
 import SwiftUI
-import Aurora
-import UIKit
-
-class alertView {
-    @discardableResult
-    init(title: String, message: String) {
-        let alert = UIAlertController.init(
-            title: title,
-            message: message,
-            preferredStyle: .alert
-        )
-
-        alert.addAction(
-            .init(title: "Ok",
-                  style: .default,
-                  handler: nil)
-        )
-
-//         UIApplication.shared.windows.first { $0.isKeyWindow }
-        // to
-        UIApplication
-            .shared
-            .connectedScenes
-            .compactMap { $0 as? UIWindowScene }
-            .flatMap { $0.windows }
-            .first { $0.isKeyWindow }?
-            .rootViewController?
-            .present(alert, animated: true, completion: nil)
-    }
-}
 
 struct EventView: View {
-    var events: [event] = [
-        event.init(name: "Weekly meeten & drinken", description: "Hap", date: .init(), attendees: 1, image: "🍺"),
-        event.init(name: "Coffee coding", description: ".", date: .init(), attendees: 1, image: "laptopcomputer.and.iphone"),
-        event.init(name: "Weekend fun", description: ".", date: .init(), attendees: 1, image: "star"),
+    @Environment(\.presentationMode) var presentationMode
 
-        event.init(name: "Weekly meeten & drinken", description: "Hap", date: .init(), attendees: 1, image: "🍺"),
-        event.init(name: "Coffee coding", description: ".", date: .init(), attendees: 1, image: "laptopcomputer.and.iphone"),
-        event.init(name: "Weekend fun", description: ".", date: .init(), attendees: 1, image: "star"),
-
-        event.init(name: "Weekly meeten & drinken", description: "Hap", date: .init(), attendees: 1, image: "🍺"),
-        event.init(name: "Coffee coding", description: ".", date: .init(), attendees: 1, image: "laptopcomputer.and.iphone"),
-        event.init(name: "Weekend fun", description: ".", date: .init(), attendees: 1, image: "star"),
-
-        event.init(name: "ZOO", description: ".", date: .init(), attendees: 1, image: "🐘")
-    ]
+    @Binding var displayEvent: event
 
     var body: some View {
-        List() {
-        Section(header: Text("Upcoming")) {
-            ForEach(events) { event in
-                EventCell(event: event)
-                    .onTapGesture {
-                        let _ = print(
-                            "Tapped event \(event)"
-                        )
+        VStack {
+            VStack {
+                GroupBox() {
+                    HStack() {
+                        // To make it on the right
+                        Spacer()
 
-                        alertView(
-                            title: "Tapped event",
-                            message: """
-id: \(event.id)
-name: \(event.name)
-description: \(event.description)
-""")
+                        Button(action: {
+                            presentationMode.wrappedValue.dismiss()
+                        }, label: {
+                            Circle()
+                                .fill(Color(.systemBackground))
+                                .frame(width: 30, height: 30)
+                                .overlay(
+                                    Image(systemName: "xmark")
+                                        .font(.system(size: 15, weight: .bold, design: .rounded))
+                                        .foregroundColor(.secondary)
+                                )
+                        }).padding(5)
                     }
-            }
-        }
-        .headerProminence(.increased)
 
-        Section(header: Text("Past")) {
-            ForEach(events) {
-                EventCell(event: $0)
-            }
-        }
-        .headerProminence(.increased)
+                    if displayEvent.image.count > 2 {
+                        Image(systemName: displayEvent.image)
+                            .resizable()
+                            .scaledToFit()
+                            .frame(width: 200, height: 200)
+                    } else {
+                        if let image = displayEvent.image.emojiToImage {
+                            Image.init(
+                                uiImage: image
+                            ).resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 200)
+                        } else {
+                            Image(systemName: "star")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 200, height: 200)
+                        }
+                    }
 
+                    Text(displayEvent.name)
+
+                    Text("Date: xxxx")
+                    Text("Time: xxxx")
+
+                    Divider()
+
+                    ScrollView {
+                        Text(displayEvent.description)
+                    }
+                }
+            }
+            GroupBox() {
+                Button ("Attend \(displayEvent.name)") {
+
+                }
+            }
         }
     }
 }
+
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView()
+        EventView(
+            displayEvent: .constant(
+                .init(
+                    name: "Test event",
+                    description: "Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, ",
+                    date: .init(),
+                    attendees: 25,
+                    image: "star"
+                )
+            )
+        )
+
+        EventView(
+            displayEvent: .constant(
+                .init(
+                    name: "Test event, with beer involved.",
+                    description: """
+                What shall we drink
+                Seven days long
+                What shall we drink?
+                What a thirst!
+
+                There's plenty for everyone
+                So we'll drink together
+                So just dip into the cask!
+                Yes, let's drink together
+                Not alone!
+
+                And then we shall work
+                Seven days long!
+                Then we shall work
+                For each other!
+
+                Then there will be work for everyone
+                So we shall work together
+                Seven days long!
+                Yes, we'll work together
+                Not alone!
+
+                But first we have to fight
+                Nobody knows for how long!
+                First we have to fight
+                For our interest!
+
+                For everybody's happiness
+                So we'll fight together
+                Together we're strong!
+                Yes, we'll fight together
+                Not alone!
+                """,
+                    date: .init(),
+                    attendees: 25,
+                    image: "🍺"
+                )
+            )
+        )
     }
 }

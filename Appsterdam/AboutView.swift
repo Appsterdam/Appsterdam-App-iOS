@@ -31,16 +31,20 @@ struct AboutView: View {
                     .frame(width: 200, height: 200)
 
                 Text("Appsterdam")
+                    .font(.title)
                     .bold()
                 Text("Version \(releaseVersionNumber)")
+                    .font(.title3)
                     .padding(.bottom)
 
                 Text("“If you want to make movies, go to Hollywood.\nIf you want to make musicals, go to Broadway.\nIf you want to make apps, go to Appsterdam.”")
+
                 Text("- Mike Lee ")
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.bottom)
 
                 Text("Appsterdam Team")
+                    .font(.title)
                     .padding(.top)
 
 
