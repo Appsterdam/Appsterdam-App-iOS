@@ -17,8 +17,6 @@ struct Event: Codable, Identifiable {
     var organizer: String
     var location: String
     var address: String
-    var latitude: Double
-    var longitude: Double
     var date: String
     var attendees: Int
     var icon: String
@@ -64,8 +62,6 @@ class EventModel {
                             organizer: "Appsterdam",
                             location: "",
                             address: "",
-                            latitude: 52.3655891418457,
-                            longitude: 4.867978096008301,
                             date: "",
                             attendees: 0,
                             icon: "exclamationmark.arrow.triangle.2.circlepath"

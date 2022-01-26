@@ -25,17 +25,6 @@ struct EventView: View {
 
     @Binding var displayEvent: Event
 
-    @State private var region = MKCoordinateRegion(
-        center: CLLocationCoordinate2D(
-            latitude: 51.507222,
-            longitude: -0.1275
-        ),
-        span: MKCoordinateSpan(
-            latitudeDelta: 0.1,
-            longitudeDelta: 0.1
-        )
-    )
-
     var body: some View {
         VStack {
             VStack {
@@ -92,15 +81,6 @@ struct EventView: View {
                                 alignment: .leading
                             )
                     }
-
-                    let _ = updateMap()
-                    Map(coordinateRegion: $region, annotationItems: [
-                        myAnnotation.init(name: displayEvent.name, coordinate: CLLocationCoordinate2D(latitude: displayEvent.latitude, longitude: displayEvent.longitude))
-                    ]) { item in
-                        MapPin(coordinate: item.coordinate)
-
-                    }
-                        .frame(width: 400, height: 200)
                 }
             }
             GroupBox() {
@@ -113,25 +93,6 @@ struct EventView: View {
             .popover(isPresented: $showSafari,  content: {
                 SafariView(urlString: $urlString)
             })
-        }
-    }
-
-    func updateMap() {
-        let geocoder = CLGeocoder()
-        geocoder.geocodeAddressString(displayEvent.address) {
-            (placemarks, error) in
-            guard error == nil,
-            let coordinate = placemarks?.first?.location?.coordinate else {
-                let _ = print("Geocoding error: \(error!)")
-
-                return
-            }
-
-            self.region = .init(
-                center: coordinate,
-                latitudinalMeters: 500,
-                longitudinalMeters: 500
-            )
         }
     }
 }
@@ -149,8 +110,6 @@ struct EventView_Previews: PreviewProvider {
                     organizer: "Appsterdam",
                     location: "",
                     address: "",
-                    latitude: 52.3655891418457,
-                    longitude: 4.867978096008301,
                     date: "",
                     attendees: 25,
                     icon: "star"
@@ -201,8 +160,6 @@ struct EventView_Previews: PreviewProvider {
                     organizer: "Appsterdam",
                     location: "Cafe Bax",
                     address: "Kinkerstraat 119, 1053CC, Amsterdam",
-                    latitude: 52.3655891418457,
-                    longitude: 4.867978096008301,
                     date: "",
                     attendees: 25,
                     icon: "🍺"

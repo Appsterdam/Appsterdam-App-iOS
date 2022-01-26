@@ -19,8 +19,6 @@ struct EventListView: View {
         organizer: "Appsterdam",
         location: "",
         address: "",
-        latitude: 52.3655891418457,
-        longitude: 4.867978096008301,
         date: "",
         attendees: 0,
         icon: ""

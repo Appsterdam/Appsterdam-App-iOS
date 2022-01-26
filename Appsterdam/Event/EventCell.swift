@@ -47,8 +47,6 @@ struct EventCell_Previews: PreviewProvider {
                             organizer: "Appsterdam",
                             location: "Cafe Bax",
                             address: "Kinkerstraat 119, 1053CC Amsterdam, Netherlands",
-                            latitude: 52.3655891418457,
-                            longitude: 4.867978096008301,
                             date: "",
                             attendees: 2,
                             icon: "star")
