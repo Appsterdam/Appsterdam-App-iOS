@@ -6,6 +6,13 @@
 //
 
 import SwiftUI
+import MapKit
+
+struct myAnnotation: Identifiable {
+    let id = UUID()
+    let name: String
+    let coordinate: CLLocationCoordinate2D
+}
 
 struct EventView: View {
     // To dismiss this screen using the button.
@@ -16,7 +23,18 @@ struct EventView: View {
     // initial URL string
     @State var urlString = "https://appsterdam.rs"
 
-    @Binding var displayEvent: event
+    @Binding var displayEvent: Event
+
+    @State private var region = MKCoordinateRegion(
+        center: CLLocationCoordinate2D(
+            latitude: 51.507222,
+            longitude: -0.1275
+        ),
+        span: MKCoordinateSpan(
+            latitudeDelta: 0.1,
+            longitudeDelta: 0.1
+        )
+    )
 
     var body: some View {
         VStack {
@@ -40,13 +58,13 @@ struct EventView: View {
                         }).padding(5)
                     }
 
-                    if displayEvent.image.count > 2 {
-                        Image(systemName: displayEvent.image)
+                    if displayEvent.icon.count > 2 {
+                        Image(systemName: displayEvent.icon)
                             .resizable()
                             .scaledToFit()
                             .frame(width: 200, height: 200)
                     } else {
-                        if let image = displayEvent.image.emojiToImage {
+                        if let image = displayEvent.icon.emojiToImage {
                             Image.init(
                                 uiImage: image
                             ).resizable()
@@ -69,7 +87,20 @@ struct EventView: View {
 
                     ScrollView {
                         Text(displayEvent.description)
+                            .frame(
+                                maxWidth: .infinity,
+                                alignment: .leading
+                            )
                     }
+
+                    let _ = updateMap()
+                    Map(coordinateRegion: $region, annotationItems: [
+                        myAnnotation.init(name: displayEvent.name, coordinate: CLLocationCoordinate2D(latitude: displayEvent.latitude, longitude: displayEvent.longitude))
+                    ]) { item in
+                        MapPin(coordinate: item.coordinate)
+
+                    }
+                        .frame(width: 400, height: 200)
                 }
             }
             GroupBox() {
@@ -79,9 +110,28 @@ struct EventView: View {
                     showSafari = true
                 }
             }
-            .popover(isPresented: $showSafari, content: {
+            .popover(isPresented: $showSafari,  content: {
                 SafariView(urlString: $urlString)
             })
+        }
+    }
+
+    func updateMap() {
+        let geocoder = CLGeocoder()
+        geocoder.geocodeAddressString(displayEvent.address) {
+            (placemarks, error) in
+            guard error == nil,
+            let coordinate = placemarks?.first?.location?.coordinate else {
+                let _ = print("Geocoding error: \(error!)")
+
+                return
+            }
+
+            self.region = .init(
+                center: coordinate,
+                latitudinalMeters: 500,
+                longitudinalMeters: 500
+            )
         }
     }
 }
@@ -92,11 +142,18 @@ struct EventView_Previews: PreviewProvider {
         EventView(
             displayEvent: .constant(
                 .init(
+                    id: "0",
                     name: "Test event",
                     description: "Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, ",
-                    date: .init(),
+                    price: 0,
+                    organizer: "Appsterdam",
+                    location: "",
+                    address: "",
+                    latitude: 52.3655891418457,
+                    longitude: 4.867978096008301,
+                    date: "",
                     attendees: 25,
-                    image: "star"
+                    icon: "star"
                 )
             )
         )
@@ -104,6 +161,7 @@ struct EventView_Previews: PreviewProvider {
         EventView(
             displayEvent: .constant(
                 .init(
+                    id: "",
                     name: "Test event, with beer involved.",
                     description: """
                 What shall we drink
@@ -139,9 +197,15 @@ struct EventView_Previews: PreviewProvider {
                 Yes, we'll fight together
                 Not alone!
                 """,
-                    date: .init(),
+                    price: 0,
+                    organizer: "Appsterdam",
+                    location: "Cafe Bax",
+                    address: "Kinkerstraat 119, 1053CC, Amsterdam",
+                    latitude: 52.3655891418457,
+                    longitude: 4.867978096008301,
+                    date: "",
                     attendees: 25,
-                    image: "🍺"
+                    icon: "🍺"
                 )
             )
         )

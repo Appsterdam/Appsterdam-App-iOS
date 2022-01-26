@@ -1,20 +1,103 @@
 <?php
 
 $events = array();
-$events['past'] = array();
-$events['past'][] = array(
-    'name' => 'Past Event',
-    'description' => 'WOOOOO',
-    'icon' => 'star',
-    'attendees' => 1
+$events[] = array(
+    'name' => 'Upcoming',
+    'events' => array(
+        array(
+            'id' => '1',
+            'name' => 'Weekly Meeten en Drinken',
+            'description' => "What shall we drink\nSeven days long\nWhat shall we drink?\nWhat a thirst!\n\nThere's plenty for everyone\nSo we'll drink together\nSo just dip into the cask!\nYes, let's drink together\nNot alone!\n\nAnd then we shall work\nSeven days long!\nThen we shall work\nFor each other!\n\nThen there will be work for everyone\nSo we shall work together\nSeven days long!\nYes, we'll work together\nNot alone!\n\nBut first we have to fight\nNobody knows for how long!\nFirst we have to fight\nFor our interest!\n\nFor everybody's happiness\nSo we'll fight together\nTogether we're strong!\nYes, we'll fight together\nNot alone!",
+            'price' => 0,
+            'organizer' => 'Appsterdam',
+            'location' => 'Bax',
+            'address' => 'Ten Katestraat 119, 1053 CC Amsterdam, Netherlands',
+            'latitude' => 52.3655891418457,
+            'longitude' => 4.867978096008301,
+            'date' => '20220101190000:20220101220000',
+            'icon' => '🍺',
+            'attendees' => 1
+        ),
+        array(
+            'id' => '280861388',
+            'name' => 'Weekend Fun: ARTIS',
+            'description' => 'SOME USELESS DESCRIPTION 🐘🌍😄',
+            'price' => 30,
+            'organizer' => 'Appsterdam',
+            'location' => 'Bax',
+            'address' => 'Plantage Kerklaan 38-40, Amsterdam, Netherlands',
+            'latitude' => 52.3655891418457,
+            'longitude' => 4.867978096008301,
+            'date' => '20220101190000:20220101220000',
+            'icon' => '🐘',
+            'attendees' => 1
+        ),
+        array(
+            'id' => '3',
+            'name' => 'Coffee Coding',
+            'description' => 'WOOOOO',
+            'price' => 0,
+            'organizer' => 'Appsterdam',
+            'location' => 'Bax',
+            'address' => 'Ten Katestraat 119, 1053 CC Amsterdam, Netherlands',
+            'latitude' => 52.3655891418457,
+            'longitude' => 4.867978096008301,
+            'date' => '20220101190000:20220101220000',
+            'icon' => 'note.text',
+            'attendees' => 1
+        )
+    )
 );
-$events['future'] = array();
-$events['future'][] = array(
-    'name' => 'future Event',
-    'description' => 'WOOOOO',
-    'icon' => 'star',
-    'attendees' => 1
-);
+
+for ($i = 2022; $i > 2012; $i--) {
+    $events[] = array(
+        'name' => sprintf("%s", $i),
+        'events' => array(
+            array(
+                'id' => $i . '1',
+                'name' => 'Past Event (' . $i . ', 1)',
+                'description' => 'WOOOOO',
+                'price' => 0,
+                'organizer' => 'Appsterdam',
+                'location' => 'Bax',
+                'address' => 'Ten Katestraat 119, 1053 CC Amsterdam, Netherlands',
+                'latitude' => 52.3655891418457,
+                'longitude' => 4.867978096008301,
+                'date' => '20220101190000:20220101220000',
+                'icon' => 'star',
+                'attendees' => 1
+            ),
+            array(
+                'id' => $i . '2',
+                'name' => 'Past Event (' . $i . ', 2)',
+                'description' => 'WOOOOO',
+                'price' => 0,
+                'organizer' => 'Appsterdam',
+                'location' => 'Bax',
+                'address' => 'Ten Katestraat 119, 1053 CC Amsterdam, Netherlands',
+                'latitude' => 52.3655891418457,
+                'longitude' => 4.867978096008301,
+                'date' => '20220101190000:20220101220000',
+                'icon' => 'star',
+                'attendees' => 1
+            ),
+            array(
+                'id' => $i . '3',
+                'name' => 'Past Event (' . $i . ', 2)',
+                'description' => 'WOOOOO',
+                'price' => 0,
+                'organizer' => 'Appsterdam',
+                'location' => 'Bax',
+                'address' => 'Ten Katestraat 119, 1053 CC Amsterdam, Netherlands',
+                'latitude' => 52.3655891418457,
+                'longitude' => 4.867978096008301,
+                'date' => '20220101190000:20220101220000',
+                'icon' => 'star',
+                'attendees' => 1
+            ),
+        )
+    );
+}
 
 $people[] = array(
     'team' => 'Board',
@@ -51,14 +134,14 @@ $people[] = array(
     'team' => 'Coffee Coding',
     'members' => array(
         array(
-        "name" => "Maike Warner",
-        "picture" => "https://i0.wp.com/appsterdam.rs/wp-content/uploads/2021/12/Maike_Warner.png?w=640&ssl=1",
-        "function" => "Coffee Coding organizer"
-    ),
-    array(
-        "name" => "Dániel Varga",
-        "function" => "Coffee Coding organizer"
-    )
+            "name" => "Maike Warner",
+            "picture" => "https://i0.wp.com/appsterdam.rs/wp-content/uploads/2021/12/Maike_Warner.png?w=640&ssl=1",
+            "function" => "Coffee Coding organizer"
+        ),
+        array(
+            "name" => "Dániel Varga",
+            "function" => "Coffee Coding organizer"
+        )
     )
 );
 
@@ -78,5 +161,5 @@ $people[] = array(
     )
 );
 
-file_put_contents("test-people.json", json_encode($people));
-file_put_contents("test-events.json", json_encode($events));
+file_put_contents("test-people.json", json_encode($people, JSON_PRETTY_PRINT));
+file_put_contents("test-events.json", json_encode($events, JSON_PRETTY_PRINT));

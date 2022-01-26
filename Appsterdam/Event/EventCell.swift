@@ -9,14 +9,14 @@
 import SwiftUI
 
 struct EventCell: View {
-    var event: event
+    var event: Event
 
     var body: some View {
         HStack {
-            if event.image.count > 2 {
-                Image(systemName: event.image)
+            if event.icon.count > 2 {
+                Image(systemName: event.icon)
             } else {
-                if let image = event.image.emojiToImage {
+                if let image = event.icon.emojiToImage {
                     Image.init(
                         uiImage: image
                     )
@@ -38,6 +38,20 @@ struct EventCell: View {
 }
 struct EventCell_Previews: PreviewProvider {
     static var previews: some View {
-        EventCell(event: .init(name: "preview", description: "preview string", date: .init(), attendees: 2, image: "star"))
+        EventCell(event:
+                        .init(
+                            id: "0",
+                            name: "preview",
+                            description: "preview string",
+                            price: 0,
+                            organizer: "Appsterdam",
+                            location: "Cafe Bax",
+                            address: "Kinkerstraat 119, 1053CC Amsterdam, Netherlands",
+                            latitude: 52.3655891418457,
+                            longitude: 4.867978096008301,
+                            date: "",
+                            attendees: 2,
+                            icon: "star")
+        )
     }
 }

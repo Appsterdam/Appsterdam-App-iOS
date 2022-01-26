@@ -87,11 +87,12 @@ class PersonModel {
     private func parse(json: Data) -> [PersonArray]? {
         let decoder = JSONDecoder()
 
-        if let persons = try? decoder.decode([PersonArray].self, from: json) {
-            return persons
+        do {
+            return try decoder.decode([PersonArray].self, from: json)
+        } catch {
+            Aurora.shared.log("Error: \(error)")
+            Aurora.shared.log("Failed to decode persons")
+            return nil
         }
-
-        Aurora.shared.log("Failed to decode persons")
-        return nil
     }
 }
