@@ -17,6 +17,7 @@ struct myAnnotation: Identifiable {
 struct EventView: View {
     // To dismiss this screen using the button.
     @Environment(\.presentationMode) var presentationMode
+    @Environment(\.verticalSizeClass) var sizeClass
 
     // whether or not to show the Safari ViewController
     @State var showSafari = false
@@ -30,6 +31,10 @@ struct EventView: View {
             VStack {
                 GroupBox() {
                     HStack() {
+                        Text(displayEvent.name)
+                            .font(.title)
+                            .lineLimit(1)
+
                         // To make it on the right
                         Spacer()
 
@@ -47,30 +52,37 @@ struct EventView: View {
                         }).padding(5)
                     }
 
-                    if displayEvent.icon.count > 2 {
-                        Image(systemName: displayEvent.icon)
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 200, height: 200)
-                    } else {
-                        if let image = displayEvent.icon.emojiToImage {
-                            Image.init(
-                                uiImage: image
-                            ).resizable()
-                                .scaledToFit()
-                                .frame(width: 200, height: 200)
-                        } else {
-                            Image(systemName: "star")
+                    if sizeClass == .regular {
+                        if displayEvent.icon.count > 2 {
+                            Image(systemName: displayEvent.icon)
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 200, height: 200)
+                        } else {
+                            if let image = displayEvent.icon.emojiToImage {
+                                Image.init(
+                                    uiImage: image
+                                ).resizable()
+                                    .scaledToFit()
+                                    .frame(width: 200, height: 200)
+                            } else {
+                                Image(systemName: "star")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 200, height: 200)
+                            }
                         }
                     }
 
-                    Text(displayEvent.name)
-
-                    Text("Date: xxxx")
-                    Text("Time: xxxx")
+                    VStack {
+                        Text("Date: xxxx")
+                        Text("Time: xxxx")
+                    }.onLandscape {
+                        $0.frame(
+                            maxWidth: .infinity,
+                            alignment: .leading
+                        )
+                    }
 
                     Divider()
 
@@ -104,7 +116,7 @@ struct EventView_Previews: PreviewProvider {
             displayEvent: .constant(
                 .init(
                     id: "0",
-                    name: "Test event",
+                    name: "Weekend fun: ARTIS/NEMO",
                     description: "Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, ",
                     price: 0,
                     organizer: "Appsterdam",
@@ -121,7 +133,7 @@ struct EventView_Previews: PreviewProvider {
             displayEvent: .constant(
                 .init(
                     id: "",
-                    name: "Test event, with beer involved.",
+                    name: "Weekly Meeten en Drinken",
                     description: """
                 What shall we drink
                 Seven days long
@@ -166,5 +178,6 @@ struct EventView_Previews: PreviewProvider {
                 )
             )
         )
+            .previewInterfaceOrientation(.landscapeLeft)
     }
 }
