@@ -31,7 +31,25 @@ struct EventCell: View {
 
                 Text(event.description)
                     .font(.caption)
+                    .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
+
+                HStack {
+                    // Date/time
+                    Image(systemName: "calendar.badge.clock")
+                    Text(event.date)
+                    Spacer()
+
+//                    // Attendees
+//                    Image(systemName: "person.fill.checkmark")
+//                    Text(event.attendees)
+//                    Spacer()
+
+                    // Place
+                    Image(systemName: "mappin.and.ellipse")
+                    Text(event.location)
+                    Spacer()
+                }.padding(.top)
             }
         }
     }
