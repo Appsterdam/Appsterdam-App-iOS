@@ -23,12 +23,26 @@ struct EventListView: View {
         attendees: 0,
         icon: ""
     )
+    @State private var searchText = ""
 
     let events = EventModel().load()
 
     var body: some View {
         List() {
-            ForEach(events) { section in
+            TextField("Search", text: $searchText)
+                .padding(7)
+                .padding(.horizontal, 20)
+                .cornerRadius(8)
+                .overlay(
+                    HStack {
+                        Image(systemName: "magnifyingglass")
+                            .foregroundColor(.gray)
+                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                    }
+                )
+                .padding(.horizontal, 0)
+
+            ForEach(searchResults) { section in
                 Section(header: Text(section.name)) {
                     ForEach(section.events) { event in
                         EventCell(event: event)
@@ -44,6 +58,62 @@ struct EventListView: View {
         .sheet(isPresented: $showsEvent, content: {
             EventView(displayEvent: $showEvent)
         })
+    }
+
+    var searchResults: [EventArray] {
+        if searchText.isEmpty {
+            return events
+        } else {
+            var searchEvents: [EventArray] = [EventArray]()
+
+            for section in events {
+                var searchEvent: [Event] = [Event]()
+
+                for event in section.events {
+                    if (
+                        event.name.contains(search: searchText) ||
+                        event.description.contains(search: searchText) ||
+                        event.date.contains(search: searchText)
+                    ) {
+                        searchEvent.append(event)
+                    }
+                }
+
+                if !searchEvent.isEmpty {
+                    searchEvents.append(
+                        .init(
+                            name: section.name,
+                            events: searchEvent
+                        )
+                    )
+                }
+            }
+
+            // if no results then return no results found...
+            guard !searchEvents.isEmpty else {
+                return [
+                    .init(
+                        name: "No results found",
+                        events: [
+                            .init(
+                                id: "0",
+                                name: "No result found",
+                                description: "Please try another search.",
+                                price: 0,
+                                organizer: "",
+                                location: "",
+                                address: "",
+                                date: "",
+                                attendees: 0,
+                                icon: "exclamationmark.arrow.triangle.2.circlepath"
+                            )
+                        ]
+                    )
+                ]
+            }
+
+            return searchEvents
+        }
     }
 }
 

@@ -449,5 +449,46 @@
                 "attendees": 1
             }
         ]
+    },
+    {
+        "name": "2012",
+        "events": [
+            {
+                "id": "20121",
+                "name": "Past Event (2012, 1)",
+                "description": "WOOOOO",
+                "price": 0,
+                "organizer": "Appsterdam",
+                "location": "Bax",
+                "address": "Ten Katestraat 119, 1053 CC Amsterdam, Netherlands",
+                "date": "20220101190000:20220101220000",
+                "icon": "star",
+                "attendees": 1
+            },
+            {
+                "id": "20122",
+                "name": "Past Event (2012, 2)",
+                "description": "WOOOOO",
+                "price": 0,
+                "organizer": "Appsterdam",
+                "location": "Bax",
+                "address": "Ten Katestraat 119, 1053 CC Amsterdam, Netherlands",
+                "date": "20220101190000:20220101220000",
+                "icon": "star",
+                "attendees": 1
+            },
+            {
+                "id": "20123",
+                "name": "Past Event (2012, 2)",
+                "description": "WOOOOO",
+                "price": 0,
+                "organizer": "Appsterdam",
+                "location": "Bax",
+                "address": "Ten Katestraat 119, 1053 CC Amsterdam, Netherlands",
+                "date": "20220101190000:20220101220000",
+                "icon": "star",
+                "attendees": 1
+            }
+        ]
     }
 ]

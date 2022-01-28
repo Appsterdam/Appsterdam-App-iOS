@@ -43,7 +43,7 @@ $events[] = array(
     )
 );
 
-for ($i = 2022; $i > 2012; $i--) {
+for ($i = 2022; $i >= 2012; $i--) {
     $events[] = array(
         'name' => sprintf("%s", $i),
         'events' => array(
