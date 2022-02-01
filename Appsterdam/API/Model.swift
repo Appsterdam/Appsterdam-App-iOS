@@ -138,10 +138,8 @@ class Model<T: Codable> {
     /// - Parameter json: JSON (as `Data`)
     /// - Returns: `Model<T>?`
     private func parse(json: Data) -> [T]? {
-        let decoder = JSONDecoder()
-
         do {
-            return try decoder.decode([T].self, from: json)
+            return try JSONDecoder().decode([T].self, from: json)
         } catch {
             Aurora.shared.log("Error: \(error)")
             Aurora.shared.log("Failed to decode <\(T.self)>")
