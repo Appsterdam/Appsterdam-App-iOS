@@ -8,12 +8,27 @@
 import Foundation
 import Aurora
 
+/// Model class for decoding JSON files
+///
+/// usage:
+///
+///     Model<Codable>("https://server/file.ext").load()
 class Model<T: Codable> {
-    let webURL: URL
-    let cache: URL
-    let maxAge: Double = 3600 * 24 * 7 // Keep one week.
-    let debug: Bool = true
+    /// The url to fetch the model from
+    private let webURL: URL
 
+
+    /// The url of the cache (automatic generated)
+    private let cache: URL
+
+    /// Cache lifetime in seconds
+    private let maxAge: Double = 3600 * 24 * 7 // Keep one week.
+
+    /// Are we debugging?
+    private let debug: Bool = true
+
+    /// Initialize Model
+    /// - Parameter url: URL
     init(url: String) {
         guard let url = URL(string: url) else {
             Aurora.shared.log("Invalid url provided <\(T.self)>.")
@@ -27,15 +42,17 @@ class Model<T: Codable> {
         )[0].appendingPathComponent(url.lastPathComponent)
     }
 
-    func load(_ testData: Bool = false) -> [T] {
+    /// Load model from internet/cache
+    /// - Returns: `Model<T>`
+    func load() -> [T] {
         // Reload (in background) after 10 seconds.
         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10) {
-            self.loadFromWebsite()
+            self.loadFromInternet()
         }
 
         // Check, if we have at least 1 person
         guard let events = loadFromCache() else {
-            guard let fetchedEvents = loadFromWebsite() else {
+            guard let fetchedEvents = loadFromInternet() else {
                 Aurora.shared.log("This should never happen, something is corrupt.\nCannot create: \(T.self)")
                 fatalError()
             }
@@ -48,13 +65,15 @@ class Model<T: Codable> {
         return events
     }
 
-    private func isCacheValid(_ refresh: Double = 0) -> Bool {
+    /// Is the cache valid?
+    /// - Returns: boolean wherever the cache is still valid or not
+    private func isCacheValid() -> Bool {
         do {
             if FileManager.default.fileExists(atPath: cache.path) {
                 let attributes = try FileManager.default.attributesOfItem(atPath: cache.path)
 
                 if let modificationDate = attributes[FileAttributeKey.modificationDate] as? Date,
-                   Date().unixTime < modificationDate.unixTime + maxAge - refresh {
+                   Date().unixTime < modificationDate.unixTime + maxAge {
                     return true
                 }
             }
@@ -69,6 +88,8 @@ class Model<T: Codable> {
         return false
     }
 
+    /// Load Model from cache
+    /// - Returns: `Model<T>?`
     private func loadFromCache() -> [T]? {
         do {
             if isCacheValid() {
@@ -88,8 +109,10 @@ class Model<T: Codable> {
         return nil
     }
 
-    @discardableResult
-    private func loadFromWebsite() -> [T]? {
+
+    /// Load Model from internet
+    /// - Returns: `Model<T>?`
+    @discardableResult private func loadFromInternet() -> [T]? {
         do {
             if debug {
                 Aurora.shared.log("Loading <\(T.self)> from internet \(webURL.absoluteString)")
@@ -111,6 +134,9 @@ class Model<T: Codable> {
     }
 
 
+    /// Parse data as `Model<T>?`
+    /// - Parameter json: JSON (as `Data`)
+    /// - Returns: `Model<T>?`
     private func parse(json: Data) -> [T]? {
         let decoder = JSONDecoder()
 
