@@ -17,7 +17,6 @@ class Model<T: Codable> {
     /// The url to fetch the model from
     private let webURL: URL
 
-
     /// The url of the cache (automatic generated)
     private let cache: URL
 
@@ -109,7 +108,6 @@ class Model<T: Codable> {
         return nil
     }
 
-
     /// Load Model from internet
     /// - Returns: `Model<T>?`
     @discardableResult private func loadFromInternet() -> [T]? {
@@ -132,7 +130,6 @@ class Model<T: Codable> {
 
         return nil
     }
-
 
     /// Parse data as `Model<T>?`
     /// - Parameter json: JSON (as `Data`)
