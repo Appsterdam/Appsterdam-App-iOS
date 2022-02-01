@@ -16,7 +16,10 @@ struct AboutView: View {
     // initial URL string
     @State var urlString = "https://appsterdam.rs"
 
-    let persons = PersonModel().load()
+//    let persons = PersonModel().load()
+    let persons = Model<PersonArray>.init(
+        url: "https://appsterdam.rs/api/people.json"
+    ).load()
 
     var releaseVersionNumber: String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"

@@ -25,7 +25,10 @@ struct EventListView: View {
     )
     @State private var searchText = ""
 
-    let events = EventModel().load()
+//    let events = EventModel().load()
+    let events = Model<EventArray>.init(
+        url: "https://appsterdam.rs/api/events.json"
+    ).load()
 
     var body: some View {
         List() {
