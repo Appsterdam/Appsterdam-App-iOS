@@ -17,7 +17,7 @@ struct AboutView: View {
     @State var urlString = "https://appsterdam.rs"
 
 //    let persons = PersonModel().load()
-    let persons = Model<PersonArray>.init(
+    let persons = Model<PersonModel>.init(
         url: "https://appsterdam.rs/api/people.json"
     ).load()
 

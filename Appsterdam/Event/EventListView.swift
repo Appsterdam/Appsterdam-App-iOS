@@ -26,7 +26,7 @@ struct EventListView: View {
     @State private var searchText = ""
 
 //    let events = EventModel().load()
-    let events = Model<EventArray>.init(
+    let events = Model<EventModel>.init(
         url: "https://appsterdam.rs/api/events.json"
     ).load()
 
@@ -63,11 +63,11 @@ struct EventListView: View {
         })
     }
 
-    var searchResults: [EventArray] {
+    var searchResults: [EventModel] {
         if searchText.isEmpty {
             return events
         } else {
-            var searchEvents: [EventArray] = [EventArray]()
+            var searchEvents: [EventModel] = [EventModel]()
 
             for section in events {
                 var searchEvent: [Event] = [Event]()

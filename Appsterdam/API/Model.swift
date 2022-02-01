@@ -23,19 +23,19 @@ class Model<T: Codable> {
 
         cache = FileManager.default.urls(
             for: .documentDirectory,
-            in: .userDomainMask
+               in: .userDomainMask
         )[0].appendingPathComponent(url.lastPathComponent)
     }
 
     func load(_ testData: Bool = false) -> [T] {
-        // Reload (in background)
-        DispatchQueue.global(qos: .background).async {
-            self.reloadFromWebsite()
+        // Reload (in background) after 10 seconds.
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10) {
+            self.loadFromWebsite()
         }
 
         // Check, if we have at least 1 person
         guard let events = loadFromCache() else {
-            guard let fetchedEvents = reloadFromWebsite() else {
+            guard let fetchedEvents = loadFromWebsite() else {
                 Aurora.shared.log("This should never happen, something is corrupt.\nCannot create: \(T.self)")
                 fatalError()
             }
@@ -48,19 +48,35 @@ class Model<T: Codable> {
         return events
     }
 
-    private func loadFromCache() -> [T]? {
+    private func isCacheValid(_ refresh: Double = 0) -> Bool {
         do {
             if FileManager.default.fileExists(atPath: cache.path) {
                 let attributes = try FileManager.default.attributesOfItem(atPath: cache.path)
 
                 if let modificationDate = attributes[FileAttributeKey.modificationDate] as? Date,
-                   Date().unixTime < modificationDate.unixTime + maxAge {
-                    let jsonData = try Data.init(contentsOf: cache)
-                    if debug {
-                        Aurora.shared.log("Loading <\(T.self)> \(cache.path) from cache")
-                    }
-                    return parse(json: jsonData)
+                   Date().unixTime < modificationDate.unixTime + maxAge - refresh {
+                    return true
                 }
+            }
+        }
+        catch {
+            if debug {
+                Aurora.shared.log("\(cache.path) is invalid")
+            }
+            Aurora.shared.log("Error: \(error)")
+        }
+
+        return false
+    }
+
+    private func loadFromCache() -> [T]? {
+        do {
+            if isCacheValid() {
+                let jsonData = try Data.init(contentsOf: cache)
+                if debug {
+                    Aurora.shared.log("Loading <\(T.self)> \(cache.path) from cache")
+                }
+                return parse(json: jsonData)
             }
         } catch {
             if debug {
@@ -73,7 +89,7 @@ class Model<T: Codable> {
     }
 
     @discardableResult
-    private func reloadFromWebsite() -> [T]? {
+    private func loadFromWebsite() -> [T]? {
         do {
             if debug {
                 Aurora.shared.log("Loading <\(T.self)> from internet \(webURL.absoluteString)")
