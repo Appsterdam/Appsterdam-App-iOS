@@ -14,7 +14,9 @@ $events[] = array(
             'address' => 'Ten Katestraat 119, 1053 CC Amsterdam, Netherlands',
             'date' => '20220101190000:20220101220000',
             'icon' => '🍺',
-            'attendees' => 1
+            'attendees' => 1,
+            'latitude' => 0,
+            'longitude' => 0
         ),
         array(
             'id' => '280861388',
@@ -26,7 +28,9 @@ $events[] = array(
             'address' => 'Plantage Kerklaan 38-40, Amsterdam, Netherlands',
             'date' => '20220101190000:20220101220000',
             'icon' => '🐘',
-            'attendees' => 1
+            'attendees' => 1,
+            'latitude' => 0,
+            'longitude' => 0
         ),
         array(
             'id' => '3',
@@ -38,7 +42,9 @@ $events[] = array(
             'address' => 'Ten Katestraat 119, 1053 CC Amsterdam, Netherlands',
             'date' => '20220101190000:20220101220000',
             'icon' => 'note.text',
-            'attendees' => 1
+            'attendees' => 1,
+            'latitude' => 0,
+            'longitude' => 0
         )
     )
 );
@@ -57,7 +63,9 @@ for ($i = 2022; $i >= 2012; $i--) {
                 'address' => 'Ten Katestraat 119, 1053 CC Amsterdam, Netherlands',
                 'date' => '20220101190000:20220101220000',
                 'icon' => 'star',
-                'attendees' => 1
+                'attendees' => 1,
+                'latitude' => 0,
+                'longitude' => 0
             ),
             array(
                 'id' => $i . '2',
@@ -69,7 +77,9 @@ for ($i = 2022; $i >= 2012; $i--) {
                 'address' => 'Ten Katestraat 119, 1053 CC Amsterdam, Netherlands',
                 'date' => '20220101190000:20220101220000',
                 'icon' => 'star',
-                'attendees' => 1
+                'attendees' => 1,
+                'latitude' => 0,
+                'longitude' => 0
             ),
             array(
                 'id' => $i . '3',
@@ -81,7 +91,9 @@ for ($i = 2022; $i >= 2012; $i--) {
                 'address' => 'Ten Katestraat 119, 1053 CC Amsterdam, Netherlands',
                 'date' => '20220101190000:20220101220000',
                 'icon' => 'star',
-                'attendees' => 1
+                'attendees' => 1,
+                'latitude' => 0,
+                'longitude' => 0
             ),
         )
     );
@@ -149,5 +161,5 @@ $people[] = array(
     )
 );
 
-file_put_contents("test-people.json", json_encode($people, JSON_PRETTY_PRINT));
-file_put_contents("test-events.json", json_encode($events, JSON_PRETTY_PRINT));
+file_put_contents("people.json", json_encode($people, JSON_PRETTY_PRINT));
+file_put_contents("events.json", json_encode($events, JSON_PRETTY_PRINT));

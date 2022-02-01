@@ -65,8 +65,8 @@ class PersonModel {
 
     private func loadFromCache() -> [PersonArray]? {
         // Load from cache, and refresh in background.
-        guard let url = Bundle.main.url(forResource: "test-people", withExtension: "json") else {
-            Aurora.shared.log("Could't find test-people.json")
+        guard let url = Bundle.main.url(forResource: "people", withExtension: "json") else {
+            Aurora.shared.log("Could't find people.json")
             return nil
         }
 

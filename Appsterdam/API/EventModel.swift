@@ -77,8 +77,8 @@ class EventModel {
 
     private func loadFromCache() -> [EventArray]? {
         // Load from cache, and refresh in background.
-        guard let url = Bundle.main.url(forResource: "test-events", withExtension: "json") else {
-            Aurora.shared.log("Could't find test-events.json")
+        guard let url = Bundle.main.url(forResource: "events", withExtension: "json") else {
+            Aurora.shared.log("Could't find events.json")
             return nil
         }
 
