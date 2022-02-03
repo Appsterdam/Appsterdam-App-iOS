@@ -75,8 +75,15 @@ struct EventView: View {
                     }
 
                     VStack {
-                        Text("Date: xxxx")
-                        Text("Time: xxxx")
+                        Text("Date: \(convertDateFormat(inputDate: displayEvent.date.split(":")[0]))")
+                        Text("Location:  \(displayEvent.location_name) 📍").onTapGesture {
+                            if displayEvent.location_name.contains("online") {
+                                return
+                            }
+
+                            guard let url = URL(string: "http://maps.apple.com/?daddr=\(displayEvent.latitude),\(displayEvent.longitude)") else { return }
+                            UIApplication.shared.open(url)
+                        }
                     }.onLandscape {
                         $0.frame(
                             maxWidth: .infinity,
@@ -87,7 +94,12 @@ struct EventView: View {
                     Divider()
 
                     ScrollView {
-                        Text(displayEvent.description)
+                        Text(
+                            // Init to enable Markdown
+                            .init(
+                                displayEvent.description
+                                  )
+                            )
                             .frame(
                                 maxWidth: .infinity,
                                 alignment: .leading
@@ -97,7 +109,7 @@ struct EventView: View {
             }
             GroupBox() {
                 Button ("Attend \(displayEvent.name)") {
-                    self.urlString = "https://www.meetup.com/nl-NL/Appsterdam/events/280861388/"
+                    self.urlString = "https://www.meetup.com/nl-NL/Appsterdam/events/\(displayEvent.id)/"
 
                     showSafari = true
                 }
@@ -106,6 +118,26 @@ struct EventView: View {
                 SafariView(urlString: $urlString)
             })
         }
+    }
+
+    func convertDateFormat(inputDate: String) -> String {
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+
+        let oldDateTime = dateFormatter.date(
+            from: inputDate
+        )
+
+        let convertDateFormatter = DateFormatter()
+        convertDateFormatter.dateFormat = "dd MMM yyyy HH:mm"
+        convertDateFormatter.locale = Locale.current
+
+        return convertDateFormatter.string(
+            from: oldDateTime!
+        )
     }
 }
 
@@ -118,13 +150,15 @@ struct EventView_Previews: PreviewProvider {
                     id: "0",
                     name: "Weekend fun: ARTIS/NEMO",
                     description: "Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, ",
-                    price: 0,
+                    price: "0",
                     organizer: "Appsterdam",
-                    location: "",
-                    address: "",
+                    location_name: "",
+                    location_address: "",
                     date: "",
-                    attendees: 25,
-                    icon: "star"
+                    attendees: "25",
+                    icon: "star",
+                    latitude: "",
+                    longitude: ""
                 )
             )
         )
@@ -168,13 +202,15 @@ struct EventView_Previews: PreviewProvider {
                 Yes, we'll fight together
                 Not alone!
                 """,
-                    price: 0,
+                    price: "0",
                     organizer: "Appsterdam",
-                    location: "Cafe Bax",
-                    address: "Kinkerstraat 119, 1053CC, Amsterdam",
+                    location_name: "Cafe Bax",
+                    location_address: "Kinkerstraat 119, 1053CC, Amsterdam",
                     date: "",
-                    attendees: 25,
-                    icon: "🍺"
+                    attendees: "25",
+                    icon: "🍺",
+                    latitude: "",
+                    longitude: ""
                 )
             )
         )

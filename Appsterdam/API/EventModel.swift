@@ -13,13 +13,15 @@ struct Event: Codable, Identifiable {
     var id: String
     var name: String
     var description: String
-    var price: Int
+    var price: String
     var organizer: String
-    var location: String
-    var address: String
+    var location_name: String
+    var location_address: String
     var date: String
-    var attendees: Int
+    var attendees: String
     var icon: String
+    var latitude: String
+    var longitude: String
 }
 
 struct EventModel: Codable {

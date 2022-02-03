@@ -13,23 +13,35 @@ struct EventCell: View {
 
     var body: some View {
         HStack {
-            if event.icon.count > 2 {
-                Image(systemName: event.icon)
-            } else {
-                if let image = event.icon.emojiToImage {
-                    Image.init(
-                        uiImage: image
+            // Event icon
+            VStack {
+                if event.icon.count > 2 {
+                    // 30wx35h
+                    Image(
+                        systemName: event.icon
                     )
+                        .resizable()
                 } else {
-                    Image(systemName: "person.3.fill")
+                    if let image = event.icon.emojiToImage {
+                        Image.init(
+                            uiImage: image
+                        )
+                            .resizable()
+                    }
                 }
             }
+            .frame(width: 30, height: 30)
+            .padding(.trailing)
 
             VStack {
                 Text(event.name)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                Text(event.description)
+
+                Text(
+                    // .init for markdown support
+                    .init(event.description)
+                )
                     .font(.caption)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -37,22 +49,51 @@ struct EventCell: View {
                 HStack {
                     // Date/time
                     Image(systemName: "calendar.badge.clock")
-                    Text(event.date)
+
+                    Text(
+                        convertDateFormat(
+                            inputDate: event.date.split(":")[0]
+                        )
+                    ).font(.caption)
+
                     Spacer()
 
 //                    // Attendees
 //                    Image(systemName: "person.fill.checkmark")
 //                    Text(event.attendees)
+//                      .font(.caption)
 //                    Spacer()
 
                     // Place
                     Image(systemName: "mappin.and.ellipse")
-                    Text(event.location)
+                    Text(event.location_name)
+                        .font(.caption)
                     Spacer()
                 }.padding(.top)
             }
         }
     }
+
+    func convertDateFormat(inputDate: String) -> String {
+
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddHHmmss"
+        dateFormatter.timeZone = TimeZone.current
+        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
+
+        let oldDateTime = dateFormatter.date(
+            from: inputDate
+        )
+
+        let convertDateFormatter = DateFormatter()
+        convertDateFormatter.dateFormat = "dd MMM yyyy HH:mm"
+        convertDateFormatter.locale = Locale.current
+
+        return convertDateFormatter.string(
+            from: oldDateTime!
+        )
+    }
+
 }
 struct EventCell_Previews: PreviewProvider {
     static var previews: some View {
@@ -61,13 +102,15 @@ struct EventCell_Previews: PreviewProvider {
                             id: "0",
                             name: "preview",
                             description: "preview string",
-                            price: 0,
+                            price: "0",
                             organizer: "Appsterdam",
-                            location: "Cafe Bax",
-                            address: "Kinkerstraat 119, 1053CC Amsterdam, Netherlands",
+                            location_name: "Cafe Bax",
+                            location_address: "Kinkerstraat 119, 1053CC Amsterdam, Netherlands",
                             date: "",
-                            attendees: 2,
-                            icon: "star")
+                            attendees: "2",
+                            icon: "star",
+                            latitude: "",
+                            longitude: "")
         )
     }
 }

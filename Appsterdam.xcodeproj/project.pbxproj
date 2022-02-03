@@ -8,13 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		2BA33D4F279F02FF0073BC8B /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D4E279F02FE0073BC8B /* SafariView.swift */; };
-		2BA33D56279F117C0073BC8B /* generate.php in Resources */ = {isa = PBXBuildFile; fileRef = 2BA33D53279F117C0073BC8B /* generate.php */; };
-		2BA33D57279F117C0073BC8B /* test-people.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BA33D54279F117C0073BC8B /* test-people.json */; };
-		2BA33D58279F117C0073BC8B /* test-events.json in Resources */ = {isa = PBXBuildFile; fileRef = 2BA33D55279F117C0073BC8B /* test-events.json */; };
-		2BA33D5A279F29510073BC8B /* APIController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D59279F29510073BC8B /* APIController.swift */; };
 		2BA33D5D279F29760073BC8B /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D5C279F29760073BC8B /* PersonModel.swift */; };
 		2BA33D60279F35430073BC8B /* RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D5F279F35430073BC8B /* RemoteImageView.swift */; };
 		2BA33D6227A07C020073BC8B /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D6127A07C020073BC8B /* EventView.swift */; };
+		2BB2C61C27A9CDA500F07B96 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2C61B27A9CDA500F07B96 /* Model.swift */; };
 		2BB690FD279DA24E003B4A00 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB690F9279DA24E003B4A00 /* AboutView.swift */; };
 		2BB690FE279DA24E003B4A00 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB690FA279DA24E003B4A00 /* MainView.swift */; };
 		2BB690FF279DA24E003B4A00 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB690FB279DA24E003B4A00 /* Settings.swift */; };
@@ -29,6 +26,7 @@
 		2BEBC0E9279DA1E6001E962F /* AppsterdamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0E8279DA1E6001E962F /* AppsterdamTests.swift */; };
 		2BEBC0F3279DA1E6001E962F /* AppsterdamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0F2279DA1E6001E962F /* AppsterdamUITests.swift */; };
 		2BEBC0F5279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0F4279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift */; };
+		2BF60E0827A44F1F00CC5C82 /* onLandscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF60E0727A44F1F00CC5C82 /* onLandscape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,13 +48,10 @@
 
 /* Begin PBXFileReference section */
 		2BA33D4E279F02FE0073BC8B /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
-		2BA33D53279F117C0073BC8B /* generate.php */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.script.php; path = generate.php; sourceTree = "<group>"; };
-		2BA33D54279F117C0073BC8B /* test-people.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-people.json"; sourceTree = "<group>"; };
-		2BA33D55279F117C0073BC8B /* test-events.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = "test-events.json"; sourceTree = "<group>"; };
-		2BA33D59279F29510073BC8B /* APIController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIController.swift; sourceTree = "<group>"; };
 		2BA33D5C279F29760073BC8B /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		2BA33D5F279F35430073BC8B /* RemoteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
 		2BA33D6127A07C020073BC8B /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
+		2BB2C61B27A9CDA500F07B96 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2BB690F9279DA24E003B4A00 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		2BB690FA279DA24E003B4A00 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2BB690FB279DA24E003B4A00 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -73,6 +68,7 @@
 		2BEBC0EE279DA1E6001E962F /* AppsterdamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppsterdamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BEBC0F2279DA1E6001E962F /* AppsterdamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITests.swift; sourceTree = "<group>"; };
 		2BEBC0F4279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2BF60E0727A44F1F00CC5C82 /* onLandscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onLandscape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,22 +97,12 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2BA33D52279F117C0073BC8B /* testData */ = {
-			isa = PBXGroup;
-			children = (
-				2BA33D53279F117C0073BC8B /* generate.php */,
-				2BA33D54279F117C0073BC8B /* test-people.json */,
-				2BA33D55279F117C0073BC8B /* test-events.json */,
-			);
-			path = testData;
-			sourceTree = "<group>";
-		};
 		2BA33D5B279F29600073BC8B /* API */ = {
 			isa = PBXGroup;
 			children = (
-				2BA33D59279F29510073BC8B /* APIController.swift */,
 				2BA33D5C279F29760073BC8B /* PersonModel.swift */,
 				2BB6910A279DA2B4003B4A00 /* EventModel.swift */,
+				2BB2C61B27A9CDA500F07B96 /* Model.swift */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -126,6 +112,7 @@
 			children = (
 				2BA33D4E279F02FE0073BC8B /* SafariView.swift */,
 				2BA33D5F279F35430073BC8B /* RemoteImageView.swift */,
+				2BF60E0727A44F1F00CC5C82 /* onLandscape.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -172,7 +159,6 @@
 				2BB690FA279DA24E003B4A00 /* MainView.swift */,
 				2BB690FB279DA24E003B4A00 /* Settings.swift */,
 				2BEBC0DB279DA1E6001E962F /* Assets.xcassets */,
-				2BA33D52279F117C0073BC8B /* testData */,
 				2BEBC0DD279DA1E6001E962F /* Preview Content */,
 			);
 			path = Appsterdam;
@@ -313,10 +299,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BA33D56279F117C0073BC8B /* generate.php in Resources */,
-				2BA33D58279F117C0073BC8B /* test-events.json in Resources */,
 				2BEBC0DF279DA1E6001E962F /* Preview Assets.xcassets in Resources */,
-				2BA33D57279F117C0073BC8B /* test-people.json in Resources */,
 				2BEBC0DC279DA1E6001E962F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -342,14 +325,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2BB2C61C27A9CDA500F07B96 /* Model.swift in Sources */,
 				2BB690FE279DA24E003B4A00 /* MainView.swift in Sources */,
 				2BA33D60279F35430073BC8B /* RemoteImageView.swift in Sources */,
 				2BA33D6227A07C020073BC8B /* EventView.swift in Sources */,
+				2BF60E0827A44F1F00CC5C82 /* onLandscape.swift in Sources */,
 				2BA33D4F279F02FF0073BC8B /* SafariView.swift in Sources */,
 				2BA33D5D279F29760073BC8B /* PersonModel.swift in Sources */,
 				2BB690FD279DA24E003B4A00 /* AboutView.swift in Sources */,
 				2BB6910D279DA2B4003B4A00 /* EventModel.swift in Sources */,
-				2BA33D5A279F29510073BC8B /* APIController.swift in Sources */,
 				2BB69100279DA24E003B4A00 /* HomeView.swift in Sources */,
 				2BB6910E279DA2B4003B4A00 /* EventCell.swift in Sources */,
 				2BB6910C279DA2B4003B4A00 /* EventListView.swift in Sources */,

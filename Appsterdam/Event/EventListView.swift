@@ -10,23 +10,24 @@ import Aurora
 import UIKit
 
 struct EventListView: View {
-    @State var showsEvent: Bool = false
-    @State var showEvent: Event = .init(
+    @State private var searchText = ""
+    @State private var showsEvent: Bool = false
+    @State private var showEvent: Event = .init(
         id: "0",
         name: "",
         description: "",
-        price: 0,
+        price: "0",
         organizer: "Appsterdam",
-        location: "",
-        address: "",
+        location_name: "",
+        location_address: "",
         date: "",
-        attendees: 0,
-        icon: ""
+        attendees: "0",
+        icon: "",
+        latitude: "",
+        longitude: ""
     )
-    @State private var searchText = ""
 
-//    let events = EventModel().load()
-    let events = Model<EventModel>.init(
+    private let events = Model<EventModel>.init(
         url: "https://appsterdam.rs/api/events.json"
     ).load()
 
@@ -52,6 +53,9 @@ struct EventListView: View {
                             .onTapGesture {
                                 self.showEvent = event
                                 self.showsEvent.toggle()
+                               // for some reason,
+                               // the list scrolls to the top when opening an
+                               // item, i cant figure out (yet) how to fix this
                             }
                     }
                 }
@@ -102,13 +106,15 @@ struct EventListView: View {
                                 id: "0",
                                 name: "No result found",
                                 description: "Please try another search.",
-                                price: 0,
+                                price: "0",
                                 organizer: "",
-                                location: "",
-                                address: "",
+                                location_name: "",
+                                location_address: "",
                                 date: "",
-                                attendees: 0,
-                                icon: "exclamationmark.arrow.triangle.2.circlepath"
+                                attendees: "0",
+                                icon: "exclamationmark.arrow.triangle.2.circlepath",
+                                latitude: "",
+                                longitude: ""
                             )
                         ]
                     )

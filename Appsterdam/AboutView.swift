@@ -12,16 +12,16 @@ import Aurora
 // MARK: View
 struct AboutView: View {
     // whether or not to show the Safari ViewController
-    @State var showSafari = false
+    @State private var showSafari = false
+    
     // initial URL string
-    @State var urlString = "https://appsterdam.rs"
+    @State private var urlString = "https://appsterdam.rs"
 
-//    let persons = PersonModel().load()
-    let persons = Model<PersonModel>.init(
+    private let persons = Model<PersonModel>.init(
         url: "https://appsterdam.rs/api/people.json"
     ).load()
 
-    var releaseVersionNumber: String {
+    private var releaseVersionNumber: String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
     }
 
