@@ -20,7 +20,6 @@ struct EventCell: View {
                     Image(
                         systemName: event.icon
                     )
-                        .resizable()
                 } else {
                     if let image = event.icon.emojiToImage {
                         Image.init(
