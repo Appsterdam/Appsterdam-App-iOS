@@ -53,15 +53,14 @@ struct EventListView: View {
                             .onTapGesture {
                                 self.showEvent = event
                                 self.showsEvent.toggle()
-                               // for some reason,
-                               // the list scrolls to the top when opening an
-                               // item, i cant figure out (yet) how to fix this
                             }
                     }
                 }
                 .headerProminence(.increased)
             }
         }
+        // using fullScreenCover instead of sheet fixes the scroll issue #3.
+        // con, the drag down gesture is not supported in full screen cover
         .fullScreenCover(isPresented: $showsEvent, content: {
             EventView(displayEvent: $showEvent)
         })

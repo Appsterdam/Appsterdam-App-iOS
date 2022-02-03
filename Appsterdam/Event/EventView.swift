@@ -98,8 +98,8 @@ struct EventView: View {
                             // Init to enable Markdown
                             .init(
                                 displayEvent.description
-                                  )
                             )
+                        )
                             .frame(
                                 maxWidth: .infinity,
                                 alignment: .leading
@@ -117,7 +117,12 @@ struct EventView: View {
             .popover(isPresented: $showSafari,  content: {
                 SafariView(urlString: $urlString)
             })
-        }
+        }.gesture(DragGesture(minimumDistance: 20, coordinateSpace: .local)
+                    .onEnded({ value in
+            if value.translation.height > 0 {
+                presentationMode.wrappedValue.dismiss()
+            }
+        }))
     }
 
     func convertDateFormat(inputDate: String) -> String {
