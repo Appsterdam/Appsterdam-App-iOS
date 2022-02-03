@@ -62,7 +62,7 @@ struct EventListView: View {
                 .headerProminence(.increased)
             }
         }
-        .sheet(isPresented: $showsEvent, content: {
+        .fullScreenCover(isPresented: $showsEvent, content: {
             EventView(displayEvent: $showEvent)
         })
     }
