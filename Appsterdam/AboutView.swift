@@ -42,7 +42,7 @@ struct AboutView: View {
 
                 Text("“If you want to make movies, go to Hollywood.\nIf you want to make musicals, go to Broadway.\nIf you want to make apps, go to Appsterdam.”")
 
-                Text("- Mike Lee ")
+                Text("- Mike Lee\u{3000}")
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .padding(.bottom)
 
