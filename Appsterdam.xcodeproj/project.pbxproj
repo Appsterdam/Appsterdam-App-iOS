@@ -7,9 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		2BA33D4F279F02FF0073BC8B /* SafariView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D4E279F02FE0073BC8B /* SafariView.swift */; };
 		2BA33D5D279F29760073BC8B /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D5C279F29760073BC8B /* PersonModel.swift */; };
-		2BA33D60279F35430073BC8B /* RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D5F279F35430073BC8B /* RemoteImageView.swift */; };
 		2BA33D6227A07C020073BC8B /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D6127A07C020073BC8B /* EventView.swift */; };
 		2BB2C61C27A9CDA500F07B96 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2C61B27A9CDA500F07B96 /* Model.swift */; };
 		2BB2C61E27AD63B100F07B96 /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2C61D27AD63B100F07B96 /* DateConverter.swift */; };
@@ -27,7 +25,6 @@
 		2BEBC0E9279DA1E6001E962F /* AppsterdamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0E8279DA1E6001E962F /* AppsterdamTests.swift */; };
 		2BEBC0F3279DA1E6001E962F /* AppsterdamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0F2279DA1E6001E962F /* AppsterdamUITests.swift */; };
 		2BEBC0F5279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0F4279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift */; };
-		2BF60E0827A44F1F00CC5C82 /* onLandscape.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF60E0727A44F1F00CC5C82 /* onLandscape.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,9 +45,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		2BA33D4E279F02FE0073BC8B /* SafariView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SafariView.swift; sourceTree = "<group>"; };
 		2BA33D5C279F29760073BC8B /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
-		2BA33D5F279F35430073BC8B /* RemoteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
 		2BA33D6127A07C020073BC8B /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		2BB2C61B27A9CDA500F07B96 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2BB2C61D27AD63B100F07B96 /* DateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverter.swift; sourceTree = "<group>"; };
@@ -70,7 +65,6 @@
 		2BEBC0EE279DA1E6001E962F /* AppsterdamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppsterdamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BEBC0F2279DA1E6001E962F /* AppsterdamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITests.swift; sourceTree = "<group>"; };
 		2BEBC0F4279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		2BF60E0727A44F1F00CC5C82 /* onLandscape.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = onLandscape.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,10 +106,7 @@
 		2BA33D5E279F35350073BC8B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2BA33D4E279F02FE0073BC8B /* SafariView.swift */,
 				2BB2C61D27AD63B100F07B96 /* DateConverter.swift */,
-				2BA33D5F279F35430073BC8B /* RemoteImageView.swift */,
-				2BF60E0727A44F1F00CC5C82 /* onLandscape.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -331,10 +322,7 @@
 			files = (
 				2BB2C61C27A9CDA500F07B96 /* Model.swift in Sources */,
 				2BB690FE279DA24E003B4A00 /* MainView.swift in Sources */,
-				2BA33D60279F35430073BC8B /* RemoteImageView.swift in Sources */,
 				2BA33D6227A07C020073BC8B /* EventView.swift in Sources */,
-				2BF60E0827A44F1F00CC5C82 /* onLandscape.swift in Sources */,
-				2BA33D4F279F02FF0073BC8B /* SafariView.swift in Sources */,
 				2BA33D5D279F29760073BC8B /* PersonModel.swift in Sources */,
 				2BB690FD279DA24E003B4A00 /* AboutView.swift in Sources */,
 				2BB6910D279DA2B4003B4A00 /* EventModel.swift in Sources */,

@@ -118,7 +118,7 @@ struct AboutView: View {
                 .padding()
         }
         .popover(isPresented: $showSafari, content: {
-            HSafariView(urlString: $urlString)
+            SafariView(url: $urlString)
         })
     }
 }
@@ -142,7 +142,7 @@ struct personView: View {
         VStack {
             if let picture = person.picture, picture.length > 0 {
                 // picture
-                HRemoteImageView(
+                RemoteImageView(
                     url: URL(string: picture)!,
                     placeholder: {
                         Image(systemName: "person.circle")

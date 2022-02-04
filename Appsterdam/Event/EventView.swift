@@ -7,6 +7,7 @@
 
 import SwiftUI
 import MapKit
+import Aurora
 
 struct myAnnotation: Identifiable {
     let id = UUID()
@@ -114,8 +115,8 @@ struct EventView: View {
                     showSafari = true
                 }
             }
-            .popover(isPresented: $showSafari,  content: {
-                HSafariView(urlString: $urlString)
+            .popover(isPresented: $showSafari, content: {
+                SafariView(url: $urlString)
             })
         }.gesture(
             DragGesture(
