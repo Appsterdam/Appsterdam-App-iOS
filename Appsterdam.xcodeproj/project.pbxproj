@@ -260,6 +260,7 @@
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
 				LastUpgradeCheck = 1320;
+				ORGANIZATIONNAME = "Stichting Appsterdam";
 				TargetAttributes = {
 					2BEBC0D3279DA1E5001E962F = {
 						CreatedOnToolsVersion = 13.2.1;
@@ -516,7 +517,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = rs.Appsterdam.Appsterdam;
+				PRODUCT_BUNDLE_IDENTIFIER = rs.appsterdam.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
@@ -545,7 +546,7 @@
 					"@executable_path/Frameworks",
 				);
 				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = rs.Appsterdam.Appsterdam;
+				PRODUCT_BUNDLE_IDENTIFIER = rs.appsterdam.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
