@@ -8,6 +8,7 @@
 // Original from https://stackoverflow.com/questions/60677622/how-to-display-image-from-a-url-in-swiftui
 // Modifications: image download in background.
 
+#if canImport(SwiftUI)
 import SwiftUI
 import Aurora
 
@@ -64,3 +65,4 @@ class ImageLoaderService: ObservableObject {
         }
     }
 }
+#endif

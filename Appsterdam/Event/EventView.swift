@@ -75,7 +75,7 @@ struct EventView: View {
                     }
 
                     VStack {
-                        Text("Date: \(convertDateFormat(inputDate: displayEvent.date.split(":")[0]))")
+                        Text("Date: \(dateFormat().convert(jsonDate: displayEvent.date.split(":")[0]))")
                         Text("Location:  \(displayEvent.location_name) 📍").onTapGesture {
                             if displayEvent.location_name.contains("online") {
                                 return
@@ -127,26 +127,6 @@ struct EventView: View {
                         presentationMode.wrappedValue.dismiss()
                     }
                 })
-        )
-    }
-
-    func convertDateFormat(inputDate: String) -> String {
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMddHHmmss"
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-
-        let oldDateTime = dateFormatter.date(
-            from: inputDate
-        )
-
-        let convertDateFormatter = DateFormatter()
-        convertDateFormatter.dateFormat = "dd MMM yyyy HH:mm"
-        convertDateFormatter.locale = Locale.current
-
-        return convertDateFormatter.string(
-            from: oldDateTime!
         )
     }
 }

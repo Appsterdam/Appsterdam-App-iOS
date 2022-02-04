@@ -50,8 +50,8 @@ struct EventCell: View {
                     Image(systemName: "calendar.badge.clock")
 
                     Text(
-                        convertDateFormat(
-                            inputDate: event.date.split(":")[0]
+                        dateFormat().convert(
+                            jsonDate: event.date.split(":")[0]
                         )
                     ).font(.caption)
 
@@ -72,28 +72,8 @@ struct EventCell: View {
             }
         }
     }
-
-    func convertDateFormat(inputDate: String) -> String {
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMddHHmmss"
-        dateFormatter.timeZone = TimeZone.current
-        dateFormatter.locale = Locale(identifier: "en_US_POSIX")
-
-        let oldDateTime = dateFormatter.date(
-            from: inputDate
-        )
-
-        let convertDateFormatter = DateFormatter()
-        convertDateFormatter.dateFormat = "dd MMM yyyy HH:mm"
-        convertDateFormatter.locale = Locale.current
-
-        return convertDateFormatter.string(
-            from: oldDateTime!
-        )
-    }
-
 }
+
 struct EventCell_Previews: PreviewProvider {
     static var previews: some View {
         EventCell(event:

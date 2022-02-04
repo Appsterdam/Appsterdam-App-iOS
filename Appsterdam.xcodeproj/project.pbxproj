@@ -12,6 +12,7 @@
 		2BA33D60279F35430073BC8B /* RemoteImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D5F279F35430073BC8B /* RemoteImageView.swift */; };
 		2BA33D6227A07C020073BC8B /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D6127A07C020073BC8B /* EventView.swift */; };
 		2BB2C61C27A9CDA500F07B96 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2C61B27A9CDA500F07B96 /* Model.swift */; };
+		2BB2C61E27AD63B100F07B96 /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2C61D27AD63B100F07B96 /* DateConverter.swift */; };
 		2BB690FD279DA24E003B4A00 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB690F9279DA24E003B4A00 /* AboutView.swift */; };
 		2BB690FE279DA24E003B4A00 /* MainView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB690FA279DA24E003B4A00 /* MainView.swift */; };
 		2BB690FF279DA24E003B4A00 /* Settings.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB690FB279DA24E003B4A00 /* Settings.swift */; };
@@ -52,6 +53,7 @@
 		2BA33D5F279F35430073BC8B /* RemoteImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageView.swift; sourceTree = "<group>"; };
 		2BA33D6127A07C020073BC8B /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		2BB2C61B27A9CDA500F07B96 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		2BB2C61D27AD63B100F07B96 /* DateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverter.swift; sourceTree = "<group>"; };
 		2BB690F9279DA24E003B4A00 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		2BB690FA279DA24E003B4A00 /* MainView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainView.swift; sourceTree = "<group>"; };
 		2BB690FB279DA24E003B4A00 /* Settings.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Settings.swift; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 			isa = PBXGroup;
 			children = (
 				2BA33D4E279F02FE0073BC8B /* SafariView.swift */,
+				2BB2C61D27AD63B100F07B96 /* DateConverter.swift */,
 				2BA33D5F279F35430073BC8B /* RemoteImageView.swift */,
 				2BF60E0727A44F1F00CC5C82 /* onLandscape.swift */,
 			);
@@ -339,6 +342,7 @@
 				2BB6910C279DA2B4003B4A00 /* EventListView.swift in Sources */,
 				2BEBC0D8279DA1E5001E962F /* AppsterdamApp.swift in Sources */,
 				2BB690FF279DA24E003B4A00 /* Settings.swift in Sources */,
+				2BB2C61E27AD63B100F07B96 /* DateConverter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

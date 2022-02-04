@@ -5,6 +5,7 @@
 //  Created by Wesley de Groot on 24/01/2022.
 //
 
+#if canImport(swiftUI) && canImport(SafariServices)
 import SwiftUI
 import SafariServices
 import UIKit
@@ -35,3 +36,4 @@ struct SafariView: UIViewControllerRepresentable {
         return
     }
 }
+#endif

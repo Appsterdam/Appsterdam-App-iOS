@@ -5,6 +5,7 @@
 //  Created by Wesley de Groot on 28/01/2022.
 //
 
+#if canImport(SwiftUI)
 import SwiftUI
 
 /// A view wrapper for
@@ -51,3 +52,5 @@ extension View {
         }
     }
 }
+
+#endif
