@@ -56,6 +56,7 @@
 		2BB69109279DA2B4003B4A00 /* EventListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		2BB6910A279DA2B4003B4A00 /* EventModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		2BB6910B279DA2B4003B4A00 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		2BCF4CD227ADBBA800094C2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2BEBC0D4279DA1E5001E962F /* Appsterdam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appsterdam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BEBC0D7279DA1E5001E962F /* AppsterdamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamApp.swift; sourceTree = "<group>"; };
 		2BEBC0DB279DA1E6001E962F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -144,6 +145,7 @@
 		2BEBC0D6279DA1E5001E962F /* Appsterdam */ = {
 			isa = PBXGroup;
 			children = (
+				2BCF4CD227ADBBA800094C2B /* Info.plist */,
 				2BEBC0D7279DA1E5001E962F /* AppsterdamApp.swift */,
 				2BA33D5B279F29600073BC8B /* API */,
 				2BB690FC279DA24E003B4A00 /* HomeView.swift */,
@@ -495,6 +497,7 @@
 				DEVELOPMENT_TEAM = 4V2D72S45C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Appsterdam/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
@@ -524,6 +527,7 @@
 				DEVELOPMENT_TEAM = 4V2D72S45C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = Appsterdam/Info.plist;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
