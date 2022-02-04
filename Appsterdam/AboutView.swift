@@ -117,7 +117,8 @@ struct AboutView: View {
                 .font(.caption)
                 .padding()
         }
-        .popover(isPresented: $showSafari, content: {
+        .sheet(isPresented: $showSafari,
+                 content: {
             SafariView(url: $urlString)
         })
     }
