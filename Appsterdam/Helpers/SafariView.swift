@@ -12,12 +12,12 @@ import UIKit
 import Aurora
 
 /// Make a Safari View for SwiftUI
-struct SafariView: UIViewControllerRepresentable {
-    typealias UIViewControllerType = SFSafariViewController
+struct HSafariView: UIViewControllerRepresentable {
+typealias UIViewControllerType = SFSafariViewController
 
     @Binding var urlString: String
 
-    func makeUIViewController(context: UIViewControllerRepresentableContext<SafariView>) -> SFSafariViewController {
+    func makeUIViewController(context: Context) -> SFSafariViewController {
         guard let url = URL(string: urlString.latinized) else {
             fatalError("Invalid urlString: \(urlString)")
         }
@@ -32,7 +32,7 @@ struct SafariView: UIViewControllerRepresentable {
         return safariViewController
     }
 
-    func updateUIViewController(_ safariViewController: SFSafariViewController, context: UIViewControllerRepresentableContext<SafariView>) {
+    func updateUIViewController(_ uiViewController: SFSafariViewController, context: Context) {
         return
     }
 }

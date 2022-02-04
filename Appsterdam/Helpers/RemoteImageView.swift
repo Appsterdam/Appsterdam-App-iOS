@@ -12,7 +12,7 @@
 import SwiftUI
 import Aurora
 
-struct RemoteImageView<Placeholder: View, ConfiguredImage: View>: View {
+struct HRemoteImageView<Placeholder: View, ConfiguredImage: View>: View {
     var url: URL
     private let placeholder: () -> Placeholder
     private let image: (Image) -> ConfiguredImage

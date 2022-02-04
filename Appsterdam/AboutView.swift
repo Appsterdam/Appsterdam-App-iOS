@@ -52,7 +52,7 @@ struct AboutView: View {
 
 
                 VStack(spacing: 20) {
-                    let _ = print(persons)
+                    let _ = Aurora.shared.log(persons)
 
                     ForEach(persons) { team in
                         GroupBox(team.team) {
@@ -118,7 +118,7 @@ struct AboutView: View {
                 .padding()
         }
         .popover(isPresented: $showSafari, content: {
-            SafariView(urlString: $urlString)
+            HSafariView(urlString: $urlString)
         })
     }
 }
@@ -142,7 +142,7 @@ struct personView: View {
         VStack {
             if let picture = person.picture, picture.length > 0 {
                 // picture
-                RemoteImageView(
+                HRemoteImageView(
                     url: URL(string: picture)!,
                     placeholder: {
                         Image(systemName: "person.circle")

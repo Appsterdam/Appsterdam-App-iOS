@@ -115,7 +115,7 @@ struct EventView: View {
                 }
             }
             .popover(isPresented: $showSafari,  content: {
-                SafariView(urlString: $urlString)
+                HSafariView(urlString: $urlString)
             })
         }.gesture(
             DragGesture(
