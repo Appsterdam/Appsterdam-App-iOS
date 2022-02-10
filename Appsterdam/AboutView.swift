@@ -55,8 +55,8 @@ struct AboutView: View {
                     let _ = Aurora.shared.log(persons)
 
                     ForEach(persons) { team in
-                        GroupBox(team.team) {
-
+                        GroupBox.init(
+                            label: Text(team.team)) {
                             ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 20) {
                                     ForEach(team.members) { member in

@@ -56,7 +56,7 @@ struct EventListView: View {
                             }
                     }
                 }
-                .headerProminence(.increased)
+//                .headerProminence(.increased)
             }
         }
         // using fullScreenCover instead of sheet fixes the scroll issue #3.

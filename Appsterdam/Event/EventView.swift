@@ -154,57 +154,61 @@ struct EventView_Previews: PreviewProvider {
             )
         )
 
-        EventView(
-            displayEvent: .constant(
-                .init(
-                    id: "",
-                    name: "Weekly Meeten en Drinken",
-                    description: """
-                What shall we drink
-                Seven days long
-                What shall we drink?
-                What a thirst!
+        if #available(iOS 15.0, *) {
+            EventView(
+                displayEvent: .constant(
+                    .init(
+                        id: "",
+                        name: "Weekly Meeten en Drinken",
+                        description: """
+                    What shall we drink
+                    Seven days long
+                    What shall we drink?
+                    What a thirst!
 
-                There's plenty for everyone
-                So we'll drink together
-                So just dip into the cask!
-                Yes, let's drink together
-                Not alone!
+                    There's plenty for everyone
+                    So we'll drink together
+                    So just dip into the cask!
+                    Yes, let's drink together
+                    Not alone!
 
-                And then we shall work
-                Seven days long!
-                Then we shall work
-                For each other!
+                    And then we shall work
+                    Seven days long!
+                    Then we shall work
+                    For each other!
 
-                Then there will be work for everyone
-                So we shall work together
-                Seven days long!
-                Yes, we'll work together
-                Not alone!
+                    Then there will be work for everyone
+                    So we shall work together
+                    Seven days long!
+                    Yes, we'll work together
+                    Not alone!
 
-                But first we have to fight
-                Nobody knows for how long!
-                First we have to fight
-                For our interest!
+                    But first we have to fight
+                    Nobody knows for how long!
+                    First we have to fight
+                    For our interest!
 
-                For everybody's happiness
-                So we'll fight together
-                Together we're strong!
-                Yes, we'll fight together
-                Not alone!
-                """,
-                    price: "0",
-                    organizer: "Appsterdam",
-                    location_name: "Cafe Bax",
-                    location_address: "Kinkerstraat 119, 1053CC, Amsterdam",
-                    date: "",
-                    attendees: "25",
-                    icon: "🍺",
-                    latitude: "",
-                    longitude: ""
+                    For everybody's happiness
+                    So we'll fight together
+                    Together we're strong!
+                    Yes, we'll fight together
+                    Not alone!
+                    """,
+                        price: "0",
+                        organizer: "Appsterdam",
+                        location_name: "Cafe Bax",
+                        location_address: "Kinkerstraat 119, 1053CC, Amsterdam",
+                        date: "",
+                        attendees: "25",
+                        icon: "🍺",
+                        latitude: "",
+                        longitude: ""
+                    )
                 )
             )
-        )
-            .previewInterfaceOrientation(.landscapeLeft)
+                .previewInterfaceOrientation(.landscapeLeft)
+        } else {
+            // Fallback on earlier versions
+        }
     }
 }
