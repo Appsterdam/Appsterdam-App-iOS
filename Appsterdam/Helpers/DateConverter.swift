@@ -21,16 +21,18 @@ class dateFormat {
         dateFormatter.timeZone = TimeZone.current
         dateFormatter.locale = Locale(identifier: "en_US_POSIX")
 
-        let oldDateTime = dateFormatter.date(
+        guard let oldDateTime = dateFormatter.date(
             from: jsonDate
-        )
+        ) else {
+            return jsonDate
+        }
 
         let convertDateFormatter = DateFormatter()
         convertDateFormatter.dateFormat = outputFormat
         convertDateFormatter.locale = Locale.current
 
         return convertDateFormatter.string(
-            from: oldDateTime!
+            from: oldDateTime
         )
     }
 }
