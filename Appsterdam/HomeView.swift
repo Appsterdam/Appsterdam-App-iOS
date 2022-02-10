@@ -13,7 +13,7 @@ struct HomeView: View {
         ScrollView {
             VStack {
                 Text(Bundle.main.appName)
-                let _ = Aurora.shared.log("Appname = \(Bundle.main.appName)")
+
                 Image("Appsterdam_logo", bundle: nil, label: Text("Appsterdam Logo"))
                     .resizable()
                     .scaledToFit()

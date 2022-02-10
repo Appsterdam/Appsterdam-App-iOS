@@ -9,6 +9,8 @@ import SwiftUI
 
 @main
 struct AppsterdamApp: App {
+    var settings = Settings.shared
+
     var body: some Scene {
         WindowGroup {
             MainView()

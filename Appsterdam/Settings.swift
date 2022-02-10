@@ -28,6 +28,9 @@ class Settings {
 
     init() {
         appRuns += 1
+
+        // Log app runs, will not display on non-debug builds
+        Aurora.shared.log("App runs: \(appRuns)")
     }
 
     deinit {
