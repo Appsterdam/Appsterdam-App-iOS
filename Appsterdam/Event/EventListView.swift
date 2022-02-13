@@ -33,18 +33,20 @@ struct EventListView: View {
 
     var body: some View {
         List() {
-            TextField("Search", text: $searchText)
-                .padding(7)
-                .padding(.horizontal, 20)
-                .cornerRadius(8)
-                .overlay(
-                    HStack {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                            .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                    }
-                )
-                .padding(.horizontal, 0)
+            if Settings.shared.eventsEnableSearch {
+                TextField("Search", text: $searchText)
+                    .padding(7)
+                    .padding(.horizontal, 20)
+                    .cornerRadius(8)
+                    .overlay(
+                        HStack {
+                            Image(systemName: "magnifyingglass")
+                                .foregroundColor(.gray)
+                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
+                        }
+                    )
+                    .padding(.horizontal, 0)
+            }
 
             ForEach(searchResults) { section in
                 Section(header: Text(section.name)) {
@@ -56,11 +58,8 @@ struct EventListView: View {
                             }
                     }
                 }
-//                .headerProminence(.increased)
             }
         }
-        // using fullScreenCover instead of sheet fixes the scroll issue #3.
-        // con, the drag down gesture is not supported in full screen cover
         .fullScreenCover(isPresented: $showsEvent, content: {
             EventView(displayEvent: $showEvent)
         })

@@ -64,7 +64,13 @@ struct AboutView: View {
                                                 .onTapGesture {
                                                     self.urlString = "https://appsterdam.rs/team-\(member.name.lowercased().replace(" ", withString: "-"))/"
 
-                                                    showSafari = true
+                                                    if Settings.shared.aboutOpenInApp {
+                                                        showSafari = true
+                                                    } else {
+                                                        if let url = URL(string: self.urlString) {
+                                                            UIApplication.shared.open(url)
+                                                        }
+                                                    }
                                                 }
                                         }
                                     }
@@ -78,38 +84,74 @@ struct AboutView: View {
                 Button("Discord") {
                     self.urlString = "https://discord.gg/HNqZPUy7An"
 
-                    showSafari = true
+                    if Settings.shared.aboutOpenInApp {
+                        showSafari = true
+                    } else {
+                        if let url = URL(string: self.urlString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
                 }.padding(.top)
                 Divider()
                 Button("Facebook") {
                     self.urlString = "https://www.facebook.com/appsterdam"
 
-                    showSafari = true
+                    if Settings.shared.aboutOpenInApp {
+                        showSafari = true
+                    } else {
+                        if let url = URL(string: self.urlString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
                 }
                 Divider()
                 Button("Twitter") {
                     self.urlString = "https://www.twitter.com/appsterdam"
 
-                    showSafari = true
+                    if Settings.shared.aboutOpenInApp {
+                        showSafari = true
+                    } else {
+                        if let url = URL(string: self.urlString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
                 }
                 Divider()
                 Button("YouTube") {
                     self.urlString = "https://www.youtube.com/appsterdam"
 
-                    showSafari = true
+                    if Settings.shared.aboutOpenInApp {
+                        showSafari = true
+                    } else {
+                        if let url = URL(string: self.urlString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
                 }.padding(.bottom)
 
                 Button("Code of Conduct") {
                     self.urlString = "https://appsterdam.rs/code-of-conduct/"
 
-                    showSafari = true
+                    if Settings.shared.aboutOpenInApp {
+                        showSafari = true
+                    } else {
+                        if let url = URL(string: self.urlString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
                 }.padding(.top)
                 Divider()
 
                 Button("Privacy Policy") {
                     self.urlString = "https://appsterdam.rs/privacy-policy/"
 
-                    showSafari = true
+                    if Settings.shared.aboutOpenInApp {
+                        showSafari = true
+                    } else {
+                        if let url = URL(string: self.urlString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
                 }
             }
 

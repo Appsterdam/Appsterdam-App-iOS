@@ -127,7 +127,13 @@ print(displayEvent.location_address)
                 Button ("Attend \(displayEvent.name)") {
                     self.urlString = "https://www.meetup.com/nl-NL/Appsterdam/events/\(displayEvent.id)/"
 
-                    showSafari = true
+                    if Settings.shared.eventsOpenInApp {
+                        showSafari = true
+                    } else {
+                        if let url = URL(string: self.urlString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
                 }
             }
             .sheet(isPresented: $showSafari, content: {

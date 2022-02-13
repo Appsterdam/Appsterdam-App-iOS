@@ -27,9 +27,9 @@ class Settings {
     /// Open events in app (safari)
     var eventsOpenInApp: Bool
 
-    @UserDefault("events.hideSearch", default: true)
-    /// Hide search in events
-    var eventsHideSearch: Bool
+    @UserDefault("events.enableSearch", default: true)
+    /// Enable search in events
+    var eventsEnableSearch: Bool
 
     @UserDefault("events.description", default: true)
     /// Show event description?
