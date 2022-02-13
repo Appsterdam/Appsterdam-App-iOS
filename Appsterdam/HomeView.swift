@@ -32,6 +32,15 @@ struct HomeView: View {
                     .font(.largeTitle)
                     .padding()
 
+                if Bundle.main.isInTestFlight {
+                    Text("""
+                    ***TESTFLIGHT BUILD***
+                    Please test:
+                    - Events route
+                    - Events general (landscape, portrait)
+                    - Links/buttons in about
+                    """)
+                }
                 Text(
                     .init("""
                 **[Join the community](https://appsterdam.rs/join-community/)**
