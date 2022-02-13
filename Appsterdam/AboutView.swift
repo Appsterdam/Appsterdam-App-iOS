@@ -57,68 +57,68 @@ struct AboutView: View {
                     ForEach(persons) { team in
                         GroupBox.init(
                             label: Text(team.team)) {
-                            ScrollView(.horizontal, showsIndicators: false) {
-                                HStack(spacing: 20) {
-                                    ForEach(team.members) { member in
-                                        personView(person: member)
-                                            .onTapGesture {
-                                                self.urlString = "https://appsterdam.rs/team-\(member.name.lowercased().replace(" ", withString: "-"))/"
+                                ScrollView(.horizontal, showsIndicators: false) {
+                                    HStack(spacing: 20) {
+                                        ForEach(team.members) { member in
+                                            personView(person: member)
+                                                .onTapGesture {
+                                                    self.urlString = "https://appsterdam.rs/team-\(member.name.lowercased().replace(" ", withString: "-"))/"
 
-                                                showSafari = true
-                                            }
+                                                    showSafari = true
+                                                }
+                                        }
                                     }
                                 }
                             }
-                        }
                     }
                 }
             }.padding(.bottom)
 
             VStack {
-            Button("Discord") {
-                self.urlString = "https://discord.gg/HNqZPUy7An"
+                Button("Discord") {
+                    self.urlString = "https://discord.gg/HNqZPUy7An"
 
-                showSafari = true
-            }.padding(.top)
-            Divider()
-            Button("Facebook") {
-                self.urlString = "https://www.facebook.com/appsterdam"
+                    showSafari = true
+                }.padding(.top)
+                Divider()
+                Button("Facebook") {
+                    self.urlString = "https://www.facebook.com/appsterdam"
 
-                showSafari = true
+                    showSafari = true
+                }
+                Divider()
+                Button("Twitter") {
+                    self.urlString = "https://www.twitter.com/appsterdam"
+
+                    showSafari = true
+                }
+                Divider()
+                Button("YouTube") {
+                    self.urlString = "https://www.youtube.com/appsterdam"
+
+                    showSafari = true
+                }.padding(.bottom)
+
+                Button("Code of Conduct") {
+                    self.urlString = "https://appsterdam.rs/code-of-conduct/"
+
+                    showSafari = true
+                }.padding(.top)
+                Divider()
+
+                Button("Privacy Policy") {
+                    self.urlString = "https://appsterdam.rs/privacy-policy/"
+
+                    showSafari = true
+                }
             }
-            Divider()
-            Button("Twitter") {
-                self.urlString = "https://www.twitter.com/appsterdam"
-
-                showSafari = true
-            }
-            Divider()
-            Button("YouTube") {
-                self.urlString = "https://www.youtube.com/appsterdam"
-
-                showSafari = true
-            }.padding(.bottom)
-
-            Button("Code of Conduct") {
-                self.urlString = "https://appsterdam.rs/code-of-conduct/"
-
-                showSafari = true
-            }.padding(.top)
-            Divider()
-
-            Button("Privacy Policy") {
-                self.urlString = "https://appsterdam.rs/privacy-policy/"
-
-                showSafari = true
-            }
-        }
 
             Text("© 2012-2022 Stichting Appsterdam. All rights reserved")
                 .font(.caption)
                 .padding()
         }
         .sheet(isPresented: $showSafari,
-                 content: {
+               content: {
             SafariView(url: $urlString)
         })
     }

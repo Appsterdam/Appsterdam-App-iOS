@@ -16,9 +16,22 @@ class Settings {
     /// Show section index titles
     var showSectionIndexTitles: Bool
 
-    @UserDefault("Appruns", default: 0)
+    @UserDefault("stats.appruns", default: 0)
     /// how many times the app is openend?
     var appRuns: Int
+
+
+    @UserDefault("about.openInApp", default: true)
+    /// Open about links in app (safari)?
+    var aboutOpenInApp: Bool
+
+    @UserDefault("events.openInApp", default: true)
+    /// Open events in app (safari)
+    var eventsOpenInApp: Bool
+
+    @UserDefault("events.description", default: true)
+    /// Show event description?
+    var eventsDescription: Bool
 
     @Keychain(item: "appsterdam.username")
     var appsterdam_username: String?

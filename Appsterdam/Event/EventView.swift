@@ -77,13 +77,28 @@ struct EventView: View {
 
                     VStack {
                         Text("Date: \(dateFormat().convert(jsonDate: displayEvent.date.split(":")[0]))")
-                        Text("Location:  \(displayEvent.location_name) 📍").onTapGesture {
-                            if displayEvent.location_name.contains("online") {
-                                return
-                            }
 
-                            guard let url = URL(string: "http://maps.apple.com/?daddr=\(displayEvent.latitude),\(displayEvent.longitude)") else { return }
-                            UIApplication.shared.open(url)
+                        if (displayEvent.location_name.contains(search: "http")) {
+                            Text("Online event")
+                        } else {
+                            Text("Location:  \(displayEvent.location_name) 📍").onTapGesture {
+                                if displayEvent.location_name.contains("online") {
+                                    return
+                                }
+
+                                if displayEvent.latitude == "0" &&
+                                    displayEvent.longitude == "0" {
+                                guard let url = URL(string: "http://maps.apple.com/?daddr=\(displayEvent.latitude),\(displayEvent.longitude)") else { return }
+
+                                    UIApplication.shared.open(url)
+                                } else {
+                                    guard let url = URL(string: "http://maps.apple.com/?daddr=\(displayEvent.location_address.urlEncoded),Netherlands") else { return }
+print(displayEvent.location_address)
+                                    print(url)
+                                    UIApplication.shared.open(url)
+                                }
+
+                            }
                         }
                     }.onLandscape {
                         $0.frame(

@@ -30,20 +30,20 @@ struct EventCell: View {
                 }
             }
             .frame(width: 30, height: 30)
-            .padding(.trailing)
 
             VStack {
                 Text(event.name)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-
-                Text(
-                    // .init for markdown support
-                    .init(event.description)
-                )
-                    .font(.caption)
-                    .lineLimit(1)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                if Settings.shared.eventsDescription {
+                    Text(
+                        // .init for markdown support
+                        .init(event.description)
+                    )
+                        .font(.caption)
+                        .lineLimit(1)
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                }
 
                 HStack {
                     // Date/time
@@ -57,18 +57,23 @@ struct EventCell: View {
 
                     Spacer()
 
-//                    // Attendees
-//                    Image(systemName: "person.fill.checkmark")
-//                    Text(event.attendees)
-//                      .font(.caption)
-//                    Spacer()
+                    //                    // Attendees
+                    Image(systemName: "person.fill.checkmark")
+                    Text(event.attendees)
+                        .font(.caption)
+                    Spacer()
 
                     // Place
                     Image(systemName: "mappin.and.ellipse")
-                    Text(event.location_name)
+                    Text(
+                        event.location_name
+                            .contains(search: "http")
+                        ? "Online event"
+                        : event.location_name
+                    )
                         .font(.caption)
                     Spacer()
-                }.padding(.top)
+                }
             }
         }
     }
