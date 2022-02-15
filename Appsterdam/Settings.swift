@@ -17,6 +17,14 @@ class Settings {
     /// how many times the app is openend?
     var appRuns: Int
 
+    @UserDefault("app.eventsCount", default: "0")
+    /// how much events do we have?
+    var appEventsCount: String
+
+    @UserDefault("app.apprunsTXT", default: "0")
+    /// how many times the app is openend (TXT)?
+    var appRunsTXT: String
+
     // MARK: About settings
     @UserDefault("about.openInApp", default: true)
     /// Open about links in app (safari)?
@@ -31,9 +39,13 @@ class Settings {
     /// Enable search in events
     var eventsEnableSearch: Bool
 
-    @UserDefault("events.description", default: true)
+    @UserDefault("events.description", default: false)
     /// Show event description?
     var eventsDescription: Bool
+
+    @UserDefault("events.showIcon", default: true)
+    /// Show icon in event list
+    var eventsShowIcon: Bool
 
     // MARK: Appsterdam User Account
     @Keychain(item: "appsterdam.username")
@@ -44,6 +56,7 @@ class Settings {
 
     init() {
         appRuns += 1
+        appRunsTXT = "\(appRuns)"
 
         // Log app runs, will not display on non-debug builds
         Aurora.shared.log("App runs: \(appRuns)")

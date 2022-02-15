@@ -14,36 +14,38 @@ struct EventCell: View {
     var body: some View {
         HStack {
             // Event icon
-            VStack {
-                if event.icon.count > 2 {
-                    // 30wx35h
-                    Image(
-                        systemName: event.icon
-                    )
-                } else {
-                    if let image = event.icon.emojiToImage {
-                        Image.init(
-                            uiImage: image
+            if Settings.shared.eventsShowIcon {
+                VStack {
+                    if event.icon.count > 2 {
+                        // 30wx35h
+                        Image(
+                            systemName: event.icon
                         )
-                            .resizable()
+                    } else {
+                        if let image = event.icon.emojiToImage {
+                            Image.init(
+                                uiImage: image
+                            )
+                                .resizable()
+                        }
                     }
                 }
+                .frame(width: 30, height: 30)
             }
-            .frame(width: 30, height: 30)
 
             VStack {
                 Text(event.name)
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                if Settings.shared.eventsDescription {
-                    Text(
-                        // .init for markdown support
-                        .init(event.description)
-                    )
-                        .font(.caption)
-                        .lineLimit(1)
-                        .frame(maxWidth: .infinity, alignment: .leading)
-                }
+                Text(
+                    // .init for markdown support
+                    Settings.shared.eventsDescription
+                    ? .init(event.description)
+                    : ""
+                )
+                    .font(.caption)
+                    .lineLimit(1)
+                    .frame(maxWidth: .infinity, alignment: .leading)
 
                 HStack {
                     // Date/time

@@ -18,6 +18,18 @@ struct HomeView: View {
     var body: some View {
         ScrollView {
             VStack {
+                VStack(alignment: .trailing) {
+                    Spacer().frame(maxWidth:.infinity)
+                Button {
+                    UIApplication.shared.openAppSettings()
+                } label: {
+                    Image(systemName: "gear")
+                        .font(.system(.largeTitle))
+                        .frame(width: 25, height: 25)
+
+                }.padding(.trailing, 25)
+                }.padding(.bottom, -25)
+
                 Image(
                     "Appsterdam_logo",
                     bundle: nil,
@@ -39,6 +51,7 @@ struct HomeView: View {
                     - Events route
                     - Events general (landscape, portrait)
                     - Links/buttons in about
+                    - Change Settings please button below
                     """)
                 }
                 Text(
@@ -63,6 +76,7 @@ struct HomeView: View {
                     .padding(.leading, 5)
             }
         }
+        // Safari
         .sheet(isPresented: $showSafari,
                content: {
             SafariView(url: $urlString)

@@ -31,6 +31,17 @@ struct EventListView: View {
         url: "https://appsterdam.rs/api/events.json"
     ).load()
 
+    init() {
+        // Update event counter.
+        var counter = 0
+
+        for event in events {
+            counter += event.events.count
+        }
+
+        Settings.shared.appEventsCount = "\(counter)"
+    }
+
     var body: some View {
         List() {
             if Settings.shared.eventsEnableSearch {
