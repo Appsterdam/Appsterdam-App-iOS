@@ -26,7 +26,6 @@ struct HomeView: View {
                     Image(systemName: "gear")
                         .font(.system(.largeTitle))
                         .frame(width: 25, height: 25)
-
                 }.padding(.trailing, 25)
                 }.padding(.bottom, -25)
 
@@ -51,7 +50,7 @@ struct HomeView: View {
                     - Events route
                     - Events general (landscape, portrait)
                     - Links/buttons in about
-                    - Change Settings please button below
+                    - Change Settings press (gear icon)
                     """)
                 }
                 Text(
