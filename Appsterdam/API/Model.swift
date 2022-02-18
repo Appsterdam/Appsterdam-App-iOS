@@ -143,4 +143,8 @@ class Model<T: Codable> {
             return nil
         }
     }
+
+    deinit {
+        Aurora.shared.log("Unloaded <\(T.self)>")
+    }
 }

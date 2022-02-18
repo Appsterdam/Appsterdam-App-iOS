@@ -11,6 +11,7 @@ import UIKit
 
 struct EventListView: View {
     @State private var searchText = ""
+    @State private var enableSearch = Settings.shared.eventsEnableSearch
     @State private var showsEvent: Bool = false
     @State private var showEvent: Event = .init(
         id: "0",
@@ -44,7 +45,7 @@ struct EventListView: View {
 
     var body: some View {
         List() {
-            if Settings.shared.eventsEnableSearch {
+            if enableSearch {
                 TextField("Search", text: $searchText)
                     .padding(7)
                     .padding(.horizontal, 20)
@@ -70,6 +71,9 @@ struct EventListView: View {
                     }
                 }
             }
+        }
+        .onAppear {
+            enableSearch = Settings.shared.eventsEnableSearch
         }
         .fullScreenCover(isPresented: $showsEvent, content: {
             EventView(displayEvent: $showEvent)
