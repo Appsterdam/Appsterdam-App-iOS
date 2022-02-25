@@ -18,7 +18,7 @@ struct HomeView: View {
     @State var animate = false
     @State var showSplash = true
 
-    @UserDefault("experiment.splash", default: true)
+    @UserDefault("experimentalSplashscreen", default: true)
     var experimentalSplashscreen: Bool
 
     var body: some View {
@@ -98,11 +98,13 @@ struct HomeView: View {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
                     if experimentalSplashscreen {
                         Aurora.shared.log("Enabled Experimental, splash")
-                        animate.toggle()
+                        if showSplash {
+                            animate = true
+                        }
                     }
                 }
-                DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                    showSplash.toggle()
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
+                    showSplash = false
                 }
             }
         }
