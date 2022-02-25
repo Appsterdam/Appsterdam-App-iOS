@@ -52,30 +52,32 @@ struct AboutView: View {
 
 
                 VStack(spacing: 20) {
-                    let _ = Aurora.shared.log(persons)
+                    if let persons = persons {
+                        let _ = Aurora.shared.log(persons)
+                        
+                        ForEach(persons) { team in
+                            GroupBox.init(
+                                label: Text(team.team)) {
+                                    ScrollView(.horizontal, showsIndicators: false) {
+                                        HStack(spacing: 20) {
+                                            ForEach(team.members) { member in
+                                                personView(person: member)
+                                                    .onTapGesture {
+                                                        self.urlString = "https://appsterdam.rs/team-\(member.name.lowercased().replace(" ", withString: "-"))/"
 
-                    ForEach(persons) { team in
-                        GroupBox.init(
-                            label: Text(team.team)) {
-                                ScrollView(.horizontal, showsIndicators: false) {
-                                    HStack(spacing: 20) {
-                                        ForEach(team.members) { member in
-                                            personView(person: member)
-                                                .onTapGesture {
-                                                    self.urlString = "https://appsterdam.rs/team-\(member.name.lowercased().replace(" ", withString: "-"))/"
-
-                                                    if Settings.shared.aboutOpenInApp {
-                                                        showSafari = true
-                                                    } else {
-                                                        if let url = URL(string: self.urlString) {
-                                                            UIApplication.shared.open(url)
+                                                        if Settings.shared.aboutOpenInApp {
+                                                            showSafari = true
+                                                        } else {
+                                                            if let url = URL(string: self.urlString) {
+                                                                UIApplication.shared.open(url)
+                                                            }
                                                         }
                                                     }
-                                                }
+                                            }
                                         }
                                     }
                                 }
-                            }
+                        }
                     }
                 }
             }.padding(.bottom)

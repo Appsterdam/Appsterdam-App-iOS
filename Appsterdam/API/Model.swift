@@ -23,6 +23,9 @@ class Model<T: Codable> {
     /// Cache lifetime in seconds
     private let maxAge: Double = 3600 * 24 * 7 // Keep one week.
 
+    /// Cache lifetime in seconds (leave this off)
+    private let disableCache: Bool = false
+
     /// Are we debugging?
     private let debug: Bool = true
 
@@ -30,8 +33,8 @@ class Model<T: Codable> {
     /// - Parameter url: URL
     init(url: String) {
         guard let url = URL(string: url) else {
-            Aurora.shared.log("Invalid url provided <\(T.self)>.")
-            fatalError()
+            Aurora.shared.log("Invalid url(\"\(url)\") provided <\(T.self)>.")
+            fatalError("Invalid url(\"\(url)\") provided <\(T.self)>.")
         }
         webURL = url
 
@@ -42,22 +45,28 @@ class Model<T: Codable> {
     }
 
     /// Load model from internet/cache
-    /// - Returns: `Model<T>`
-    func load() -> [T] {
-        // Reload (in background) after 10 seconds.
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10) {
-            self.loadFromInternet()
-        }
-
+    /// - Returns: `Model<T>?`
+    func load() -> [T]? {
         // Check, if we have at least 1 person
         guard let events = loadFromCache() else {
             guard let fetchedEvents = loadFromInternet() else {
-                Aurora.shared.log("This should never happen, something is corrupt.\nCannot create: \(T.self)")
-                fatalError()
+                // Try one more time with the 'old' cache.
+                guard let events = loadFromCache(ignoreCacheTime: true) else {
+                    Aurora.shared.log("We can't load data from disk or internet.\nCannot create: \(T.self)")
+                    return nil
+                }
+
+                // Return the 'old' cache.
+                return events
             }
 
             // Return list from web
             return fetchedEvents
+        }
+
+        // Reload (in background) after 10 seconds.
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10) {
+            self.loadFromInternet()
         }
 
         // Return team list.
@@ -65,11 +74,20 @@ class Model<T: Codable> {
     }
 
     /// Is the cache valid?
+    /// - Parameter ignoreCacheTime: Ignore the maximum cache time
     /// - Returns: boolean wherever the cache is still valid or not
-    private func isCacheValid() -> Bool {
+    private func isCacheValid(ignoreCacheTime: Bool = false) -> Bool {
+        if disableCache {
+            Aurora.shared.log("CACHING DISABLED <\(T.self)>")
+            return false
+        }
         do {
             if FileManager.default.fileExists(atPath: cache.path) {
                 let attributes = try FileManager.default.attributesOfItem(atPath: cache.path)
+
+                if ignoreCacheTime {
+                    return true
+                }
 
                 if let modificationDate = attributes[FileAttributeKey.modificationDate] as? Date,
                    Date().unixTime < modificationDate.unixTime + maxAge {
@@ -89,12 +107,12 @@ class Model<T: Codable> {
 
     /// Load Model from cache
     /// - Returns: `Model<T>?`
-    private func loadFromCache() -> [T]? {
+    private func loadFromCache(ignoreCacheTime: Bool = false) -> [T]? {
         do {
-            if isCacheValid() {
+            if isCacheValid(ignoreCacheTime: ignoreCacheTime) {
                 let jsonData = try Data.init(contentsOf: cache)
                 if debug {
-                    Aurora.shared.log("Loading <\(T.self)> \(cache.path) from cache")
+                    Aurora.shared.log("Loading <\(T.self)> \(cache.path) from cache.")
                 }
                 return parse(json: jsonData)
             }

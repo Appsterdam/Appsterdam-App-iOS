@@ -27,22 +27,24 @@ struct EventListView: View {
         latitude: "",
         longitude: ""
     )
-
+    
     private let events = Model<EventModel>.init(
         url: "https://appsterdam.rs/api/events.json"
     ).load()
-
+    
     init() {
-        // Update event counter.
-        var counter = 0
-
-        for event in events {
-            counter += event.events.count
+        if let events = events {
+            // Update event counter.
+            var counter = 0
+            
+            for event in events {
+                counter += event.events.count
+            }
+            
+            Settings.shared.appEventsCount = "\(counter)"
         }
-
-        Settings.shared.appEventsCount = "\(counter)"
     }
-
+    
     var body: some View {
         List() {
             if enableSearch {
@@ -59,15 +61,17 @@ struct EventListView: View {
                     )
                     .padding(.horizontal, 0)
             }
-
-            ForEach(searchResults) { section in
-                Section(header: Text(section.name)) {
-                    ForEach(section.events) { event in
-                        EventCell(event: event)
-                            .onTapGesture {
-                                self.showEvent = event
-                                self.showsEvent.toggle()
-                            }
+            
+            if let searchResults = searchResults {
+                ForEach(searchResults) { section in
+                    Section(header: Text(section.name)) {
+                        ForEach(section.events) { event in
+                            EventCell(event: event)
+                                .onTapGesture {
+                                    self.showEvent = event
+                                    self.showsEvent.toggle()
+                                }
+                        }
                     }
                 }
             }
@@ -79,36 +83,40 @@ struct EventListView: View {
             EventView(displayEvent: $showEvent)
         })
     }
-
-    var searchResults: [EventModel] {
+    
+    var searchResults: [EventModel]? {
         if searchText.isEmpty {
             return events
         } else {
             var searchEvents: [EventModel] = [EventModel]()
-
-            for section in events {
-                var searchEvent: [Event] = [Event]()
-
-                for event in section.events {
-                    if (
-                        event.name.contains(search: searchText) ||
-                        event.description.contains(search: searchText) ||
-                        event.date.contains(search: searchText)
-                    ) {
-                        searchEvent.append(event)
+            
+            if let events = events {
+                for section in events {
+                    var searchEvent: [Event] = [Event]()
+                    
+                    for event in section.events {
+                        if (
+                            event.name.contains(search: searchText) ||
+                            event.description.contains(search: searchText) ||
+                            event.date.contains(search: searchText)
+                        ) {
+                            searchEvent.append(event)
+                        }
                     }
-                }
-
-                if !searchEvent.isEmpty {
-                    searchEvents.append(
-                        .init(
-                            name: section.name,
-                            events: searchEvent
+                    
+                    if !searchEvent.isEmpty {
+                        searchEvents.append(
+                            .init(
+                                name: section.name,
+                                events: searchEvent
+                            )
                         )
-                    )
+                    }
+                    
                 }
             }
-
+            
+            
             // if no results then return no results found...
             guard !searchEvents.isEmpty else {
                 return [
@@ -133,7 +141,7 @@ struct EventListView: View {
                     )
                 ]
             }
-
+            
             return searchEvents
         }
     }
