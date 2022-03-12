@@ -50,6 +50,16 @@
 		</dict>
 		<dict>
 			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Last background fetch</string>
+			<key>Key</key>
+			<string>app.lastUpdate</string>
+			<key>DefaultValue</key>
+			<string>Never</string>
+		</dict>
+		<dict>
+			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Events</string>

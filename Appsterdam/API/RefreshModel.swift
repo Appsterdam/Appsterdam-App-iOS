@@ -9,27 +9,26 @@
 import Foundation
 import BackgroundTasks
 import Aurora
-import UserNotifications
 
+/// Refresh model:
+///
+/// To debug:
+/// minimize app, press pause and enter this code in the debugger:
+///
+///     e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"rs.appsterdam.refresh"]
 public class RefreshModel {
     let taskIdentifier = "rs.appsterdam.refresh"
-    let runAfter: Double = 30 // 10 * 60
+    let runAfter: Double = 3600 * 24 // Once a day.
 
     /// Static variable settings
     public static let shared = RefreshModel()
 
+    /// Initialize class.
     init () {
-        Aurora.shared.log("Refresh Model")
-
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
-            if success {
-                print("All set!")
-            } else if let error = error {
-                print(error.localizedDescription)
-            }
-        }
+        Aurora.shared.log("Refresh Model (last refresh: \(Settings.shared.lastUpdate))")
     }
 
+    /// Register the task
     public func register() {
         Aurora.shared.log("Registered task: \(taskIdentifier).")
         BGTaskScheduler.shared.register(forTaskWithIdentifier: taskIdentifier, using: nil) { task in
@@ -37,6 +36,7 @@ public class RefreshModel {
         }
     }
 
+    /// Schedule a new refresh
     public func scheduleAppRefresh() {
         Aurora.shared.log("Registered \(taskIdentifier), earliest time: \(runAfter)")
         let request = BGAppRefreshTaskRequest(identifier: taskIdentifier)
@@ -46,50 +46,40 @@ public class RefreshModel {
         } catch {
             Aurora.shared.log("Could not schedule app refresh: \(error)")
         }
+    }
 
+    /// Log all pending requests
+    public func logAllRequests() {
         BGTaskScheduler.shared.getPendingTaskRequests { requests in
             Aurora.shared.log(requests)
         }
     }
 
+    /// Handle the refresh request
+    /// - Parameter task: iOS task
     public func handleAppRefresh(task: BGAppRefreshTask) {
-        print("Start refeshing...")
         scheduleAppRefresh()
 
         task.expirationHandler = {
-            print("expired")
+            Aurora.shared.log("Refresh expired")
             task.setTaskCompleted(success: false)
         }
 
         // Load About
-        let persons = Model<PersonModel>.init(
+        Model<PersonModel>.init(
             url: "https://appsterdam.rs/api/people.json"
         ).update()
 
         // Load Events
-        let events = Model<EventModel>.init(
+        Model<EventModel>.init(
             url: "https://appsterdam.rs/api/events.json"
         ).update()
 
-        print("Updated: \(persons?.count) PPL Cat, \(events?.count) Event years.")
-        sendNotification(title: "Updated", message: "\(events?.count) Event years.")
+        let df = DateFormatter()
+        df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+
+        Settings.shared.lastUpdate = df.string(from: Date())
 
         task.setTaskCompleted(success: true)
-    }
-
-    public func sendNotification(title: String, message: String?) {
-        let content = UNMutableNotificationContent()
-        content.title = title
-        content.subtitle = message ?? ""
-        content.sound = UNNotificationSound.default
-
-        // show this notification five seconds from now
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0.1, repeats: false)
-
-        // choose a random identifier
-        let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
-
-        // add our notification request
-        UNUserNotificationCenter.current().add(request)
     }
 }

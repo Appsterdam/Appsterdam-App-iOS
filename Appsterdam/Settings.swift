@@ -25,6 +25,10 @@ class Settings {
     /// how many times the app is openend (TXT)?
     var appRunsTXT: String
 
+    @UserDefault("app.lastUpdate", default: "Never")
+    /// When did the last background update happen
+    var lastUpdate: String
+
     // MARK: About settings
     @UserDefault("about.openInApp", default: true)
     /// Open about links in app (safari)?

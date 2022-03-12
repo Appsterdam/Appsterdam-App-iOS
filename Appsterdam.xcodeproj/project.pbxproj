@@ -28,6 +28,7 @@
 		2BEBC0E9279DA1E6001E962F /* AppsterdamTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0E8279DA1E6001E962F /* AppsterdamTests.swift */; };
 		2BEBC0F3279DA1E6001E962F /* AppsterdamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0F2279DA1E6001E962F /* AppsterdamUITests.swift */; };
 		2BEBC0F5279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0F4279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift */; };
+		2BF60FCB27DD114D002D5DE3 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF60FCA27DD114C002D5DE3 /* Notifications.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +73,7 @@
 		2BEBC0EE279DA1E6001E962F /* AppsterdamUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = AppsterdamUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BEBC0F2279DA1E6001E962F /* AppsterdamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITests.swift; sourceTree = "<group>"; };
 		2BEBC0F4279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		2BF60FCA27DD114C002D5DE3 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -115,6 +117,7 @@
 			isa = PBXGroup;
 			children = (
 				2BB2C61D27AD63B100F07B96 /* DateConverter.swift */,
+				2BF60FCA27DD114C002D5DE3 /* Notifications.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -341,6 +344,7 @@
 				2BB690FD279DA24E003B4A00 /* AboutView.swift in Sources */,
 				2BB6910D279DA2B4003B4A00 /* EventModel.swift in Sources */,
 				2BB69100279DA24E003B4A00 /* HomeView.swift in Sources */,
+				2BF60FCB27DD114D002D5DE3 /* Notifications.swift in Sources */,
 				2BB6910E279DA2B4003B4A00 /* EventCell.swift in Sources */,
 				2BB6910C279DA2B4003B4A00 /* EventListView.swift in Sources */,
 				2BEBC0D8279DA1E5001E962F /* AppsterdamApp.swift in Sources */,
