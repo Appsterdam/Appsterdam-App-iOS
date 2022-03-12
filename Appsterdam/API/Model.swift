@@ -36,6 +36,7 @@ class Model<T: Codable> {
             Aurora.shared.log("Invalid url(\"\(url)\") provided <\(T.self)>.")
             fatalError("Invalid url(\"\(url)\") provided <\(T.self)>.")
         }
+
         webURL = url
 
         cache = FileManager.default.urls(
@@ -49,7 +50,7 @@ class Model<T: Codable> {
     func load() -> [T]? {
         // Check, if we have at least 1 person
         guard let events = loadFromCache() else {
-            guard let fetchedEvents = loadFromInternet() else {
+            guard let fetchedEvents = update() else {
                 // Try one more time with the 'old' cache.
                 guard let events = loadFromCache(ignoreCacheTime: true) else {
                     Aurora.shared.log("We can't load data from disk or internet.\nCannot create: \(T.self)")
@@ -66,7 +67,7 @@ class Model<T: Codable> {
 
         // Reload (in background) after 10 seconds.
         DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10) {
-            self.loadFromInternet()
+            self.update()
         }
 
         // Return team list.
@@ -126,9 +127,9 @@ class Model<T: Codable> {
         return nil
     }
 
-    /// Load Model from internet
+    /// Update Model from internet
     /// - Returns: `Model<T>?`
-    @discardableResult private func loadFromInternet() -> [T]? {
+    @discardableResult public func update() -> [T]? {
         do {
             if debug {
                 Aurora.shared.log("Loading <\(T.self)> from internet \(webURL.absoluteString)")
