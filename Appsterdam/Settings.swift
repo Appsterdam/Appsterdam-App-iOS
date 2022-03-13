@@ -51,6 +51,10 @@ class Settings {
     /// Show icon in event list
     var eventsShowIcon: Bool
 
+    @UserDefault("jobs.enable", default: true)
+    /// Enable job search
+    var jobsEnable: Bool
+
     // MARK: Appsterdam User Account
     @Keychain(item: "appsterdam.username")
     var appsterdam_username: String?

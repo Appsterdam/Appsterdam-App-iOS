@@ -20,6 +20,13 @@ struct MainView: View {
                     Label("Events", systemImage: "person.3.fill")
                 }
 
+            if Settings.shared.jobsEnable {
+                JobsView()
+                    .tabItem {
+                        Label("Jobs", systemImage: "signature")
+                    }
+            }
+
             AboutView()
                 .tabItem {
                     Label("About", systemImage: "info.circle.fill")

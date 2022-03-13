@@ -12,6 +12,7 @@
 		2BA33D5D279F29760073BC8B /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D5C279F29760073BC8B /* PersonModel.swift */; };
 		2BA33D6227A07C020073BC8B /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D6127A07C020073BC8B /* EventView.swift */; };
 		2BA4930F27DCDF7C005237BC /* RefreshModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4930E27DCDF7C005237BC /* RefreshModel.swift */; };
+		2BA6B47F27DE0BC000E926F1 /* JobsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA6B47E27DE0BC000E926F1 /* JobsView.swift */; };
 		2BB2C61C27A9CDA500F07B96 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2C61B27A9CDA500F07B96 /* Model.swift */; };
 		2BB2C61E27AD63B100F07B96 /* DateConverter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB2C61D27AD63B100F07B96 /* DateConverter.swift */; };
 		2BB690FD279DA24E003B4A00 /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB690F9279DA24E003B4A00 /* AboutView.swift */; };
@@ -54,6 +55,7 @@
 		2BA33D5C279F29760073BC8B /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		2BA33D6127A07C020073BC8B /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		2BA4930E27DCDF7C005237BC /* RefreshModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshModel.swift; sourceTree = "<group>"; };
+		2BA6B47E27DE0BC000E926F1 /* JobsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JobsView.swift; sourceTree = "<group>"; };
 		2BB2C61B27A9CDA500F07B96 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
 		2BB2C61D27AD63B100F07B96 /* DateConverter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateConverter.swift; sourceTree = "<group>"; };
 		2BB690F9279DA24E003B4A00 /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -159,6 +161,7 @@
 				2BEBC0D7279DA1E5001E962F /* AppsterdamApp.swift */,
 				2BA33D5B279F29600073BC8B /* API */,
 				2BB690FC279DA24E003B4A00 /* HomeView.swift */,
+				2BA6B47E27DE0BC000E926F1 /* JobsView.swift */,
 				2BB690F9279DA24E003B4A00 /* AboutView.swift */,
 				2BA33D5E279F35350073BC8B /* Helpers */,
 				2BB69108279DA292003B4A00 /* Event */,
@@ -347,6 +350,7 @@
 				2BF60FCB27DD114D002D5DE3 /* Notifications.swift in Sources */,
 				2BB6910E279DA2B4003B4A00 /* EventCell.swift in Sources */,
 				2BB6910C279DA2B4003B4A00 /* EventListView.swift in Sources */,
+				2BA6B47F27DE0BC000E926F1 /* JobsView.swift in Sources */,
 				2BEBC0D8279DA1E5001E962F /* AppsterdamApp.swift in Sources */,
 				2BB690FF279DA24E003B4A00 /* Settings.swift in Sources */,
 				2BB2C61E27AD63B100F07B96 /* DateConverter.swift in Sources */,
