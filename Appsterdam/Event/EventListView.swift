@@ -46,42 +46,36 @@ struct EventListView: View {
     }
     
     var body: some View {
-        List() {
-            if enableSearch {
-                TextField("Search", text: $searchText)
-                    .padding(7)
-                    .padding(.horizontal, 20)
-                    .cornerRadius(8)
-                    .overlay(
-                        HStack {
-                            Image(systemName: "magnifyingglass")
-                                .foregroundColor(.gray)
-                                .frame(minWidth: 0, maxWidth: .infinity, alignment: .leading)
-                        }
-                    )
-                    .padding(.horizontal, 0)
-            }
-            
-            if let searchResults = searchResults {
-                ForEach(searchResults) { section in
-                    Section(header: Text(section.name)) {
-                        ForEach(section.events) { event in
-                            EventCell(event: event)
-                                .onTapGesture {
-                                    self.showEvent = event
-                                    self.showsEvent.toggle()
+            let nav = NavigationView {
+                List() {
+                    if let searchResults = searchResults {
+                        ForEach(searchResults) { section in
+                            Section(header: Text(section.name)) {
+                                ForEach(section.events) { event in
+                                    EventCell(event: event)
+                                        .onTapGesture {
+                                            self.showEvent = event
+                                            self.showsEvent.toggle()
+                                        }
                                 }
+                            }
+                            .navigationTitle(section.name)
                         }
                     }
                 }
+                .onAppear {
+                    enableSearch = Settings.shared.eventsEnableSearch
+                }
+                .fullScreenCover(isPresented: $showsEvent, content: {
+                    EventView(displayEvent: $showEvent)
+                })
             }
-        }
-        .onAppear {
-            enableSearch = Settings.shared.eventsEnableSearch
-        }
-        .fullScreenCover(isPresented: $showsEvent, content: {
-            EventView(displayEvent: $showEvent)
-        })
+
+            if #available(iOS 15.0, *) {
+                if enableSearch {
+                    nav.searchable(text: $searchText)
+                }
+            }
     }
     
     var searchResults: [EventModel]? {

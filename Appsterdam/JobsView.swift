@@ -40,6 +40,7 @@ struct JobsView: View {
     // initial URL string
     @State private var urlString = "https://appsterdam.rs"
 
+    
     private let jobs = Model<JobsModel>.init(
         url: "https://appsterdam.rs/api/jobs.json"
     ).load()
@@ -54,6 +55,7 @@ struct JobsView: View {
                 }
             }
         }
+//        .searchable(text: <#T##Binding<String>#>)
     }
 }
 
