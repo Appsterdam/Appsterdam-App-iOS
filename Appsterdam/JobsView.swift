@@ -40,22 +40,43 @@ struct JobsView: View {
     // initial URL string
     @State private var urlString = "https://appsterdam.rs"
 
-    
+    @State private var searchText = ""
+
     private let jobs = Model<JobsModel>.init(
         url: "https://appsterdam.rs/api/jobs.json"
     ).load()
 
     var body: some View {
-        let _ = print(jobs)
-
-        NavigationView {
+        let nav = NavigationView {
             if let jobs = jobs {
-                List(jobs) { job in
-                    Text("Vacancy \(job.JobTitle)")
+                List {
+                    Section(footer: Text("Please note: this job data is coming from our friends the house of appril.")) {
+                    ForEach(jobs) { job in
+                        VStack {
+                            Text("\(job.JobTitle)")
+                                .font(.body)
+
+                            Text("\(job.JobShortDescription)")
+                                .font(.caption2)
+
+                            Text("📍 \(job.JobLocation.JobLocationCity), enddate: \(job.JobPublishEndDate)")
+                                .font(.caption)
+                        }.onTapGesture {
+                            print("OpenView for:")
+                            print(job)
+                        }
+                    }
+                    }
                 }
+                .navigationTitle("Jobs @ The house of appril")
             }
         }
-//        .searchable(text: <#T##Binding<String>#>)
+
+        if #available(iOS 15.0, *) {
+            nav.searchable(text: $searchText)
+        } else {
+            nav.unredacted()
+        }
     }
 }
 

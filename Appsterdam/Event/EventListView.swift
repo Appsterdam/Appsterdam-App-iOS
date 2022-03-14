@@ -72,9 +72,9 @@ struct EventListView: View {
             }
 
             if #available(iOS 15.0, *) {
-                if enableSearch {
-                    nav.searchable(text: $searchText)
-                }
+                nav.searchable(text: $searchText)
+            } else {
+                nav.unredacted()
             }
     }
     
