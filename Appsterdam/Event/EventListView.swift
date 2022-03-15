@@ -125,7 +125,7 @@ struct EventListView: View {
                                 organizer: "",
                                 location_name: "",
                                 location_address: "",
-                                date: "",
+                                date: "0:0",
                                 attendees: "0",
                                 icon: "exclamationmark.arrow.triangle.2.circlepath",
                                 latitude: "",

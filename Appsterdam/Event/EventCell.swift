@@ -53,7 +53,7 @@ struct EventCell: View {
 
                     Text(
                         dateFormat().convert(
-                            jsonDate: event.date.split(":")[0]
+                            jsonDate: event.date
                         )
                     ).font(.caption)
 
@@ -92,7 +92,7 @@ struct EventCell_Previews: PreviewProvider {
                             organizer: "Appsterdam",
                             location_name: "Cafe Bax",
                             location_address: "Kinkerstraat 119, 1053CC Amsterdam, Netherlands",
-                            date: "",
+                            date: "0:0",
                             attendees: "2",
                             icon: "star",
                             latitude: "",
