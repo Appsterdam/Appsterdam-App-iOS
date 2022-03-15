@@ -69,7 +69,7 @@ struct EventListView: View {
                 .fullScreenCover(isPresented: $showsEvent, content: {
                     EventView(displayEvent: $showEvent)
                 })
-            }
+            }.navigationViewStyle(.stack)
 
             if #available(iOS 15.0, *) {
                 nav.searchable(text: $searchText)

@@ -70,7 +70,7 @@ struct JobsView: View {
                 }
                 .navigationTitle("Jobs @ The house of appril")
             }
-        }
+        }.navigationViewStyle(.stack)
 
         if #available(iOS 15.0, *) {
             nav.searchable(text: $searchText)
