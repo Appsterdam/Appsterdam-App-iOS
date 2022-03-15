@@ -26,111 +26,131 @@ struct AboutView: View {
     }
 
     var body: some View {
-        ScrollView {
-            VStack {
-                Image("Appsterdam_logo", bundle: nil, label: Text("Appsterdam Logo"))
-                    .resizable()
-                    .scaledToFit()
-                    .frame(width: 200, height: 200)
+        NavigationView {
+            ScrollView {
+                VStack {
+                    Image("Appsterdam_logo", bundle: nil, label: Text("Appsterdam Logo"))
+                        .resizable()
+                        .scaledToFit()
+                        .frame(width: 200, height: 200)
+                        .toolbar {
+                            ToolbarItem(placement: .principal) {
+                                HStack {
+                                    Image("Appsterdam_logo")
+                                        .resizable()
+                                        .scaledToFit()
+                                        .frame(width: 45, height: 45)
 
-                Text("Appsterdam")
-                    .font(.title)
-                    .bold()
-                Text("Version \(releaseVersionNumber)")
-                    .font(.title3)
-                    .padding(.bottom)
+                                    VStack {
+                                        Text("Appsterdam")
+                                            .font(.headline)
 
-                Text("“If you want to make movies, go to Hollywood.\nIf you want to make musicals, go to Broadway.\nIf you want to make apps, go to Appsterdam.”")
+                                        Text("Version \(releaseVersionNumber)")
+                                            .font(.subheadline)
+                                    }
+                                }
+                            }
+                        }
 
-                Text("- Mike Lee\u{3000}")
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .padding(.bottom)
+                    Text("Appsterdam")
+                        .font(.title)
+                        .bold()
+                    Text("Version \(releaseVersionNumber)")
+                        .font(.title3)
+                        .padding(.bottom)
 
-                Text("Appsterdam Team")
-                    .font(.title)
-                    .padding(.top)
+                    Text("“If you want to make movies, go to Hollywood.\nIf you want to make musicals, go to Broadway.\nIf you want to make apps, go to Appsterdam.”")
+
+                    Text("- Mike Lee\u{3000}")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
+                        .padding(.bottom)
+
+                    Text("Appsterdam Team")
+                        .font(.title)
+                        .padding(.top)
 
 
-                VStack(spacing: 20) {
-                    if let persons = persons {
-                        let _ = Aurora.shared.log(persons)
-                        
-                        ForEach(persons) { team in
-                            GroupBox.init(
-                                label: Text(team.team)) {
-                                    ScrollView(.horizontal, showsIndicators: false) {
-                                        HStack(spacing: 20) {
-                                            ForEach(team.members) { member in
-                                                personView(person: member)
-                                                    .onTapGesture {
-                                                        self.urlString = "https://appsterdam.rs/team-\(member.name.lowercased().replace(" ", withString: "-"))/"
+                    VStack(spacing: 20) {
+                        if let persons = persons {
+                            let _ = Aurora.shared.log(persons)
 
-                                                        showSafari = true
-                                                    }
+                            ForEach(persons) { team in
+                                GroupBox.init(
+                                    label: Text(team.team)) {
+                                        ScrollView(.horizontal, showsIndicators: false) {
+                                            HStack(spacing: 20) {
+                                                ForEach(team.members) { member in
+                                                    personView(person: member)
+                                                        .onTapGesture {
+                                                            self.urlString = "https://appsterdam.rs/team-\(member.name.lowercased().replace(" ", withString: "-"))/"
+
+                                                            showSafari = true
+                                                        }
+                                                }
                                             }
                                         }
                                     }
-                                }
+                            }
                         }
-                    }
-                }
-            }.padding(.bottom)
-
-            VStack {
-                Button("Discord") {
-                    self.urlString = "https://discord.gg/HNqZPUy7An"
-
-                    if let url = URL(string: self.urlString) {
-                        UIApplication.shared.open(url)
-                    }
-                }.padding(.top)
-                Divider()
-                Button("Facebook") {
-                    self.urlString = "https://www.facebook.com/appsterdam"
-
-                    if let url = URL(string: self.urlString) {
-                        UIApplication.shared.open(url)
-                    }
-                }
-                Divider()
-                Button("Twitter") {
-                    self.urlString = "https://www.twitter.com/appsterdam"
-
-                    if let url = URL(string: self.urlString) {
-                        UIApplication.shared.open(url)
-                    }
-                }
-                Divider()
-                Button("YouTube") {
-                    self.urlString = "https://www.youtube.com/appsterdam"
-
-                    if let url = URL(string: self.urlString) {
-                        UIApplication.shared.open(url)
                     }
                 }.padding(.bottom)
 
-                Button("Code of Conduct") {
-                    self.urlString = "https://appsterdam.rs/code-of-conduct/"
+                VStack {
+                    Button("Discord") {
+                        self.urlString = "https://discord.gg/HNqZPUy7An"
 
-                    showSafari = true
-                }.padding(.top)
-                Divider()
+                        if let url = URL(string: self.urlString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }.padding(.top)
+                    Divider()
+                    Button("Facebook") {
+                        self.urlString = "https://www.facebook.com/appsterdam"
 
-                Button("Privacy Policy") {
-                    self.urlString = "https://appsterdam.rs/privacy-policy/"
+                        if let url = URL(string: self.urlString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                    Divider()
+                    Button("Twitter") {
+                        self.urlString = "https://www.twitter.com/appsterdam"
 
-                    showSafari = true
+                        if let url = URL(string: self.urlString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }
+                    Divider()
+                    Button("YouTube") {
+                        self.urlString = "https://www.youtube.com/appsterdam"
+
+                        if let url = URL(string: self.urlString) {
+                            UIApplication.shared.open(url)
+                        }
+                    }.padding(.bottom)
+
+                    Button("Code of Conduct") {
+                        self.urlString = "https://appsterdam.rs/code-of-conduct/"
+
+                        showSafari = true
+                    }.padding(.top)
+                    Divider()
+
+                    Button("Privacy Policy") {
+                        self.urlString = "https://appsterdam.rs/privacy-policy/"
+
+                        showSafari = true
+                    }
                 }
-            }
 
-            Text("© 2012-2022 Stichting Appsterdam. All rights reserved")
-                .font(.caption)
-                .padding()
-        }
-        .sheet(isPresented: $showSafari,
-               content: {
-            SafariView(url: $urlString)
-        })
+                Text("© 2012-2022 Stichting Appsterdam. All rights reserved")
+                    .font(.caption)
+                    .padding()
+            }
+            .sheet(isPresented: $showSafari,
+                   content: {
+                SafariView(url: $urlString)
+            })
+        }.navigationViewStyle(.stack)
     }
 }
 
@@ -183,10 +203,8 @@ struct personView: View {
 struct PersonView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            personView(person: .init(
-                name: "Appsterdam",
-                picture: nil,
-                function: "Test")
+            personView(person:
+                    .init(name: "Wesley", picture: nil, function: "App Builder", twitter: "wesdegroot", linkedin: "wesdegroot", website: "https://wesleydegroot.nl", bio: "Hi!")
             )
         }
         .previewLayout(PreviewLayout.sizeThatFits)

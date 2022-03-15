@@ -7,6 +7,7 @@
 //
 
 import SwiftUI
+import Aurora
 
 struct JobCompanyModel: Codable {
 
@@ -46,37 +47,57 @@ struct JobsView: View {
         url: "https://appsterdam.rs/api/jobs.json"
     ).load()
 
+    init() {
+        if let jobs = jobs {
+            Settings.shared.jobsCount = "\(jobs.count)"
+        }
+    }
+
     var body: some View {
         let nav = NavigationView {
             if let jobs = jobs {
                 List {
-                    Section(footer: Text("Please note: this job data is coming from our friends the house of appril.")) {
-                    ForEach(jobs) { job in
-                        VStack {
-                            Text("\(job.JobTitle)")
-                                .font(.body)
+                    Section(
+                        footer:
+                            Text(
+                                "Please note: this job data is coming from our friends The House of April."
+                            )
+                    ) {
+                        ForEach(jobs) { job in
+                            VStack {
+                                Text("\(job.JobTitle)")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(.body)
 
-                            Text("\(job.JobShortDescription)")
-                                .font(.caption2)
-
-                            Text("📍 \(job.JobLocation.JobLocationCity), enddate: \(job.JobPublishEndDate)")
-                                .font(.caption)
-                        }.onTapGesture {
-                            print("OpenView for:")
-                            print(job)
+                                Text("\(job.JobShortDescription.decodeHTML())")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(.caption2)
+                                Spacer()
+                                Text("📍 \(job.JobLocation.JobLocationCity), 📅 \(job.JobPublishEndDate)")
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(.caption)
+                            }.onTapGesture {
+                                //                            print("OpenView for:")
+                                //                            print(job)
+                                urlString = job.JobUrl
+                                showSafari = true
+                            }
                         }
                     }
-                    }
                 }
-                .navigationTitle("Jobs @ The house of appril")
+                .navigationTitle("Jobs")
             }
         }.navigationViewStyle(.stack)
+        .sheet(isPresented: $showSafari,
+                   content: {
+            SafariView(url: $urlString)
+        })
 
-        if #available(iOS 15.0, *) {
-            nav.searchable(text: $searchText)
-        } else {
-            nav.unredacted()
-        }
+        //        if #available(iOS 15.0, *) {
+        //            nav.searchable(text: $searchText)
+        //        } else {
+        nav.unredacted()
+        //        }
     }
 }
 

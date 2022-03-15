@@ -12,6 +12,10 @@ struct Person: Codable  {
     var name: String
     var picture: String?
     var function: String
+    var twitter: String
+    var linkedin: String
+    var website: String
+    var bio: String
 }
 
 // Make it work in SwiftUI Views

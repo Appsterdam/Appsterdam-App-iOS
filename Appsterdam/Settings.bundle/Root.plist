@@ -10,23 +10,7 @@
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
-			<string>Experimental</string>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
-			<string>Splash Screen v2</string>
-			<key>Key</key>
-			<string>experimentalSplashscreen</string>
-			<key>DefaultValue</key>
-			<true/>
-		</dict>
-		<dict>
-			<key>Type</key>
-			<string>PSGroupSpecifier</string>
-			<key>Title</key>
-			<string>Stats</string>
+			<string>Statistics</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -45,6 +29,16 @@
 			<string>Events count</string>
 			<key>Key</key>
 			<string>app.eventsCount</string>
+			<key>DefaultValue</key>
+			<string>None</string>
+		</dict>
+        <dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>Title</key>
+			<string>Jobs count</string>
+			<key>Key</key>
+			<string>jobs.count</string>
 			<key>DefaultValue</key>
 			<string>None</string>
 		</dict>
@@ -93,6 +87,44 @@
 			<string>events.showIcon</string>
 			<key>DefaultValue</key>
 			<true/>
+		</dict>
+        <dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Notify on new</string>
+			<key>Key</key>
+			<string>events.notify</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+        <dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Jobs</string>
+            <key>FooterText</key>
+            <string>The job data is coming from The House of April.</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Enable</string>
+			<key>Key</key>
+			<string>jobs.enable</string>
+			<key>DefaultValue</key>
+			<true/>
+		</dict>
+        <dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Notify on new</string>
+			<key>Key</key>
+			<string>events.notify</string>
+			<key>DefaultValue</key>
+			<false/>
 		</dict>
 	</array>
 </dict>

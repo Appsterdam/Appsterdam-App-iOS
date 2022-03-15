@@ -30,6 +30,7 @@
 		2BEBC0F3279DA1E6001E962F /* AppsterdamUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0F2279DA1E6001E962F /* AppsterdamUITests.swift */; };
 		2BEBC0F5279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0F4279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift */; };
 		2BF60FCB27DD114D002D5DE3 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF60FCA27DD114C002D5DE3 /* Notifications.swift */; };
+		2BF950CB27E1218400705D61 /* StaffPersonView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BF950CA27E1218300705D61 /* StaffPersonView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -76,6 +77,7 @@
 		2BEBC0F2279DA1E6001E962F /* AppsterdamUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITests.swift; sourceTree = "<group>"; };
 		2BEBC0F4279DA1E6001E962F /* AppsterdamUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		2BF60FCA27DD114C002D5DE3 /* Notifications.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
+		2BF950CA27E1218300705D61 /* StaffPersonView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaffPersonView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -163,6 +165,7 @@
 				2BB690FC279DA24E003B4A00 /* HomeView.swift */,
 				2BA6B47E27DE0BC000E926F1 /* JobsView.swift */,
 				2BB690F9279DA24E003B4A00 /* AboutView.swift */,
+				2BF950CA27E1218300705D61 /* StaffPersonView.swift */,
 				2BA33D5E279F35350073BC8B /* Helpers */,
 				2BB69108279DA292003B4A00 /* Event */,
 				2BB690FA279DA24E003B4A00 /* MainView.swift */,
@@ -345,6 +348,7 @@
 				2BA33D6227A07C020073BC8B /* EventView.swift in Sources */,
 				2BA33D5D279F29760073BC8B /* PersonModel.swift in Sources */,
 				2BB690FD279DA24E003B4A00 /* AboutView.swift in Sources */,
+				2BF950CB27E1218400705D61 /* StaffPersonView.swift in Sources */,
 				2BB6910D279DA2B4003B4A00 /* EventModel.swift in Sources */,
 				2BB69100279DA24E003B4A00 /* HomeView.swift in Sources */,
 				2BF60FCB27DD114D002D5DE3 /* Notifications.swift in Sources */,

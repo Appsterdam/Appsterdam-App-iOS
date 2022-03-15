@@ -72,7 +72,11 @@ struct EventListView: View {
             }.navigationViewStyle(.stack)
 
             if #available(iOS 15.0, *) {
-                nav.searchable(text: $searchText)
+                if Settings.shared.eventsEnableSearch {
+                    nav.searchable(text: $searchText)
+                } else {
+                    nav.unredacted()
+                }
             } else {
                 nav.unredacted()
             }
