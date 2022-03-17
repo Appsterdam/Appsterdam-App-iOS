@@ -13,10 +13,14 @@ import Aurora
 struct AboutView: View {
     // whether or not to show the Safari ViewController
     @State private var showSafari = false
-    
+
+    // Show person view (profile)
+    @State private var showPerson = false
+
     // initial URL string
     @State private var urlString = "https://appsterdam.rs"
-
+    @State private var person: Person = Mock.person
+    
     private let persons = Model<PersonModel>.init(
         url: "https://appsterdam.rs/api/people.json"
     ).load()
@@ -82,9 +86,8 @@ struct AboutView: View {
                                                 ForEach(team.members) { member in
                                                     personView(person: member)
                                                         .onTapGesture {
-                                                            self.urlString = "https://appsterdam.rs/team-\(member.name.lowercased().replace(" ", withString: "-"))/"
-
-                                                            showSafari = true
+                                                            self.person = member
+                                                            showPerson = true
                                                         }
                                                 }
                                             }
@@ -146,6 +149,10 @@ struct AboutView: View {
                     .font(.caption)
                     .padding()
             }
+            .sheet(isPresented: $showPerson,
+                   content: {
+                StaffPersonView(person: $person)
+            })
             .sheet(isPresented: $showSafari,
                    content: {
                 SafariView(url: $urlString)
@@ -203,9 +210,7 @@ struct personView: View {
 struct PersonView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            personView(person:
-                    .init(name: "Wesley", picture: nil, function: "App Builder", twitter: "wesdegroot", linkedin: "wesdegroot", website: "https://wesleydegroot.nl", bio: "Hi!")
-            )
+            personView(person: Mock.person)
         }
         .previewLayout(PreviewLayout.sizeThatFits)
         .padding()

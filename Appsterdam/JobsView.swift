@@ -35,12 +35,15 @@ extension JobsModel: Identifiable {
 }
 
 struct JobsView: View {
+    @Environment(\.colorScheme) var colorScheme
+
     // whether or not to show the Safari ViewController
     @State private var showSafari = false
+    @State private var showJob = false
 
     // initial URL string
     @State private var urlString = "https://appsterdam.rs"
-
+    @State private var job: JobsModel = Mock.jobs
     @State private var searchText = ""
 
     private let jobs = Model<JobsModel>.init(
@@ -60,7 +63,7 @@ struct JobsView: View {
                     Section(
                         footer:
                             Text(
-                                "Please note: this job data is coming from our friends The House of April."
+                                "Please note: this job data is coming from our friends."
                             )
                     ) {
                         ForEach(jobs) { job in
@@ -73,25 +76,36 @@ struct JobsView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption2)
                                 Spacer()
-                                Text("📍 \(job.JobLocation.JobLocationCity), 📅 \(job.JobPublishEndDate)")
+                                Text("📍 \(job.JobLocation.JobLocationCity) 📅 \(job.JobPublishEndDate) 🏠 The House Of Appril")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption)
                             }.onTapGesture {
-                                //                            print("OpenView for:")
-                                //                            print(job)
+                                print("OpenView for:")
+                                print(job)
                                 urlString = job.JobUrl
-                                showSafari = true
+                                self.job = job
+                                self.showJob = true
                             }
                         }
                     }
                 }
-                .navigationTitle("Jobs")
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        HStack {
+                            VStack {
+                                Text("Jobs")
+                                    .font(.headline)
+                                Text("For everyone who is creating.")
+                                    .font(.subheadline)
+                            }
+                        }
+                    }
+                }
             }
         }.navigationViewStyle(.stack)
-        .sheet(isPresented: $showSafari,
-                   content: {
-            SafariView(url: $urlString)
-        })
+            .sheet(isPresented: $showJob, content: {
+                JobView(job: $job)
+            })
 
         //        if #available(iOS 15.0, *) {
         //            nav.searchable(text: $searchText)
@@ -104,5 +118,124 @@ struct JobsView: View {
 struct JobsView_Previews: PreviewProvider {
     static var previews: some View {
         JobsView()
+    }
+}
+
+struct JobView: View {
+    // whether or not to show the Safari ViewController
+    @State private var showSafari = false
+
+    // initial URL string
+    @State private var urlString = "https://appsterdam.rs"
+
+    // Which job are we showing
+    @Binding var job: JobsModel
+
+    var body: some View {
+        CardView(title: job.JobTitle) {
+            VStack {
+
+                /**
+                 var JobUrl: String
+                 var JobTitle: String
+                 var JobShortDescription: String
+                 var JobDescription: String
+                 var JobCriteria: String
+                 var JobPublishStartDate: String
+                 var JobPublishEndDate: String
+                 var JobLocation: JobLocationModel
+                 */
+
+                HStack {
+                    VStack {
+                        Text("Apply Before: \(job.JobPublishEndDate)")
+                            .font(.subheadline)
+                            .frame(
+                                maxWidth: .infinity,
+                                alignment: .leading
+                            )
+
+                        Text("Location: \(job.JobLocation.JobLocationCity)")
+                            .font(.subheadline)
+                            .frame(
+                                maxWidth: .infinity,
+                                alignment: .leading
+                            )
+                    }
+
+                    Spacer()
+
+                    VStack(alignment: .leading) {
+                        Text("The House Of Appril.\u{3000}")
+                            .frame(maxWidth: .infinity, alignment: .trailing)
+                            .font(.subheadline)
+                            .frame(
+                                maxWidth: .infinity,
+                                alignment: .leading
+                            )
+                        Text("\u{3000}")
+                    }
+                }.padding(.horizontal)
+
+                ScrollView {
+                    GroupBox(label: Text("Criteria")) {
+                        if job.JobCriteria.contains(">"),
+                           job.JobCriteria.contains("<"),
+                           let criteria = job.JobCriteria.asAttributedString {
+                            Text(.init(criteria.string))
+                                .font(.body)
+                                .frame(
+                                    maxWidth: .infinity,
+                                    alignment: .leading
+                                )
+                        } else {
+                            Text(.init(job.JobCriteria))
+                                .font(.body)
+                                .frame(
+                                    maxWidth: .infinity,
+                                    alignment: .leading
+                                )
+                        }
+                    }.padding(.horizontal)
+
+                    GroupBox(label: Text("Description")) {
+                        if job.JobDescription.contains(">"),
+                           job.JobDescription.contains("<"),
+                           let description = job.JobDescription.asAttributedString {
+                            Text(description.string)
+                                .font(.body)
+                                .frame(
+                                    maxWidth: .infinity,
+                                    alignment: .leading
+                                )
+                        } else {
+                            Text(.init(job.JobDescription))
+                                .font(.body)
+                                .frame(
+                                    maxWidth: .infinity,
+                                    alignment: .leading
+                                )
+                        }
+                    }.padding(.horizontal)
+                }
+
+                GroupBox() {
+                    Button ("View on Web") {
+                        self.urlString = job.JobUrl
+                        showSafari = true
+                    }
+                }
+            }
+        }
+        .sheet(isPresented: $showSafari,
+               content: {
+            SafariView(url: $urlString)
+        })
+    }
+}
+
+struct JobView_Previews: PreviewProvider {
+    static var previews: some View {
+        JobView(job: .constant(Mock.jobs))
     }
 }
