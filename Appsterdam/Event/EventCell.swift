@@ -83,20 +83,6 @@ struct EventCell: View {
 
 struct EventCell_Previews: PreviewProvider {
     static var previews: some View {
-        EventCell(event:
-                        .init(
-                            id: "0",
-                            name: "preview",
-                            description: "preview string",
-                            price: "0",
-                            organizer: "Appsterdam",
-                            location_name: "Cafe Bax",
-                            location_address: "Kinkerstraat 119, 1053CC Amsterdam, Netherlands",
-                            date: "0:0",
-                            attendees: "2",
-                            icon: "star",
-                            latitude: "",
-                            longitude: "")
-        )
+        EventCell(event: Mock.event)
     }
 }

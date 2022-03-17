@@ -13,20 +13,7 @@ struct EventListView: View {
     @State private var searchText = ""
     @State private var enableSearch = Settings.shared.eventsEnableSearch
     @State private var showsEvent: Bool = false
-    @State private var showEvent: Event = .init(
-        id: "0",
-        name: "",
-        description: "",
-        price: "0",
-        organizer: "Appsterdam",
-        location_name: "",
-        location_address: "",
-        date: "",
-        attendees: "0",
-        icon: "",
-        latitude: "",
-        longitude: ""
-    )
+    @State private var showEvent: Event = Mock.event
     
     private let events = Model<EventModel>.init(
         url: "https://appsterdam.rs/api/events.json"

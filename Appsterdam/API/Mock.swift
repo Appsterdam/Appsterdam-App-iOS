@@ -8,8 +8,8 @@
 
 import Foundation
 
-class Mock {
-    static public let person = Person.init(
+public class Mock {
+    static let person = Person.init(
         name: "Person",
         picture: "https://appsterdam.rs/logo.png",
         function: "My Function",
@@ -19,7 +19,7 @@ class Mock {
         bio: "Hello i'm myself."
     )
 
-    static public let jobs = JobsModel.init(
+    static let jobs = JobsModel.init(
         JobUrl: "https://appsterdam.rs",
         JobTitle: "Fake Job",
         JobShortDescription: "Job Description (Short)",
@@ -28,5 +28,20 @@ class Mock {
         JobPublishStartDate: "2022-02-22",
         JobPublishEndDate: "2022-12-22",
         JobLocation: .init(JobLocationCity: "Amsterdam")
+    )
+
+    static let event = Event.init(
+        id: "0",
+        name: "preview",
+        description: "preview string",
+        price: "0",
+        organizer: "Appsterdam",
+        location_name: "Cafe Bax",
+        location_address: "Kinkerstraat 119, 1053CC Amsterdam, Netherlands",
+        date: "0:0",
+        attendees: "2",
+        icon: "star",
+        latitude: "",
+        longitude: ""
     )
 }

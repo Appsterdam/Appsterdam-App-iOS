@@ -156,80 +156,11 @@ print(displayEvent.location_address)
 
 struct EventView_Previews: PreviewProvider {
     static var previews: some View {
-        EventView(
-            displayEvent: .constant(
-                .init(
-                    id: "0",
-                    name: "Weekend fun: ARTIS/NEMO",
-                    description: "Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, Super description, ",
-                    price: "0",
-                    organizer: "Appsterdam",
-                    location_name: "",
-                    location_address: "",
-                    date: "",
-                    attendees: "25",
-                    icon: "star",
-                    latitude: "",
-                    longitude: ""
-                )
-            )
-        )
+        EventView(displayEvent: .constant(Mock.event))
 
         if #available(iOS 15.0, *) {
-            EventView(
-                displayEvent: .constant(
-                    .init(
-                        id: "",
-                        name: "Weekly Meeten en Drinken",
-                        description: """
-                    What shall we drink
-                    Seven days long
-                    What shall we drink?
-                    What a thirst!
-
-                    There's plenty for everyone
-                    So we'll drink together
-                    So just dip into the cask!
-                    Yes, let's drink together
-                    Not alone!
-
-                    And then we shall work
-                    Seven days long!
-                    Then we shall work
-                    For each other!
-
-                    Then there will be work for everyone
-                    So we shall work together
-                    Seven days long!
-                    Yes, we'll work together
-                    Not alone!
-
-                    But first we have to fight
-                    Nobody knows for how long!
-                    First we have to fight
-                    For our interest!
-
-                    For everybody's happiness
-                    So we'll fight together
-                    Together we're strong!
-                    Yes, we'll fight together
-                    Not alone!
-                    """,
-                        price: "0",
-                        organizer: "Appsterdam",
-                        location_name: "Cafe Bax",
-                        location_address: "Kinkerstraat 119, 1053CC, Amsterdam",
-                        date: "",
-                        attendees: "25",
-                        icon: "🍺",
-                        latitude: "",
-                        longitude: ""
-                    )
-                )
-            )
+            EventView(displayEvent: .constant(Mock.event))
                 .previewInterfaceOrientation(.landscapeLeft)
-        } else {
-            // Fallback on earlier versions
         }
     }
 }
