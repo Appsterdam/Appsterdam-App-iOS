@@ -11,31 +11,41 @@ import Aurora
 
 struct StaffPersonView: View {
     @Binding var person: Person
+    @Environment(\.verticalSizeClass) var sizeClass
 
     var body: some View {
+
         CardView(title: person.name) {
-            if let picture = person.picture, picture.length > 0 {
-                // picture
-                RemoteImageView(
-                    url: URL(string: picture)!,
-                    placeholder: {
-                        Image(systemName: "person.circle")
-                    },
-                    image: {
-                        $0.resizable()
-                            .scaledToFit()
-                            .clipShape(Circle())
-                    }
-                ).frame(width: 200, height: 200)
-            } else {
-                Image(systemName: "person.circle")
-                    .resizable()
-                    .frame(width: 200, height: 200)
+            VStack {
+                if let picture = person.picture, picture.length > 0 {
+                    // picture
+                    RemoteImageView(
+                        url: URL(string: picture)!,
+                        placeholder: {
+                            Image(systemName: "person.circle")
+                        },
+                        image: {
+                            $0.resizable()
+                                .scaledToFit()
+                                .clipShape(Circle())
+                        }
+                    )
+                } else {
+                    Image(systemName: "person.circle")
+                        .resizable()
+                }
+            }.onPortrait {
+                $0.frame(width: 200, height: 200)
+            }
+            .onLandscape {
+                $0.frame(width: 100, height: 100)
             }
 
             Text(person.function)
                 .foregroundColor(Color.accentColor)
-                .padding(.top)
+                .onPortrait {
+                    $0.padding(.top)
+                }
 
             HStack {
                 Spacer()
@@ -99,7 +109,10 @@ struct StaffPersonView: View {
                 }
 
                 Spacer()
-            }.padding()
+            }.onPortrait {
+                $0.padding()
+            }
+
             ScrollView {
                 // BIO
                 Text(person.bio)

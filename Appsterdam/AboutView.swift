@@ -20,10 +20,10 @@ struct AboutView: View {
     // initial URL string
     @State private var urlString = "https://appsterdam.rs"
     @State private var person: Person = Mock.person
-    
-    private let persons = Model<PersonModel>.init(
-        url: "https://appsterdam.rs/api/people.json"
-    ).load()
+
+    private let persons = Model<AppModel>.init(
+        url: "https://appsterdam.rs/api/app.json"
+    ).load()?.people
 
     private var releaseVersionNumber: String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"

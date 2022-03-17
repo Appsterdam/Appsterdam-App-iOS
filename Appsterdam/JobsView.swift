@@ -48,7 +48,7 @@ struct JobsView: View {
 
     private let jobs = Model<JobsModel>.init(
         url: "https://appsterdam.rs/api/jobs.json"
-    ).load()
+    ).loadArray()
 
     init() {
         if let jobs = jobs {

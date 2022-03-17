@@ -9,6 +9,22 @@
 import Foundation
 
 public class Mock {
+    static let app = AppModel.init(
+        home: """
+                **[Join the community](https://appsterdam.rs/join-community/)**
+                We are 4,500 members of makers, designers and developers.
+                App makers helping app makers -  come join our community!
+
+                **[Collaborate](https://appsterdam.rs/collaborate/)**
+                Do you have an SDK, API or plugin that you want to share with Appsterdamers?
+                Contact us if you want to host a workshop or guru session.
+
+                **[Share a project](https://appsterdam.rs/shared-projects/)**
+                Our members are always developing new projects, products and solutions.
+                Check out the projects they are most proud of here.
+                """
+    )
+    
     static let person = Person.init(
         name: "Person",
         picture: "https://appsterdam.rs/logo.png",

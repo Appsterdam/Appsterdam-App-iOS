@@ -104,7 +104,7 @@
 			<key>Title</key>
 			<string>Jobs</string>
             <key>FooterText</key>
-            <string>The job data is coming from The House of April.</string>
+            <string>The job data is coming from our friends.</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -123,6 +123,24 @@
 			<string>Notify on new</string>
 			<key>Key</key>
 			<string>events.notify</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+        <dict>
+			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Cache</string>
+            <key>FooterText</key>
+            <string>This will reset the cache on the next launch</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>Disable</string>
+			<key>Key</key>
+			<string>app.disableCache</string>
 			<key>DefaultValue</key>
 			<false/>
 		</dict>

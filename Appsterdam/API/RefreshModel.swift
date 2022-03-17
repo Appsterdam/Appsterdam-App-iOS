@@ -62,17 +62,23 @@ public class RefreshModel {
 
         task.expirationHandler = {
             Aurora.shared.log("Refresh expired")
+            Settings.shared.lastUpdate = "Failed"
             task.setTaskCompleted(success: false)
         }
 
-        // Load About
-        Model<PersonModel>.init(
-            url: "https://appsterdam.rs/api/people.json"
+        // Load App
+        Model<AppModel>.init(
+            url: "https://appsterdam.rs/api/app.json"
         ).update()
 
         // Load Events
         Model<EventModel>.init(
             url: "https://appsterdam.rs/api/events.json"
+        ).update()
+
+        // Load Jobs
+        Model<JobsModel>.init(
+            url: "https://appsterdam.rs/api/jobs.json"
         ).update()
 
         let df = DateFormatter()

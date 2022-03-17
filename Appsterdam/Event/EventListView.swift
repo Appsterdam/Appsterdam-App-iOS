@@ -17,7 +17,7 @@ struct EventListView: View {
     
     private let events = Model<EventModel>.init(
         url: "https://appsterdam.rs/api/events.json"
-    ).load()
+    ).loadArray()
     
     init() {
         if let events = events {

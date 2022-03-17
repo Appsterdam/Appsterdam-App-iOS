@@ -17,10 +17,13 @@ struct HomeView: View {
     
     @State var animate = false
     @State var showSplash = true
-    
+
+    private let app = Model<AppModel>.init(
+        url: "https://appsterdam.rs/api/app.json"
+    ).load() ?? Mock.app
+
     var body: some View {
         NavigationView {
-            
             ZStack {
                 ZStack {
                     ScrollView {
@@ -65,20 +68,7 @@ struct HomeView: View {
                                 .padding()
                             
                             GroupBox {
-                                Text(
-                                    .init("""
-                **[Join the community](https://appsterdam.rs/join-community/)**
-                We are 4,500 members of makers, designers and developers.
-                App makers helping app makers -  come join our community!
-                
-                **[Collaborate](https://appsterdam.rs/collaborate/)**
-                Do you have an SDK, API or plugin that you want to share with Appsterdamers?
-                Contact us if you want to host a workshop or guru session.
-                
-                **[Share a project](https://appsterdam.rs/shared-projects/)**
-                Our members are always developing new projects, products and solutions.
-                Check out the projects they are most proud of here.
-                """))
+                                Text(.init(app.home))
                                 .frame(
                                     maxWidth: .infinity,
                                     alignment: .leading

@@ -29,6 +29,10 @@ class Settings {
     /// When did the last background update happen
     var lastUpdate: String
 
+    @UserDefault("app.disableCache", default: false)
+    /// Reset cache
+    var disableCache: Bool
+
     // MARK: About settings
     @UserDefault("about.openInApp", default: true)
     /// Open about links in app (safari)?
@@ -83,6 +87,6 @@ class Settings {
     }
 
     deinit {
-
+        disableCache = false
     }
 }

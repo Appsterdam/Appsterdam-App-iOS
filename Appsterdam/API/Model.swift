@@ -12,7 +12,14 @@ import Aurora
 ///
 /// usage:
 ///
+///     // Load Codable?
 ///     Model<Codable>("https://server/file.ext").load()
+///
+///     // Load as [Codable]?
+///     Model<Codable>("https://server/file.ext").loadArray()
+///
+///     // Only update and cache
+///     Model<Codable>("https://server/file.ext").update()
 class Model<T: Codable> {
     /// The url to fetch the model from
     private let webURL: URL
@@ -23,8 +30,8 @@ class Model<T: Codable> {
     /// Cache lifetime in seconds
     private let maxAge: Double = 3600 * 24 * 7 // Keep one week.
 
-    /// Cache lifetime in seconds (leave this off)
-    private let disableCache: Bool = false
+    /// Cache disabled (leave this off)
+    private var disableCache: Bool = false
 
     /// Are we debugging?
     private let debug: Bool = true
@@ -32,6 +39,10 @@ class Model<T: Codable> {
     /// Initialize Model
     /// - Parameter url: URL
     init(url: String) {
+        if Settings.shared.disableCache {
+            disableCache = true
+        }
+
         guard let url = URL(string: url) else {
             Aurora.shared.log("Invalid url(\"\(url)\") provided <\(T.self)>.")
             fatalError("Invalid url(\"\(url)\") provided <\(T.self)>.")
@@ -45,9 +56,19 @@ class Model<T: Codable> {
         )[0].appendingPathComponent(url.lastPathComponent)
     }
 
+    /// Load model from internet/cache (first item)
+    /// - Returns: `T?`
+    func load() -> T? {
+        if let item = self.loadArray(), item.count > 0 {
+            return item[0]
+        }
+
+        return nil
+    }
+
     /// Load model from internet/cache
-    /// - Returns: `Model<T>?`
-    func load() -> [T]? {
+    /// - Returns: `[T]?`
+    func loadArray() -> [T]? {
         // Check, if we have at least 1 person
         guard let events = loadFromCache() else {
             guard let fetchedEvents = update() else {
@@ -79,7 +100,7 @@ class Model<T: Codable> {
     /// - Returns: boolean wherever the cache is still valid or not
     private func isCacheValid(ignoreCacheTime: Bool = false) -> Bool {
         if disableCache {
-            Aurora.shared.log("CACHING DISABLED <\(T.self)>")
+            Aurora.shared.log("Forced to invalidate cache for <\(T.self)>.")
             return false
         }
         do {
@@ -157,9 +178,13 @@ class Model<T: Codable> {
         do {
             return try JSONDecoder().decode([T].self, from: json)
         } catch {
-            Aurora.shared.log("Error: \(error)")
-            Aurora.shared.log("Failed to decode <\(T.self)>")
-            return nil
+            do {
+                return [try JSONDecoder().decode(T.self, from: json)]
+            } catch {
+                Aurora.shared.log("Error: \(error)")
+                Aurora.shared.log("Failed to decode <\(T.self)>")
+                return nil
+            }
         }
     }
 
