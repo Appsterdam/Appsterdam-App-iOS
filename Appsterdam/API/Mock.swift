@@ -1,5 +1,5 @@
 //
-//  FakeModel.swift
+//  Mock.swift
 //  Appsterdam
 //
 //  Created by Wesley de Groot on 17/03/2022.
