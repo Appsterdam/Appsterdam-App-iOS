@@ -87,6 +87,6 @@ class Settings {
     }
 
     deinit {
-        disableCache = false
+
     }
 }
