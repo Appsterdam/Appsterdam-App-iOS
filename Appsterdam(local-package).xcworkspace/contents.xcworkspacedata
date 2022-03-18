@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Workspace
+   version = "1.0">
+   <FileRef
+      location = "group:../../Frameworks/Aurora.swift">
+   </FileRef>
+   <FileRef
+      location = "container:Appsterdam.xcodeproj">
+   </FileRef>
+</Workspace>

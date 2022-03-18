@@ -58,7 +58,6 @@
 		2B3AACF027BC2BC400B05797 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		2B4B004127E3CC0400BFD1A5 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		2B4B004527E3F0D600BFD1A5 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
-		2B55CF0727E5439400010010 /* Aurora.swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Aurora.swift; path = ../../Frameworks/Aurora.swift; sourceTree = "<group>"; };
 		2B72CBB727E4AD3600CE5B36 /* Stickers.xcstickers */ = {isa = PBXFileReference; lastKnownFileType = folder.stickers; path = Stickers.xcstickers; sourceTree = "<group>"; };
 		2BA33D5C279F29760073BC8B /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		2BA33D6127A07C020073BC8B /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -113,14 +112,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		2B55CF0627E5439400010010 /* Packages */ = {
-			isa = PBXGroup;
-			children = (
-				2B55CF0727E5439400010010 /* Aurora.swift */,
-			);
-			name = Packages;
-			sourceTree = "<group>";
-		};
 		2BA33D5B279F29600073BC8B /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -156,7 +147,6 @@
 		2BEBC0CB279DA1E5001E962F = {
 			isa = PBXGroup;
 			children = (
-				2B55CF0627E5439400010010 /* Packages */,
 				2BEBC0D6279DA1E5001E962F /* Appsterdam */,
 				2BEBC0E7279DA1E6001E962F /* AppsterdamTests */,
 				2BEBC0F1279DA1E6001E962F /* AppsterdamUITests */,
