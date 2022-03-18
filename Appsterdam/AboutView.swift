@@ -197,10 +197,10 @@ struct personView: View {
                     .frame(width: 100, height: 100)
             }
 
-            Text(person.name)
+            Text(.init(person.name))
                 .foregroundColor(Color.accentColor)
 
-            Text(person.function)
+            Text(.init(person.function))
                 .font(.caption)
         }
     }
@@ -222,6 +222,6 @@ struct Cell: View {
     let text: String
 
     var body: some View {
-        Text(text)
+        Text(.init(text))
     }
 }

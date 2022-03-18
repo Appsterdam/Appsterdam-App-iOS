@@ -32,7 +32,7 @@ struct EventView: View {
             VStack {
                 GroupBox() {
                     HStack() {
-                        Text(displayEvent.name)
+                        Text(.init(displayEvent.name))
                             .font(.title)
                             .lineLimit(1)
 
@@ -81,7 +81,7 @@ struct EventView: View {
                         if (displayEvent.location_name.contains(search: "http")) {
                             Text("Online event")
                         } else {
-                            Text("Location:  \(displayEvent.location_name) 📍").onTapGesture {
+                            Text("Location: \(displayEvent.location_name) 📍").onTapGesture {
                                 if displayEvent.location_name.contains("online") {
                                     return
                                 }

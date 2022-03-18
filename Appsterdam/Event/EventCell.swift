@@ -34,15 +34,14 @@ struct EventCell: View {
             }
 
             VStack {
-                Text(event.name)
+                Text(.init(event.name))
                     .frame(maxWidth: .infinity, alignment: .leading)
 
-                Text(
-                    // .init for markdown support
+                Text(.init(
                     Settings.shared.eventsDescription
-                    ? .init(event.description)
+                    ? event.description
                     : ""
-                )
+                ))
                     .font(.caption)
                     .lineLimit(1)
                     .frame(maxWidth: .infinity, alignment: .leading)
@@ -61,18 +60,18 @@ struct EventCell: View {
 
                     //                    // Attendees
                     Image(systemName: "person.fill.checkmark")
-                    Text(event.attendees)
+                    Text(.init(event.attendees))
                         .font(.caption)
                     Spacer()
 
                     // Place
                     Image(systemName: "mappin.and.ellipse")
-                    Text(
+                    Text(.init(
                         event.location_name
                             .contains(search: "http")
                         ? "Online event"
                         : event.location_name
-                    )
+                    ))
                         .font(.caption)
                     Spacer()
                 }

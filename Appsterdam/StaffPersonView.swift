@@ -41,7 +41,7 @@ struct StaffPersonView: View {
                 $0.frame(width: 100, height: 100)
             }
 
-            Text(person.function)
+            Text(.init(person.function))
                 .foregroundColor(Color.accentColor)
                 .onPortrait {
                     $0.padding(.top)
@@ -115,7 +115,7 @@ struct StaffPersonView: View {
 
             ScrollView {
                 // BIO
-                Text(person.bio)
+                Text(.init(person.bio))
             }
         }
     }

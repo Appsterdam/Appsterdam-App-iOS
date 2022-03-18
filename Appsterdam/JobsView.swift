@@ -37,13 +37,9 @@ extension JobsModel: Identifiable {
 struct JobsView: View {
     @Environment(\.colorScheme) var colorScheme
 
-    // whether or not to show the Safari ViewController
-    @State private var showSafari = false
     @State private var showJob = false
-
-    // initial URL string
-    @State private var urlString = "https://appsterdam.rs"
     @State private var job: JobsModel = Mock.jobs
+
     @State private var searchText = ""
 
     private let jobs = Model<JobsModel>.init(
@@ -62,17 +58,17 @@ struct JobsView: View {
                 List {
                     Section(
                         footer:
-                            Text(
-                                "Please note: this job data is coming from our friends."
-                            )
+                            Text(.init(
+                                "_Please note: this job data is coming from our friends._"
+                            ))
                     ) {
                         ForEach(jobs) { job in
                             VStack {
-                                Text("\(job.JobTitle)")
+                                Text(.init(job.JobTitle))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.body)
 
-                                Text("\(job.JobShortDescription.decodeHTML())")
+                                Text(.init(job.JobShortDescription.decodeHTML()))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption2)
                                 Spacer()
@@ -80,9 +76,6 @@ struct JobsView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption)
                             }.onTapGesture {
-                                print("OpenView for:")
-                                print(job)
-                                urlString = job.JobUrl
                                 self.job = job
                                 self.showJob = true
                             }
@@ -134,18 +127,6 @@ struct JobView: View {
     var body: some View {
         CardView(title: job.JobTitle) {
             VStack {
-
-                /**
-                 var JobUrl: String
-                 var JobTitle: String
-                 var JobShortDescription: String
-                 var JobDescription: String
-                 var JobCriteria: String
-                 var JobPublishStartDate: String
-                 var JobPublishEndDate: String
-                 var JobLocation: JobLocationModel
-                 */
-
                 HStack {
                     VStack {
                         Text("Apply Before: \(job.JobPublishEndDate)")
@@ -202,7 +183,7 @@ struct JobView: View {
                         if job.JobDescription.contains(">"),
                            job.JobDescription.contains("<"),
                            let description = job.JobDescription.asAttributedString {
-                            Text(description.string)
+                            Text(.init(description.string))
                                 .font(.body)
                                 .frame(
                                     maxWidth: .infinity,
