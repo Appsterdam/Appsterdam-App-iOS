@@ -14,7 +14,6 @@ struct StaffPersonView: View {
     @Environment(\.verticalSizeClass) var sizeClass
 
     var body: some View {
-
         CardView(title: person.name) {
             VStack {
                 if let picture = person.picture, picture.length > 0 {

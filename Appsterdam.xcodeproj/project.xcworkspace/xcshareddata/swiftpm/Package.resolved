@@ -1,16 +1,14 @@
 {
-  "object": {
-    "pins": [
-      {
-        "package": "Aurora",
-        "repositoryURL": "https://github.com/AuroraFramework/Aurora.swift",
-        "state": {
-          "branch": "master",
-          "revision": "5dafb6b0564da606ac00b6e739235f9f59cfdaf5",
-          "version": null
-        }
+  "pins" : [
+    {
+      "identity" : "aurora.swift",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/AuroraFramework/Aurora.swift",
+      "state" : {
+        "branch" : "master",
+        "revision" : "69c83fb58a307cc21c7f8838aa4c489b28a2148c"
       }
-    ]
-  },
-  "version": 1
+    }
+  ],
+  "version" : 2
 }

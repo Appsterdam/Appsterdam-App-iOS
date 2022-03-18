@@ -10,7 +10,6 @@
 		2B28424927C908FE00C1E061 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B28424827C908FE00C1E061 /* Launch Screen.storyboard */; };
 		2B3AACF127BC2BC400B05797 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B3AACF027BC2BC400B05797 /* Settings.bundle */; };
 		2B4B004227E3CC0500BFD1A5 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B004127E3CC0400BFD1A5 /* Mock.swift */; };
-		2B4B004427E3D2CE00BFD1A5 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B004327E3D2CE00BFD1A5 /* CardView.swift */; };
 		2B4B004627E3F0D600BFD1A5 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B004527E3F0D600BFD1A5 /* AppModel.swift */; };
 		2B72CBB827E4AD3600CE5B36 /* Stickers.xcstickers in Resources */ = {isa = PBXBuildFile; fileRef = 2B72CBB727E4AD3600CE5B36 /* Stickers.xcstickers */; };
 		2BA33D5D279F29760073BC8B /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D5C279F29760073BC8B /* PersonModel.swift */; };
@@ -58,8 +57,8 @@
 		2B28424827C908FE00C1E061 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2B3AACF027BC2BC400B05797 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		2B4B004127E3CC0400BFD1A5 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
-		2B4B004327E3D2CE00BFD1A5 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
 		2B4B004527E3F0D600BFD1A5 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
+		2B55CF0727E5439400010010 /* Aurora.swift */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = Aurora.swift; path = ../../Frameworks/Aurora.swift; sourceTree = "<group>"; };
 		2B72CBB727E4AD3600CE5B36 /* Stickers.xcstickers */ = {isa = PBXFileReference; lastKnownFileType = folder.stickers; path = Stickers.xcstickers; sourceTree = "<group>"; };
 		2BA33D5C279F29760073BC8B /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		2BA33D6127A07C020073BC8B /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
@@ -114,6 +113,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B55CF0627E5439400010010 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				2B55CF0727E5439400010010 /* Aurora.swift */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
 		2BA33D5B279F29600073BC8B /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -130,7 +137,6 @@
 		2BA33D5E279F35350073BC8B /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
-				2B4B004327E3D2CE00BFD1A5 /* CardView.swift */,
 				2BB2C61D27AD63B100F07B96 /* DateConverter.swift */,
 				2BF60FCA27DD114C002D5DE3 /* Notifications.swift */,
 			);
@@ -150,6 +156,7 @@
 		2BEBC0CB279DA1E5001E962F = {
 			isa = PBXGroup;
 			children = (
+				2B55CF0627E5439400010010 /* Packages */,
 				2BEBC0D6279DA1E5001E962F /* Appsterdam */,
 				2BEBC0E7279DA1E6001E962F /* AppsterdamTests */,
 				2BEBC0F1279DA1E6001E962F /* AppsterdamUITests */,
@@ -365,7 +372,6 @@
 				2BB6910D279DA2B4003B4A00 /* EventModel.swift in Sources */,
 				2BB69100279DA24E003B4A00 /* HomeView.swift in Sources */,
 				2BF60FCB27DD114D002D5DE3 /* Notifications.swift in Sources */,
-				2B4B004427E3D2CE00BFD1A5 /* CardView.swift in Sources */,
 				2B4B004627E3F0D600BFD1A5 /* AppModel.swift in Sources */,
 				2BB6910E279DA2B4003B4A00 /* EventCell.swift in Sources */,
 				2BB6910C279DA2B4003B4A00 /* EventListView.swift in Sources */,
