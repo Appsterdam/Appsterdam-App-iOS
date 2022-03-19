@@ -272,6 +272,7 @@
 				2BEBC0D1279DA1E5001E962F /* Frameworks */,
 				2BEBC0D2279DA1E5001E962F /* Resources */,
 				2B9A442527E60C530040EE3D /* Embed App Extensions */,
+				2B9A443627E616E20040EE3D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -409,6 +410,26 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		2B9A443627E616E20040EE3D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Update sticker version to this version.\necho ${PROJECT_DIR}/${INFOPLIST_FILE}\n#buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\n#buildNumber=$(($buildNumber + 1))\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		2BEBC0D0279DA1E5001E962F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -482,8 +503,10 @@
 				DEVELOPMENT_TEAM = 4V2D72S45C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Appsterdam Stickers/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Appsterdam Stickers";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "rs.appsterdam.app.Appsterdam-Stickers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -501,8 +524,10 @@
 				DEVELOPMENT_TEAM = 4V2D72S45C;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "Appsterdam Stickers/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = "Appsterdam Stickers";
+				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.3;
 				PRODUCT_BUNDLE_IDENTIFIER = "rs.appsterdam.app.Appsterdam-Stickers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

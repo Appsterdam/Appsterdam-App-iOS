@@ -86,8 +86,8 @@ class Model<T: Codable> {
             return fetchedEvents
         }
 
-        // Reload (in background) after 10 seconds.
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 10) {
+        // Reload (in background) after 5 seconds.
+        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 5) {
             self.update()
         }
 
