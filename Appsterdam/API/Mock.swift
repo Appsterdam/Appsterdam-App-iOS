@@ -27,12 +27,12 @@ public class Mock {
     
     static let person = Person.init(
         name: "Person",
-        picture: "https://appsterdam.rs/logo.png",
+        picture: "https://appsterdam.rs/wp-content/uploads/2022/01/cropped-Appsterdam-Logo-512x512-2.png",
         function: "My Function",
         twitter: "myTwitter",
         linkedin: "myLinkedin",
         website: "https://appsterdam.rs/",
-        bio: "Hello i'm myself."
+        bio: "Hello i'm *myself*, and this ~text~,\r\ncontaining _mark_**down**. and a [Link](https://wdg.codes)"
     )
 
     static let jobs = JobsModel.init(

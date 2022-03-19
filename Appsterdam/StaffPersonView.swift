@@ -113,8 +113,10 @@ struct StaffPersonView: View {
             }
 
             ScrollView {
-                // BIO
-                Text(.init(person.bio))
+                GroupBox {
+                    Text(.init(person.bio))
+                        .padding()
+                }
             }
         }
     }
@@ -122,6 +124,8 @@ struct StaffPersonView: View {
 
 struct StaffPersonView_Previews: PreviewProvider {
     static var previews: some View {
-        StaffPersonView(person: .constant(Mock.person))
+        StaffPersonView(
+            person: .constant(Mock.person)
+        )
     }
 }
