@@ -11,7 +11,8 @@
 		2B3AACF127BC2BC400B05797 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B3AACF027BC2BC400B05797 /* Settings.bundle */; };
 		2B4B004227E3CC0500BFD1A5 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B004127E3CC0400BFD1A5 /* Mock.swift */; };
 		2B4B004627E3F0D600BFD1A5 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B004527E3F0D600BFD1A5 /* AppModel.swift */; };
-		2B72CBB827E4AD3600CE5B36 /* Stickers.xcstickers in Resources */ = {isa = PBXBuildFile; fileRef = 2B72CBB727E4AD3600CE5B36 /* Stickers.xcstickers */; };
+		2B9A442E27E60CF30040EE3D /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B9A442D27E60CF30040EE3D /* Stickers.xcassets */; };
+		2B9A443227E60CF30040EE3D /* Appsterdam Stickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2B9A442B27E60CF20040EE3D /* Appsterdam Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2BA33D5D279F29760073BC8B /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D5C279F29760073BC8B /* PersonModel.swift */; };
 		2BA33D6227A07C020073BC8B /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D6127A07C020073BC8B /* EventView.swift */; };
 		2BA4930F27DCDF7C005237BC /* RefreshModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4930E27DCDF7C005237BC /* RefreshModel.swift */; };
@@ -37,6 +38,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		2B9A443027E60CF30040EE3D /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 2BEBC0CC279DA1E5001E962F /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 2B9A442A27E60CF20040EE3D;
+			remoteInfo = "Appsterdam Stickers";
+		};
 		2BEBC0E5279DA1E6001E962F /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 2BEBC0CC279DA1E5001E962F /* Project object */;
@@ -53,12 +61,28 @@
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		2B9A442527E60C530040EE3D /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				2B9A443227E60CF30040EE3D /* Appsterdam Stickers.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
 		2B28424827C908FE00C1E061 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2B3AACF027BC2BC400B05797 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		2B4B004127E3CC0400BFD1A5 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		2B4B004527E3F0D600BFD1A5 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
-		2B72CBB727E4AD3600CE5B36 /* Stickers.xcstickers */ = {isa = PBXFileReference; lastKnownFileType = folder.stickers; path = Stickers.xcstickers; sourceTree = "<group>"; };
+		2B9A442B27E60CF20040EE3D /* Appsterdam Stickers.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "Appsterdam Stickers.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		2B9A442D27E60CF30040EE3D /* Stickers.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Stickers.xcassets; sourceTree = "<group>"; };
+		2B9A442F27E60CF30040EE3D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2BA33D5C279F29760073BC8B /* PersonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonModel.swift; sourceTree = "<group>"; };
 		2BA33D6127A07C020073BC8B /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		2BA4930E27DCDF7C005237BC /* RefreshModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefreshModel.swift; sourceTree = "<group>"; };
@@ -112,6 +136,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B9A442C27E60CF20040EE3D /* Appsterdam Stickers */ = {
+			isa = PBXGroup;
+			children = (
+				2B9A442D27E60CF30040EE3D /* Stickers.xcassets */,
+				2B9A442F27E60CF30040EE3D /* Info.plist */,
+			);
+			path = "Appsterdam Stickers";
+			sourceTree = "<group>";
+		};
 		2BA33D5B279F29600073BC8B /* API */ = {
 			isa = PBXGroup;
 			children = (
@@ -150,6 +183,7 @@
 				2BEBC0D6279DA1E5001E962F /* Appsterdam */,
 				2BEBC0E7279DA1E6001E962F /* AppsterdamTests */,
 				2BEBC0F1279DA1E6001E962F /* AppsterdamUITests */,
+				2B9A442C27E60CF20040EE3D /* Appsterdam Stickers */,
 				2BEBC0D5279DA1E5001E962F /* Products */,
 			);
 			sourceTree = "<group>";
@@ -160,6 +194,7 @@
 				2BEBC0D4279DA1E5001E962F /* Appsterdam.app */,
 				2BEBC0E4279DA1E6001E962F /* AppsterdamTests.xctest */,
 				2BEBC0EE279DA1E6001E962F /* AppsterdamUITests.xctest */,
+				2B9A442B27E60CF20040EE3D /* Appsterdam Stickers.appex */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -182,7 +217,6 @@
 				2BEBC0DD279DA1E6001E962F /* Preview Content */,
 				2B3AACF027BC2BC400B05797 /* Settings.bundle */,
 				2B28424827C908FE00C1E061 /* Launch Screen.storyboard */,
-				2B72CBB727E4AD3600CE5B36 /* Stickers.xcstickers */,
 			);
 			path = Appsterdam;
 			sourceTree = "<group>";
@@ -215,6 +249,21 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		2B9A442A27E60CF20040EE3D /* Appsterdam Stickers */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2B9A443327E60CF30040EE3D /* Build configuration list for PBXNativeTarget "Appsterdam Stickers" */;
+			buildPhases = (
+				2B9A442927E60CF20040EE3D /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Appsterdam Stickers";
+			productName = "Appsterdam Stickers";
+			productReference = 2B9A442B27E60CF20040EE3D /* Appsterdam Stickers.appex */;
+			productType = "com.apple.product-type.app-extension.messages-sticker-pack";
+		};
 		2BEBC0D3279DA1E5001E962F /* Appsterdam */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2BEBC0F8279DA1E6001E962F /* Build configuration list for PBXNativeTarget "Appsterdam" */;
@@ -222,10 +271,12 @@
 				2BEBC0D0279DA1E5001E962F /* Sources */,
 				2BEBC0D1279DA1E5001E962F /* Frameworks */,
 				2BEBC0D2279DA1E5001E962F /* Resources */,
+				2B9A442527E60C530040EE3D /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				2B9A443127E60CF30040EE3D /* PBXTargetDependency */,
 			);
 			name = Appsterdam;
 			packageProductDependencies = (
@@ -282,6 +333,9 @@
 				LastUpgradeCheck = 1320;
 				ORGANIZATIONNAME = "Stichting Appsterdam";
 				TargetAttributes = {
+					2B9A442A27E60CF20040EE3D = {
+						CreatedOnToolsVersion = 13.3;
+					};
 					2BEBC0D3279DA1E5001E962F = {
 						CreatedOnToolsVersion = 13.2.1;
 					};
@@ -314,11 +368,20 @@
 				2BEBC0D3279DA1E5001E962F /* Appsterdam */,
 				2BEBC0E3279DA1E6001E962F /* AppsterdamTests */,
 				2BEBC0ED279DA1E6001E962F /* AppsterdamUITests */,
+				2B9A442A27E60CF20040EE3D /* Appsterdam Stickers */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		2B9A442927E60CF20040EE3D /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				2B9A442E27E60CF30040EE3D /* Stickers.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		2BEBC0D2279DA1E5001E962F /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -326,7 +389,6 @@
 				2BEBC0DF279DA1E6001E962F /* Preview Assets.xcassets in Resources */,
 				2B3AACF127BC2BC400B05797 /* Settings.bundle in Resources */,
 				2B28424927C908FE00C1E061 /* Launch Screen.storyboard in Resources */,
-				2B72CBB827E4AD3600CE5B36 /* Stickers.xcstickers in Resources */,
 				2BEBC0DC279DA1E6001E962F /* Assets.xcassets in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -393,6 +455,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		2B9A443127E60CF30040EE3D /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 2B9A442A27E60CF20040EE3D /* Appsterdam Stickers */;
+			targetProxy = 2B9A443027E60CF30040EE3D /* PBXContainerItemProxy */;
+		};
 		2BEBC0E6279DA1E6001E962F /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 2BEBC0D3279DA1E5001E962F /* Appsterdam */;
@@ -406,6 +473,44 @@
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
+		2B9A443427E60CF30040EE3D /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4V2D72S45C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Appsterdam Stickers/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "rs.appsterdam.app.Appsterdam-Stickers";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		2B9A443527E60CF30040EE3D /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = "iMessage App Icon";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 4V2D72S45C;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Appsterdam Stickers/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "rs.appsterdam.app.Appsterdam-Stickers";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
 		2BEBC0F6279DA1E6001E962F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -665,6 +770,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		2B9A443327E60CF30040EE3D /* Build configuration list for PBXNativeTarget "Appsterdam Stickers" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				2B9A443427E60CF30040EE3D /* Debug */,
+				2B9A443527E60CF30040EE3D /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		2BEBC0CF279DA1E5001E962F /* Build configuration list for PBXProject "Appsterdam" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
