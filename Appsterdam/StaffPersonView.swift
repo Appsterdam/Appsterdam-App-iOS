@@ -116,18 +116,12 @@ struct StaffPersonView: View {
                 ScrollView {
                     Text(
                         .init(person.bio)
-                    )
-                    .frame(
+                    ).frame(
                         maxWidth: .infinity,
                         maxHeight: .infinity
                     )
                 }
-            }
-            .frame(
-                maxWidth: .infinity,
-                maxHeight: .infinity
-            )
-            .padding()
+            }.padding()
         }
     }
 }
