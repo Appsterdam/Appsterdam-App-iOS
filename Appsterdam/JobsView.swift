@@ -53,15 +53,15 @@ struct JobsView: View {
     }
 
     var body: some View {
-        let nav = NavigationView {
-            if let jobs = jobs {
-                List {
-                    Section(
-                        footer:
-                            Text(.init(
-                                "_Please note: this job data is coming from our friends._"
-                            ))
-                    ) {
+        NavigationView {
+            List {
+                Section(
+                    footer:
+                        Text(.init(
+                            "_Please note: this job data is coming from our friends._"
+                        ))
+                ) {
+                    if let jobs = jobs {
                         ForEach(jobs) { job in
                             VStack {
                                 Text(.init(job.JobTitle))
@@ -82,29 +82,23 @@ struct JobsView: View {
                         }
                     }
                 }
-                .toolbar {
-                    ToolbarItem(placement: .principal) {
-                        HStack {
-                            VStack {
-                                Text("Jobs")
-                                    .font(.headline)
-                                Text("For everyone who is creating.")
-                                    .font(.subheadline)
-                            }
-                        }
+            } // /list
+            .toolbar {
+                ToolbarItem(placement: .principal) {
+                    VStack {
+                        Text("Jobs")
+                            .font(.headline)
+                        Text("For everyone who is creating.")
+                            .font(.subheadline)
                     }
                 }
             }
-        }.navigationViewStyle(.stack)
-            .sheet(isPresented: $showJob, content: {
-                JobView(job: $job)
-            })
-
-        //        if #available(iOS 15.0, *) {
-        //            nav.searchable(text: $searchText)
-        //        } else {
-        nav.unredacted()
-        //        }
+        } // /navigationview
+        .navigationViewStyle(.stack)
+        .navigationBarTitleDisplayMode(.inline)
+        .sheet(isPresented: $showJob, content: {
+            JobView(job: $job)
+        })
     }
 }
 

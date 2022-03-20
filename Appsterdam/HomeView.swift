@@ -37,7 +37,6 @@ struct HomeView: View {
                             .scaledToFit()
                             .frame(width: 200, height: 200)
                             .padding()
-                            
                             .toolbar {
                                 ToolbarItem(placement: .principal) {
                                     HStack {
