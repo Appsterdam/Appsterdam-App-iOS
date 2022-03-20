@@ -106,8 +106,9 @@ struct EventView: View {
                     )
                 }
 
-                ScrollView {
-                    GroupBox {
+
+                GroupBox {
+                    ScrollView {
                         Text(
                             // Init to enable Markdown
                             .init(
@@ -119,7 +120,7 @@ struct EventView: View {
                             alignment: .leading
                         )
                     }
-                }
+                }.padding()
             }
             GroupBox() {
                 Button ("Attend \(displayEvent.name)") {
@@ -160,7 +161,7 @@ struct EventView_Previews: PreviewProvider {
             EventView(
                 displayEvent: .constant(Mock.event)
             )
-                .previewInterfaceOrientation(.landscapeLeft)
+            .previewInterfaceOrientation(.landscapeLeft)
         }
     }
 }

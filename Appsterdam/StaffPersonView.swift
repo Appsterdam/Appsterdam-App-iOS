@@ -112,12 +112,22 @@ struct StaffPersonView: View {
                 $0.padding()
             }
 
-            ScrollView {
-                GroupBox {
-                    Text(.init(person.bio))
-                        .padding()
+            GroupBox {
+                ScrollView {
+                    Text(
+                        .init(person.bio)
+                    )
+                    .frame(
+                        maxWidth: .infinity,
+                        maxHeight: .infinity
+                    )
                 }
             }
+            .frame(
+                maxWidth: .infinity,
+                maxHeight: .infinity
+            )
+            .padding()
         }
     }
 }
