@@ -53,9 +53,12 @@ struct EventListView: View {
                 .onAppear {
                     enableSearch = Settings.shared.eventsEnableSearch
                 }
-                .fullScreenCover(isPresented: $showsEvent, content: {
+                .sheet(isPresented: $showsEvent, content: {
                     EventView(displayEvent: $showEvent)
                 })
+//                .fullScreenCover(isPresented: $showsEvent, content: {
+//                    EventView(displayEvent: $showEvent)
+//                })
             }.navigationViewStyle(.stack)
 
             if #available(iOS 15.0, *) {

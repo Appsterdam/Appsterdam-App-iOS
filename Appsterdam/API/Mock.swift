@@ -43,7 +43,8 @@ public class Mock {
         JobCriteria: "Criteria",
         JobPublishStartDate: "2022-02-22",
         JobPublishEndDate: "2022-12-22",
-        JobLocation: .init(JobLocationCity: "Amsterdam")
+        JobProvider: "Wesley de Groot 🤪",
+        JobCity: "Appsterdam"
     )
 
     static let event = Event.init(

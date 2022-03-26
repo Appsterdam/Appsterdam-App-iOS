@@ -9,14 +9,6 @@
 import SwiftUI
 import Aurora
 
-struct JobCompanyModel: Codable {
-
-}
-
-struct JobLocationModel: Codable {
-    var JobLocationCity: String
-}
-
 struct JobsModel: Codable {
     var JobUrl: String
     var JobTitle: String
@@ -25,7 +17,8 @@ struct JobsModel: Codable {
     var JobCriteria: String
     var JobPublishStartDate: String
     var JobPublishEndDate: String
-    var JobLocation: JobLocationModel
+    var JobProvider: String?
+    var JobCity: String
 }
 
 extension JobsModel: Identifiable {
@@ -72,7 +65,7 @@ struct JobsView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption2)
                                 Spacer()
-                                Text("📍 \(job.JobLocation.JobLocationCity) 📅 \(job.JobPublishEndDate) 🏠 The House Of Appril")
+                                Text("📍 \(job.JobCity) 📅 \(job.JobPublishEndDate) 🏠 \(job.JobProvider ?? "")")
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption)
                             }.onTapGesture {
@@ -130,7 +123,7 @@ struct JobView: View {
                                 alignment: .leading
                             )
 
-                        Text("Location: \(job.JobLocation.JobLocationCity)")
+                        Text("Location: \(job.JobCity)")
                             .font(.subheadline)
                             .frame(
                                 maxWidth: .infinity,
@@ -141,7 +134,7 @@ struct JobView: View {
                     Spacer()
 
                     VStack(alignment: .leading) {
-                        Text("The House Of Appril.\u{3000}")
+                        Text("\(job.JobProvider ?? "")\u{3000}")
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .font(.subheadline)
                             .frame(
@@ -153,26 +146,6 @@ struct JobView: View {
                 }.padding(.horizontal)
 
                 ScrollView {
-                    GroupBox(label: Text("Criteria")) {
-                        if job.JobCriteria.contains(">"),
-                           job.JobCriteria.contains("<"),
-                           let criteria = job.JobCriteria.asAttributedString {
-                            Text(.init(criteria.string))
-                                .font(.body)
-                                .frame(
-                                    maxWidth: .infinity,
-                                    alignment: .leading
-                                )
-                        } else {
-                            Text(.init(job.JobCriteria))
-                                .font(.body)
-                                .frame(
-                                    maxWidth: .infinity,
-                                    alignment: .leading
-                                )
-                        }
-                    }.padding(.horizontal)
-
                     GroupBox(label: Text("Description")) {
                         if job.JobDescription.contains(">"),
                            job.JobDescription.contains("<"),
@@ -185,6 +158,26 @@ struct JobView: View {
                                 )
                         } else {
                             Text(.init(job.JobDescription))
+                                .font(.body)
+                                .frame(
+                                    maxWidth: .infinity,
+                                    alignment: .leading
+                                )
+                        }
+                    }.padding(.horizontal)
+
+                    GroupBox(label: Text("Criteria")) {
+                        if job.JobCriteria.contains(">"),
+                           job.JobCriteria.contains("<"),
+                           let criteria = job.JobCriteria.asAttributedString {
+                            Text(.init(criteria.string))
+                                .font(.body)
+                                .frame(
+                                    maxWidth: .infinity,
+                                    alignment: .leading
+                                )
+                        } else {
+                            Text(.init(job.JobCriteria))
                                 .font(.body)
                                 .frame(
                                     maxWidth: .infinity,
