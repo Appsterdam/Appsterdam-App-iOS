@@ -65,9 +65,13 @@ struct JobsView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption2)
                                 Spacer()
-                                Text("📍 \(job.JobCity) 📅 \(job.JobPublishEndDate) 🏠 \(job.JobProvider ?? "")")
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .font(.caption)
+                                HStack {
+                                    Text("📍 \(job.JobCity)")
+                                        .font(.caption)
+                                    Spacer()
+                                    Text("🏠 \(job.JobProvider ?? "")")
+                                        .font(.caption)
+                                }
                             }.onTapGesture {
                                 self.job = job
                                 self.showJob = true
