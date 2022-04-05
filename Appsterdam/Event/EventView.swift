@@ -99,7 +99,7 @@ struct EventView: View {
             }.padding()
 
             GroupBox() {
-                Button ("Attend \(displayEvent.name)") {
+                Button ("\(AttendOrView(date:displayEvent.date)) \(displayEvent.name)") {
                     self.urlString = "https://www.meetup.com/nl-NL/Appsterdam/events/\(displayEvent.id)/"
 
                     if Settings.shared.eventsOpenInApp {
@@ -115,6 +115,20 @@ struct EventView: View {
                 SafariView(url: $urlString)
             })
         }
+    }
+
+    func AttendOrView(date: String) -> String {
+        let split = date.split(":")
+        let eventDate = split[0]
+
+        let df = DateFormatter()
+        df.dateFormat = "yyyyMMddHHmmss"
+        
+        if df.string(from: Date()) > eventDate {
+            return "View"
+        }
+
+        return "Attend"
     }
 }
 
