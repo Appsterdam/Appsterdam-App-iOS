@@ -151,43 +151,21 @@ struct JobView: View {
 
                 ScrollView {
                     GroupBox(label: Text("Description")) {
-                        if job.JobDescription.contains(">"),
-                           job.JobDescription.contains("<"),
-                           let description = job.JobDescription.asAttributedString {
-                            Text(.init(description.string))
-                                .font(.body)
-                                .frame(
-                                    maxWidth: .infinity,
-                                    alignment: .leading
-                                )
-                        } else {
-                            Text(.init(job.JobDescription))
-                                .font(.body)
-                                .frame(
-                                    maxWidth: .infinity,
-                                    alignment: .leading
-                                )
-                        }
+                        Text(.init(job.JobDescription))
+                            .font(.body)
+                            .frame(
+                                maxWidth: .infinity,
+                                alignment: .leading
+                            )
                     }.padding(.horizontal)
 
                     GroupBox(label: Text("Criteria")) {
-                        if job.JobCriteria.contains(">"),
-                           job.JobCriteria.contains("<"),
-                           let criteria = job.JobCriteria.asAttributedString {
-                            Text(.init(criteria.string))
-                                .font(.body)
-                                .frame(
-                                    maxWidth: .infinity,
-                                    alignment: .leading
-                                )
-                        } else {
-                            Text(.init(job.JobCriteria))
-                                .font(.body)
-                                .frame(
-                                    maxWidth: .infinity,
-                                    alignment: .leading
-                                )
-                        }
+                        Text(.init(job.JobCriteria))
+                            .font(.body)
+                            .frame(
+                                maxWidth: .infinity,
+                                alignment: .leading
+                            )
                     }.padding(.horizontal)
                 }
 
