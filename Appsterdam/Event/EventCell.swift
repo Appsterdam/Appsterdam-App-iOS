@@ -26,7 +26,7 @@ struct EventCell: View {
                             Image.init(
                                 uiImage: image
                             )
-                                .resizable()
+                            .resizable()
                         }
                     }
                 }
@@ -42,38 +42,21 @@ struct EventCell: View {
                     ? event.description
                     : ""
                 ))
-                    .font(.caption)
-                    .lineLimit(1)
-                    .frame(maxWidth: .infinity, alignment: .leading)
+                .font(.caption)
+                .lineLimit(1)
+                .frame(maxWidth: .infinity, alignment: .leading)
 
                 HStack {
                     // Date/time
                     Image(systemName: "calendar.badge.clock")
-
-                    Text(
-                        dateFormat().convert(
-                            jsonDate: event.date
-                        )
-                    ).font(.caption)
+                    Text(dateFormat().convert(jsonDate: event.date))
+                        .font(.caption)
 
                     Spacer()
 
-                    //                    // Attendees
                     Image(systemName: "person.fill.checkmark")
                     Text(.init(event.attendees))
                         .font(.caption)
-                    Spacer()
-
-                    // Place
-                    Image(systemName: "mappin.and.ellipse")
-                    Text(.init(
-                        event.location_name
-                            .contains(search: "http")
-                        ? "Online event"
-                        : event.location_name
-                    ))
-                        .font(.caption)
-                    Spacer()
                 }
             }
         }
