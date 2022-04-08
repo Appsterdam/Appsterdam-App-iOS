@@ -7,6 +7,7 @@
 
 import Foundation
 import Aurora
+import Combine
 
 /// Model class for decoding JSON files
 ///
@@ -20,7 +21,7 @@ import Aurora
 ///
 ///     // Only update and cache
 ///     Model<Codable>("https://server/file.ext").update()
-class Model<T: Codable> {
+class Model<T: Codable>: ObservableObject {
     /// The url to fetch the model from
     private let webURL: URL
 
@@ -34,7 +35,7 @@ class Model<T: Codable> {
     private var disableCache: Bool = false
 
     /// Are we debugging?
-    private let debug: Bool = true
+    private let debug: Bool = false
 
     /// Initialize Model
     /// - Parameter url: URL
@@ -58,7 +59,9 @@ class Model<T: Codable> {
 
     /// Load model from internet/cache (first item)
     /// - Returns: `T?`
-    func load() -> T? {
+    func load(_ ignoringCache: Bool = false) -> T? {
+        disableCache = ignoringCache
+
         if let item = self.loadArray(), item.count > 0 {
             return item[0]
         }
@@ -68,7 +71,9 @@ class Model<T: Codable> {
 
     /// Load model from internet/cache
     /// - Returns: `[T]?`
-    func loadArray() -> [T]? {
+    func loadArray(_ ignoringCache: Bool = false) -> [T]? {
+        disableCache = ignoringCache
+
         // Check, if we have at least 1 person
         guard let events = loadFromCache() else {
             guard let fetchedEvents = update() else {
@@ -91,7 +96,7 @@ class Model<T: Codable> {
             self.update()
         }
 
-        // Return team list.
+        // Return T list.
         return events
     }
 
@@ -189,6 +194,8 @@ class Model<T: Codable> {
     }
 
     deinit {
-        Aurora.shared.log("Unloaded <\(T.self)>")
+        if debug {
+            Aurora.shared.log("Unloaded <\(T.self)>")
+        }
     }
 }

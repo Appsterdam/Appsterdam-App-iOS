@@ -10,7 +10,7 @@ import Foundation
 
 struct AppModel: Codable {
     var home: String
-    var people: [PersonModel]?
+    var people: [PersonModel]
 }
 
 // Make it work in SwiftUI Views

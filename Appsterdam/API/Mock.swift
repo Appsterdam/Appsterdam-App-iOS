@@ -22,7 +22,14 @@ public class Mock {
                 **[Share a project](https://appsterdam.rs/shared-projects/)**
                 Our members are always developing new projects, products and solutions.
                 Check out the projects they are most proud of here.
-                """
+                """,
+
+                people: [
+                    .init(
+                        team: "FakeTeam",
+                        members: [Mock.person]
+                    )
+                ]
     )
     
     static let person = Person.init(

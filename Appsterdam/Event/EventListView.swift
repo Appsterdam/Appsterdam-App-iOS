@@ -15,7 +15,7 @@ struct EventListView: View {
     @State private var showsEvent: Bool = false
     @State private var showEvent: Event = Mock.event
     
-    private let events = Model<EventModel>.init(
+    @State private var events = Model<EventModel>.init(
         url: "https://appsterdam.rs/api/events.json"
     ).loadArray()
     
@@ -31,7 +31,7 @@ struct EventListView: View {
             Settings.shared.appEventsCount = "\(counter)"
         }
     }
-    
+
     var body: some View {
             let nav = NavigationView {
                 List() {
@@ -57,6 +57,13 @@ struct EventListView: View {
                     EventView(displayEvent: $showEvent)
                 })
             }.navigationViewStyle(.stack)
+            .onAppear {
+                DispatchQueue.global(qos: .background).async {
+                    self.events = Model<EventModel>.init(
+                        url: "https://appsterdam.rs/api/events.json"
+                    ).update()
+                }
+            }
 
             if #available(iOS 15.0, *) {
                 if Settings.shared.eventsEnableSearch {

@@ -19,9 +19,12 @@ struct AboutView: View {
 
     // initial URL string
     @State private var urlString = "https://appsterdam.rs"
+
+    // Current person
     @State private var person: Person = Mock.person
 
-    private let persons = Model<AppModel>.init(
+    // Persons.
+    @State private var persons = Model<AppModel>.init(
         url: "https://appsterdam.rs/api/app.json"
     ).load()?.people
 
@@ -157,6 +160,16 @@ struct AboutView: View {
                    content: {
                 SafariView(url: $urlString)
             })
+            .onAppear {
+                DispatchQueue.global(qos: .background).async {
+                    if let ModelValue = Model<AppModel>.init(
+                        url: "https://appsterdam.rs/api/app.json"
+                    ).update(),
+                       ModelValue.count > 0 {
+                        self.persons = ModelValue[0].people
+                    }
+                }
+            }
         }.navigationViewStyle(.stack)
     }
 }
