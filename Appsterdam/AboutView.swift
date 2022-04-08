@@ -26,7 +26,7 @@ struct AboutView: View {
     // Persons.
     @State private var persons = Model<AppModel>.init(
         url: "https://appsterdam.rs/api/app.json"
-    ).load()?.people
+    ).Model?[0].people ?? Mock.app.people
 
     private var releaseVersionNumber: String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"

@@ -37,7 +37,7 @@ struct JobsView: View {
 
     @State private var jobs = Model<JobsModel>.init(
         url: "https://appsterdam.rs/api/jobs.json"
-    ).loadArray()
+    ).Model
 
     init() {
         if let jobs = jobs {
@@ -96,13 +96,6 @@ struct JobsView: View {
         .sheet(isPresented: $showJob, content: {
             JobView(job: $job)
         })
-        .onAppear {
-            DispatchQueue.global(qos: .background).async {
-                self.jobs = Model<JobsModel>.init(
-                    url: "https://appsterdam.rs/api/jobs.json"
-                ).update()
-            }
-        }
     }
 }
 

@@ -17,7 +17,7 @@ struct EventListView: View {
     
     @State private var events = Model<EventModel>.init(
         url: "https://appsterdam.rs/api/events.json"
-    ).loadArray()
+    ).Model
     
     init() {
         if let events = events {
@@ -57,13 +57,6 @@ struct EventListView: View {
                     EventView(displayEvent: $showEvent)
                 })
             }.navigationViewStyle(.stack)
-            .onAppear {
-                DispatchQueue.global(qos: .background).async {
-                    self.events = Model<EventModel>.init(
-                        url: "https://appsterdam.rs/api/events.json"
-                    ).update()
-                }
-            }
 
             if #available(iOS 15.0, *) {
                 if Settings.shared.eventsEnableSearch {

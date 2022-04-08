@@ -13,15 +13,15 @@ import Combine
 ///
 /// usage:
 ///
-///     // Load Codable?
-///     Model<Codable>("https://server/file.ext").load()
-///
 ///     // Load as [Codable]?
-///     Model<Codable>("https://server/file.ext").loadArray()
+///     Model<Codable>("https://server/file.ext").Model
 ///
-///     // Only update and cache
+///     // Only update and cache (never run this, unless it's for background updates)
 ///     Model<Codable>("https://server/file.ext").update()
 class Model<T: Codable>: ObservableObject {
+    /// Model
+    @Published public var Model: [T]?
+
     /// The url to fetch the model from
     private let webURL: URL
 
@@ -31,19 +31,13 @@ class Model<T: Codable>: ObservableObject {
     /// Cache lifetime in seconds
     private let maxAge: Double = 3600 * 24 * 7 // Keep one week.
 
-    /// Cache disabled (leave this off)
-    private var disableCache: Bool = false
-
     /// Are we debugging?
-    private let debug: Bool = false
+    private let debug: Bool = true
 
     /// Initialize Model
     /// - Parameter url: URL
     init(url: String) {
-        if Settings.shared.disableCache {
-            disableCache = true
-        }
-
+        print("Model V2 For <\(T.self)> Initialized.")
         guard let url = URL(string: url) else {
             Aurora.shared.log("Invalid url(\"\(url)\") provided <\(T.self)>.")
             fatalError("Invalid url(\"\(url)\") provided <\(T.self)>.")
@@ -53,27 +47,15 @@ class Model<T: Codable>: ObservableObject {
 
         cache = FileManager.default.urls(
             for: .documentDirectory,
-               in: .userDomainMask
+            in: .userDomainMask
         )[0].appendingPathComponent(url.lastPathComponent)
-    }
 
-    /// Load model from internet/cache (first item)
-    /// - Returns: `T?`
-    func load(_ ignoringCache: Bool = false) -> T? {
-        disableCache = ignoringCache
-
-        if let item = self.loadArray(), item.count > 0 {
-            return item[0]
-        }
-
-        return nil
+        Model = load()
     }
 
     /// Load model from internet/cache
     /// - Returns: `[T]?`
-    func loadArray(_ ignoringCache: Bool = false) -> [T]? {
-        disableCache = ignoringCache
-
+    private func load() -> [T]? {
         // Check, if we have at least 1 person
         guard let events = loadFromCache() else {
             guard let fetchedEvents = update() else {
@@ -104,10 +86,6 @@ class Model<T: Codable>: ObservableObject {
     /// - Parameter ignoreCacheTime: Ignore the maximum cache time
     /// - Returns: boolean wherever the cache is still valid or not
     private func isCacheValid(ignoreCacheTime: Bool = false) -> Bool {
-        if disableCache {
-            Aurora.shared.log("Forced to invalidate cache for <\(T.self)>.")
-            return false
-        }
         do {
             if FileManager.default.fileExists(atPath: cache.path) {
                 let attributes = try FileManager.default.attributesOfItem(atPath: cache.path)
@@ -165,7 +143,14 @@ class Model<T: Codable>: ObservableObject {
                 Aurora.shared.log("Saving <\(T.self)> to \(cache.path)")
             }
             try? jsonData.write(to: cache)
-            return parse(json: jsonData)
+
+            let updatedModel = parse(json: jsonData)
+
+            // Send notification to publisher that the value is updated
+            Model = updatedModel
+            objectWillChange.send()
+
+            return updatedModel
         } catch {
             if debug {
                 Aurora.shared.log("Failed to load <\(T.self)> from internet \(webURL.path)")

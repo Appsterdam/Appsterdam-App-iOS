@@ -20,7 +20,7 @@ struct HomeView: View {
 
     private let app = Model<AppModel>.init(
         url: "https://appsterdam.rs/api/app.json"
-    ).load() ?? Mock.app
+    ).Model?[0] ?? Mock.app
 
     var body: some View {
         NavigationView {
