@@ -15,12 +15,12 @@ struct EventListView: View {
     @State private var showsEvent: Bool = false
     @State private var showEvent: Event = Mock.event
     
-    @State private var events = Model<EventModel>.init(
+    @ObservedObject private var events = Model<EventModel>.init(
         url: "https://appsterdam.rs/api/events.json"
-    ).Model
+    )
     
     init() {
-        if let events = events {
+        if let events = events.Model {
             // Update event counter.
             var counter = 0
             
@@ -71,11 +71,11 @@ struct EventListView: View {
     
     var searchResults: [EventModel]? {
         if searchText.isEmpty {
-            return events
+            return events.Model
         } else {
             var searchEvents: [EventModel] = [EventModel]()
             
-            if let events = events {
+            if let events = events.Model {
                 for section in events {
                     var searchEvent: [Event] = [Event]()
                     

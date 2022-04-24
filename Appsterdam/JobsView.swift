@@ -35,12 +35,12 @@ struct JobsView: View {
 
     @State private var searchText = ""
 
-    @State private var jobs = Model<JobsModel>.init(
+    @ObservedObject private var jobs = Model<JobsModel>.init(
         url: "https://appsterdam.rs/api/jobs.json"
-    ).Model
+    )
 
     init() {
-        if let jobs = jobs {
+        if let jobs = jobs.Model {
             Settings.shared.jobsCount = "\(jobs.count)"
         }
     }
@@ -55,7 +55,7 @@ struct JobsView: View {
                         ))
                 ) {
                     if let jobs = jobs {
-                        ForEach(jobs) { job in
+                        ForEach(jobs.Model ?? [Mock.jobs]) { job in
                             VStack {
                                 Text(.init(job.JobTitle))
                                     .frame(maxWidth: .infinity, alignment: .leading)
