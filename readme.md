@@ -1,3 +1,3 @@
 # Appsterdam App.
 
-- This is a placeholder
+This is the repo for the "official" Appsterdam app.
