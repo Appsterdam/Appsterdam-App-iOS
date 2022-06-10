@@ -272,7 +272,6 @@
 				2BEBC0D1279DA1E5001E962F /* Frameworks */,
 				2BEBC0D2279DA1E5001E962F /* Resources */,
 				2B9A442527E60C530040EE3D /* Embed App Extensions */,
-				2B9A443627E616E20040EE3D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -409,26 +408,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		2B9A443627E616E20040EE3D /* ShellScript */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputFileListPaths = (
-			);
-			inputPaths = (
-			);
-			outputFileListPaths = (
-			);
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n# Update sticker version to this version.\necho ${PROJECT_DIR}/${INFOPLIST_FILE}\n#buildNumber=$(/usr/libexec/PlistBuddy -c \"Print CFBundleShortVersionString\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\")\n#buildNumber=$(($buildNumber + 1))\n#/usr/libexec/PlistBuddy -c \"Set :CFBundleVersion $buildNumber\" \"${PROJECT_DIR}/${INFOPLIST_FILE}\"\n";
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2BEBC0D0279DA1E5001E962F /* Sources */ = {

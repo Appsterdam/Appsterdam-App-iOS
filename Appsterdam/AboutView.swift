@@ -191,7 +191,7 @@ struct personView: View {
 
     var body: some View {
         VStack {
-            if let picture = person.picture, picture.length > 0 {
+            if let picture = person.picture, picture.count > 0 {
                 // picture
                 RemoteImageView(
                     url: URL(string: picture)!,

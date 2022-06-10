@@ -16,7 +16,7 @@ struct StaffPersonView: View {
     var body: some View {
         CardView(title: person.name, subtitle: person.function) {
             VStack {
-                if let picture = person.picture, picture.length > 0 {
+                if let picture = person.picture, picture.count > 0 {
                     // picture
                     RemoteImageView(
                         url: URL(string: picture)!,

@@ -81,9 +81,9 @@ struct EventListView: View {
                     
                     for event in section.events {
                         if (
-                            event.name.contains(search: searchText) ||
-                            event.description.contains(search: searchText) ||
-                            event.date.contains(search: searchText)
+                            event.name.contains(searchText) ||
+                            event.description.contains(searchText) ||
+                            event.date.contains(searchText)
                         ) {
                             searchEvent.append(event)
                         }

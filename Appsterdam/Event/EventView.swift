@@ -54,7 +54,7 @@ struct EventView: View {
             VStack {
                 Text("Date: \(dateFormat().convert(jsonDate: displayEvent.date.split(":")[0]))")
 
-                if (displayEvent.location_name.contains(search: "http")) {
+                if (displayEvent.location_name.contains("http")) {
                     Text("Online event")
                 } else {
                     Text("Location: \(displayEvent.location_name) 📍").onTapGesture {

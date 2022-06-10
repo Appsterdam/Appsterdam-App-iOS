@@ -146,9 +146,11 @@ class Model<T: Codable>: ObservableObject {
 
             let updatedModel = parse(json: jsonData)
 
-            // Send notification to publisher that the value is updated
-            Model = updatedModel
-            objectWillChange.send()
+            DispatchQueue.main.async {
+                // Send notification to publisher that the value is updated
+                self.Model = updatedModel
+                self.objectWillChange.send()
+            }
 
             return updatedModel
         } catch {

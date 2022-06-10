@@ -61,7 +61,7 @@ struct JobsView: View {
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.body)
 
-                                Text(.init(job.JobShortDescription.decodeHTML()))
+                                Text(.init(job.JobShortDescription))
                                     .frame(maxWidth: .infinity, alignment: .leading)
                                     .font(.caption2)
                                 Spacer()
