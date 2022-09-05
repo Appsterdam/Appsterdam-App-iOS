@@ -8,8 +8,8 @@ This is the repo for the official Appsterdam app.
 
 |Platform|Store|Source|
 |---|---|---|
-|iOS|<a href='https://apps.apple.com/us/app/appsterdam/id1608532704' target='_blank'>AppStore</a>|<a href='https://github.com/wdg/Appsterdam-App' target='_blank'>GitHub</a>|
-|Android|<a href='https://play.google.com/store/apps/details?id=rs.appsterdam.app' target='_blank'>Play Store</a>|<a href='https://github.com/wdg/Appsterdam-App-Android' target='_blank'>GitHub</a>|
+|iOS|<a href='https://apps.apple.com/us/app/appsterdam/id1608532704' target='_blank'>AppStore</a>|<a href='https://github.com/Appsterdam/Appsterdam-App-iOS' target='_blank'>GitHub</a>|
+|Android|<a href='https://play.google.com/store/apps/details?id=rs.appsterdam.app' target='_blank'>Play Store</a>|<a href='https://github.com/Appsterdam/Appsterdam-App-Android' target='_blank'>GitHub</a>|
 
 ---
 
