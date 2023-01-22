@@ -133,12 +133,21 @@ struct AboutView: View {
                             UIApplication.shared.open(url)
                         }
                     }.padding(.bottom)
+                }
+
+                VStack {
+                    Button("Website") {
+                        self.urlString = "https://appsterdam.rs/"
+
+                        showSafari = true
+                    }.padding(.top)
+                    Divider()
 
                     Button("Code of Conduct") {
                         self.urlString = "https://appsterdam.rs/code-of-conduct/"
 
                         showSafari = true
-                    }.padding(.top)
+                    }
                     Divider()
 
                     Button("Privacy Policy") {
@@ -148,7 +157,7 @@ struct AboutView: View {
                     }
                 }
 
-                Text("© 2012-2022 Stichting Appsterdam. All rights reserved")
+                Text("© 2012-2023 Stichting Appsterdam. All rights reserved")
                     .font(.caption)
                     .padding()
             }
