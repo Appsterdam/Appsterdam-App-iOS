@@ -30,25 +30,21 @@ struct EventView: View {
     var body: some View {
         CardView(title: displayEvent.name) {
             if sizeClass == .regular {
-                if displayEvent.icon.count > 2 {
-                    Image(systemName: displayEvent.icon)
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                } else {
-                    if let image = displayEvent.icon.emojiToImage {
-                        Image.init(
-                            uiImage: image
-                        ).resizable()
-                            .scaledToFit()
-                            .frame(width: 200, height: 200)
-                    } else {
-                        Image(systemName: "star")
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 200, height: 200)
+                let url = URL(string: "https://appsterdam.rs/api/getImage.php?for=\(displayEvent.name.urlEncoded)")!
+
+                RemoteImageView(
+                    url: url,
+                    placeholder: {
+                        Image(systemName: "hourglass")
+                    },
+                    image: {
+                        $0.resizable()
                     }
-                }
+                )
+                .frame(
+                    maxWidth: .infinity,
+                    maxHeight: 250
+                )
             }
 
             VStack {
