@@ -71,7 +71,7 @@ struct StaffPersonView: View {
 
                 if !person.linkedin.isEmpty {
                     Button {
-                        if let url = URL(string: "https://linkedin.com/in/\(person.twitter)") {
+                        if let url = URL(string: "https://linkedin.com/in/\(person.linkedin)") {
                             UIApplication.shared.open(url)
                         }
                     } label: {
