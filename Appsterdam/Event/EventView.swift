@@ -96,7 +96,7 @@ struct EventView: View {
 
             GroupBox() {
                 Button ("\(AttendOrView(date:displayEvent.date)) \(displayEvent.name)") {
-                    self.urlString = "https://www.meetup.com/nl-NL/Appsterdam/events/\(displayEvent.id)/"
+                    self.urlString = "https://www.meetup.com/Appsterdam/events/\(displayEvent.id)/"
 
                     if Settings.shared.eventsOpenInApp {
                         showSafari = true
