@@ -18,9 +18,9 @@ struct HomeView: View {
     @State var animate = false
     @State var showSplash = true
 
-    @ObservedObject private let app = Model<AppModel>.init(
+    @ObservedObject private var app = Model<AppModel>.init(
         url: "https://appsterdam.rs/api/app.json"
-    ).Model?[0] ?? Mock.app
+    )
 
     var body: some View {
         NavigationView {
@@ -67,7 +67,7 @@ struct HomeView: View {
                                 .padding()
                             
                             GroupBox {
-                                Text(.init(app.home))
+                                Text(.init(app.Model?.first?.home ?? Mock.app.home))
                                 .frame(
                                     maxWidth: .infinity,
                                     alignment: .leading

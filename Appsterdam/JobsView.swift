@@ -54,28 +54,26 @@ struct JobsView: View {
                             "_Please note: this job data is coming from our friends._"
                         ))
                 ) {
-                    if let jobs = jobs {
-                        ForEach(jobs.Model ?? [Mock.jobs]) { job in
-                            VStack {
-                                Text(.init(job.JobTitle))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .font(.body)
+                    ForEach(jobs.Model ?? [Mock.jobs]) { job in
+                        VStack {
+                            Text(.init(job.JobTitle))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.body)
 
-                                Text(.init(job.JobShortDescription))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .font(.caption2)
+                            Text(.init(job.JobShortDescription))
+                                .frame(maxWidth: .infinity, alignment: .leading)
+                                .font(.caption2)
+                            Spacer()
+                            HStack {
+                                Text("📍 \(job.JobCity)")
+                                    .font(.caption)
                                 Spacer()
-                                HStack {
-                                    Text("📍 \(job.JobCity)")
-                                        .font(.caption)
-                                    Spacer()
-                                    Text("🏠 \(job.JobProvider ?? "")")
-                                        .font(.caption)
-                                }
-                            }.onTapGesture {
-                                self.job = job
-                                self.showJob = true
+                                Text("🏠 \(job.JobProvider ?? "")")
+                                    .font(.caption)
                             }
+                        }.onTapGesture {
+                            self.job = job
+                            self.showJob = true
                         }
                     }
                 }

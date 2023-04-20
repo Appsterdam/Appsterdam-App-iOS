@@ -78,25 +78,23 @@ struct AboutView: View {
 
 
                     VStack(spacing: 20) {
-                        if let persons = persons {
-                            let _ = Aurora.shared.log(persons)
+                        let _ = Aurora.shared.log(persons)
 
-                            ForEach(persons) { team in
-                                GroupBox.init(
-                                    label: Text(team.team)) {
-                                        ScrollView(.horizontal, showsIndicators: false) {
-                                            HStack(spacing: 20) {
-                                                ForEach(team.members) { member in
-                                                    personView(person: member)
-                                                        .onTapGesture {
-                                                            self.person = member
-                                                            showPerson = true
-                                                        }
-                                                }
+                        ForEach(persons) { team in
+                            GroupBox.init(
+                                label: Text(team.team)) {
+                                    ScrollView(.horizontal, showsIndicators: false) {
+                                        HStack(spacing: 20) {
+                                            ForEach(team.members) { member in
+                                                personView(person: member)
+                                                    .onTapGesture {
+                                                        self.person = member
+                                                        showPerson = true
+                                                    }
                                             }
                                         }
                                     }
-                            }
+                                }
                         }
                     }
                 }.padding(.bottom)
