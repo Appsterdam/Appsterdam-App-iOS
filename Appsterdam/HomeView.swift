@@ -18,7 +18,7 @@ struct HomeView: View {
     @State var animate = false
     @State var showSplash = true
 
-    private let app = Model<AppModel>.init(
+    @ObservedObject private let app = Model<AppModel>.init(
         url: "https://appsterdam.rs/api/app.json"
     ).Model?[0] ?? Mock.app
 
