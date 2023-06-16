@@ -39,11 +39,13 @@ struct EventListView: View {
                         ForEach(searchResults) { section in
                             Section(header: Text(section.name)) {
                                 ForEach(section.events) { event in
-                                    EventCell(event: event)
-                                        .onTapGesture {
-                                            self.showEvent = event
-                                            self.showsEvent.toggle()
-                                        }
+                                    Button {
+                                        self.showEvent = event
+                                        self.showsEvent.toggle()
+                                    } label: {
+                                        EventCell(event: event)
+                                    }
+                                    .buttonStyle(CellButtonStyle())
                                 }
                             }
                             .navigationTitle(section.name)

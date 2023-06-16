@@ -32,7 +32,7 @@
 			<key>DefaultValue</key>
 			<string>None</string>
 		</dict>
-        <dict>
+		<dict>
 			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>Title</key>
@@ -82,29 +82,19 @@
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
-			<string>Show icon</string>
-			<key>Key</key>
-			<string>events.showIcon</string>
-			<key>DefaultValue</key>
-			<true/>
-		</dict>
-        <dict>
-			<key>Type</key>
-			<string>PSToggleSwitchSpecifier</string>
-			<key>Title</key>
 			<string>Notify on new</string>
 			<key>Key</key>
 			<string>events.notify</string>
 			<key>DefaultValue</key>
 			<true/>
 		</dict>
-        <dict>
+		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Jobs</string>
-            <key>FooterText</key>
-            <string>The job data is coming from our friends.</string>
+			<key>FooterText</key>
+			<string>The job data is coming from our friends.</string>
 		</dict>
 		<dict>
 			<key>Type</key>
@@ -116,7 +106,7 @@
 			<key>DefaultValue</key>
 			<true/>
 		</dict>
-        <dict>
+		<dict>
 			<key>Type</key>
 			<string>PSToggleSwitchSpecifier</string>
 			<key>Title</key>
@@ -126,13 +116,13 @@
 			<key>DefaultValue</key>
 			<false/>
 		</dict>
-        <dict>
+		<dict>
 			<key>Type</key>
 			<string>PSGroupSpecifier</string>
 			<key>Title</key>
 			<string>Cache</string>
-            <key>FooterText</key>
-            <string>This will reset the cache on the next launch</string>
+			<key>FooterText</key>
+			<string>This will reset the cache on the next launch</string>
 		</dict>
 		<dict>
 			<key>Type</key>

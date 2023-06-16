@@ -13,26 +13,6 @@ struct EventCell: View {
 
     var body: some View {
         HStack {
-            // Event icon
-            if Settings.shared.eventsShowIcon {
-                VStack {
-                    if event.icon.count > 2 {
-                        // 30wx35h
-                        Image(
-                            systemName: event.icon
-                        )
-                    } else {
-                        if let image = event.icon.emojiToImage {
-                            Image.init(
-                                uiImage: image
-                            )
-                            .resizable()
-                        }
-                    }
-                }
-                .frame(width: 30, height: 30)
-            }
-
             VStack {
                 Text(.init(event.name))
                     .frame(maxWidth: .infinity, alignment: .leading)

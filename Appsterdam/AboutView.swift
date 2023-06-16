@@ -155,7 +155,7 @@ struct AboutView: View {
                     }
                 }
 
-                Text("© 2012-2023 Stichting Appsterdam. All rights reserved")
+                Text("© 2011-2023 Stichting Appsterdam. All rights reserved")
                     .font(.caption)
                     .padding()
             }

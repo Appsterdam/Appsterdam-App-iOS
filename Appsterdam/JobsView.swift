@@ -55,7 +55,10 @@ struct JobsView: View {
                         ))
                 ) {
                     ForEach(jobs.Model ?? [Mock.jobs]) { job in
-                        VStack {
+                        Button {
+                            self.job = job
+                            self.showJob = true
+                        } label: {
                             Text(.init(job.JobTitle))
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .font(.body)
@@ -71,10 +74,8 @@ struct JobsView: View {
                                 Text("🏠 \(job.JobProvider ?? "")")
                                     .font(.caption)
                             }
-                        }.onTapGesture {
-                            self.job = job
-                            self.showJob = true
                         }
+                        .buttonStyle(CellButtonStyle())
                     }
                 }
             } // /list

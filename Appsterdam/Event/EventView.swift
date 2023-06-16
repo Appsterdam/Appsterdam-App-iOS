@@ -72,6 +72,7 @@ struct EventView: View {
 
                     }
                 }
+                Text("Attendees: \(displayEvent.attendees)")
             }.onLandscape {
                 $0.frame(
                     maxWidth: .infinity,

@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		2B2038C92A3C9E9E00CB3919 /* CellButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2038C82A3C9E9E00CB3919 /* CellButtonStyle.swift */; };
 		2B28424927C908FE00C1E061 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B28424827C908FE00C1E061 /* Launch Screen.storyboard */; };
 		2B3AACF127BC2BC400B05797 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B3AACF027BC2BC400B05797 /* Settings.bundle */; };
 		2B4B004227E3CC0500BFD1A5 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B004127E3CC0400BFD1A5 /* Mock.swift */; };
@@ -76,6 +77,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		2B2038C82A3C9E9E00CB3919 /* CellButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellButtonStyle.swift; sourceTree = "<group>"; };
 		2B28424827C908FE00C1E061 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
 		2B3AACF027BC2BC400B05797 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		2B4B004127E3CC0400BFD1A5 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
@@ -163,6 +165,7 @@
 			children = (
 				2BB2C61D27AD63B100F07B96 /* DateConverter.swift */,
 				2BF60FCA27DD114C002D5DE3 /* Notifications.swift */,
+				2B2038C82A3C9E9E00CB3919 /* CellButtonStyle.swift */,
 			);
 			path = Helpers;
 			sourceTree = "<group>";
@@ -425,6 +428,7 @@
 				2BB69100279DA24E003B4A00 /* HomeView.swift in Sources */,
 				2BF60FCB27DD114D002D5DE3 /* Notifications.swift in Sources */,
 				2B4B004627E3F0D600BFD1A5 /* AppModel.swift in Sources */,
+				2B2038C92A3C9E9E00CB3919 /* CellButtonStyle.swift in Sources */,
 				2BB6910E279DA2B4003B4A00 /* EventCell.swift in Sources */,
 				2BB6910C279DA2B4003B4A00 /* EventListView.swift in Sources */,
 				2BA6B47F27DE0BC000E926F1 /* JobsView.swift in Sources */,
@@ -487,7 +491,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "rs.appsterdam.app.Appsterdam-Stickers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -510,7 +514,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UIRequiredDeviceCapabilities = arm64;
 				IPHONEOS_DEPLOYMENT_TARGET = 15.4;
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = "rs.appsterdam.app.Appsterdam-Stickers";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -659,7 +663,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = rs.appsterdam.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
@@ -690,7 +694,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.9;
+				MARKETING_VERSION = 2.0.2;
 				PRODUCT_BUNDLE_IDENTIFIER = rs.appsterdam.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_EMIT_LOC_STRINGS = YES;
