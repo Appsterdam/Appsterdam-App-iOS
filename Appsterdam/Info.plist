@@ -12,5 +12,9 @@
 	<array>
 		<string>fetch</string>
 	</array>
+	<key>LSApplicationQueriesSchemes</key>
+	<array>
+		<string>meetup</string>
+	</array>
 </dict>
 </plist>

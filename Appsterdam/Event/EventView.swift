@@ -20,11 +20,6 @@ struct EventView: View {
     @Environment(\.presentationMode) var presentationMode
     @Environment(\.verticalSizeClass) var sizeClass
 
-    // whether or not to show the Safari ViewController
-    @State var showSafari = false
-    // initial URL string
-    @State var urlString = "https://appsterdam.rs"
-
     @Binding var displayEvent: Event
 
     var body: some View {
@@ -97,20 +92,21 @@ struct EventView: View {
 
             GroupBox() {
                 Button ("\(AttendOrView(date:displayEvent.date)) \(displayEvent.name)") {
-                    self.urlString = "https://www.meetup.com/Appsterdam/events/\(displayEvent.id)/"
+                    let eventURL = "Appsterdam/events/\(displayEvent.id)/"
+                    guard
+                        let meetupURL = URL(string: "https://www.meetup.com/\(eventURL)"),
+                        let deeplinkURL = URL(string: "meetup://\(eventURL)") else {
+                        return
+                    }
 
-                    if Settings.shared.eventsOpenInApp {
-                        showSafari = true
-                    } else {
-                        if let url = URL(string: self.urlString) {
-                            UIApplication.shared.open(url)
+                    Task {
+                        let didOpenURL = await UIApplication.shared.open(deeplinkURL)
+                        if !didOpenURL {
+                            await UIApplication.shared.open(meetupURL)
                         }
                     }
                 }
             }
-            .sheet(isPresented: $showSafari, content: {
-                SafariView(url: $urlString)
-            })
         }
     }
 

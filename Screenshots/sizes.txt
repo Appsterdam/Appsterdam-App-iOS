@@ -1,4 +1,6 @@
 6.5", for instance iPhone 11 Pro Max
 5.5", for instance iPhone 8 plus
+Screenshots dimensions should be: 1242x2208 2208x1242
+
 12.9", iPad 5G or 6G
 12.9", iPad 2G
