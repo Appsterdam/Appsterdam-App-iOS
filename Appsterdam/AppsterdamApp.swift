@@ -7,7 +7,6 @@
 
 import SwiftUI
 import BackgroundTasks
-import Aurora
 
 @main
 struct AppsterdamApp: App {
@@ -22,20 +21,13 @@ struct AppsterdamApp: App {
     }
 
     var body: some Scene {
-        WindowGroup {
+        WindowGroup("Appsterdam App") {
             MainView()
                 .onChange(of: scenePhase) { newPhase in
-                    if newPhase == .active {
-                        Aurora.shared.log("Active")
-                    } else if newPhase == .inactive {
-                        Aurora.shared.log("Inactive")
-                    } else if newPhase == .background {
+                    if newPhase == .background {
                         if Settings.shared.disableCache {
-                            Aurora.shared.log("Enabling cache")
                             Settings.shared.disableCache = false
                         }
-
-                        Aurora.shared.log("Background")
                     }
                 }
         }

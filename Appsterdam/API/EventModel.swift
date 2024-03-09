@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import Aurora
 
 struct Event: Codable, Identifiable {
     var id: String

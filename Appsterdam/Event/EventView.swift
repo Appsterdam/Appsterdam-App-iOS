@@ -25,8 +25,10 @@ struct EventView: View {
     var body: some View {
         CardView(title: displayEvent.name) {
             if sizeClass == .regular {
-                let url = URL(string: "https://appsterdam.rs/api/getImage.php?for=\(displayEvent.name.urlEncoded)")!
+                let url = URL(string: "https://appsterdam.rs/api/getImage.php?eid=\(displayEvent.id)&for=\(displayEvent.name.urlEncoded)")!
 
+                let _ = print(url)
+                
                 RemoteImageView(
                     url: url,
                     placeholder: {

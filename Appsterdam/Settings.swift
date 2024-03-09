@@ -83,7 +83,7 @@ class Settings {
         appRunsTXT = "\(appRuns)"
 
         // Log app runs, will not display on non-debug builds
-        Aurora.shared.log("App runs: \(appRuns)")
+        print("App runs: \(appRuns)")
     }
 
     deinit {
