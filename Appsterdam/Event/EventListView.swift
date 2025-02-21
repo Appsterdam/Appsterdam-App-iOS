@@ -6,8 +6,6 @@
 //
 
 import SwiftUI
-import Aurora
-import UIKit
 
 struct EventListView: View {
     @State private var searchText = ""
@@ -83,9 +81,9 @@ struct EventListView: View {
                     
                     for event in section.events {
                         if (
-                            event.name.contains(searchText) ||
-                            event.description.contains(searchText) ||
-                            event.date.contains(searchText)
+                            event.name.lowercased().contains(searchText.lowercased()) ||
+                            event.description.lowercased().contains(searchText.lowercased()) ||
+                            event.date.lowercased().contains(searchText.lowercased())
                         ) {
                             searchEvent.append(event)
                         }

@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Aurora
+import SwiftExtras
 
 struct HomeView: View {
     // whether or not to show the Safari ViewController
@@ -54,7 +54,12 @@ struct HomeView: View {
                                 
                                 ToolbarItem(placement: .primaryAction) {
                                     Button {
-                                        UIApplication.shared.openAppSettings()
+                                        guard let url = URL(
+                                            string: UIApplication.openSettingsURLString
+                                        ) else {
+                                            return
+                                        }
+                                        openURL(url)
                                     } label: {
                                         Image(systemName: "gear")
                                             .font(.system(.title2))

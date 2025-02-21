@@ -39,7 +39,7 @@ public class Mock {
         twitter: "myTwitter",
         linkedin: "myLinkedin",
         website: "https://appsterdam.rs/",
-        bio: "Hello i'm *myself*, and this ~text~,\r\ncontaining _mark_**down**. and a [Link](https://wdg.codes)"
+        bio: "Hello i'm *myself*, and this ~text~,\r\ncontaining _mark_**down**. and a [Link](https://appsterdam.rs)"
     )
 
     static let jobs = JobsModel.init(
@@ -56,8 +56,8 @@ public class Mock {
 
     static let event = Event.init(
         id: "0",
-        name: "preview",
-        description: "preview string",
+        name: "Weekly Meeten & Drinken",
+        description: "Weekly Meeten & Drinken, Weekly Meeten & Drinken, Weekly Meeten & Drinken, Weekly Meeten & Drinken",
         price: "0",
         organizer: "Appsterdam",
         location_name: "Cafe Bax",

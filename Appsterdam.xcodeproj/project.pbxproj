@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		2B2038C92A3C9E9E00CB3919 /* CellButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B2038C82A3C9E9E00CB3919 /* CellButtonStyle.swift */; };
 		2B28424927C908FE00C1E061 /* Launch Screen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2B28424827C908FE00C1E061 /* Launch Screen.storyboard */; };
+		2B377B782D68AEBB00ADD9D9 /* SwiftExtras in Frameworks */ = {isa = PBXBuildFile; productRef = 2B377B772D68AEBB00ADD9D9 /* SwiftExtras */; };
 		2B3AACF127BC2BC400B05797 /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 2B3AACF027BC2BC400B05797 /* Settings.bundle */; };
 		2B4B004227E3CC0500BFD1A5 /* Mock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B004127E3CC0400BFD1A5 /* Mock.swift */; };
 		2B4B004627E3F0D600BFD1A5 /* AppModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2B4B004527E3F0D600BFD1A5 /* AppModel.swift */; };
 		2B9A442E27E60CF30040EE3D /* Stickers.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2B9A442D27E60CF30040EE3D /* Stickers.xcassets */; };
-		2B9A443227E60CF30040EE3D /* Appsterdam Stickers.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 2B9A442B27E60CF20040EE3D /* Appsterdam Stickers.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		2B9A443227E60CF30040EE3D /* Appsterdam Stickers.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = 2B9A442B27E60CF20040EE3D /* Appsterdam Stickers.appex */; platformFilter = ios; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		2BA33D5D279F29760073BC8B /* PersonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D5C279F29760073BC8B /* PersonModel.swift */; };
 		2BA33D6227A07C020073BC8B /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA33D6127A07C020073BC8B /* EventView.swift */; };
 		2BA4930F27DCDF7C005237BC /* RefreshModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BA4930E27DCDF7C005237BC /* RefreshModel.swift */; };
@@ -26,7 +27,6 @@
 		2BB6910C279DA2B4003B4A00 /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB69109279DA2B4003B4A00 /* EventListView.swift */; };
 		2BB6910D279DA2B4003B4A00 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6910A279DA2B4003B4A00 /* EventModel.swift */; };
 		2BB6910E279DA2B4003B4A00 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6910B279DA2B4003B4A00 /* EventCell.swift */; };
-		2BB69111279DA314003B4A00 /* Aurora in Frameworks */ = {isa = PBXBuildFile; productRef = 2BB69110279DA314003B4A00 /* Aurora */; };
 		2BC18A5D28007CAE003845C8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC18A5C28007CAE003845C8 /* Model.swift */; };
 		2BEBC0D8279DA1E5001E962F /* AppsterdamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0D7279DA1E5001E962F /* AppsterdamApp.swift */; };
 		2BEBC0DC279DA1E6001E962F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BEBC0DB279DA1E6001E962F /* Assets.xcassets */; };
@@ -63,15 +63,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		2B9A442527E60C530040EE3D /* Embed App Extensions */ = {
+		2B9A442527E60C530040EE3D /* Embed Foundation Extensions */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
-				2B9A443227E60CF30040EE3D /* Appsterdam Stickers.appex in Embed App Extensions */,
+				2B9A443227E60CF30040EE3D /* Appsterdam Stickers.appex in Embed Foundation Extensions */,
 			);
-			name = "Embed App Extensions";
+			name = "Embed Foundation Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
@@ -79,6 +79,7 @@
 /* Begin PBXFileReference section */
 		2B2038C82A3C9E9E00CB3919 /* CellButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CellButtonStyle.swift; sourceTree = "<group>"; };
 		2B28424827C908FE00C1E061 /* Launch Screen.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = "Launch Screen.storyboard"; sourceTree = "<group>"; };
+		2B377B752D68AEA400ADD9D9 /* SwiftExtras */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = SwiftExtras; path = /Users/wesley/Developer/Frameworks/SwiftExtras; sourceTree = "<absolute>"; };
 		2B3AACF027BC2BC400B05797 /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		2B4B004127E3CC0400BFD1A5 /* Mock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Mock.swift; sourceTree = "<group>"; };
 		2B4B004527E3F0D600BFD1A5 /* AppModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppModel.swift; sourceTree = "<group>"; };
@@ -117,7 +118,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				2BB69111279DA314003B4A00 /* Aurora in Frameworks */,
+				2B377B782D68AEBB00ADD9D9 /* SwiftExtras in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -138,6 +139,13 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		2B377B762D68AEBB00ADD9D9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		2B9A442C27E60CF20040EE3D /* Appsterdam Stickers */ = {
 			isa = PBXGroup;
 			children = (
@@ -188,6 +196,8 @@
 				2BEBC0F1279DA1E6001E962F /* AppsterdamUITests */,
 				2B9A442C27E60CF20040EE3D /* Appsterdam Stickers */,
 				2BEBC0D5279DA1E5001E962F /* Products */,
+				2B377B752D68AEA400ADD9D9 /* SwiftExtras */,
+				2B377B762D68AEBB00ADD9D9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -274,7 +284,7 @@
 				2BEBC0D0279DA1E5001E962F /* Sources */,
 				2BEBC0D1279DA1E5001E962F /* Frameworks */,
 				2BEBC0D2279DA1E5001E962F /* Resources */,
-				2B9A442527E60C530040EE3D /* Embed App Extensions */,
+				2B9A442527E60C530040EE3D /* Embed Foundation Extensions */,
 			);
 			buildRules = (
 			);
@@ -283,7 +293,7 @@
 			);
 			name = Appsterdam;
 			packageProductDependencies = (
-				2BB69110279DA314003B4A00 /* Aurora */,
+				2B377B772D68AEBB00ADD9D9 /* SwiftExtras */,
 			);
 			productName = Appsterdam;
 			productReference = 2BEBC0D4279DA1E5001E962F /* Appsterdam.app */;
@@ -333,7 +343,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1320;
-				LastUpgradeCheck = 1320;
+				LastUpgradeCheck = 1620;
 				ORGANIZATIONNAME = "Stichting Appsterdam";
 				TargetAttributes = {
 					2B9A442A27E60CF20040EE3D = {
@@ -362,7 +372,7 @@
 			);
 			mainGroup = 2BEBC0CB279DA1E5001E962F;
 			packageReferences = (
-				2BB6910F279DA314003B4A00 /* XCRemoteSwiftPackageReference "Aurora" */,
+				2B377B742D68AE6D00ADD9D9 /* XCRemoteSwiftPackageReference "SwiftExtras" */,
 			);
 			productRefGroup = 2BEBC0D5279DA1E5001E962F /* Products */;
 			projectDirPath = "";
@@ -461,6 +471,7 @@
 /* Begin PBXTargetDependency section */
 		2B9A443127E60CF30040EE3D /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
+			platformFilter = ios;
 			target = 2B9A442A27E60CF20040EE3D /* Appsterdam Stickers */;
 			targetProxy = 2B9A443027E60CF30040EE3D /* PBXContainerItemProxy */;
 		};
@@ -535,6 +546,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -568,6 +580,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -598,6 +611,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
@@ -631,6 +645,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -669,6 +684,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -678,7 +694,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
@@ -703,6 +718,7 @@
 				INFOPLIST_KEY_UILaunchStoryboardName = "Launch Screen.storyboard";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -712,7 +728,6 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
 				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2,7";
@@ -722,7 +737,6 @@
 		2BEBC0FC279DA1E6001E962F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -745,7 +759,6 @@
 		2BEBC0FD279DA1E6001E962F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
@@ -768,7 +781,6 @@
 		2BEBC0FF279DA1E6001E962F /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4V2D72S45C;
@@ -789,7 +801,6 @@
 		2BEBC100279DA1E6001E962F /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 4V2D72S45C;
@@ -858,21 +869,21 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		2BB6910F279DA314003B4A00 /* XCRemoteSwiftPackageReference "Aurora" */ = {
+		2B377B742D68AE6D00ADD9D9 /* XCRemoteSwiftPackageReference "SwiftExtras" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/AuroraFramework/Aurora.swift";
+			repositoryURL = "https://github.com/0xWDG/SwiftExtras.git";
 			requirement = {
-				branch = master;
-				kind = branch;
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.1.6;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		2BB69110279DA314003B4A00 /* Aurora */ = {
+		2B377B772D68AEBB00ADD9D9 /* SwiftExtras */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 2BB6910F279DA314003B4A00 /* XCRemoteSwiftPackageReference "Aurora" */;
-			productName = Aurora;
+			package = 2B377B742D68AE6D00ADD9D9 /* XCRemoteSwiftPackageReference "SwiftExtras" */;
+			productName = SwiftExtras;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

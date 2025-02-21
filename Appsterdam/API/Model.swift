@@ -6,8 +6,8 @@
 //
 
 import Foundation
-import Aurora
 import Combine
+import OSLog
 
 /// Model class for decoding JSON files
 ///
@@ -34,12 +34,15 @@ class Model<T: Codable>: ObservableObject {
     /// Are we debugging?
     private let debug: Bool = true
 
+    /// Logger
+    private let logger = Logger(subsystem: "rs.appsterdam", category: "Model")
+
     /// Initialize Model
     /// - Parameter url: URL
     init(url: String) {
-        print("Model V2 For <\(T.self)> Initialized.")
+        logger.debug("Model V2 For <\(T.self)> Initialized.")
         guard let url = URL(string: url) else {
-            Aurora.shared.log("Invalid url(\"\(url)\") provided <\(T.self)>.")
+            logger.debug("Invalid url(\"\(url)\") provided <\(T.self)>.")
             fatalError("Invalid url(\"\(url)\") provided <\(T.self)>.")
         }
 
@@ -61,7 +64,7 @@ class Model<T: Codable>: ObservableObject {
             guard let fetchedEvents = update() else {
                 // Try one more time with the 'old' cache.
                 guard let events = loadFromCache(ignoreCacheTime: true) else {
-                    Aurora.shared.log("We can't load data from disk or internet.\nCannot create: \(T.self)")
+                    logger.error("We can't load data from disk or internet.\nCannot create: \(T.self)")
                     return nil
                 }
 
@@ -95,16 +98,16 @@ class Model<T: Codable>: ObservableObject {
                 }
 
                 if let modificationDate = attributes[FileAttributeKey.modificationDate] as? Date,
-                   Date().unixTime < modificationDate.unixTime + maxAge {
+                   Date().timeIntervalSince1970 < modificationDate.timeIntervalSince1970 + maxAge {
                     return true
                 }
             }
         }
         catch {
             if debug {
-                Aurora.shared.log("\(cache.path) is invalid")
+                logger.debug("\(self.cache.path) is invalid")
             }
-            Aurora.shared.log("Error: \(error)")
+            logger.error("Error: \(error)")
         }
 
         return false
@@ -117,15 +120,16 @@ class Model<T: Codable>: ObservableObject {
             if isCacheValid(ignoreCacheTime: ignoreCacheTime) {
                 let jsonData = try Data.init(contentsOf: cache)
                 if debug {
-                    Aurora.shared.log("Loading <\(T.self)> \(cache.path) from cache.")
+                    logger
+                        .debug("Loading <\(T.self)> \(self.cache.path) from cache.")
                 }
                 return parse(json: jsonData)
             }
         } catch {
             if debug {
-                Aurora.shared.log("Failed to load <\(T.self)> \(cache.path) from cache")
+                logger.debug("Failed to load <\(T.self)> \(self.cache.path) from cache")
             }
-            Aurora.shared.log("Error: \(error)")
+            logger.error("Error: \(error)")
         }
 
         return nil
@@ -136,11 +140,11 @@ class Model<T: Codable>: ObservableObject {
     @discardableResult public func update() -> [T]? {
         do {
             if debug {
-                Aurora.shared.log("Loading <\(T.self)> from internet \(webURL.absoluteString)")
+                logger.debug("Loading <\(T.self)> from internet \(self.webURL.absoluteString)")
             }
             let jsonData = try Data.init(contentsOf: webURL)
             if debug {
-                Aurora.shared.log("Saving <\(T.self)> to \(cache.path)")
+                logger.debug("Saving <\(T.self)> to \(self.cache.path)")
             }
             try? jsonData.write(to: cache)
 
@@ -155,9 +159,9 @@ class Model<T: Codable>: ObservableObject {
             return updatedModel
         } catch {
             if debug {
-                Aurora.shared.log("Failed to load <\(T.self)> from internet \(webURL.path)")
+                logger.debug("Failed to load <\(T.self)> from internet \(self.webURL.path)")
             }
-            Aurora.shared.log("Error: \(error)")
+            logger.error("Error: \(error)")
         }
 
         return nil
@@ -173,8 +177,8 @@ class Model<T: Codable>: ObservableObject {
             do {
                 return [try JSONDecoder().decode(T.self, from: json)]
             } catch {
-                Aurora.shared.log("Error: \(error)")
-                Aurora.shared.log("Failed to decode <\(T.self)>")
+                logger.error("Error: \(error)")
+                logger.debug("Failed to decode <\(T.self)>")
                 return nil
             }
         }
@@ -182,7 +186,7 @@ class Model<T: Codable>: ObservableObject {
 
     deinit {
         if debug {
-            Aurora.shared.log("Unloaded <\(T.self)>")
+            logger.debug("Unloaded <\(T.self)>")
         }
     }
 }

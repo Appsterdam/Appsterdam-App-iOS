@@ -5,78 +5,71 @@
 //  Created by Wesley de Groot on 21/01/2022.
 //
 
-import Foundation
-import Aurora
+import SwiftUI
+import SwiftExtras
 
 class Settings {
     /// Static variable settings
     public static let shared = Settings()
 
     // MARK: APP Stats/settings
-    @UserDefault("app.appruns", default: 0)
     /// how many times the app is openend?
-    var appRuns: Int
+    @AppStorage("app.appruns")
+    var appRuns: Int = 0
 
-    @UserDefault("app.eventsCount", default: "0")
+    @AppStorage("app.eventsCount")
     /// how much events do we have?
-    var appEventsCount: String
+    var appEventsCount: String = "0"
 
-    @UserDefault("app.apprunsTXT", default: "0")
     /// how many times the app is openend (TXT)?
-    var appRunsTXT: String
+    @AppStorage("app.apprunsTXT")
+    var appRunsTXT: String = "0"
 
-    @UserDefault("app.lastUpdate", default: "Never")
     /// When did the last background update happen
-    var lastUpdate: String
+    @AppStorage("app.lastUpdate")
+    var lastUpdate: String = "Never"
 
-    @UserDefault("app.disableCache", default: false)
     /// Reset cache
-    var disableCache: Bool
+    @AppStorage("app.disableCache")
+    var disableCache: Bool = false
 
     // MARK: About settings
-    @UserDefault("about.openInApp", default: true)
     /// Open about links in app (safari)?
-    var aboutOpenInApp: Bool
+    @AppStorage("about.openInApp")
+    var aboutOpenInApp: Bool = true
 
     // MARK: Events
-    @UserDefault("events.openInApp", default: true)
     /// Open events in app (safari)
-    var eventsOpenInApp: Bool
+    @AppStorage("events.openInApp")
+    var eventsOpenInApp: Bool = true
 
-    @UserDefault("events.enableSearch", default: true)
     /// Enable search in events
-    var eventsEnableSearch: Bool
+    @AppStorage("events.enableSearch")
+    var eventsEnableSearch: Bool = true
 
-    @UserDefault("events.description", default: false)
     /// Show event description?
-    var eventsDescription: Bool
+    @AppStorage("events.description")
+    var eventsDescription: Bool = false
 
-    @UserDefault("events.showIcon", default: true)
     /// Show icon in event list
-    var eventsShowIcon: Bool
+    @AppStorage("events.showIcon")
+    var eventsShowIcon: Bool = true
 
-    @UserDefault("events.notify", default: true)
     /// Notify on new events
-    var eventsNotify: Bool
+    @AppStorage("events.notify")
+    var eventsNotify: Bool = true
 
-    @UserDefault("jobs.enable", default: true)
     /// Enable job search
-    var jobsEnable: Bool
+    @AppStorage("jobs.enable")
+    var jobsEnable: Bool = true
 
-    @UserDefault("jobs.count", default: "None")
     /// Jobs counter
-    var jobsCount: String
+    @AppStorage("jobs.count")
+    var jobsCount: String = "None"
 
-    @UserDefault("jobs.notify", default: false)
     /// Notify on new jobs
-    var jobsNotify: Bool
-
-    // MARK: Appsterdam User Account
-    @Keychain(item: "appsterdam.username")
-    var appsterdam_username: String?
-
-    @Keychain(item: "appsterdam.password")
-    var appsterdam_password: String?
+    @AppStorage("jobs.notify")
+    var jobsNotify: Bool = false
 
     init() {
         appRuns += 1

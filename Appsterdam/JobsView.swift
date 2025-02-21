@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Aurora
+import SwiftExtras
 
 struct JobsModel: Codable {
     var JobUrl: String

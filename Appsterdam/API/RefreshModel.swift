@@ -8,7 +8,7 @@
 
 import Foundation
 import BackgroundTasks
-import Aurora
+import OSLog
 
 /// Refresh model:
 ///
@@ -19,18 +19,19 @@ import Aurora
 public class RefreshModel {
     let taskIdentifier = "rs.appsterdam.refresh"
     let runAfter: Double = 3600 * 24 // Once a day.
+    let logger = Logger(subsystem: "rs.appsterdam", category: "refresh model")
 
     /// Static variable settings
     public static let shared = RefreshModel()
 
     /// Initialize class.
     init () {
-        Aurora.shared.log("Refresh Model (last refresh: \(Settings.shared.lastUpdate))")
+        logger.debug("Refresh Model (last refresh: \(Settings.shared.lastUpdate))")
     }
 
     /// Register the task
     public func register() {
-        Aurora.shared.log("Registered task: \(taskIdentifier).")
+        logger.debug("Registered task: \(self.taskIdentifier).")
         BGTaskScheduler.shared.register(forTaskWithIdentifier: taskIdentifier, using: nil) { task in
             self.handleAppRefresh(task: task as! BGAppRefreshTask)
         }
@@ -38,20 +39,20 @@ public class RefreshModel {
 
     /// Schedule a new refresh
     public func scheduleAppRefresh() {
-        Aurora.shared.log("Registered \(taskIdentifier), earliest time: \(runAfter)")
+        logger.debug("Registered \(self.taskIdentifier), earliest time: \(self.runAfter)")
         let request = BGAppRefreshTaskRequest(identifier: taskIdentifier)
         request.earliestBeginDate = Date(timeIntervalSinceNow: runAfter)
         do {
             try BGTaskScheduler.shared.submit(request)
         } catch {
-            Aurora.shared.log("Could not schedule app refresh: \(error)")
+            logger.debug("Could not schedule app refresh: \(error)")
         }
     }
 
     /// Log all pending requests
     public func logAllRequests() {
         BGTaskScheduler.shared.getPendingTaskRequests { requests in
-            Aurora.shared.log(requests)
+            print(requests)
         }
     }
 
@@ -61,7 +62,7 @@ public class RefreshModel {
         scheduleAppRefresh()
 
         task.expirationHandler = {
-            Aurora.shared.log("Refresh expired")
+            self.logger.debug("Refresh expired")
             Settings.shared.lastUpdate = "Failed"
             task.setTaskCompleted(success: false)
         }

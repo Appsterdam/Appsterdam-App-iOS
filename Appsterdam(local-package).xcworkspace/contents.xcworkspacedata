@@ -2,9 +2,6 @@
 <Workspace
    version = "1.0">
    <FileRef
-      location = "group:../../Frameworks/Aurora.swift">
-   </FileRef>
-   <FileRef
       location = "container:Appsterdam.xcodeproj">
    </FileRef>
 </Workspace>

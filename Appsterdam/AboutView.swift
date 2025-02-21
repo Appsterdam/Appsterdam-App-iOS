@@ -6,7 +6,7 @@
 //
 
 import SwiftUI
-import Aurora
+import SwiftExtras
 
 // MARK: - AboutView
 // MARK: View
@@ -78,8 +78,6 @@ struct AboutView: View {
 
 
                     VStack(spacing: 20) {
-                        let _ = Aurora.shared.log(persons)
-
                         ForEach(persons) { team in
                             GroupBox.init(
                                 label: Text(team.team)) {
@@ -199,18 +197,19 @@ struct personView: View {
     var body: some View {
         VStack {
             if let picture = person.picture, picture.count > 0 {
-                // picture
-                RemoteImageView(
-                    url: URL(string: picture)!,
-                    placeholder: {
+                AsyncImage(
+                    url: URL(string: picture)!) {
+                        $0
+                            .resizable()
+                            .scaledToFit()
+                            .clipShape(Circle())
+                    } placeholder: {
                         Image(systemName: "person.circle")
-                    },
-                    image: {
-                        $0.resizable()
+                            .resizable()
                             .scaledToFit()
                             .clipShape(Circle())
                     }
-                ).frame(width: 100, height: 100)
+                    .frame(width: 100, height: 100)
             } else {
                 Image(systemName: "person.circle")
                     .resizable()

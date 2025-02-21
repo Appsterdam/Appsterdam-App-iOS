@@ -7,7 +7,7 @@
 //
 
 import SwiftUI
-import Aurora
+import SwiftExtras
 
 struct StaffPersonView: View {
     @Binding var person: Person
@@ -15,113 +15,117 @@ struct StaffPersonView: View {
 
     var body: some View {
         CardView(title: person.name, subtitle: person.function) {
-            VStack {
-                if let picture = person.picture, picture.count > 0 {
-                    // picture
-                    RemoteImageView(
-                        url: URL(string: picture)!,
-                        placeholder: {
-                            Image(systemName: "person.circle")
-                        },
-                        image: {
-                            $0.resizable()
+            VStack(alignment: .center) {
+                VStack {
+                    if let picture = person.picture, picture.count > 0 {
+                        AsyncImage(
+                            url: URL(string: picture)!) {
+                                $0
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(Circle())
+                            } placeholder: {
+                                Image(systemName: "person.circle")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .clipShape(Circle())
+                            }
+
+                    } else {
+                        Image(systemName: "person.circle")
+                            .resizable()
+                    }
+                }.onPortrait {
+                    $0.frame(width: 200, height: 200)
+                }
+                .onLandscape {
+                    $0.frame(width: 100, height: 100)
+                }
+
+                Text(.init(person.function))
+                    .foregroundColor(Color.accentColor)
+                    .onPortrait {
+                        $0.padding(.top)
+                    }
+
+                HStack {
+                    Spacer()
+
+                    if !person.twitter.isEmpty {
+                        Button {
+                            if let url = URL(string: "https://twitter.com/\(person.twitter)") {
+                                UIApplication.shared.open(url)
+                            }
+                        } label: {
+                            Image("twitter")
+                                .renderingMode(.template)
+                                .resizable()
                                 .scaledToFit()
-                                .clipShape(Circle())
+                                .foregroundColor(Color.accentColor)
+                                .frame(width: 25, height: 25)
                         }
-                    )
-                } else {
-                    Image(systemName: "person.circle")
-                        .resizable()
-                }
-            }.onPortrait {
-                $0.frame(width: 200, height: 200)
-            }
-            .onLandscape {
-                $0.frame(width: 100, height: 100)
-            }
-
-            Text(.init(person.function))
-                .foregroundColor(Color.accentColor)
-                .onPortrait {
-                    $0.padding(.top)
-                }
-
-            HStack {
-                Spacer()
-
-                if !person.twitter.isEmpty {
-                    Button {
-                        if let url = URL(string: "https://twitter.com/\(person.twitter)") {
-                            UIApplication.shared.open(url)
-                        }
-                    } label: {
-                        Image("twitter")
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(Color.accentColor)
-                            .frame(width: 25, height: 25)
+                    } else {
+                        // Placeholder for design
+                        Text("\u{3000}")
                     }
-                } else {
-                    // Placeholder for design
-                    Text("\u{3000}")
-                }
 
-                Spacer()
+                    Spacer()
 
-                if !person.linkedin.isEmpty {
-                    Button {
-                        if let url = URL(string: "https://linkedin.com/in/\(person.linkedin)") {
-                            UIApplication.shared.open(url)
+                    if !person.linkedin.isEmpty {
+                        Button {
+                            if let url = URL(string: "https://linkedin.com/in/\(person.linkedin)") {
+                                UIApplication.shared.open(url)
+                            }
+                        } label: {
+                            Image("linkedin")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(Color.accentColor)
+                                .frame(width: 25, height: 25)
                         }
-                    } label: {
-                        Image("linkedin")
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(Color.accentColor)
-                            .frame(width: 25, height: 25)
+                    } else {
+                        // Placeholder for design
+                        Text("\u{3000}")
                     }
-                } else {
-                    // Placeholder for design
-                    Text("\u{3000}")
-                }
 
-                Spacer()
+                    Spacer()
 
-                if !person.website.isEmpty {
-                    Button {
-                        if let url = URL(string: person.website) {
-                            UIApplication.shared.open(url)
+                    if !person.website.isEmpty {
+                        Button {
+                            if let url = URL(string: person.website) {
+                                UIApplication.shared.open(url)
+                            }
+                        } label: {
+                            Image("globe")
+                                .renderingMode(.template)
+                                .resizable()
+                                .scaledToFit()
+                                .foregroundColor(Color.accentColor)
+                                .frame(width: 25, height: 25)
                         }
-                    } label: {
-                        Image("globe")
-                            .renderingMode(.template)
-                            .resizable()
-                            .scaledToFit()
-                            .foregroundColor(Color.accentColor)
-                            .frame(width: 25, height: 25)
+                    } else {
+                        // Placeholder for design
+                        Text("\u{3000}")
                     }
-                } else {
-                    // Placeholder for design
-                    Text("\u{3000}")
+
+                    Spacer()
+                }.onPortrait {
+                    $0.padding()
                 }
 
-                Spacer()
-            }.onPortrait {
-                $0.padding()
+                GroupBox {
+                    ScrollView {
+                        Text(
+                            .init(person.bio)
+                        ).frame(
+                            maxWidth: .infinity,
+                            maxHeight: .infinity
+                        )
+                    }
+                }.padding()
             }
-
-            GroupBox {
-                ScrollView {
-                    Text(
-                        .init(person.bio)
-                    ).frame(
-                        maxWidth: .infinity,
-                        maxHeight: .infinity
-                    )
-                }
-            }.padding()
+            .frame(maxWidth: .infinity)
         }
     }
 }
