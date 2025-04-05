@@ -27,7 +27,7 @@
 		2BB6910C279DA2B4003B4A00 /* EventListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB69109279DA2B4003B4A00 /* EventListView.swift */; };
 		2BB6910D279DA2B4003B4A00 /* EventModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6910A279DA2B4003B4A00 /* EventModel.swift */; };
 		2BB6910E279DA2B4003B4A00 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BB6910B279DA2B4003B4A00 /* EventCell.swift */; };
-		2BC18A5D28007CAE003845C8 /* Model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC18A5C28007CAE003845C8 /* Model.swift */; };
+		2BC18A5D28007CAE003845C8 /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BC18A5C28007CAE003845C8 /* model.swift */; };
 		2BEBC0D8279DA1E5001E962F /* AppsterdamApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2BEBC0D7279DA1E5001E962F /* AppsterdamApp.swift */; };
 		2BEBC0DC279DA1E6001E962F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BEBC0DB279DA1E6001E962F /* Assets.xcassets */; };
 		2BEBC0DF279DA1E6001E962F /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2BEBC0DE279DA1E6001E962F /* Preview Assets.xcassets */; };
@@ -98,7 +98,7 @@
 		2BB69109279DA2B4003B4A00 /* EventListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventListView.swift; sourceTree = "<group>"; };
 		2BB6910A279DA2B4003B4A00 /* EventModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventModel.swift; sourceTree = "<group>"; };
 		2BB6910B279DA2B4003B4A00 /* EventCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
-		2BC18A5C28007CAE003845C8 /* Model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Model.swift; sourceTree = "<group>"; };
+		2BC18A5C28007CAE003845C8 /* model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 		2BCF4CD227ADBBA800094C2B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		2BEBC0D4279DA1E5001E962F /* Appsterdam.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Appsterdam.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2BEBC0D7279DA1E5001E962F /* AppsterdamApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppsterdamApp.swift; sourceTree = "<group>"; };
@@ -161,7 +161,7 @@
 				2BA4930E27DCDF7C005237BC /* RefreshModel.swift */,
 				2BA33D5C279F29760073BC8B /* PersonModel.swift */,
 				2BB6910A279DA2B4003B4A00 /* EventModel.swift */,
-				2BC18A5C28007CAE003845C8 /* Model.swift */,
+				2BC18A5C28007CAE003845C8 /* model.swift */,
 				2B4B004127E3CC0400BFD1A5 /* Mock.swift */,
 				2B4B004527E3F0D600BFD1A5 /* AppModel.swift */,
 			);
@@ -432,7 +432,7 @@
 				2BA33D6227A07C020073BC8B /* EventView.swift in Sources */,
 				2BA33D5D279F29760073BC8B /* PersonModel.swift in Sources */,
 				2BB690FD279DA24E003B4A00 /* AboutView.swift in Sources */,
-				2BC18A5D28007CAE003845C8 /* Model.swift in Sources */,
+				2BC18A5D28007CAE003845C8 /* model.swift in Sources */,
 				2BF950CB27E1218400705D61 /* StaffPersonView.swift in Sources */,
 				2BB6910D279DA2B4003B4A00 /* EventModel.swift in Sources */,
 				2BB69100279DA24E003B4A00 /* HomeView.swift in Sources */,
@@ -689,7 +689,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.4;
+				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = rs.appsterdam.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";
@@ -723,7 +723,7 @@
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 2.0.4;
+				MARKETING_VERSION = 2.0.5;
 				PRODUCT_BUNDLE_IDENTIFIER = rs.appsterdam.app;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator xros xrsimulator";

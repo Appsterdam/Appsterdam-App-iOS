@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Person: Codable  {
+struct Person: Codable {
     var name: String
     var picture: String?
     var function: String
@@ -35,5 +35,3 @@ extension PersonModel: Identifiable {
         return UUID()
     }
 }
-
-

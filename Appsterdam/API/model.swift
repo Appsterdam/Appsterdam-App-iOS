@@ -20,7 +20,7 @@ import OSLog
 ///     Model<Codable>("https://server/file.ext").update()
 class Model<T: Codable>: ObservableObject {
     /// Model
-    @Published public var Model: [T]?
+    @Published public var model: [T]?
 
     /// The url to fetch the model from
     private let webURL: URL
@@ -53,7 +53,7 @@ class Model<T: Codable>: ObservableObject {
             in: .userDomainMask
         )[0].appendingPathComponent(url.lastPathComponent)
 
-        Model = load()
+        model = load()
     }
 
     /// Load model from internet/cache
@@ -102,8 +102,7 @@ class Model<T: Codable>: ObservableObject {
                     return true
                 }
             }
-        }
-        catch {
+        } catch {
             if debug {
                 logger.debug("\(self.cache.path) is invalid")
             }
@@ -152,7 +151,7 @@ class Model<T: Codable>: ObservableObject {
 
             DispatchQueue.main.async {
                 // Send notification to publisher that the value is updated
-                self.Model = updatedModel
+                self.model = updatedModel
                 self.objectWillChange.send()
             }
 

@@ -13,7 +13,7 @@ class Notifications {
     public static let shared = Notifications()
 
     init () {
-        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { success, error in
+        UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .badge, .sound]) { _, error in
             if let error = error {
                 print(error.localizedDescription)
             }

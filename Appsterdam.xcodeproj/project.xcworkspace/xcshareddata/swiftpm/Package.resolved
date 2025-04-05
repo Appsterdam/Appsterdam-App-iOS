@@ -1,12 +1,12 @@
 {
   "pins" : [
     {
-      "identity" : "aurora.swift",
+      "identity" : "oslogviewer",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/AuroraFramework/Aurora.swift",
+      "location" : "https://github.com/0xWDG/OSLogViewer.git",
       "state" : {
-        "branch" : "master",
-        "revision" : "402df22dea7ec8d6b862d551806a8f335b0981ef"
+        "branch" : "main",
+        "revision" : "8070b59e04284d3cbdca0b8087cb4b6efe5388b0"
       }
     }
   ],

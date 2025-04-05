@@ -9,6 +9,7 @@
 import SwiftUI
 import SwiftExtras
 
+// swiftlint:disable identifier_name
 struct JobsModel: Codable {
     var JobUrl: String
     var JobTitle: String
@@ -20,6 +21,7 @@ struct JobsModel: Codable {
     var JobProvider: String?
     var JobCity: String
 }
+// swiftlint:enable identifier_name
 
 extension JobsModel: Identifiable {
     var id: UUID {
@@ -40,7 +42,7 @@ struct JobsView: View {
     )
 
     init() {
-        if let jobs = jobs.Model {
+        if let jobs = jobs.model {
             Settings.shared.jobsCount = "\(jobs.count)"
         }
     }
@@ -54,7 +56,7 @@ struct JobsView: View {
                             "_Please note: this job data is coming from our friends._"
                         ))
                 ) {
-                    ForEach(jobs.Model ?? [Mock.jobs]) { job in
+                    ForEach(jobs.model ?? [Mock.jobs]) { job in
                         Button {
                             self.job = job
                             self.showJob = true
@@ -168,8 +170,8 @@ struct JobView: View {
                     }.padding(.horizontal)
                 }
 
-                GroupBox() {
-                    Button ("View on Web") {
+                GroupBox {
+                    Button("View on Web") {
                         self.urlString = job.JobUrl
                         showSafari = true
                     }

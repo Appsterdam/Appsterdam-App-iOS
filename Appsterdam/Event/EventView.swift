@@ -9,7 +9,7 @@ import SwiftUI
 import MapKit
 import SwiftExtras
 
-struct myAnnotation: Identifiable {
+struct MyAnnotation: Identifiable {
     let id = UUID()
     let name: String
     let coordinate: CLLocationCoordinate2D
@@ -23,11 +23,15 @@ struct EventView: View {
     @Binding var displayEvent: Event
 
     var body: some View {
-        CardView(title: displayEvent.name) {
+        CardView(
+            title: displayEvent.name,
+            subtitle: displayEvent.location_name
+        ) {
             VStack(alignment: .center) {
                 if sizeClass == .regular {
                     let url = URL(
                         string: "https://appsterdam.rs/api/getImage.php?eid=\(displayEvent.id)&for=\(displayEvent.name.urlEncoded)"
+                        // swiftlint:disable:previous line_length
                     )!
 
                     AsyncImage(
@@ -46,34 +50,38 @@ struct EventView: View {
                 }
 
                 VStack {
-                    Text(
-                        "Date: \(dateFormat().convert(jsonDate: String(displayEvent.date.split(separator: ":")[0])))"
+                    LabeledContent(
+                        "Date:",
+                        value: "\(DateFormat().convert(jsonDate: String(displayEvent.date.split(separator: ":")[0])))"
                     )
 
-                    if (displayEvent.location_name.contains("http")) {
+                    if displayEvent.location_name.contains("http") {
                         Text("Online event")
                     } else {
-                        Text("Location: \(displayEvent.location_name) 📍").onTapGesture {
+                        HStack {
+                            LabeledContent("Location:", value: displayEvent.location_name)
+                            Image(systemName: "arrow.up.right.diamond")
+                                .foregroundStyle(.accent)
+
+                        }
+                        .onTapGesture {
                             if displayEvent.location_name.contains("online") {
                                 return
                             }
 
-                            if displayEvent.latitude == "0" &&
-                                displayEvent.longitude == "0" {
-                                guard let url = URL(string: "http://maps.apple.com/?daddr=\(displayEvent.latitude),\(displayEvent.longitude)") else { return }
-
-                                UIApplication.shared.open(url)
-                            } else {
-                                guard let url = URL(string: "http://maps.apple.com/?daddr=\(displayEvent.location_address.urlEncoded),Netherlands") else { return }
-                                print(displayEvent.location_address)
-                                print(url)
-                                UIApplication.shared.open(url)
-                            }
-
+                            guard let url = URL(
+                                string: "http://maps.apple.com/?daddr=\(displayEvent.location_address.urlEncoded),Netherlands"
+                                // swiftlint:disable:previous line_length
+                            ) else { return }
+                            print(displayEvent.location_address)
+                            print(url)
+                            UIApplication.shared.open(url)
                         }
                     }
-                    Text("Attendees: \(displayEvent.attendees)")
+                    LabeledContent("Organised by:", value: displayEvent.organizer)
+                    LabeledContent("Attendees:", value: displayEvent.attendees)
                 }
+                .padding()
                 .frame(maxWidth: .infinity)
 
                 GroupBox {
@@ -91,8 +99,8 @@ struct EventView: View {
                     }
                 }.padding()
 
-                GroupBox() {
-                    Button ("\(AttendOrView(date:displayEvent.date)) \(displayEvent.name)") {
+                GroupBox {
+                    Button("\(attendOrView(date: displayEvent.date)) \(displayEvent.name)") {
                         let eventURL = "Appsterdam/events/\(displayEvent.id)/"
                         guard
                             let meetupURL = URL(string: "https://www.meetup.com/\(eventURL)"),
@@ -112,14 +120,14 @@ struct EventView: View {
         }
     }
 
-    func AttendOrView(date: String) -> String {
+    func attendOrView(date: String) -> String {
         let split = date.split(separator: ":")
         let eventDate = split[0]
 
-        let df = DateFormatter()
-        df.dateFormat = "yyyyMMddHHmmss"
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyyMMddHHmmss"
 
-        if df.string(from: Date()) > eventDate {
+        if dateFormatter.string(from: Date()) > eventDate {
             return "View"
         }
 

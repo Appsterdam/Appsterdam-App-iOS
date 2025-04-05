@@ -31,7 +31,7 @@ public class Mock {
                     )
                 ]
     )
-    
+
     static let person = Person.init(
         name: "Person",
         picture: "https://appsterdam.rs/wp-content/uploads/2022/01/cropped-Appsterdam-Logo-512x512-2.png",
@@ -57,12 +57,12 @@ public class Mock {
     static let event = Event.init(
         id: "0",
         name: "Weekly Meeten & Drinken",
-        description: "Weekly Meeten & Drinken, Weekly Meeten & Drinken, Weekly Meeten & Drinken, Weekly Meeten & Drinken",
+        description: "Weekly Meeten & Drinken, Weekly Meeten & Drinken, Weekly Meeten",
         price: "0",
         organizer: "Appsterdam",
         location_name: "Cafe Bax",
         location_address: "Kinkerstraat 119, 1053CC Amsterdam, Netherlands",
-        date: "0:0",
+        date: "20250101190000:20250101235959",
         attendees: "2",
         icon: "star",
         latitude: "",

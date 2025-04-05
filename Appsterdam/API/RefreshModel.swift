@@ -15,7 +15,7 @@ import OSLog
 /// To debug:
 /// minimize app, press pause and enter this code in the debugger:
 ///
-///     e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"rs.appsterdam.refresh"]
+/// e -l objc -- (void)[[BGTaskScheduler sharedScheduler] _simulateLaunchForTaskWithIdentifier:@"rs.appsterdam.refresh"]
 public class RefreshModel {
     let taskIdentifier = "rs.appsterdam.refresh"
     let runAfter: Double = 3600 * 24 // Once a day.
@@ -34,6 +34,7 @@ public class RefreshModel {
         logger.debug("Registered task: \(self.taskIdentifier).")
         BGTaskScheduler.shared.register(forTaskWithIdentifier: taskIdentifier, using: nil) { task in
             self.handleAppRefresh(task: task as! BGAppRefreshTask)
+            // swiftlint:disable:previous force_cast
         }
     }
 
@@ -82,10 +83,10 @@ public class RefreshModel {
             url: "https://appsterdam.rs/api/jobs.json"
         ).update()
 
-        let df = DateFormatter()
-        df.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
 
-        Settings.shared.lastUpdate = df.string(from: Date())
+        Settings.shared.lastUpdate = formatter.string(from: Date())
 
         task.setTaskCompleted(success: true)
     }

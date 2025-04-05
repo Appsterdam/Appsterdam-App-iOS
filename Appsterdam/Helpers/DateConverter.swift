@@ -7,7 +7,7 @@
 
 import Foundation
 
-class dateFormat {
+class DateFormat {
     init() {
 
     }

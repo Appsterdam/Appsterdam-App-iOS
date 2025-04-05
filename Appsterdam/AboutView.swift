@@ -26,7 +26,7 @@ struct AboutView: View {
     // Persons.
     @State private var persons = Model<AppModel>.init(
         url: "https://appsterdam.rs/api/app.json"
-    ).Model?[0].people ?? Mock.app.people
+    ).model?[0].people ?? Mock.app.people
 
     private var releaseVersionNumber: String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
@@ -66,6 +66,7 @@ struct AboutView: View {
                         .font(.title3)
                         .padding(.bottom)
 
+                    // swiftlint:disable:next line_length
                     Text("“If you want to make movies, go to Hollywood.\nIf you want to make musicals, go to Broadway.\nIf you want to make apps, go to Appsterdam.”")
 
                     Text("- Mike Lee\u{3000}")
@@ -76,7 +77,6 @@ struct AboutView: View {
                         .font(.title)
                         .padding(.top)
 
-
                     VStack(spacing: 20) {
                         ForEach(persons) { team in
                             GroupBox.init(
@@ -84,7 +84,7 @@ struct AboutView: View {
                                     ScrollView(.horizontal, showsIndicators: false) {
                                         HStack(spacing: 20) {
                                             ForEach(team.members) { member in
-                                                personView(person: member)
+                                                PersonView(person: member)
                                                     .onTapGesture {
                                                         self.person = member
                                                         showPerson = true
@@ -153,7 +153,7 @@ struct AboutView: View {
                     }
                 }
 
-                Text("© 2011-2023 Stichting Appsterdam. All rights reserved")
+                Text("© 2011-2025 Stichting Appsterdam. All rights reserved")
                     .font(.caption)
                     .padding()
             }
@@ -167,11 +167,11 @@ struct AboutView: View {
             })
             .onAppear {
                 DispatchQueue.global(qos: .background).async {
-                    if let ModelValue = Model<AppModel>.init(
+                    if let modelValue = Model<AppModel>.init(
                         url: "https://appsterdam.rs/api/app.json"
                     ).update(),
-                       ModelValue.count > 0 {
-                        self.persons = ModelValue[0].people
+                       modelValue.count > 0 {
+                        self.persons = modelValue[0].people
                     }
                 }
             }
@@ -191,7 +191,7 @@ struct AboutView_Previews: PreviewProvider {
 
 // MARK: - PersonView
 // MARK: View
-struct personView: View {
+struct PersonView: View {
     let person: Person
 
     var body: some View {
@@ -229,7 +229,7 @@ struct personView: View {
 struct PersonView_Previews: PreviewProvider {
     static var previews: some View {
         VStack {
-            personView(person: Mock.person)
+            PersonView(person: Mock.person)
         }
         .previewLayout(PreviewLayout.sizeThatFits)
         .padding()

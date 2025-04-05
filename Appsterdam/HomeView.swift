@@ -11,10 +11,10 @@ import SwiftExtras
 struct HomeView: View {
     // whether or not to show the Safari ViewController
     @State private var showSafari = false
-    
+
     // initial URL string
     @State private var urlString = "https://appsterdam.rs"
-    
+
     @State var animate = false
     @State var showSplash = true
 
@@ -44,14 +44,14 @@ struct HomeView: View {
                                             .resizable()
                                             .scaledToFit()
                                             .frame(width: 45, height: 45)
-                                        
+
                                         VStack {
                                             Text("Appsterdam")
                                                 .font(.headline)
                                         }
                                     }
                                 }
-                                
+
                                 ToolbarItem(placement: .primaryAction) {
                                     Button {
                                         guard let url = URL(
@@ -66,17 +66,18 @@ struct HomeView: View {
                                     }
                                 }
                             }
-                            
+
                             Text("Appsterdam")
                                 .font(.largeTitle)
                                 .padding()
-                            
+
                             GroupBox {
-                                Text(.init(app.Model?.first?.home ?? Mock.app.home))
+                                Text(.init(app.model?.first?.home ?? Mock.app.home))
                                 .frame(
                                     maxWidth: .infinity,
                                     alignment: .leading
                                 )
+                                .tint(Color.accent)
                                 .padding(.leading, 5)
                             }
                         }
@@ -87,7 +88,7 @@ struct HomeView: View {
                         SafariView(url: $urlString)
                     })
                 }
-                
+
                 // Animation
                 ZStack {
                     Color.red

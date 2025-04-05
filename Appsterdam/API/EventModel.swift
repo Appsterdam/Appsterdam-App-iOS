@@ -15,7 +15,9 @@ struct Event: Codable, Identifiable {
     var price: String
     var organizer: String
     var location_name: String
+    // swiftlint:disable:previous identifier_name
     var location_address: String
+    // swiftlint:disable:previous identifier_name
     var date: String
     var attendees: String
     var icon: String

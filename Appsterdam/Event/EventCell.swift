@@ -29,7 +29,7 @@ struct EventCell: View {
                 HStack {
                     // Date/time
                     Image(systemName: "calendar.badge.clock")
-                    Text(dateFormat().convert(jsonDate: event.date))
+                    Text(DateFormat().convert(jsonDate: event.date))
                         .font(.caption)
 
                     Spacer()

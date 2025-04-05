@@ -12,27 +12,27 @@ struct EventListView: View {
     @State private var enableSearch = Settings.shared.eventsEnableSearch
     @State private var showsEvent: Bool = false
     @State private var showEvent: Event = Mock.event
-    
+
     @ObservedObject private var events = Model<EventModel>.init(
         url: "https://appsterdam.rs/api/events.json"
     )
-    
+
     init() {
-        if let events = events.Model {
+        if let events = events.model {
             // Update event counter.
             var counter = 0
-            
+
             for event in events {
                 counter += event.events.count
             }
-            
+
             Settings.shared.appEventsCount = "\(counter)"
         }
     }
 
     var body: some View {
             let nav = NavigationView {
-                List() {
+                List {
                     if let searchResults = searchResults {
                         ForEach(searchResults) { section in
                             Section(header: Text(section.name)) {
@@ -68,27 +68,23 @@ struct EventListView: View {
                 nav.unredacted()
             }
     }
-    
+
     var searchResults: [EventModel]? {
         if searchText.isEmpty {
-            return events.Model
+            return events.model
         } else {
             var searchEvents: [EventModel] = [EventModel]()
-            
-            if let events = events.Model {
+
+            if let events = events.model {
                 for section in events {
                     var searchEvent: [Event] = [Event]()
-                    
-                    for event in section.events {
-                        if (
-                            event.name.lowercased().contains(searchText.lowercased()) ||
+
+                    for event in section.events where event.name.lowercased().contains(searchText.lowercased()) ||
                             event.description.lowercased().contains(searchText.lowercased()) ||
-                            event.date.lowercased().contains(searchText.lowercased())
-                        ) {
+                            event.date.lowercased().contains(searchText.lowercased()) {
                             searchEvent.append(event)
-                        }
                     }
-                    
+
                     if !searchEvent.isEmpty {
                         searchEvents.append(
                             .init(
@@ -97,11 +93,10 @@ struct EventListView: View {
                             )
                         )
                     }
-                    
+
                 }
             }
-            
-            
+
             // if no results then return no results found...
             guard !searchEvents.isEmpty else {
                 return [
@@ -126,7 +121,7 @@ struct EventListView: View {
                     )
                 ]
             }
-            
+
             return searchEvents
         }
     }
