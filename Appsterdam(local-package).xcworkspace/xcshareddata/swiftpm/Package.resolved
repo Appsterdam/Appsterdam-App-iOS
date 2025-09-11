@@ -1,0 +1,14 @@
+{
+  "pins" : [
+    {
+      "identity" : "oslogviewer",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/0xWDG/OSLogViewer.git",
+      "state" : {
+        "branch" : "main",
+        "revision" : "e45ebc517b5266a3b7fdb41e938f82fbb93039fc"
+      }
+    }
+  ],
+  "version" : 2
+}

@@ -15,17 +15,12 @@ struct HomeView: View {
     // initial URL string
     @State private var urlString = "https://appsterdam.rs"
 
-    @State var animate = false
-    @State var showSplash = true
-
     @ObservedObject private var app = Model<AppModel>.init(
         url: "https://appsterdam.rs/api/app.json"
     )
 
     var body: some View {
         NavigationView {
-            ZStack {
-                ZStack {
                     ScrollView {
                         VStack {
                             Image(
@@ -87,34 +82,6 @@ struct HomeView: View {
                            content: {
                         SafariView(url: $urlString)
                     })
-                }
-
-                // Animation
-                ZStack {
-                    Color.red
-                    Image("Appsterdam_logo")
-                        .resizable()
-                        .aspectRatio(contentMode: .fit)
-                        .frame(width: 200, height: 200)
-                        .scaleEffect(animate ? 1000 : 1)
-                        .animation(Animation.easeIn(duration: 1))
-                }
-                .zIndex(100)
-                .edgesIgnoringSafeArea(.all)
-                .opacity(showSplash ? 1 : 0)
-                .animation(Animation.easeOut(duration: 1.5))
-                .navigationBarHidden(showSplash)
-                .onAppear {
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-                        if showSplash {
-                            animate = true
-                        }
-                    }
-                    DispatchQueue.main.asyncAfter(deadline: .now() + 1.2) {
-                        showSplash = false
-                    }
-                }
-            }
         }
         .navigationViewStyle(.stack)
     }
