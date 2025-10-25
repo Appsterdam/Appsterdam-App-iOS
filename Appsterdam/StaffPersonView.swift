@@ -51,9 +51,9 @@ struct StaffPersonView: View {
                 HStack {
                     Spacer()
 
-                    if !person.twitter.isEmpty {
+                    if let twitter = person.twitter, !twitter.isEmpty {
                         Button {
-                            if let url = URL(string: "https://twitter.com/\(person.twitter)") {
+                            if let url = URL(string: "https://twitter.com/\(twitter)") {
                                 UIApplication.shared.open(url)
                             }
                         } label: {
@@ -71,9 +71,9 @@ struct StaffPersonView: View {
 
                     Spacer()
 
-                    if !person.linkedin.isEmpty {
+                    if let linkedin = person.linkedin, !linkedin.isEmpty {
                         Button {
-                            if let url = URL(string: "https://linkedin.com/in/\(person.linkedin)") {
+                            if let url = URL(string: "https://linkedin.com/in/\(linkedin)") {
                                 UIApplication.shared.open(url)
                             }
                         } label: {
@@ -91,9 +91,9 @@ struct StaffPersonView: View {
 
                     Spacer()
 
-                    if !person.website.isEmpty {
+                    if let website = person.website, !website.isEmpty {
                         Button {
-                            if let url = URL(string: person.website) {
+                            if let url = URL(string: website) {
                                 UIApplication.shared.open(url)
                             }
                         } label: {

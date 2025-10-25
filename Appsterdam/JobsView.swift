@@ -81,6 +81,11 @@ struct JobsView: View {
                     }
                 }
             } // /list
+            .refreshable {
+                Task {
+                    jobs.update()
+                }
+            }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     VStack {

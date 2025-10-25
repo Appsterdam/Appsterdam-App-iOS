@@ -50,6 +50,11 @@ struct EventListView: View {
                         }
                     }
                 }
+                .refreshable {
+                    Task {
+                        events.update()
+                    }
+                }
                 .onAppear {
                     enableSearch = Settings.shared.eventsEnableSearch
                 }

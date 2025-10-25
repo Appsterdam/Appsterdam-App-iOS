@@ -15,7 +15,11 @@ class Settings {
     // MARK: APP Stats/settings
     /// how many times the app is openend?
     @AppStorage("app.appruns")
-    var appRuns: Int = 0
+    var appRuns: Int = 0 {
+        didSet {
+            appRunsTXT = "\(appRuns)"
+        }
+    }
 
     @AppStorage("app.eventsCount")
     /// how much events do we have?
@@ -73,7 +77,6 @@ class Settings {
 
     init() {
         appRuns += 1
-        appRunsTXT = "\(appRuns)"
 
         // Log app runs, will not display on non-debug builds
         print("App runs: \(appRuns)")

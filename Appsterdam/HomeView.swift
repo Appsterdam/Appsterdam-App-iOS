@@ -21,67 +21,70 @@ struct HomeView: View {
 
     var body: some View {
         NavigationView {
-                    ScrollView {
-                        VStack {
-                            Image(
-                                "Appsterdam_logo",
-                                bundle: nil,
-                                label: Text("Appsterdam Logo")
-                            )
-                            .resizable()
-                            .scaledToFit()
-                            .frame(width: 200, height: 200)
-                            .padding()
-                            .toolbar {
-                                ToolbarItem(placement: .principal) {
-                                    HStack {
-                                        Image("Appsterdam_logo")
-                                            .resizable()
-                                            .scaledToFit()
-                                            .frame(width: 45, height: 45)
+            ScrollView {
+                VStack {
+                    Image(
+                        "Appsterdam_logo",
+                        bundle: nil,
+                        label: Text("Appsterdam Logo")
+                    )
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 200, height: 200)
+                    .padding()
+                    .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            HStack {
+                                Image("Appsterdam_logo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 45, height: 45)
 
-                                        VStack {
-                                            Text("Appsterdam")
-                                                .font(.headline)
-                                        }
-                                    }
-                                }
-
-                                ToolbarItem(placement: .primaryAction) {
-                                    Button {
-                                        guard let url = URL(
-                                            string: UIApplication.openSettingsURLString
-                                        ) else {
-                                            return
-                                        }
-                                        openURL(url)
-                                    } label: {
-                                        Image(systemName: "gear")
-                                            .font(.system(.title2))
-                                    }
+                                VStack {
+                                    Text("Appsterdam")
+                                        .font(.headline)
                                 }
                             }
+                        }
 
-                            Text("Appsterdam")
-                                .font(.largeTitle)
-                                .padding()
-
-                            GroupBox {
-                                Text(.init(app.model?.first?.home ?? Mock.app.home))
-                                .frame(
-                                    maxWidth: .infinity,
-                                    alignment: .leading
-                                )
-                                .tint(Color.accent)
-                                .padding(.leading, 5)
+                        ToolbarItem(placement: .primaryAction) {
+                            Button {
+                                guard let url = URL(
+                                    string: UIApplication.openSettingsURLString
+                                ) else {
+                                    return
+                                }
+                                openURL(url)
+                            } label: {
+                                Image(systemName: "gear")
+                                    .font(.system(.title2))
                             }
                         }
                     }
-                    // Safari
-                    .sheet(isPresented: $showSafari,
-                           content: {
-                        SafariView(url: $urlString)
-                    })
+
+                    Text("Appsterdam")
+                        .font(.largeTitle)
+                        .padding()
+
+                    GroupBox {
+                        Text(.init(app.model?.first?.home ?? Mock.app.home))
+                            .frame(
+                                maxWidth: .infinity,
+                                alignment: .leading
+                            )
+                            .tint(Color.accent)
+                            .padding(.leading, 5)
+                    }
+                }
+            }
+            .refreshable {
+                Task.detached {
+                    await app.update()
+                }
+            }
+            .sheet(isPresented: $showSafari) {
+                SafariView(url: $urlString)
+            }
         }
         .navigationViewStyle(.stack)
     }
