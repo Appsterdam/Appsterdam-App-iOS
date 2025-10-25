@@ -35,7 +35,6 @@ struct AboutView: View {
     var body: some View {
         NavigationView {
             Form {
-                // swiftlint:disable:next line_length
                 VStack {
                     Group {
                         Text("“If you want to make movies, go to Hollywood.")
