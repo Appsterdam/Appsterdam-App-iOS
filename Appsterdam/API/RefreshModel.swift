@@ -68,20 +68,22 @@ public class RefreshModel {
             task.setTaskCompleted(success: false)
         }
 
-        // Load App
-        Model<AppModel>.init(
-            url: "https://appsterdam.rs/api/app.json"
-        ).update()
+        Task {
+            // Load App
+            await Model<AppModel>.init(
+                url: "https://appsterdam.rs/api/app.json"
+            ).update()
 
-        // Load Events
-        Model<EventModel>.init(
-            url: "https://appsterdam.rs/api/events.json"
-        ).update()
+            // Load Events
+            await Model<EventModel>.init(
+                url: "https://appsterdam.rs/api/events.json"
+            ).update()
 
-        // Load Jobs
-        Model<JobsModel>.init(
-            url: "https://appsterdam.rs/api/jobs.json"
-        ).update()
+            // Load Jobs
+            await Model<JobsModel>.init(
+                url: "https://appsterdam.rs/api/jobs.json"
+            ).update()
+        }
 
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"

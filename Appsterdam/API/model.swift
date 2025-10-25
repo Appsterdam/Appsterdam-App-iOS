@@ -20,7 +20,7 @@ import OSLog
 ///     Model<Codable>("https://server/file.ext").update()
 class Model<T: Codable>: ObservableObject {
     /// Model
-    @Published public var model: [T]?
+    @Published public var model: T?
 
     /// The url to fetch the model from
     private let webURL: URL
@@ -53,15 +53,18 @@ class Model<T: Codable>: ObservableObject {
             in: .userDomainMask
         )[0].appendingPathComponent(url.lastPathComponent)
 
-        model = load()
+        Task { @MainActor in
+            model = await load()
+            self.objectWillChange.send()
+        }
     }
 
     /// Load model from internet/cache
-    /// - Returns: `[T]?`
-    private func load() -> [T]? {
+    /// - Returns: `T?`
+    private func load() async -> T? {
         // Check, if we have at least 1 person
         guard let events = loadFromCache() else {
-            guard let fetchedEvents = update() else {
+            guard let fetchedEvents = await update() else {
                 // Try one more time with the 'old' cache.
                 guard let events = loadFromCache(ignoreCacheTime: true) else {
                     logger.error("We can't load data from disk or internet.\nCannot create: \(T.self)")
@@ -76,9 +79,11 @@ class Model<T: Codable>: ObservableObject {
             return fetchedEvents
         }
 
-        // Reload (in background) after 5 seconds.
-        DispatchQueue.global(qos: .background).asyncAfter(deadline: .now() + 5) {
-            self.update()
+        // Reload (in background) after 5 seconds using Swift Concurrency.
+        Task { [weak self] in
+            try? await Task.sleep(for: .seconds(5))
+            guard let self else { return }
+            await self.update()
         }
 
         // Return T list.
@@ -114,7 +119,7 @@ class Model<T: Codable>: ObservableObject {
 
     /// Load Model from cache
     /// - Returns: `Model<T>?`
-    private func loadFromCache(ignoreCacheTime: Bool = false) -> [T]? {
+    private func loadFromCache(ignoreCacheTime: Bool = false) -> T? {
         do {
             if isCacheValid(ignoreCacheTime: ignoreCacheTime) {
                 let jsonData = try Data.init(contentsOf: cache)
@@ -136,7 +141,7 @@ class Model<T: Codable>: ObservableObject {
 
     /// Update Model from internet
     /// - Returns: `Model<T>?`
-    @discardableResult public func update() -> [T]? {
+    @discardableResult public func update() async -> T? {
         do {
             if debug {
                 logger.debug("Loading <\(T.self)> from internet \(self.webURL.absoluteString)")
@@ -149,7 +154,7 @@ class Model<T: Codable>: ObservableObject {
 
             let updatedModel = parse(json: jsonData)
 
-            DispatchQueue.main.async {
+            Task { @MainActor in
                 // Send notification to publisher that the value is updated
                 self.model = updatedModel
                 self.objectWillChange.send()
@@ -169,17 +174,13 @@ class Model<T: Codable>: ObservableObject {
     /// Parse data as `Model<T>?`
     /// - Parameter json: JSON (as `Data`)
     /// - Returns: `Model<T>?`
-    private func parse(json: Data) -> [T]? {
+    private func parse(json: Data) -> T? {
         do {
-            return try JSONDecoder().decode([T].self, from: json)
+            return try JSONDecoder().decode(T.self, from: json)
         } catch {
-            do {
-                return [try JSONDecoder().decode(T.self, from: json)]
-            } catch {
-                logger.error("Error: \(error)")
-                logger.debug("Failed to decode <\(T.self)>")
-                return nil
-            }
+            logger.error("Error: \(error)")
+            logger.debug("Failed to decode <\(T.self)>")
+            return nil
         }
     }
 

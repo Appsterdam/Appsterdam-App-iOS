@@ -37,7 +37,7 @@ struct JobsView: View {
 
     @State private var searchText = ""
 
-    @ObservedObject private var jobs = Model<JobsModel>.init(
+    @ObservedObject private var jobs = Model<[JobsModel]>.init(
         url: "https://appsterdam.rs/api/jobs.json"
     )
 
@@ -83,7 +83,7 @@ struct JobsView: View {
             } // /list
             .refreshable {
                 Task {
-                    jobs.update()
+                    await jobs.update()
                 }
             }
             .toolbar {

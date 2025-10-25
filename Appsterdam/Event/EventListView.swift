@@ -13,7 +13,7 @@ struct EventListView: View {
     @State private var showsEvent: Bool = false
     @State private var showEvent: Event = Mock.event
 
-    @ObservedObject private var events = Model<EventModel>.init(
+    @ObservedObject private var events = Model<[EventModel]>.init(
         url: "https://appsterdam.rs/api/events.json"
     )
 
@@ -52,7 +52,7 @@ struct EventListView: View {
                 }
                 .refreshable {
                     Task {
-                        events.update()
+                        await events.update()
                     }
                 }
                 .onAppear {

@@ -24,9 +24,9 @@ struct AboutView: View {
     @State private var person: Person = Mock.person
 
     // Persons.
-    @State private var persons = Model<AppModel>.init(
+    @ObservedObject private var persons = Model<AppModel>.init(
         url: "https://appsterdam.rs/api/app.json"
-    ).model?[0].people ?? Mock.app.people
+    )
 
     private var releaseVersionNumber: String {
         return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
@@ -34,78 +34,73 @@ struct AboutView: View {
 
     var body: some View {
         NavigationView {
-            ScrollView {
+            Form {
+                // swiftlint:disable:next line_length
                 VStack {
-                    Image("Appsterdam_logo", bundle: nil, label: Text("Appsterdam Logo"))
-                        .resizable()
-                        .scaledToFit()
-                        .frame(width: 200, height: 200)
-                        .toolbar {
-                            ToolbarItem(placement: .principal) {
-                                HStack {
-                                    Image("Appsterdam_logo")
-                                        .resizable()
-                                        .scaledToFit()
-                                        .frame(width: 45, height: 45)
+                    Group {
+                        Text("“If you want to make movies, go to Hollywood.")
+                        Text("If you want to make musicals, go to Broadway.")
+                        Text("If you want to make apps, go to Appsterdam.”")
+                    }
+                    .frame(maxWidth: .infinity)
+                    .minimumScaleFactor(0.5)
+                    .lineLimit(1)
+                }
+                .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                
+                Text("- Mike Lee\u{3000}")
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+                    .listRowInsets(EdgeInsets(top: -10, leading: 0, bottom: 10, trailing: 0))
+                    .listRowBackground(Color.clear)
+                    .toolbar {
+                        ToolbarItem(placement: .principal) {
+                            HStack {
+                                Image("Appsterdam_logo")
+                                    .resizable()
+                                    .scaledToFit()
+                                    .frame(width: 45, height: 45)
 
-                                    VStack {
-                                        Text("Appsterdam")
-                                            .font(.headline)
+                                VStack {
+                                    Text("Appsterdam")
+                                        .font(.headline)
 
-                                        Text("Version \(releaseVersionNumber)")
-                                            .font(.subheadline)
+                                    Text("Version \(releaseVersionNumber)")
+                                        .font(.subheadline)
+                                }
+                            }
+                        }
+                    }
+
+                if let model = persons.model {
+                    ForEach(model.people) { team in
+                        Section(team.team) {
+                            ScrollView(.horizontal, showsIndicators: false) {
+                                HStack(spacing: 20) {
+                                    ForEach(team.members) { member in
+                                        PersonView(person: member)
+                                            .onTapGesture {
+                                                self.person = member
+                                                showPerson = true
+                                            }
                                     }
                                 }
                             }
                         }
-
-                    Text("Appsterdam")
-                        .font(.title)
-                        .bold()
-                    Text("Version \(releaseVersionNumber)")
-                        .font(.title3)
-                        .padding(.bottom)
-
-                    // swiftlint:disable:next line_length
-                    Text("“If you want to make movies, go to Hollywood.\nIf you want to make musicals, go to Broadway.\nIf you want to make apps, go to Appsterdam.”")
-
-                    Text("- Mike Lee\u{3000}")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
-                        .padding(.bottom)
-
-                    Text("Appsterdam Team")
-                        .font(.title)
-                        .padding(.top)
-
-                    VStack(spacing: 20) {
-                        ForEach(persons) { team in
-                            GroupBox.init(
-                                label: Text(team.team)) {
-                                    ScrollView(.horizontal, showsIndicators: false) {
-                                        HStack(spacing: 20) {
-                                            ForEach(team.members) { member in
-                                                PersonView(person: member)
-                                                    .onTapGesture {
-                                                        self.person = member
-                                                        showPerson = true
-                                                    }
-                                            }
-                                        }
-                                    }
-                                }
-                        }
                     }
-                }.padding(.bottom)
+                } else {
+                    ProgressView()
+                        .controlSize(.large)
+                }
 
-                VStack {
+                Section("Socials") {
                     Button("Discord") {
                         self.urlString = "https://discord.gg/HNqZPUy7An"
 
                         if let url = URL(string: self.urlString) {
                             UIApplication.shared.open(url)
                         }
-                    }.padding(.top)
-                    Divider()
+                    }
+
                     Button("Facebook") {
                         self.urlString = "https://www.facebook.com/appsterdam"
 
@@ -113,7 +108,7 @@ struct AboutView: View {
                             UIApplication.shared.open(url)
                         }
                     }
-                    Divider()
+
                     Button("Twitter") {
                         self.urlString = "https://www.twitter.com/appsterdam"
 
@@ -121,61 +116,56 @@ struct AboutView: View {
                             UIApplication.shared.open(url)
                         }
                     }
-                    Divider()
+
                     Button("YouTube") {
                         self.urlString = "https://www.youtube.com/appsterdam"
 
                         if let url = URL(string: self.urlString) {
                             UIApplication.shared.open(url)
                         }
-                    }.padding(.bottom)
+                    }
                 }
 
-                VStack {
+                Section {
                     Button("Website") {
                         self.urlString = "https://appsterdam.rs/"
-
                         showSafari = true
-                    }.padding(.top)
-                    Divider()
+                    }
 
                     Button("Code of Conduct") {
                         self.urlString = "https://appsterdam.rs/code-of-conduct/"
-
                         showSafari = true
                     }
-                    Divider()
 
                     Button("Privacy Policy") {
                         self.urlString = "https://appsterdam.rs/privacy-policy/"
-
                         showSafari = true
                     }
                 }
 
-                Text("© 2011-2025 Stichting Appsterdam. All rights reserved")
+                Text("© 2011-\(String(Date.now.year)) Stichting Appsterdam.\r\nAll rights reserved")
+                    .frame(maxWidth: .infinity)
+                    .multilineTextAlignment(.center)
                     .font(.caption)
-                    .padding()
+                    .listRowBackground(Color.clear)
             }
-            .sheet(isPresented: $showPerson,
-                   content: {
-                StaffPersonView(person: $person)
-            })
-            .sheet(isPresented: $showSafari,
-                   content: {
-                SafariView(url: $urlString)
-            })
-            .onAppear {
-                DispatchQueue.global(qos: .background).async {
-                    if let modelValue = Model<AppModel>.init(
-                        url: "https://appsterdam.rs/api/app.json"
-                    ).update(),
-                       modelValue.count > 0 {
-                        self.persons = modelValue[0].people
-                    }
+            .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .refreshable {
+                Task {
+                    await persons.update()
                 }
             }
-        }.navigationViewStyle(.stack)
+            .onChange(of: persons.model?.people.first?.team.count) { _ in
+                print("Model did change!!!")
+            }
+            .sheet(isPresented: $showPerson) {
+                StaffPersonView(person: $person)
+            }
+            .sheet(isPresented: $showSafari) {
+                SafariView(url: $urlString)
+            }
+        }
+        .navigationViewStyle(.stack)
     }
 }
 
@@ -234,13 +224,5 @@ struct PersonView_Previews: PreviewProvider {
         .previewLayout(PreviewLayout.sizeThatFits)
         .padding()
         .previewDisplayName("PersonView")
-    }
-}
-
-struct Cell: View {
-    let text: String
-
-    var body: some View {
-        Text(.init(text))
     }
 }

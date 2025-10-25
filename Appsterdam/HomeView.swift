@@ -67,7 +67,7 @@ struct HomeView: View {
                         .padding()
 
                     GroupBox {
-                        Text(.init(app.model?.first?.home ?? Mock.app.home))
+                        Text(.init(app.model?.home ?? Mock.app.home))
                             .frame(
                                 maxWidth: .infinity,
                                 alignment: .leading
