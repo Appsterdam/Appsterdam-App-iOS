@@ -47,7 +47,7 @@ struct AboutView: View {
                     .lineLimit(1)
                 }
                 .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
-                
+
                 Text("- Mike Lee\u{3000}")
                     .frame(maxWidth: .infinity, alignment: .trailing)
                     .listRowInsets(EdgeInsets(top: -10, leading: 0, bottom: 10, trailing: 0))

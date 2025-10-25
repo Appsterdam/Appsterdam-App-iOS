@@ -20,25 +20,25 @@ struct MainView: View {
                     .tabItem {
                         Label("Home", systemImage: "house.fill")
                     }
-                
+
                 EventListView()
                     .tabItem {
                         Label("Events", systemImage: "person.3.fill")
                     }
-                
+
                 if Settings.shared.jobsEnable {
                     JobsView()
                         .tabItem {
                             Label("Jobs", systemImage: "signature")
                         }
                 }
-                
+
                 AboutView()
                     .tabItem {
                         Label("About", systemImage: "info.circle.fill")
                     }
             }
-            
+
             // Animation
             ZStack {
                 Color.red
