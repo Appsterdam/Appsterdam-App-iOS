@@ -73,8 +73,7 @@ struct EventView: View {
                                 string: "http://maps.apple.com/?daddr=\(displayEvent.location_address.urlEncoded),Netherlands"
                                 // swiftlint:disable:previous line_length
                             ) else { return }
-                            print(displayEvent.location_address)
-                            print(url)
+
                             UIApplication.shared.open(url)
                         }
                     }

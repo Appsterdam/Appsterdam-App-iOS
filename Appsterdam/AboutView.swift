@@ -35,40 +35,40 @@ struct AboutView: View {
     var body: some View {
         NavigationView {
             Form {
-                VStack {
-                    Group {
-                        Text("“If you want to make movies, go to Hollywood.")
-                        Text("If you want to make musicals, go to Broadway.")
-                        Text("If you want to make apps, go to Appsterdam.”")
+                Section {
+                    VStack {
+                        Group {
+                            Text("“If you want to make movies, go to Hollywood.")
+                            Text("If you want to make musicals, go to Broadway.")
+                            Text("If you want to make apps, go to Appsterdam.”")
+                        }
+                        .frame(maxWidth: .infinity)
+                        .minimumScaleFactor(0.5)
+                        .lineLimit(1)
                     }
-                    .frame(maxWidth: .infinity)
-                    .minimumScaleFactor(0.5)
-                    .lineLimit(1)
+                    .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                } footer: {
+                    Text("- Mike Lee\u{3000}")
+                        .frame(maxWidth: .infinity, alignment: .trailing)
                 }
-                .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
+                .toolbar {
+                    ToolbarItem(placement: .principal) {
+                        HStack {
+                            Image("Appsterdam_logo")
+                                .resizable()
+                                .scaledToFit()
+                                .frame(width: 45, height: 45)
 
-                Text("- Mike Lee\u{3000}")
-                    .frame(maxWidth: .infinity, alignment: .trailing)
-                    .listRowInsets(EdgeInsets(top: -10, leading: 0, bottom: 10, trailing: 0))
-                    .listRowBackground(Color.clear)
-                    .toolbar {
-                        ToolbarItem(placement: .principal) {
-                            HStack {
-                                Image("Appsterdam_logo")
-                                    .resizable()
-                                    .scaledToFit()
-                                    .frame(width: 45, height: 45)
+                            VStack {
+                                Text("Appsterdam")
+                                    .font(.headline)
 
-                                VStack {
-                                    Text("Appsterdam")
-                                        .font(.headline)
-
-                                    Text("Version \(releaseVersionNumber)")
-                                        .font(.subheadline)
-                                }
+                                Text("Version \(releaseVersionNumber)")
+                                    .font(.subheadline)
                             }
                         }
                     }
+                }
 
                 if let model = persons.model {
                     ForEach(model.people) { team in
@@ -125,7 +125,7 @@ struct AboutView: View {
                     }
                 }
 
-                Section {
+                Section("More") {
                     Button("Website") {
                         self.urlString = "https://appsterdam.rs/"
                         showSafari = true
@@ -154,9 +154,6 @@ struct AboutView: View {
                     await persons.update()
                 }
             }
-            .onChange(of: persons.model?.people.first?.team.count) { _ in
-                print("Model did change!!!")
-            }
             .sheet(isPresented: $showPerson) {
                 StaffPersonView(person: $person)
             }
@@ -172,8 +169,6 @@ struct AboutView: View {
 struct AboutView_Previews: PreviewProvider {
     static var previews: some View {
         AboutView()
-            .previewLayout(PreviewLayout.sizeThatFits)
-            .padding()
             .previewDisplayName("Default preview")
     }
 }
@@ -190,7 +185,7 @@ struct PersonView: View {
                     url: URL(string: picture)!) {
                         $0
                             .resizable()
-                            .scaledToFit()
+                            .scaledToFill()
                             .clipShape(Circle())
                     } placeholder: {
                         Image(systemName: "person.circle")

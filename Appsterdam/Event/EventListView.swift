@@ -17,19 +17,6 @@ struct EventListView: View {
         url: "https://appsterdam.rs/api/events.json"
     )
 
-    init() {
-        if let events = events.model {
-            // Update event counter.
-            var counter = 0
-
-            for event in events {
-                counter += event.events.count
-            }
-
-            Settings.shared.appEventsCount = "\(counter)"
-        }
-    }
-
     var body: some View {
             let nav = NavigationView {
                 List {
@@ -55,13 +42,20 @@ struct EventListView: View {
                         await events.update()
                     }
                 }
+                .onChange(of: events.model?.count) { _ in
+                    let eventCount = events.model?.compactMap { $0.events.count }.reduce(0, +) ?? 0
+                    Settings.shared.appEventsCount = "\(eventCount)"
+                }
                 .onAppear {
+                    let eventCount = events.model?.compactMap { $0.events.count }.reduce(0, +) ?? 0
+                    Settings.shared.appEventsCount = "\(eventCount)"
                     enableSearch = Settings.shared.eventsEnableSearch
                 }
                 .sheet(isPresented: $showsEvent, content: {
                     EventView(displayEvent: $showEvent)
                 })
-            }.navigationViewStyle(.stack)
+            }
+            .navigationViewStyle(.stack)
 
             if #available(iOS 15.0, *) {
                 if Settings.shared.eventsEnableSearch {

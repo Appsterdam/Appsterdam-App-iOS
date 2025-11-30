@@ -22,7 +22,7 @@ struct StaffPersonView: View {
                             url: URL(string: picture)!) {
                                 $0
                                     .resizable()
-                                    .scaledToFit()
+                                    .scaledToFill()
                                     .clipShape(Circle())
                             } placeholder: {
                                 Image(systemName: "person.circle")

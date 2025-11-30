@@ -86,6 +86,9 @@ struct JobsView: View {
                     await jobs.update()
                 }
             }
+            .onChange(of: jobs.model?.first?.id) { _ in
+                Settings.shared.jobsCount = "\(jobs.model?.count ?? 0)"
+            }
             .toolbar {
                 ToolbarItem(placement: .principal) {
                     VStack {
