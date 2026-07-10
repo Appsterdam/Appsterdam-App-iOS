@@ -34,21 +34,10 @@ struct AboutView: View {
         NavigationStack {
             Form {
                 Section {
-                    VStack {
-                        Group {
-                            Text("“If you want to make movies, go to Hollywood.")
-                            Text("If you want to make musicals, go to Broadway.")
-                            Text("If you want to make apps, go to Appsterdam.”")
-                        }
-                        .frame(maxWidth: .infinity)
-                        .minimumScaleFactor(0.5)
-                        .lineLimit(1)
-                    }
-                    .listRowInsets(EdgeInsets(top: 10, leading: 10, bottom: 10, trailing: 10))
-                } footer: {
-                    Text("- Mike Lee\u{3000}")
-                        .frame(maxWidth: .infinity, alignment: .trailing)
+                    AboutHeroCard(version: releaseVersionNumber)
                 }
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
                 .toolbar {
                     ToolbarItem(placement: .principal) {
                         HStack {
@@ -56,6 +45,7 @@ struct AboutView: View {
                                 .resizable()
                                 .scaledToFit()
                                 .frame(width: 45, height: 45)
+                                .accessibilityHidden(true)
 
                             VStack {
                                 Text("Appsterdam")
@@ -80,8 +70,10 @@ struct AboutView: View {
                                             PersonView(person: member)
                                         }
                                         .buttonStyle(.plain)
+                                        .accessibilityLabel("\(member.name), \(member.function)")
                                     }
                                 }
+                                .padding(.vertical, 4)
                             }
                             .scrollIndicators(.hidden)
                         }
@@ -92,53 +84,67 @@ struct AboutView: View {
                 }
 
                 Section("Socials") {
-                    Button("Discord") {
+                    Button {
                         self.urlString = "https://discord.gg/HNqZPUy7An"
 
                         if let url = URL(string: self.urlString) {
                             UIApplication.shared.open(url)
                         }
+                    } label: {
+                        Label("Discord", systemImage: "bubble.left.and.bubble.right")
                     }
 
-                    Button("Facebook") {
+                    Button {
                         self.urlString = "https://www.facebook.com/appsterdam"
 
                         if let url = URL(string: self.urlString) {
                             UIApplication.shared.open(url)
                         }
+                    } label: {
+                        Label("Facebook", systemImage: "person.3")
                     }
 
-                    Button("Twitter") {
+                    Button {
                         self.urlString = "https://www.twitter.com/appsterdam"
 
                         if let url = URL(string: self.urlString) {
                             UIApplication.shared.open(url)
                         }
+                    } label: {
+                        Label("Twitter", systemImage: "bubble")
                     }
 
-                    Button("YouTube") {
+                    Button {
                         self.urlString = "https://www.youtube.com/appsterdam"
 
                         if let url = URL(string: self.urlString) {
                             UIApplication.shared.open(url)
                         }
+                    } label: {
+                        Label("YouTube", systemImage: "play.rectangle")
                     }
                 }
 
                 Section("More") {
-                    Button("Website") {
+                    Button {
                         self.urlString = "https://appsterdam.rs/"
                         showSafari = true
+                    } label: {
+                        Label("Website", systemImage: "globe")
                     }
 
-                    Button("Code of Conduct") {
+                    Button {
                         self.urlString = "https://appsterdam.rs/code-of-conduct/"
                         showSafari = true
+                    } label: {
+                        Label("Code of Conduct", systemImage: "checkmark.shield")
                     }
 
-                    Button("Privacy Policy") {
+                    Button {
                         self.urlString = "https://appsterdam.rs/privacy-policy/"
                         showSafari = true
+                    } label: {
+                        Label("Privacy Policy", systemImage: "hand.raised")
                     }
                 }
 
@@ -149,6 +155,7 @@ struct AboutView: View {
                     .listRowBackground(Color.clear)
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
+            .appGroupedBackground()
             .refreshable {
                 await persons.update()
             }
@@ -157,6 +164,76 @@ struct AboutView: View {
                 SafariView(url: $urlString)
             }
         }
+    }
+}
+
+private struct AboutHeroCard: View {
+    let version: String
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 18) {
+            HStack(spacing: 14) {
+                Image("Appsterdam_logo")
+                    .resizable()
+                    .scaledToFit()
+                    .frame(width: 58, height: 58)
+                    .padding(10)
+                    .background(.regularMaterial, in: Circle())
+                    .accessibilityHidden(true)
+
+                VStack(alignment: .leading, spacing: 4) {
+                    Text("Appsterdam")
+                        .font(.title2.bold())
+
+                    Text("Version \(version)")
+                        .font(.subheadline)
+                        .foregroundStyle(.secondary)
+                }
+
+                Spacer()
+            }
+
+            VStack(alignment: .leading, spacing: 10) {
+                Image(systemName: "quote.opening")
+                    .font(.title3.weight(.semibold))
+                    .foregroundStyle(AppTheme.accent)
+
+                // swiftlint:disable:next line_length
+                Text("If you want to make movies, go to Hollywood. If you want to make musicals, go to Broadway. If you want to make apps, go to Appsterdam.")
+                    .font(.headline)
+                    .lineSpacing(3)
+                    .fixedSize(horizontal: false, vertical: true)
+
+                Text("Mike Lee")
+                    .font(.subheadline.weight(.semibold))
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, alignment: .trailing)
+            }
+        }
+        .padding(20)
+        .frame(maxWidth: .infinity, alignment: .leading)
+        .background {
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(AppTheme.cardBackground)
+                .overlay(alignment: .topTrailing) {
+                    Circle()
+                        .fill(AppTheme.softAccent)
+                        .frame(width: 128, height: 128)
+                        .offset(x: 38, y: -44)
+                }
+                .overlay(alignment: .bottomLeading) {
+                    RoundedRectangle(cornerRadius: 3)
+                        .fill(AppTheme.accent)
+                        .frame(width: 54, height: 6)
+                        .padding(20)
+                }
+        }
+        .clipShape(.rect(cornerRadius: 24, style: .continuous))
+        .padding(.horizontal)
+        .padding(.vertical, 8)
+        .accessibilityElement(children: .combine)
+        // swiftlint:disable:next line_length
+        .accessibilityLabel("Appsterdam, version \(version). Quote by Mike Lee: If you want to make movies, go to Hollywood. If you want to make musicals, go to Broadway. If you want to make apps, go to Appsterdam.")
     }
 }
 
@@ -174,7 +251,7 @@ struct PersonView: View {
     let person: Person
 
     var body: some View {
-        VStack {
+        VStack(spacing: 8) {
             if let picture = person.picture, !picture.isEmpty, let pictureURL = URL(string: picture) {
                 AsyncImage(
                     url: pictureURL
@@ -197,11 +274,19 @@ struct PersonView: View {
             }
 
             Text(.init(person.name))
-                .foregroundStyle(Color.accentColor)
+                .font(.subheadline.weight(.semibold))
+                .foregroundStyle(.primary)
+                .lineLimit(1)
 
             Text(.init(person.function))
                 .font(.caption)
+                .foregroundStyle(.secondary)
+                .lineLimit(2)
         }
+        .frame(width: 132)
+        .padding(10)
+        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .accessibilityElement(children: .combine)
     }
 }
 

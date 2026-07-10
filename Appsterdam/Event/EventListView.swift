@@ -20,8 +20,8 @@ struct EventListView: View {
         let navigation = NavigationStack {
             List {
                 if searchResults.isEmpty, !searchText.isEmpty {
-                    Text("No results found")
-                        .foregroundStyle(.secondary)
+                    EmptySearchResultsView(searchText: searchText)
+                        .listRowBackground(Color.clear)
                 } else {
                     ForEach(searchResults) { section in
                         Section(section.name) {
@@ -32,11 +32,16 @@ struct EventListView: View {
                                     EventCell(event: event)
                                 }
                                 .buttonStyle(CellButtonStyle())
+                                .listRowSeparator(.hidden)
+                                .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                                .listRowBackground(Color.clear)
                             }
                         }
                     }
                 }
             }
+            .listStyle(.insetGrouped)
+            .appGroupedBackground()
             .navigationTitle("Events")
             .navigationBarTitleDisplayMode(.inline)
             .refreshable {
@@ -53,7 +58,7 @@ struct EventListView: View {
         }
 
         if enableSearch {
-            navigation.searchable(text: $searchText)
+            navigation.searchable(text: $searchText, prompt: "Search events")
         } else {
             navigation
         }
@@ -77,6 +82,34 @@ struct EventListView: View {
     private func updateEventCount() {
         let eventCount = events.model?.map(\.events.count).reduce(0, +) ?? 0
         Settings.shared.appEventsCount = "\(eventCount)"
+
+        if let eventSections = events.model {
+            let eventIDs = EventUpdateDetector.eventIDs(in: eventSections)
+            Settings.shared.eventsKnownIDs = EventUpdateDetector.storageString(from: eventIDs)
+        }
+    }
+}
+
+private struct EmptySearchResultsView: View {
+    let searchText: String
+
+    var body: some View {
+        VStack(spacing: 12) {
+            Image(systemName: "magnifyingglass")
+                .font(.largeTitle)
+                .foregroundStyle(.secondary)
+
+            Text("No results found")
+                .font(.headline)
+
+            Text("No events match \"\(searchText)\".")
+                .font(.subheadline)
+                .foregroundStyle(.secondary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.vertical, 40)
+        .accessibilityElement(children: .combine)
     }
 }
 

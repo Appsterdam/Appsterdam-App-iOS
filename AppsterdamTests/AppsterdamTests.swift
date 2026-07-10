@@ -70,4 +70,77 @@ final class AppsterdamTests: XCTestCase {
         XCTAssertEqual(job.id, "https://example.com/job")
         XCTAssertEqual(job.jobTitle, "iOS Engineer")
     }
+
+    func testEventUpdateDetectorFindsOnlyNewEvents() {
+        let knownEvent = Mock.event
+        var newEvent = Mock.event
+        newEvent.id = "new-event"
+        newEvent.name = "New Meetup"
+
+        let sections = [
+            EventModel(name: "Upcoming", events: [knownEvent, newEvent])
+        ]
+
+        let newEvents = EventUpdateDetector.newEvents(
+            in: sections,
+            knownEventIDs: [knownEvent.id]
+        )
+
+        XCTAssertEqual(newEvents.map(\.id), ["new-event"])
+        XCTAssertEqual(EventUpdateDetector.eventIDs(in: sections), ["0", "new-event"])
+    }
+
+    func testEventUpdateDetectorNotificationCopy() {
+        XCTAssertNil(EventUpdateDetector.notification(for: []))
+        XCTAssertEqual(
+            EventUpdateDetector.notification(for: [Mock.event])?.title,
+            "New Appsterdam event"
+        )
+        XCTAssertEqual(
+            EventUpdateDetector.notification(for: [Mock.event, Mock.event])?.title,
+            "2 new Appsterdam events"
+        )
+    }
+
+    func testEventDescriptionParserKeepsTextOnlyMarkdown() {
+        let blocks = EventDescriptionParser.blocks(from: "**Hello** [Appsterdam](https://appsterdam.rs)")
+
+        XCTAssertEqual(blocks, [
+            .text("**Hello** [Appsterdam](https://appsterdam.rs)")
+        ])
+    }
+
+    func testEventDescriptionParserExtractsImageTags() throws {
+        let blocks = EventDescriptionParser.blocks(
+            from: """
+            **Before**
+            <img alt="Venue photo" src="https://example.com/venue.jpg" />
+            _After_
+            """
+        )
+
+        XCTAssertEqual(blocks.count, 3)
+        XCTAssertEqual(blocks.first, .text("**Before**"))
+        XCTAssertEqual(blocks.last, .text("_After_"))
+
+        guard case .image(let imageBlock) = blocks[1] else {
+            return XCTFail("Expected image block")
+        }
+
+        XCTAssertEqual(imageBlock.url.absoluteString, "https://example.com/venue.jpg")
+        XCTAssertEqual(imageBlock.altText, "Venue photo")
+    }
+
+    func testEventDescriptionParserSupportsSingleQuotedImageAttributes() throws {
+        let blocks = EventDescriptionParser.blocks(
+            from: "<img src='https://example.com/image.png' alt='Schedule'>"
+        )
+
+        guard case .image(let imageBlock) = blocks.first else {
+            return XCTFail("Expected image block")
+        }
+
+        XCTAssertEqual(imageBlock.url.absoluteString, "https://example.com/image.png")
+        XCTAssertEqual(imageBlock.altText, "Schedule")
+    }
 }

@@ -16,6 +16,7 @@ struct AppsterdamApp: App {
     var data = RefreshModel.shared
 
     init() {
+        _ = Notifications.shared
         data.register()
         data.scheduleAppRefresh()
     }

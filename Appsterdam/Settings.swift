@@ -53,7 +53,7 @@ class Settings {
 
     /// Show event description?
     @AppStorage("events.description")
-    var eventsDescription: Bool = false
+    var eventsDescription: Bool = true
 
     /// Show icon in event list
     @AppStorage("events.showIcon")
@@ -62,6 +62,10 @@ class Settings {
     /// Notify on new events
     @AppStorage("events.notify")
     var eventsNotify: Bool = true
+
+    /// Event IDs seen during background refresh.
+    @AppStorage("events.knownIDs")
+    var eventsKnownIDs: String = ""
 
     /// Enable job search
     @AppStorage("jobs.enable")

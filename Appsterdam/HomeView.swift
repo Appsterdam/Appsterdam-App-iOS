@@ -23,15 +23,19 @@ struct HomeView: View {
                 Section {
                     HomeWelcomeHeader()
                 }
+                .listRowInsets(EdgeInsets())
+                .listRowBackground(Color.clear)
 
                 Section("Community") {
                     ForEach(textSections, id: \.self) { element in
                         Text(.init(stringLiteral: String(element)))
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .tint(.accentColor)
+                            .padding(.vertical, 4)
                     }
                 }
             }
+            .appGroupedBackground()
             .navigationBarTitleDisplayMode(.inline)
             .toolbar {
                 ToolbarItem(placement: .primaryAction) {
@@ -45,6 +49,7 @@ struct HomeView: View {
                     } label: {
                         Label("Settings", systemImage: "gear")
                     }
+                    .accessibilityLabel("Open Appsterdam settings")
                 }
             }
             .refreshable {
@@ -56,7 +61,7 @@ struct HomeView: View {
 
 private struct HomeWelcomeHeader: View {
     var body: some View {
-        VStack(spacing: 12) {
+        VStack(spacing: 16) {
             Image(
                 "Appsterdam_logo",
                 bundle: nil,
@@ -64,18 +69,36 @@ private struct HomeWelcomeHeader: View {
             )
             .resizable()
             .scaledToFit()
-            .frame(width: 120, height: 120)
+            .frame(width: 104, height: 104)
+            .padding(18)
 
             Text("Welcome to Appsterdam")
-                .font(.title2)
-                .fontWeight(.semibold)
+                .font(.largeTitle.bold())
+                .multilineTextAlignment(.center)
 
             Text("The community for app makers in Amsterdam and beyond.")
+                .font(.body)
                 .foregroundStyle(.secondary)
                 .multilineTextAlignment(.center)
+                .padding(.horizontal)
         }
         .frame(maxWidth: .infinity)
-        .padding(.vertical)
+        .padding(.vertical, 30)
+        .padding(.horizontal, 20)
+        .background {
+            RoundedRectangle(cornerRadius: 24, style: .continuous)
+                .fill(AppTheme.cardBackground)
+                .overlay(alignment: .topTrailing) {
+                    Circle()
+                        .fill(AppTheme.softAccent)
+                        .frame(width: 140, height: 140)
+                        .offset(x: 42, y: -52)
+                }
+        }
+        .clipShape(.rect(cornerRadius: 24, style: .continuous))
+        .padding(.horizontal)
+        .padding(.vertical, 8)
+        .accessibilityElement(children: .combine)
     }
 }
 

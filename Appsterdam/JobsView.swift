@@ -46,33 +46,19 @@ struct JobsView: View {
         NavigationStack {
             List {
                 Section(
-                    footer:
-                        Text(.init(
-                            "_Please note: this job data is coming from our friends._"
-                        ))
+                    footer: Text(.init("_Please note: this job data is coming from our friends._"))
                 ) {
                     if let loadedJobs = jobs.model {
                         ForEach(loadedJobs) { job in
                             Button {
                                 selectedJob = job
                             } label: {
-                                Text(.init(job.jobTitle))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .font(.body)
-
-                                Text(.init(job.jobShortDescription))
-                                    .frame(maxWidth: .infinity, alignment: .leading)
-                                    .font(.caption2)
-                                Spacer()
-                                HStack {
-                                    Text("📍 \(job.jobCity)")
-                                        .font(.caption)
-                                    Spacer()
-                                    Text("🏠 \(job.jobProvider ?? "")")
-                                        .font(.caption)
-                                }
+                                JobCell(job: job)
                             }
                             .buttonStyle(CellButtonStyle())
+                            .listRowSeparator(.hidden)
+                            .listRowInsets(EdgeInsets(top: 6, leading: 16, bottom: 6, trailing: 16))
+                            .listRowBackground(Color.clear)
                         }
                     } else {
                         ProgressView()
@@ -81,6 +67,10 @@ struct JobsView: View {
                     }
                 }
             } // /list
+            .listStyle(.insetGrouped)
+            .appGroupedBackground()
+            .navigationTitle("Jobs")
+            .navigationBarTitleDisplayMode(.inline)
             .refreshable {
                 await jobs.update()
             }
@@ -88,9 +78,76 @@ struct JobsView: View {
                 Settings.shared.jobsCount = "\(jobs.model?.count ?? 0)"
             }
         } // /navigationview
-        .navigationTitle("Jobs")
-        .navigationBarTitleDisplayMode(.inline)
         .sheet(item: $selectedJob, content: JobView.init)
+    }
+}
+
+private struct JobCell: View {
+    let job: JobsModel
+
+    var body: some View {
+        HStack(alignment: .top, spacing: 12) {
+            Image(systemName: "briefcase.fill")
+                .font(.title3)
+                .foregroundStyle(AppTheme.accent)
+                .frame(width: 42, height: 42)
+                .background(AppTheme.softAccent, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .accessibilityHidden(true)
+
+            VStack(alignment: .leading, spacing: 10) {
+                Text(.init(job.jobTitle))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.headline)
+                    .foregroundStyle(.primary)
+                    .lineLimit(2)
+
+                Text(.init(job.jobShortDescription))
+                    .frame(maxWidth: .infinity, alignment: .leading)
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
+
+                FlowingJobMetadata(job: job)
+            }
+        }
+        .padding(14)
+        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .accessibilityElement(children: .combine)
+    }
+}
+
+private struct FlowingJobMetadata: View {
+    let job: JobsModel
+
+    var body: some View {
+        VStack(alignment: .leading, spacing: 8) {
+            HStack(spacing: 8) {
+                JobMetadataChip(title: job.jobCity, systemImage: "mappin.and.ellipse")
+
+                if let provider = job.jobProvider, !provider.isEmpty {
+                    JobMetadataChip(title: provider, systemImage: "building.2")
+                }
+            }
+
+            if !job.jobPublishEndDate.isEmpty {
+                JobMetadataChip(title: "Apply by \(job.jobPublishEndDate)", systemImage: "calendar")
+            }
+        }
+    }
+}
+
+private struct JobMetadataChip: View {
+    let title: String
+    let systemImage: String
+
+    var body: some View {
+        Label(title, systemImage: systemImage)
+            .font(.caption)
+            .lineLimit(1)
+            .foregroundStyle(.secondary)
+            .padding(.horizontal, 9)
+            .padding(.vertical, 6)
+            .background(Color(uiColor: .tertiarySystemGroupedBackground), in: Capsule())
     }
 }
 
@@ -142,7 +199,10 @@ struct JobView: View {
                             )
                         Text("\u{3000}")
                     }
-                }.padding(.horizontal)
+                }
+                .padding()
+                .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+                .padding(.horizontal)
 
                 ScrollView {
                     GroupBox(label: Text("Description")) {
@@ -169,6 +229,9 @@ struct JobView: View {
                         self.urlString = job.jobURL
                         showSafari = true
                     }
+                    .buttonStyle(.borderedProminent)
+                    .frame(maxWidth: .infinity)
+                    .accessibilityHint("Opens the job posting in Safari")
                 }
             }
         }

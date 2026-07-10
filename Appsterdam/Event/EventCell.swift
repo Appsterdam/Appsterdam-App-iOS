@@ -12,34 +12,120 @@ struct EventCell: View {
     var event: Event
 
     var body: some View {
-        HStack {
-            VStack {
-                Text(.init(event.name))
-                    .frame(maxWidth: .infinity, alignment: .leading)
+        VStack(alignment: .leading, spacing: 12) {
+            HStack(alignment: .top, spacing: 12) {
+                EventDatePill(month: monthText, day: dayText)
 
-                Text(.init(
-                    Settings.shared.eventsDescription
-                    ? event.description
-                    : ""
-                ))
-                .font(.caption)
-                .lineLimit(1)
-                .frame(maxWidth: .infinity, alignment: .leading)
+                VStack {
+                    Text(.init(event.name))
+                        .font(.headline)
+                        .foregroundStyle(.primary)
+                        .lineLimit(2)
+                        .frame(maxWidth: .infinity, alignment: .leading)
 
-                HStack {
-                    // Date/time
-                    Image(systemName: "calendar.badge.clock")
-                    Text(EventDateFormatter.string(from: event.date))
-                        .font(.caption)
-
-                    Spacer()
-
-                    Image(systemName: "person.fill.checkmark")
-                    Text(.init(event.attendees))
-                        .font(.caption)
+                    if Settings.shared.eventsDescription, !event.description.isEmpty {
+                        Text(.init(event.description))
+                            .font(.subheadline)
+                            .foregroundStyle(.secondary)
+                            .lineLimit(2)
+                    }
                 }
             }
+
+            VStack(alignment: .trailing, spacing: 8) {
+                HStack(spacing: 8) {
+                    Spacer()
+
+                    MetadataChip(
+                        title: event.organizer,
+                        systemImage: "person"
+                    )
+
+                    MetadataChip(
+                        title: event.locationName,
+                        systemImage: "mappin.and.ellipse"
+                    )
+
+                    MetadataChip(
+                        title: event.attendees,
+                        systemImage: "person.2"
+                    )
+                }
+            }
+            .frame(maxWidth: .infinity)
         }
+        .padding(14)
+        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .overlay(alignment: .leading) {
+            RoundedRectangle(cornerRadius: 2)
+                .fill(AppTheme.accent)
+                .frame(width: 4)
+                .padding(.vertical, 16)
+        }
+        .accessibilityElement(children: .ignore)
+        .accessibilityLabel(accessibilityText)
+    }
+
+    private var eventDate: Date? {
+        EventDateFormatter.date(from: event.date)
+    }
+
+    private var monthText: String {
+        guard let eventDate else {
+            return "--"
+        }
+
+        return eventDate.formatted(.dateTime.month(.abbreviated))
+    }
+
+    private var dayText: String {
+        guard let eventDate else {
+            return "--"
+        }
+
+        return eventDate.formatted(.dateTime.day())
+    }
+
+    private var accessibilityText: String {
+        [
+            event.name,
+            EventDateFormatter.string(from: event.date),
+            "\(event.attendees) attendees"
+        ].joined(separator: ", ")
+    }
+}
+
+private struct EventDatePill: View {
+    let month: String
+    let day: String
+
+    var body: some View {
+        VStack(spacing: 2) {
+            Text(month.uppercased())
+                .font(.caption2.weight(.bold))
+
+            Text(day)
+                .font(.title3.weight(.semibold))
+        }
+        .foregroundStyle(AppTheme.accent)
+        .frame(width: 52, height: 52)
+        .background(AppTheme.softAccent, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .accessibilityHidden(true)
+    }
+}
+
+private struct MetadataChip: View {
+    let title: String
+    let systemImage: String
+
+    var body: some View {
+        Label(title, systemImage: systemImage)
+            .font(.caption)
+            .lineLimit(1)
+            .foregroundStyle(.secondary)
+            .padding(.horizontal, 9)
+            .padding(.vertical, 6)
+            .background(Color(uiColor: .tertiarySystemGroupedBackground), in: Capsule())
     }
 }
 

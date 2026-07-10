@@ -97,9 +97,70 @@ public class RefreshModel {
             }
 
             let results = await (app, events, jobs)
+            if let events = results.1 {
+                self.notifyIfNeeded(for: events)
+            }
             let succeeded = results.0 != nil && results.1 != nil && results.2 != nil
             Settings.shared.lastUpdate = succeeded ? Date.now.formatted() : "Failed"
             task.setTaskCompleted(success: succeeded)
         }
+    }
+
+    private func notifyIfNeeded(for eventSections: [EventModel]) {
+        let knownIDs = EventUpdateDetector.knownEventIDs(from: Settings.shared.eventsKnownIDs)
+        let latestIDs = EventUpdateDetector.eventIDs(in: eventSections)
+        defer {
+            Settings.shared.eventsKnownIDs = EventUpdateDetector.storageString(from: latestIDs)
+        }
+
+        guard Settings.shared.eventsNotify, !knownIDs.isEmpty else {
+            return
+        }
+
+        let newEvents = EventUpdateDetector.newEvents(in: eventSections, knownEventIDs: knownIDs)
+        guard let notification = EventUpdateDetector.notification(for: newEvents) else {
+            return
+        }
+
+        Notifications.shared.send(
+            title: notification.title,
+            message: notification.message,
+            identifier: "rs.appsterdam.events.\(latestIDs.sorted().joined(separator: "-").hashValue)"
+        )
+    }
+}
+
+enum EventUpdateDetector {
+    static func knownEventIDs(from storageString: String) -> Set<String> {
+        Set(storageString.split(separator: "\n").map(String.init))
+    }
+
+    static func storageString(from eventIDs: Set<String>) -> String {
+        eventIDs.sorted().joined(separator: "\n")
+    }
+
+    static func eventIDs(in sections: [EventModel]) -> Set<String> {
+        Set(sections.flatMap(\.events).map(\.id))
+    }
+
+    static func newEvents(in sections: [EventModel], knownEventIDs: Set<String>) -> [Event] {
+        sections
+            .flatMap(\.events)
+            .filter { !knownEventIDs.contains($0.id) }
+    }
+
+    static func notification(for newEvents: [Event]) -> (title: String, message: String)? {
+        guard let firstEvent = newEvents.first else {
+            return nil
+        }
+
+        if newEvents.count == 1 {
+            return ("New Appsterdam event", firstEvent.name)
+        }
+
+        return (
+            "\(newEvents.count) new Appsterdam events",
+            "Including \(firstEvent.name)"
+        )
     }
 }
