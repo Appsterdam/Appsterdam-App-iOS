@@ -8,31 +8,30 @@
 
 import Foundation
 
-struct Event: Codable, Identifiable {
+struct Event: Codable, Equatable, Identifiable {
     var id: String
     var name: String
     var description: String
     var price: String
     var organizer: String
-    var location_name: String
-    // swiftlint:disable:previous identifier_name
-    var location_address: String
-    // swiftlint:disable:previous identifier_name
+    var locationName: String
+    var locationAddress: String
     var date: String
     var attendees: String
     var icon: String
     var latitude: String
     var longitude: String
+
+    enum CodingKeys: String, CodingKey {
+        case id, name, description, price, organizer, date, attendees, icon, latitude, longitude
+        case locationName = "location_name"
+        case locationAddress = "location_address"
+    }
 }
 
-struct EventModel: Codable {
+struct EventModel: Codable, Equatable, Identifiable {
     var name: String
     var events: [Event]
-}
 
-// Make it work in SwiftUI Views
-extension EventModel: Identifiable {
-    var id: UUID {
-        return UUID()
-    }
+    var id: String { name }
 }

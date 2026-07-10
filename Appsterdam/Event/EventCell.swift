@@ -29,7 +29,7 @@ struct EventCell: View {
                 HStack {
                     // Date/time
                     Image(systemName: "calendar.badge.clock")
-                    Text(DateFormat().convert(jsonDate: event.date))
+                    Text(EventDateFormatter.string(from: event.date))
                         .font(.caption)
 
                     Spacer()
@@ -43,8 +43,6 @@ struct EventCell: View {
     }
 }
 
-struct EventCell_Previews: PreviewProvider {
-    static var previews: some View {
-        EventCell(event: Mock.event)
-    }
+#Preview {
+    EventCell(event: Mock.event)
 }

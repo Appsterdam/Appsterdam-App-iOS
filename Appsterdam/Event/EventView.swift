@@ -6,36 +6,22 @@
 //
 
 import SwiftUI
-import MapKit
 import SwiftExtras
 
-struct MyAnnotation: Identifiable {
-    let id = UUID()
-    let name: String
-    let coordinate: CLLocationCoordinate2D
-}
-
 struct EventView: View {
-    // To dismiss this screen using the button.
-    @Environment(\.presentationMode) var presentationMode
-    @Environment(\.verticalSizeClass) var sizeClass
+    @Environment(\.verticalSizeClass) private var sizeClass
 
-    @Binding var displayEvent: Event
+    let displayEvent: Event
 
     var body: some View {
         CardView(
             title: displayEvent.name,
-            subtitle: displayEvent.location_name
+            subtitle: displayEvent.locationName
         ) {
             VStack(alignment: .center) {
-                if sizeClass == .regular {
-                    let url = URL(
-                        string: "https://appsterdam.rs/api/getImage.php?eid=\(displayEvent.id)&for=\(displayEvent.name.urlEncoded)"
-                        // swiftlint:disable:previous line_length
-                    )!
-
+                if sizeClass == .regular, let imageURL {
                     AsyncImage(
-                        url: url,
+                        url: imageURL,
                         content: {
                             $0.resizable()
                         }, placeholder: {
@@ -52,30 +38,22 @@ struct EventView: View {
                 VStack {
                     LabeledContent(
                         "Date:",
-                        value: "\(DateFormat().convert(jsonDate: String(displayEvent.date.split(separator: ":")[0])))"
+                        value: EventDateFormatter.string(from: displayEvent.date)
                     )
 
-                    if displayEvent.location_name.contains("http") {
+                    if isOnlineEvent {
                         Text("Online event")
-                    } else {
-                        HStack {
-                            LabeledContent("Location:", value: displayEvent.location_name)
-                            Image(systemName: "arrow.up.right.diamond")
-                                .foregroundStyle(.accent)
-
-                        }
-                        .onTapGesture {
-                            if displayEvent.location_name.contains("online") {
-                                return
+                    } else if let mapsURL {
+                        Button {
+                            UIApplication.shared.open(mapsURL)
+                        } label: {
+                            HStack {
+                                LabeledContent("Location:", value: displayEvent.locationName)
+                                Image(systemName: "arrow.up.right.diamond")
+                                    .foregroundStyle(.accent)
                             }
-
-                            guard let url = URL(
-                                string: "http://maps.apple.com/?daddr=\(displayEvent.location_address.urlEncoded),Netherlands"
-                                // swiftlint:disable:previous line_length
-                            ) else { return }
-
-                            UIApplication.shared.open(url)
                         }
+                        .buttonStyle(.plain)
                     }
                     LabeledContent("Organised by:", value: displayEvent.organizer)
                     LabeledContent("Attendees:", value: displayEvent.attendees)
@@ -99,7 +77,7 @@ struct EventView: View {
                 }.padding()
 
                 GroupBox {
-                    Button("\(attendOrView(date: displayEvent.date)) \(displayEvent.name)") {
+                    Button("\(attendanceAction) \(displayEvent.name)") {
                         let eventURL = "Appsterdam/events/\(displayEvent.id)/"
                         guard
                             let meetupURL = URL(string: "https://www.meetup.com/\(eventURL)"),
@@ -119,30 +97,37 @@ struct EventView: View {
         }
     }
 
-    func attendOrView(date: String) -> String {
-        let split = date.split(separator: ":")
-        let eventDate = split[0]
-
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyyMMddHHmmss"
-
-        if dateFormatter.string(from: Date()) > eventDate {
-            return "View"
+    private var attendanceAction: String {
+        guard let eventDate = EventDateFormatter.date(from: displayEvent.date) else {
+            return "Attend"
         }
 
-        return "Attend"
+        return Date.now > eventDate ? "View" : "Attend"
+    }
+
+    private var isOnlineEvent: Bool {
+        displayEvent.locationName.localizedCaseInsensitiveContains("http")
+            || displayEvent.locationName.localizedCaseInsensitiveContains("online")
+    }
+
+    private var imageURL: URL? {
+        var components = URLComponents(string: "https://appsterdam.rs/api/getImage.php")
+        components?.queryItems = [
+            URLQueryItem(name: "eid", value: displayEvent.id),
+            URLQueryItem(name: "for", value: displayEvent.name)
+        ]
+        return components?.url
+    }
+
+    private var mapsURL: URL? {
+        var components = URLComponents(string: "https://maps.apple.com/")
+        components?.queryItems = [
+            URLQueryItem(name: "daddr", value: "\(displayEvent.locationAddress),Netherlands")
+        ]
+        return components?.url
     }
 }
 
-struct EventView_Previews: PreviewProvider {
-    static var previews: some View {
-        EventView(displayEvent: .constant(Mock.event))
-
-        if #available(iOS 15.0, *) {
-            EventView(
-                displayEvent: .constant(Mock.event)
-            )
-            .previewInterfaceOrientation(.landscapeLeft)
-        }
-    }
+#Preview {
+    EventView(displayEvent: Mock.event)
 }

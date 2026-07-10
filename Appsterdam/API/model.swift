@@ -9,6 +9,28 @@ import Foundation
 import Combine
 import OSLog
 
+private actor ModelCache {
+    func data(at url: URL, maxAge: TimeInterval, ignoreAge: Bool) throws -> Data? {
+        guard FileManager.default.fileExists(atPath: url.path) else {
+            return nil
+        }
+
+        if !ignoreAge {
+            let attributes = try FileManager.default.attributesOfItem(atPath: url.path)
+            guard let modificationDate = attributes[.modificationDate] as? Date,
+                  Date.now.timeIntervalSince(modificationDate) < maxAge else {
+                return nil
+            }
+        }
+
+        return try Data(contentsOf: url)
+    }
+
+    func write(_ data: Data, to url: URL) throws {
+        try data.write(to: url, options: .atomic)
+    }
+}
+
 /// Model class for decoding JSON files
 ///
 /// usage:
@@ -18,7 +40,8 @@ import OSLog
 ///
 ///     // Only update and cache (never run this, unless it's for background updates)
 ///     Model<Codable>("https://server/file.ext").update()
-class Model<T: Codable>: ObservableObject {
+@MainActor
+final class Model<T: Codable>: ObservableObject {
     /// Model
     @Published public var model: T?
 
@@ -27,6 +50,7 @@ class Model<T: Codable>: ObservableObject {
 
     /// The url of the cache (automatic generated)
     private let cache: URL
+    private let cacheStore = ModelCache()
 
     /// Cache lifetime in seconds
     private let maxAge: Double = 3600 * 24 * 7 // Keep one week.
@@ -38,8 +62,10 @@ class Model<T: Codable>: ObservableObject {
     private let logger = Logger(subsystem: "rs.appsterdam", category: "Model")
 
     /// Initialize Model
-    /// - Parameter url: URL
-    init(url: String) {
+    /// - Parameters:
+    ///   - url: URL
+    ///   - automaticallyLoads: Whether to load cached and remote data immediately.
+    init(url: String, automaticallyLoads: Bool = true) {
         logger.debug("Model V2 For <\(T.self)> Initialized.")
         guard let url = URL(string: url) else {
             logger.debug("Invalid url(\"\(url)\") provided <\(T.self)>.")
@@ -48,14 +74,12 @@ class Model<T: Codable>: ObservableObject {
 
         webURL = url
 
-        cache = FileManager.default.urls(
-            for: .documentDirectory,
-            in: .userDomainMask
-        )[0].appendingPathComponent(url.lastPathComponent)
+        cache = URL.documentsDirectory.appending(path: url.lastPathComponent)
 
-        Task { @MainActor in
-            model = await load()
-            self.objectWillChange.send()
+        if automaticallyLoads {
+            Task {
+                model = await load()
+            }
         }
     }
 
@@ -63,10 +87,10 @@ class Model<T: Codable>: ObservableObject {
     /// - Returns: `T?`
     private func load() async -> T? {
         // Check, if we have at least 1 person
-        guard let events = loadFromCache() else {
+        guard let events = await loadFromCache() else {
             guard let fetchedEvents = await update() else {
                 // Try one more time with the 'old' cache.
-                guard let events = loadFromCache(ignoreCacheTime: true) else {
+                guard let events = await loadFromCache(ignoreCacheTime: true) else {
                     logger.error("We can't load data from disk or internet.\nCannot create: \(T.self)")
                     return nil
                 }
@@ -90,45 +114,22 @@ class Model<T: Codable>: ObservableObject {
         return events
     }
 
-    /// Is the cache valid?
-    /// - Parameter ignoreCacheTime: Ignore the maximum cache time
-    /// - Returns: boolean wherever the cache is still valid or not
-    private func isCacheValid(ignoreCacheTime: Bool = false) -> Bool {
-        do {
-            if FileManager.default.fileExists(atPath: cache.path) {
-                let attributes = try FileManager.default.attributesOfItem(atPath: cache.path)
-
-                if ignoreCacheTime {
-                    return true
-                }
-
-                if let modificationDate = attributes[FileAttributeKey.modificationDate] as? Date,
-                   Date().timeIntervalSince1970 < modificationDate.timeIntervalSince1970 + maxAge {
-                    return true
-                }
-            }
-        } catch {
-            if debug {
-                logger.debug("\(self.cache.path) is invalid")
-            }
-            logger.error("Error: \(error)")
-        }
-
-        return false
-    }
-
     /// Load Model from cache
     /// - Returns: `Model<T>?`
-    private func loadFromCache(ignoreCacheTime: Bool = false) -> T? {
+    private func loadFromCache(ignoreCacheTime: Bool = false) async -> T? {
         do {
-            if isCacheValid(ignoreCacheTime: ignoreCacheTime) {
-                let jsonData = try Data.init(contentsOf: cache)
-                if debug {
-                    logger
-                        .debug("Loading <\(T.self)> \(self.cache.path) from cache.")
-                }
-                return parse(json: jsonData)
+            guard let jsonData = try await cacheStore.data(
+                at: cache,
+                maxAge: maxAge,
+                ignoreAge: ignoreCacheTime
+            ) else {
+                return nil
             }
+
+            if debug {
+                logger.debug("Loading <\(T.self)> \(self.cache.path) from cache.")
+            }
+            return parse(json: jsonData)
         } catch {
             if debug {
                 logger.debug("Failed to load <\(T.self)> \(self.cache.path) from cache")
@@ -146,19 +147,19 @@ class Model<T: Codable>: ObservableObject {
             if debug {
                 logger.debug("Loading <\(T.self)> from internet \(self.webURL.absoluteString)")
             }
-            let jsonData = try Data.init(contentsOf: webURL)
+            let (jsonData, response) = try await URLSession.shared.data(from: webURL)
+            guard let response = response as? HTTPURLResponse,
+                  200..<300 ~= response.statusCode else {
+                logger.error("Invalid response while loading <\(T.self)> from \(self.webURL.absoluteString)")
+                return nil
+            }
             if debug {
                 logger.debug("Saving <\(T.self)> to \(self.cache.path)")
             }
-            try? jsonData.write(to: cache)
+            try? await cacheStore.write(jsonData, to: cache)
 
             let updatedModel = parse(json: jsonData)
-
-            Task { @MainActor in
-                // Send notification to publisher that the value is updated
-                self.model = updatedModel
-                self.objectWillChange.send()
-            }
+            model = updatedModel
 
             return updatedModel
         } catch {

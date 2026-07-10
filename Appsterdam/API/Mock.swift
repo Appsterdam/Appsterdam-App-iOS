@@ -43,15 +43,15 @@ public class Mock {
     )
 
     static let jobs = JobsModel.init(
-        JobUrl: "https://appsterdam.rs",
-        JobTitle: "Fake Job",
-        JobShortDescription: "Job Description (Short)",
-        JobDescription: "Longer job descriptions <b>la</b><i>la</i><s>la</s>",
-        JobCriteria: "Criteria",
-        JobPublishStartDate: "2022-02-22",
-        JobPublishEndDate: "2022-12-22",
-        JobProvider: "Wesley de Groot 🤪",
-        JobCity: "Appsterdam"
+        jobURL: "https://appsterdam.rs",
+        jobTitle: "Fake Job",
+        jobShortDescription: "Job Description (Short)",
+        jobDescription: "Longer job descriptions <b>la</b><i>la</i><s>la</s>",
+        jobCriteria: "Criteria",
+        jobPublishStartDate: "2022-02-22",
+        jobPublishEndDate: "2022-12-22",
+        jobProvider: "Wesley de Groot 🤪",
+        jobCity: "Appsterdam"
     )
 
     static let event = Event.init(
@@ -60,8 +60,8 @@ public class Mock {
         description: "Weekly Meeten & Drinken, Weekly Meeten & Drinken, Weekly Meeten",
         price: "0",
         organizer: "Appsterdam",
-        location_name: "Cafe Bax",
-        location_address: "Kinkerstraat 119, 1053CC Amsterdam, Netherlands",
+        locationName: "Cafe Bax",
+        locationAddress: "Kinkerstraat 119, 1053CC Amsterdam, Netherlands",
         date: "20250101190000:20250101235959",
         attendees: "2",
         icon: "star",

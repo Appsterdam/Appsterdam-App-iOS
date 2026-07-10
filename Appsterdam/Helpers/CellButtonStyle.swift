@@ -6,7 +6,6 @@
 //  Copyright © 2023 Stichting Appsterdam. All rights reserved.
 //
 
-import Foundation
 import SwiftUI
 
 /// Hack to make buttons always clickable on the whole surface area not only on text / images.
@@ -24,6 +23,7 @@ struct CellButtonStyle: ButtonStyle {
     func makeBody(configuration: Configuration) -> some View {
         configuration.label
             .frame(maxWidth: .infinity, maxHeight: .infinity)
-            .background(Color.init(red: 0, green: 0, blue: 0, opacity: 0.0001))
+            .contentShape(.rect)
+            .opacity(configuration.isPressed ? 0.7 : 1)
     }
 }

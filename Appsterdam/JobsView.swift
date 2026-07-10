@@ -9,46 +9,41 @@
 import SwiftUI
 import SwiftExtras
 
-// swiftlint:disable identifier_name
-struct JobsModel: Codable {
-    var JobUrl: String
-    var JobTitle: String
-    var JobShortDescription: String
-    var JobDescription: String
-    var JobCriteria: String
-    var JobPublishStartDate: String
-    var JobPublishEndDate: String
-    var JobProvider: String?
-    var JobCity: String
-}
-// swiftlint:enable identifier_name
+struct JobsModel: Codable, Equatable, Identifiable {
+    var jobURL: String
+    var jobTitle: String
+    var jobShortDescription: String
+    var jobDescription: String
+    var jobCriteria: String
+    var jobPublishStartDate: String
+    var jobPublishEndDate: String
+    var jobProvider: String?
+    var jobCity: String
 
-extension JobsModel: Identifiable {
-    var id: UUID {
-        return UUID()
+    var id: String { jobURL }
+
+    enum CodingKeys: String, CodingKey {
+        case jobURL = "JobUrl"
+        case jobTitle = "JobTitle"
+        case jobShortDescription = "JobShortDescription"
+        case jobDescription = "JobDescription"
+        case jobCriteria = "JobCriteria"
+        case jobPublishStartDate = "JobPublishStartDate"
+        case jobPublishEndDate = "JobPublishEndDate"
+        case jobProvider = "JobProvider"
+        case jobCity = "JobCity"
     }
 }
 
 struct JobsView: View {
-    @Environment(\.colorScheme) var colorScheme
+    @State private var selectedJob: JobsModel?
 
-    @State private var showJob = false
-    @State private var job: JobsModel = Mock.jobs
-
-    @State private var searchText = ""
-
-    @ObservedObject private var jobs = Model<[JobsModel]>.init(
+    @StateObject private var jobs = Model<[JobsModel]>.init(
         url: "https://appsterdam.rs/api/jobs.json"
     )
 
-    init() {
-        if let jobs = jobs.model {
-            Settings.shared.jobsCount = "\(jobs.count)"
-        }
-    }
-
     var body: some View {
-        NavigationView {
+        NavigationStack {
             List {
                 Section(
                     footer:
@@ -56,55 +51,46 @@ struct JobsView: View {
                             "_Please note: this job data is coming from our friends._"
                         ))
                 ) {
-                    ForEach(jobs.model ?? [Mock.jobs]) { job in
-                        Button {
-                            self.job = job
-                            self.showJob = true
-                        } label: {
-                            Text(.init(job.JobTitle))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .font(.body)
+                    if let loadedJobs = jobs.model {
+                        ForEach(loadedJobs) { job in
+                            Button {
+                                selectedJob = job
+                            } label: {
+                                Text(.init(job.jobTitle))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(.body)
 
-                            Text(.init(job.JobShortDescription))
-                                .frame(maxWidth: .infinity, alignment: .leading)
-                                .font(.caption2)
-                            Spacer()
-                            HStack {
-                                Text("📍 \(job.JobCity)")
-                                    .font(.caption)
+                                Text(.init(job.jobShortDescription))
+                                    .frame(maxWidth: .infinity, alignment: .leading)
+                                    .font(.caption2)
                                 Spacer()
-                                Text("🏠 \(job.JobProvider ?? "")")
-                                    .font(.caption)
+                                HStack {
+                                    Text("📍 \(job.jobCity)")
+                                        .font(.caption)
+                                    Spacer()
+                                    Text("🏠 \(job.jobProvider ?? "")")
+                                        .font(.caption)
+                                }
                             }
+                            .buttonStyle(CellButtonStyle())
                         }
-                        .buttonStyle(CellButtonStyle())
+                    } else {
+                        ProgressView()
+                            .controlSize(.large)
+                            .frame(maxWidth: .infinity)
                     }
                 }
             } // /list
             .refreshable {
-                Task {
-                    await jobs.update()
-                }
+                await jobs.update()
             }
-            .onChange(of: jobs.model?.first?.id) { _ in
+            .onChange(of: jobs.model?.count) { _ in
                 Settings.shared.jobsCount = "\(jobs.model?.count ?? 0)"
             }
-            .toolbar {
-                ToolbarItem(placement: .principal) {
-                    VStack {
-                        Text("Jobs")
-                            .font(.headline)
-                        Text("For everyone who is creating.")
-                            .font(.subheadline)
-                    }
-                }
-            }
         } // /navigationview
-        .navigationViewStyle(.stack)
+        .navigationTitle("Jobs")
         .navigationBarTitleDisplayMode(.inline)
-        .sheet(isPresented: $showJob, content: {
-            JobView(job: $job)
-        })
+        .sheet(item: $selectedJob, content: JobView.init)
     }
 }
 
@@ -122,21 +108,21 @@ struct JobView: View {
     @State private var urlString = "https://appsterdam.rs"
 
     // Which job are we showing
-    @Binding var job: JobsModel
+    let job: JobsModel
 
     var body: some View {
-        CardView(title: job.JobTitle) {
+        CardView(title: job.jobTitle) {
             VStack {
                 HStack {
                     VStack {
-                        Text("Apply Before: \(job.JobPublishEndDate)")
+                        Text("Apply Before: \(job.jobPublishEndDate)")
                             .font(.subheadline)
                             .frame(
                                 maxWidth: .infinity,
                                 alignment: .leading
                             )
 
-                        Text("Location: \(job.JobCity)")
+                        Text("Location: \(job.jobCity)")
                             .font(.subheadline)
                             .frame(
                                 maxWidth: .infinity,
@@ -147,7 +133,7 @@ struct JobView: View {
                     Spacer()
 
                     VStack(alignment: .leading) {
-                        Text("\(job.JobProvider ?? "")\u{3000}")
+                        Text("\(job.jobProvider ?? "")\u{3000}")
                             .frame(maxWidth: .infinity, alignment: .trailing)
                             .font(.subheadline)
                             .frame(
@@ -160,7 +146,7 @@ struct JobView: View {
 
                 ScrollView {
                     GroupBox(label: Text("Description")) {
-                        Text(.init(job.JobDescription))
+                        Text(.init(job.jobDescription))
                             .font(.body)
                             .frame(
                                 maxWidth: .infinity,
@@ -169,7 +155,7 @@ struct JobView: View {
                     }.padding(.horizontal)
 
                     GroupBox(label: Text("Criteria")) {
-                        Text(.init(job.JobCriteria))
+                        Text(.init(job.jobCriteria))
                             .font(.body)
                             .frame(
                                 maxWidth: .infinity,
@@ -180,7 +166,7 @@ struct JobView: View {
 
                 GroupBox {
                     Button("View on Web") {
-                        self.urlString = job.JobUrl
+                        self.urlString = job.jobURL
                         showSafari = true
                     }
                 }
@@ -195,6 +181,6 @@ struct JobView: View {
 
 struct JobView_Previews: PreviewProvider {
     static var previews: some View {
-        JobView(job: .constant(Mock.jobs))
+        JobView(job: Mock.jobs)
     }
 }

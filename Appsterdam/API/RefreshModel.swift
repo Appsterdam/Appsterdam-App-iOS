@@ -20,6 +20,7 @@ public class RefreshModel {
     let taskIdentifier = "rs.appsterdam.refresh"
     let runAfter: Double = 3600 * 24 // Once a day.
     let logger = Logger(subsystem: "rs.appsterdam", category: "refresh model")
+    private var refreshTask: Task<Void, Never>?
 
     /// Static variable settings
     public static let shared = RefreshModel()
@@ -33,8 +34,11 @@ public class RefreshModel {
     public func register() {
         logger.debug("Registered task: \(self.taskIdentifier).")
         BGTaskScheduler.shared.register(forTaskWithIdentifier: taskIdentifier, using: nil) { task in
-            self.handleAppRefresh(task: task as! BGAppRefreshTask)
-            // swiftlint:disable:previous force_cast
+            guard let task = task as? BGAppRefreshTask else {
+                task.setTaskCompleted(success: false)
+                return
+            }
+            self.handleAppRefresh(task: task)
         }
     }
 
@@ -62,34 +66,40 @@ public class RefreshModel {
     public func handleAppRefresh(task: BGAppRefreshTask) {
         scheduleAppRefresh()
 
-        task.expirationHandler = {
-            self.logger.debug("Refresh expired")
+        task.expirationHandler = { [weak self] in
+            self?.refreshTask?.cancel()
+            self?.logger.debug("Refresh expired")
             Settings.shared.lastUpdate = "Failed"
-            task.setTaskCompleted(success: false)
         }
 
-        Task {
+        refreshTask = Task { @MainActor in
             // Load App
-            await Model<AppModel>.init(
-                url: "https://appsterdam.rs/api/app.json"
+            async let app = Model<AppModel>.init(
+                url: "https://appsterdam.rs/api/app.json",
+                automaticallyLoads: false
             ).update()
 
             // Load Events
-            await Model<EventModel>.init(
-                url: "https://appsterdam.rs/api/events.json"
+            async let events = Model<[EventModel]>.init(
+                url: "https://appsterdam.rs/api/events.json",
+                automaticallyLoads: false
             ).update()
 
             // Load Jobs
-            await Model<JobsModel>.init(
-                url: "https://appsterdam.rs/api/jobs.json"
+            async let jobs = Model<[JobsModel]>.init(
+                url: "https://appsterdam.rs/api/jobs.json",
+                automaticallyLoads: false
             ).update()
+
+            guard !Task.isCancelled else {
+                task.setTaskCompleted(success: false)
+                return
+            }
+
+            let results = await (app, events, jobs)
+            let succeeded = results.0 != nil && results.1 != nil && results.2 != nil
+            Settings.shared.lastUpdate = succeeded ? Date.now.formatted() : "Failed"
+            task.setTaskCompleted(success: succeeded)
         }
-
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-
-        Settings.shared.lastUpdate = formatter.string(from: Date())
-
-        task.setTaskCompleted(success: true)
     }
 }

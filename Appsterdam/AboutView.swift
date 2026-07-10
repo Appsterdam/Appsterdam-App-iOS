@@ -15,25 +15,23 @@ struct AboutView: View {
     @State private var showSafari = false
 
     // Show person view (profile)
-    @State private var showPerson = false
-
     // initial URL string
     @State private var urlString = "https://appsterdam.rs"
 
     // Current person
-    @State private var person: Person = Mock.person
+    @State private var selectedPerson: Person?
 
     // Persons.
-    @ObservedObject private var persons = Model<AppModel>.init(
+    @StateObject private var persons = Model<AppModel>.init(
         url: "https://appsterdam.rs/api/app.json"
     )
 
     private var releaseVersionNumber: String {
-        return Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
+        Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
     }
 
     var body: some View {
-        NavigationView {
+        NavigationStack {
             Form {
                 Section {
                     VStack {
@@ -73,17 +71,19 @@ struct AboutView: View {
                 if let model = persons.model {
                     ForEach(model.people) { team in
                         Section(team.team) {
-                            ScrollView(.horizontal, showsIndicators: false) {
+                            ScrollView(.horizontal) {
                                 HStack(spacing: 20) {
                                     ForEach(team.members) { member in
-                                        PersonView(person: member)
-                                            .onTapGesture {
-                                                self.person = member
-                                                showPerson = true
-                                            }
+                                        Button {
+                                            selectedPerson = member
+                                        } label: {
+                                            PersonView(person: member)
+                                        }
+                                        .buttonStyle(.plain)
                                     }
                                 }
                             }
+                            .scrollIndicators(.hidden)
                         }
                     }
                 } else {
@@ -150,18 +150,13 @@ struct AboutView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .refreshable {
-                Task {
-                    await persons.update()
-                }
+                await persons.update()
             }
-            .sheet(isPresented: $showPerson) {
-                StaffPersonView(person: $person)
-            }
+            .sheet(item: $selectedPerson, content: StaffPersonView.init)
             .sheet(isPresented: $showSafari) {
                 SafariView(url: $urlString)
             }
         }
-        .navigationViewStyle(.stack)
     }
 }
 
@@ -180,9 +175,10 @@ struct PersonView: View {
 
     var body: some View {
         VStack {
-            if let picture = person.picture, picture.count > 0 {
+            if let picture = person.picture, !picture.isEmpty, let pictureURL = URL(string: picture) {
                 AsyncImage(
-                    url: URL(string: picture)!) {
+                    url: pictureURL
+                ) {
                         $0
                             .resizable()
                             .scaledToFill()
@@ -201,7 +197,7 @@ struct PersonView: View {
             }
 
             Text(.init(person.name))
-                .foregroundColor(Color.accentColor)
+                .foregroundStyle(Color.accentColor)
 
             Text(.init(person.function))
                 .font(.caption)

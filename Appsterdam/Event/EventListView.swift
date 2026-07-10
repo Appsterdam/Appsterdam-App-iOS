@@ -10,124 +10,76 @@ import SwiftUI
 struct EventListView: View {
     @State private var searchText = ""
     @State private var enableSearch = Settings.shared.eventsEnableSearch
-    @State private var showsEvent: Bool = false
-    @State private var showEvent: Event = Mock.event
+    @State private var selectedEvent: Event?
 
-    @ObservedObject private var events = Model<[EventModel]>.init(
+    @StateObject private var events = Model<[EventModel]>.init(
         url: "https://appsterdam.rs/api/events.json"
     )
 
     var body: some View {
-            let nav = NavigationView {
-                List {
-                    if let searchResults = searchResults {
-                        ForEach(searchResults) { section in
-                            Section(header: Text(section.name)) {
-                                ForEach(section.events) { event in
-                                    Button {
-                                        self.showEvent = event
-                                        self.showsEvent.toggle()
-                                    } label: {
-                                        EventCell(event: event)
-                                    }
-                                    .buttonStyle(CellButtonStyle())
+        let navigation = NavigationStack {
+            List {
+                if searchResults.isEmpty, !searchText.isEmpty {
+                    Text("No results found")
+                        .foregroundStyle(.secondary)
+                } else {
+                    ForEach(searchResults) { section in
+                        Section(section.name) {
+                            ForEach(section.events) { event in
+                                Button {
+                                    selectedEvent = event
+                                } label: {
+                                    EventCell(event: event)
                                 }
+                                .buttonStyle(CellButtonStyle())
                             }
-                            .navigationTitle(section.name)
                         }
                     }
                 }
-                .refreshable {
-                    Task {
-                        await events.update()
-                    }
-                }
-                .onChange(of: events.model?.count) { _ in
-                    let eventCount = events.model?.compactMap { $0.events.count }.reduce(0, +) ?? 0
-                    Settings.shared.appEventsCount = "\(eventCount)"
-                }
-                .onAppear {
-                    let eventCount = events.model?.compactMap { $0.events.count }.reduce(0, +) ?? 0
-                    Settings.shared.appEventsCount = "\(eventCount)"
-                    enableSearch = Settings.shared.eventsEnableSearch
-                }
-                .sheet(isPresented: $showsEvent, content: {
-                    EventView(displayEvent: $showEvent)
-                })
             }
-            .navigationViewStyle(.stack)
+            .navigationTitle("Events")
+            .navigationBarTitleDisplayMode(.inline)
+            .refreshable {
+                await events.update()
+            }
+            .onChange(of: events.model?.count) { _ in
+                updateEventCount()
+            }
+            .onAppear {
+                updateEventCount()
+                enableSearch = Settings.shared.eventsEnableSearch
+            }
+            .sheet(item: $selectedEvent, content: EventView.init)
+        }
 
-            if #available(iOS 15.0, *) {
-                if Settings.shared.eventsEnableSearch {
-                    nav.searchable(text: $searchText)
-                } else {
-                    nav.unredacted()
-                }
-            } else {
-                nav.unredacted()
-            }
+        if enableSearch {
+            navigation.searchable(text: $searchText)
+        } else {
+            navigation
+        }
     }
 
-    var searchResults: [EventModel]? {
-        if searchText.isEmpty {
-            return events.model
-        } else {
-            var searchEvents: [EventModel] = [EventModel]()
-
-            if let events = events.model {
-                for section in events {
-                    var searchEvent: [Event] = [Event]()
-
-                    for event in section.events where event.name.lowercased().contains(searchText.lowercased()) ||
-                            event.description.lowercased().contains(searchText.lowercased()) ||
-                            event.date.lowercased().contains(searchText.lowercased()) {
-                            searchEvent.append(event)
-                    }
-
-                    if !searchEvent.isEmpty {
-                        searchEvents.append(
-                            .init(
-                                name: section.name,
-                                events: searchEvent
-                            )
-                        )
-                    }
-
-                }
-            }
-
-            // if no results then return no results found...
-            guard !searchEvents.isEmpty else {
-                return [
-                    .init(
-                        name: "No results found",
-                        events: [
-                            .init(
-                                id: "0",
-                                name: "No result found",
-                                description: "Please try another search.",
-                                price: "0",
-                                organizer: "",
-                                location_name: "",
-                                location_address: "",
-                                date: "0:0",
-                                attendees: "0",
-                                icon: "exclamationmark.arrow.triangle.2.circlepath",
-                                latitude: "",
-                                longitude: ""
-                            )
-                        ]
-                    )
-                ]
-            }
-
-            return searchEvents
+    private var searchResults: [EventModel] {
+        guard !searchText.isEmpty else {
+            return events.model ?? []
         }
+
+        return events.model?.compactMap { section in
+            let matchingEvents = section.events.filter { event in
+                event.name.localizedStandardContains(searchText)
+                    || event.description.localizedStandardContains(searchText)
+                    || event.date.localizedStandardContains(searchText)
+            }
+            return matchingEvents.isEmpty ? nil : EventModel(name: section.name, events: matchingEvents)
+        } ?? []
+    }
+
+    private func updateEventCount() {
+        let eventCount = events.model?.map(\.events.count).reduce(0, +) ?? 0
+        Settings.shared.appEventsCount = "\(eventCount)"
     }
 }
 
-struct EventListView_Previews: PreviewProvider {
-    static var previews: some View {
-        EventListView()
-    }
+#Preview {
+    EventListView()
 }

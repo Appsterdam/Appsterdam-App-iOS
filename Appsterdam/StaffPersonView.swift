@@ -10,16 +10,15 @@ import SwiftUI
 import SwiftExtras
 
 struct StaffPersonView: View {
-    @Binding var person: Person
-    @Environment(\.verticalSizeClass) var sizeClass
+    let person: Person
 
     var body: some View {
         CardView(title: person.name, subtitle: person.function) {
             VStack(alignment: .center) {
                 VStack {
-                    if let picture = person.picture, picture.count > 0 {
+                    if let picture = person.picture, !picture.isEmpty, let pictureURL = URL(string: picture) {
                         AsyncImage(
-                            url: URL(string: picture)!) {
+                            url: pictureURL) {
                                 $0
                                     .resizable()
                                     .scaledToFill()
@@ -43,7 +42,7 @@ struct StaffPersonView: View {
                 }
 
                 Text(.init(person.function))
-                    .foregroundColor(Color.accentColor)
+                    .foregroundStyle(Color.accentColor)
                     .onPortrait {
                         $0.padding(.top)
                     }
@@ -61,7 +60,7 @@ struct StaffPersonView: View {
                                 .renderingMode(.template)
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundColor(Color.accentColor)
+                                .foregroundStyle(Color.accentColor)
                                 .frame(width: 25, height: 25)
                         }
                     } else {
@@ -81,7 +80,7 @@ struct StaffPersonView: View {
                                 .renderingMode(.template)
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundColor(Color.accentColor)
+                                .foregroundStyle(Color.accentColor)
                                 .frame(width: 25, height: 25)
                         }
                     } else {
@@ -101,7 +100,7 @@ struct StaffPersonView: View {
                                 .renderingMode(.template)
                                 .resizable()
                                 .scaledToFit()
-                                .foregroundColor(Color.accentColor)
+                                .foregroundStyle(Color.accentColor)
                                 .frame(width: 25, height: 25)
                         }
                     } else {
@@ -133,7 +132,7 @@ struct StaffPersonView: View {
 struct StaffPersonView_Previews: PreviewProvider {
     static var previews: some View {
         StaffPersonView(
-            person: .constant(Mock.person)
+            person: Mock.person
         )
     }
 }
