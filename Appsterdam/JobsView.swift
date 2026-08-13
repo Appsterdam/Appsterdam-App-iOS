@@ -91,7 +91,7 @@ private struct JobCell: View {
                 .font(.title3)
                 .foregroundStyle(AppTheme.accent)
                 .frame(width: 42, height: 42)
-                .background(AppTheme.softAccent, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+                .background(Color(uiColor: .tertiarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 8))
                 .accessibilityHidden(true)
 
             VStack(alignment: .leading, spacing: 10) {
@@ -111,7 +111,7 @@ private struct JobCell: View {
             }
         }
         .padding(14)
-        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .accessibilityElement(children: .combine)
     }
 }
@@ -145,9 +145,7 @@ private struct JobMetadataChip: View {
             .font(.caption)
             .lineLimit(1)
             .foregroundStyle(.secondary)
-            .padding(.horizontal, 9)
-            .padding(.vertical, 6)
-            .background(Color(uiColor: .tertiarySystemGroupedBackground), in: Capsule())
+
     }
 }
 

@@ -155,19 +155,7 @@ private struct EventFallbackHero: View {
 
     var body: some View {
         ZStack {
-            LinearGradient(
-                colors: [
-                    AppTheme.accent.opacity(0.28),
-                    Color(uiColor: .secondarySystemGroupedBackground)
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-
-            Circle()
-                .fill(AppTheme.softAccent)
-                .frame(width: 180, height: 180)
-                .offset(x: 90, y: -80)
+            Color(uiColor: .secondarySystemGroupedBackground)
 
             if showProgress {
                 ProgressView()
@@ -250,7 +238,7 @@ private struct EventInfoCard: View {
         .frame(maxWidth: .infinity)
         .background(
             AppTheme.cardBackground,
-            in: RoundedRectangle(cornerRadius: 18, style: .continuous)
+            in: RoundedRectangle(cornerRadius: 12, style: .continuous)
         )
     }
 }
@@ -277,7 +265,7 @@ private struct EventDescriptionCard: View {
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .accessibilityElement(children: .combine)
     }
 }

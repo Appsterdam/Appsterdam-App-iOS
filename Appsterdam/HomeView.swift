@@ -85,17 +85,7 @@ private struct HomeWelcomeHeader: View {
         .frame(maxWidth: .infinity)
         .padding(.vertical, 30)
         .padding(.horizontal, 20)
-        .background {
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(AppTheme.cardBackground)
-                .overlay(alignment: .topTrailing) {
-                    Circle()
-                        .fill(AppTheme.softAccent)
-                        .frame(width: 140, height: 140)
-                        .offset(x: 42, y: -52)
-                }
-        }
-        .clipShape(.rect(cornerRadius: 24, style: .continuous))
+        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .padding(.horizontal)
         .padding(.vertical, 8)
         .accessibilityElement(children: .combine)

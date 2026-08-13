@@ -178,7 +178,6 @@ private struct AboutHeroCard: View {
                     .scaledToFit()
                     .frame(width: 58, height: 58)
                     .padding(10)
-                    .background(.regularMaterial, in: Circle())
                     .accessibilityHidden(true)
 
                 VStack(alignment: .leading, spacing: 4) {
@@ -199,7 +198,7 @@ private struct AboutHeroCard: View {
                     .foregroundStyle(AppTheme.accent)
 
                 // swiftlint:disable:next line_length
-                Text("If you want to make movies, go to Hollywood. If you want to make musicals, go to Broadway. If you want to make apps, go to Appsterdam.")
+                Text("If you want to make movies, go to Hollywood.\nIf you want to make musicals, go to Broadway.\nIf you want to make apps, go to Appsterdam.")
                     .font(.headline)
                     .lineSpacing(3)
                     .fixedSize(horizontal: false, vertical: true)
@@ -212,23 +211,7 @@ private struct AboutHeroCard: View {
         }
         .padding(20)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background {
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(AppTheme.cardBackground)
-                .overlay(alignment: .topTrailing) {
-                    Circle()
-                        .fill(AppTheme.softAccent)
-                        .frame(width: 128, height: 128)
-                        .offset(x: 38, y: -44)
-                }
-                .overlay(alignment: .bottomLeading) {
-                    RoundedRectangle(cornerRadius: 3)
-                        .fill(AppTheme.accent)
-                        .frame(width: 54, height: 6)
-                        .padding(20)
-                }
-        }
-        .clipShape(.rect(cornerRadius: 24, style: .continuous))
+        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .padding(.horizontal)
         .padding(.vertical, 8)
         .accessibilityElement(children: .combine)
@@ -285,7 +268,7 @@ struct PersonView: View {
         }
         .frame(width: 132)
         .padding(10)
-        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .accessibilityElement(children: .combine)
     }
 }

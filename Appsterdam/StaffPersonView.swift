@@ -25,6 +25,7 @@ struct StaffPersonView: View {
             }
             .frame(maxWidth: .infinity)
         }
+        .background(Color.systemGroupedBackground)
     }
 }
 
@@ -48,17 +49,7 @@ private struct StaffProfileHeader: View {
         }
         .frame(maxWidth: .infinity)
         .padding(22)
-        .background {
-            RoundedRectangle(cornerRadius: 24, style: .continuous)
-                .fill(AppTheme.cardBackground)
-                .overlay(alignment: .topTrailing) {
-                    Circle()
-                        .fill(AppTheme.softAccent)
-                        .frame(width: 132, height: 132)
-                        .offset(x: 40, y: -48)
-                }
-        }
-        .clipShape(.rect(cornerRadius: 24, style: .continuous))
+        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .accessibilityElement(children: .combine)
     }
 }
@@ -89,13 +80,8 @@ private struct StaffAvatar: View {
             }
         }
         .frame(width: 142, height: 142)
-        .background(.regularMaterial, in: Circle())
+        .background(Color(uiColor: .secondarySystemGroupedBackground), in: Circle())
         .clipShape(Circle())
-        .overlay {
-            Circle()
-                .stroke(AppTheme.accent.opacity(0.18), lineWidth: 3)
-        }
-        .shadow(color: AppTheme.accent.opacity(0.18), radius: 16, y: 8)
         .accessibilityHidden(true)
     }
 }
@@ -169,7 +155,7 @@ private struct StaffSocialButton: View {
             }
             .frame(maxWidth: .infinity)
             .frame(height: 72)
-            .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 16, style: .continuous))
+            .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         }
         .buttonStyle(.plain)
         .accessibilityLabel(accessibilityLabel)
@@ -192,15 +178,20 @@ private struct StaffBioCard: View {
         }
         .padding(18)
         .frame(maxWidth: .infinity, alignment: .leading)
-        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
+        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .accessibilityElement(children: .combine)
     }
 }
 
 struct StaffPersonView_Previews: PreviewProvider {
     static var previews: some View {
-        StaffPersonView(
-            person: Mock.person
-        )
+        Color
+            .red
+            .ignoresSafeArea()
+            .sheet(isPresented: .constant(true)) {
+                StaffPersonView(
+                    person: Mock.person
+                )
+            }
     }
 }

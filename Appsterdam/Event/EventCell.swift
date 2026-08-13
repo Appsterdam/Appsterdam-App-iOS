@@ -55,13 +55,7 @@ struct EventCell: View {
             .frame(maxWidth: .infinity)
         }
         .padding(14)
-        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
-        .overlay(alignment: .leading) {
-            RoundedRectangle(cornerRadius: 2)
-                .fill(AppTheme.accent)
-                .frame(width: 4)
-                .padding(.vertical, 16)
-        }
+        .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
         .accessibilityElement(children: .ignore)
         .accessibilityLabel(accessibilityText)
     }
@@ -109,7 +103,7 @@ private struct EventDatePill: View {
         }
         .foregroundStyle(AppTheme.accent)
         .frame(width: 52, height: 52)
-        .background(AppTheme.softAccent, in: RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .background(Color(uiColor: .tertiarySystemGroupedBackground), in: RoundedRectangle(cornerRadius: 8))
         .accessibilityHidden(true)
     }
 }
@@ -123,9 +117,7 @@ private struct MetadataChip: View {
             .font(.caption)
             .lineLimit(1)
             .foregroundStyle(.secondary)
-            .padding(.horizontal, 9)
-            .padding(.vertical, 6)
-            .background(Color(uiColor: .tertiarySystemGroupedBackground), in: Capsule())
+
     }
 }
 
