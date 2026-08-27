@@ -31,7 +31,7 @@ struct AboutView: View {
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             Form {
                 Section {
                     AboutHeroCard(version: releaseVersionNumber)
@@ -61,7 +61,7 @@ struct AboutView: View {
                 if let model = persons.model {
                     ForEach(model.people) { team in
                         Section(team.team) {
-                            ScrollView(.horizontal) {
+                            ScrollView(.horizontal, showsIndicators: false) {
                                 HStack(spacing: 20) {
                                     ForEach(team.members) { member in
                                         Button {
@@ -75,7 +75,6 @@ struct AboutView: View {
                                 }
                                 .padding(.vertical, 4)
                             }
-                            .scrollIndicators(.hidden)
                         }
                     }
                 } else {
@@ -164,6 +163,7 @@ struct AboutView: View {
                 SafariView(url: $urlString)
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
 

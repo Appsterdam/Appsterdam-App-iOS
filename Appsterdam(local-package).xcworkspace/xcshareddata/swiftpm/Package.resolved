@@ -6,8 +6,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/0xWDG/OSLogViewer.git",
       "state" : {
-        "branch" : "main",
-        "revision" : "e45ebc517b5266a3b7fdb41e938f82fbb93039fc"
+        "revision" : "f226e23a897b58640e09e4bedd53b93440c9152d",
+        "version" : "1.1.5"
       }
     },
     {
@@ -16,7 +16,7 @@
       "location" : "https://github.com/0xWDG/SwiftExtras.git",
       "state" : {
         "branch" : "main",
-        "revision" : "7a6303164c5fff7dff5ae08a08493642d67252fc"
+        "revision" : "af19ed37c5e33a6d416defea0312ca471374d8e1"
       }
     }
   ],

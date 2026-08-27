@@ -43,7 +43,7 @@ struct JobsView: View {
     )
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             List {
                 Section(
                     footer: Text(.init("_Please note: this job data is coming from our friends._"))
@@ -78,6 +78,7 @@ struct JobsView: View {
                 Settings.shared.jobsCount = "\(jobs.model?.count ?? 0)"
             }
         } // /navigationview
+        .navigationViewStyle(.stack)
         .sheet(item: $selectedJob, content: JobView.init)
     }
 }

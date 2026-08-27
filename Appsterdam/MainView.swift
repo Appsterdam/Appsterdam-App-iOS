@@ -15,12 +15,20 @@ enum AppTheme {
 }
 
 extension View {
+    @ViewBuilder
     func appGroupedBackground() -> some View {
-        scrollContentBackground(.hidden)
-            .background(AppTheme.background.ignoresSafeArea())
-            .safeAreaInset(edge: .bottom) {
-                Color.clear.frame(height: 8)
-            }
+        if #available(iOS 16.0, *) {
+            scrollContentBackground(.hidden)
+                .background(AppTheme.background.ignoresSafeArea())
+                .safeAreaInset(edge: .bottom) {
+                    Color.clear.frame(height: 8)
+                }
+        } else {
+            background(AppTheme.background.ignoresSafeArea())
+                .safeAreaInset(edge: .bottom) {
+                    Color.clear.frame(height: 8)
+                }
+        }
     }
 }
 

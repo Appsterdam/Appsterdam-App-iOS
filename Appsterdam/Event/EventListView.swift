@@ -17,7 +17,7 @@ struct EventListView: View {
     )
 
     var body: some View {
-        let navigation = NavigationStack {
+        let navigation = NavigationView {
             List {
                 if searchResults.isEmpty, !searchText.isEmpty {
                     EmptySearchResultsView(searchText: searchText)
@@ -58,9 +58,12 @@ struct EventListView: View {
         }
 
         if enableSearch {
-            navigation.searchable(text: $searchText, prompt: "Search events")
+            navigation
+                .navigationViewStyle(.stack)
+                .searchable(text: $searchText, prompt: "Search events")
         } else {
             navigation
+                .navigationViewStyle(.stack)
         }
     }
 

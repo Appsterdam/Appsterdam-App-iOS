@@ -74,7 +74,11 @@ final class Model<T: Codable>: ObservableObject {
 
         webURL = url
 
-        cache = URL.documentsDirectory.appending(path: url.lastPathComponent)
+        let documentsDirectory = FileManager.default.urls(
+            for: .documentDirectory,
+            in: .userDomainMask
+        ).first ?? FileManager.default.temporaryDirectory
+        cache = documentsDirectory.appendingPathComponent(url.lastPathComponent)
 
         if automaticallyLoads {
             Task {
@@ -105,7 +109,7 @@ final class Model<T: Codable>: ObservableObject {
 
         // Reload (in background) after 5 seconds using Swift Concurrency.
         Task { [weak self] in
-            try? await Task.sleep(for: .seconds(5))
+            try? await Task.sleep(nanoseconds: 5_000_000_000)
             guard let self else { return }
             await self.update()
         }

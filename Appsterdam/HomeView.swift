@@ -12,13 +12,13 @@ struct HomeView: View {
         url: "https://appsterdam.rs/api/app.json"
     )
 
-    var textSections: [Substring] {
+    var textSections: [String] {
         let text = app.model?.home ?? Mock.app.home
-        return text.split(separator: "\r\n\r\n")
+        return text.components(separatedBy: "\r\n\r\n").filter { !$0.isEmpty }
     }
 
     var body: some View {
-        NavigationStack {
+        NavigationView {
             Form {
                 Section {
                     HomeWelcomeHeader()
@@ -56,6 +56,7 @@ struct HomeView: View {
                 await app.update()
             }
         }
+        .navigationViewStyle(.stack)
     }
 }
 
