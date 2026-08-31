@@ -18,10 +18,7 @@ struct EventView: View {
         ) {
             ScrollView {
                 VStack(spacing: 16) {
-                    EventHeroCard(
-                        event: displayEvent,
-                        imageURL: imageURL
-                    )
+                    EventHeroImage(imageURL: imageURL)        .frame(height: 270)
 
                     EventInfoCard(
                         event: displayEvent,
@@ -68,6 +65,12 @@ struct EventView: View {
             URLQueryItem(name: "eid", value: displayEvent.id),
             URLQueryItem(name: "for", value: displayEvent.name)
         ]
+        print("ICON: \(displayEvent.icon)")
+
+        if displayEvent.icon.contains("http", caseSensitive: false) {
+            return URL(string: displayEvent.icon)
+        }
+
         return components?.url
     }
 
@@ -96,37 +99,6 @@ struct EventView: View {
     }
 }
 
-private struct EventHeroCard: View {
-    let event: Event
-    let imageURL: URL?
-
-    var body: some View {
-        ZStack(alignment: .bottomLeading) {
-            EventHeroImage(imageURL: imageURL)
-
-            LinearGradient(
-                colors: [.clear, .black.opacity(0.72)],
-                startPoint: .center,
-                endPoint: .bottom
-            )
-
-            VStack(alignment: .leading, spacing: 12) {
-                Text(.init(event.name))
-                    .font(.title2.bold())
-                    .foregroundStyle(.white)
-                    .lineLimit(3)
-                    .shadow(radius: 4)
-                    .frame(maxWidth: .infinity)
-            }
-            .padding(18)
-        }
-        .frame(maxWidth: .infinity)
-        .frame(height: 270)
-        .accessibilityElement(children: .combine)
-        .accessibilityLabel("\(event.name), \(EventDateFormatter.string(from: event.date)), \(event.locationName)")
-    }
-}
-
 private struct EventHeroImage: View {
     let imageURL: URL?
 
@@ -136,7 +108,7 @@ private struct EventHeroImage: View {
             case .success(let image):
                 image
                     .resizable()
-                    .scaledToFit()
+                    .scaledToFill()
             case .failure:
                 EventFallbackHero()
             case .empty:
