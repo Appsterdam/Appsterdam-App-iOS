@@ -16,22 +16,21 @@ struct EventView: View {
             title: displayEvent.name,
             subtitle: displayEvent.locationName
         ) {
-            ScrollView {
-                VStack(spacing: 16) {
-                    EventHeroImage(imageURL: imageURL)        .frame(height: 270)
+            VStack(spacing: 16) {
+                EventHeroImage(imageURL: imageURL)
+                    .frame(height: 270)
 
-                    EventInfoCard(
-                        event: displayEvent,
-                        isOnlineEvent: isOnlineEvent,
-                        mapsURL: mapsURL
-                    )
+                EventInfoCard(
+                    event: displayEvent,
+                    isOnlineEvent: isOnlineEvent,
+                    mapsURL: mapsURL
+                )
 
-                    EventDescriptionCard(
-                        description: displayEvent.description
-                    )
-                }
-                .padding(.bottom, 40)
+                EventDescriptionCard(
+                    description: displayEvent.description
+                )
             }
+            .padding(.bottom, 40)
         }
         .overlay(alignment: .bottom) {
             Group {
@@ -120,7 +119,6 @@ private struct EventHeroImage: View {
             case .success(let image):
                 image
                     .resizable()
-                    .scaledToFill()
             case .failure:
                 EventFallbackHero()
             case .empty:
