@@ -107,9 +107,8 @@ final class Model<T: Codable>: ObservableObject {
             return fetchedEvents
         }
 
-        // Reload (in background) after 5 seconds using Swift Concurrency.
+        // Refresh cached content in the background so the UI receives new server data.
         Task { [weak self] in
-            try? await Task.sleep(nanoseconds: 5_000_000_000)
             guard let self else { return }
             await self.update()
         }
@@ -151,7 +150,8 @@ final class Model<T: Codable>: ObservableObject {
             if debug {
                 logger.debug("Loading <\(T.self)> from internet \(self.webURL.absoluteString)")
             }
-            let (jsonData, response) = try await URLSession.shared.data(from: webURL)
+            let request = Self.request(for: webURL)
+            let (jsonData, response) = try await URLSession.shared.data(for: request)
             guard let response = response as? HTTPURLResponse,
                   200..<300 ~= response.statusCode else {
                 logger.error("Invalid response while loading <\(T.self)> from \(self.webURL.absoluteString)")
@@ -174,6 +174,12 @@ final class Model<T: Codable>: ObservableObject {
         }
 
         return nil
+    }
+
+    nonisolated static func request(for url: URL) -> URLRequest {
+        var request = URLRequest(url: url, cachePolicy: .reloadIgnoringLocalCacheData)
+        request.setValue("no-cache", forHTTPHeaderField: "Cache-Control")
+        return request
     }
 
     /// Parse data as `Model<T>?`

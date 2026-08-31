@@ -6,6 +6,7 @@
 //  Copyright © 2022 Stichting Appsterdam. All rights reserved.
 //
 
+import MapKit
 import SwiftUI
 import SwiftExtras
 
@@ -169,75 +170,181 @@ struct JobView: View {
     var body: some View {
         CardView(title: job.jobTitle) {
             VStack {
-                HStack {
-                    VStack {
+                VStack {
+                    Text(job.jobProvider ?? "")
+                        .frame(maxWidth: .infinity, alignment: .leading)
+                        .font(.subheadline)
+
+                    if !job.jobPublishEndDate.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
                         Text("Apply Before: \(job.jobPublishEndDate)")
                             .font(.subheadline)
                             .frame(
                                 maxWidth: .infinity,
                                 alignment: .leading
                             )
-
-                        Text("Location: \(job.jobCity)")
-                            .font(.subheadline)
-                            .frame(
-                                maxWidth: .infinity,
-                                alignment: .leading
-                            )
                     }
 
-                    Spacer()
+                    Text("Location: \(job.jobCity)")
+                        .font(.subheadline)
+                        .lineLimit(1)
+                        .minimumScaleFactor(0.75)
+                        .allowsTightening(true)
+                        .frame(
+                            maxWidth: .infinity,
+                            alignment: .leading
+                        )
 
-                    VStack(alignment: .leading) {
-                        Text("\(job.jobProvider ?? "")\u{3000}")
-                            .frame(maxWidth: .infinity, alignment: .trailing)
-                            .font(.subheadline)
-                            .frame(
-                                maxWidth: .infinity,
-                                alignment: .leading
-                            )
-                        Text("\u{3000}")
-                    }
+                    CompactLocationMap(
+                        locationName: job.jobCity,
+                        searchQuery: job.jobCity
+                    )
                 }
                 .padding()
                 .background(AppTheme.cardBackground, in: RoundedRectangle(cornerRadius: 18, style: .continuous))
                 .padding(.horizontal)
 
                 ScrollView {
-                    GroupBox(label: Text("Description")) {
-                        Text(.init(job.jobDescription))
-                            .font(.body)
-                            .frame(
-                                maxWidth: .infinity,
-                                alignment: .leading
-                            )
-                    }.padding(.horizontal)
+                    VStack {
+                        GroupBox(label: Text("Description")) {
+                            Text(.init(job.jobDescription))
+                                .font(.body)
+                                .frame(
+                                    maxWidth: .infinity,
+                                    alignment: .leading
+                                )
+                        }.padding(.horizontal)
 
-                    GroupBox(label: Text("Criteria")) {
-                        Text(.init(job.jobCriteria))
-                            .font(.body)
-                            .frame(
-                                maxWidth: .infinity,
-                                alignment: .leading
-                            )
-                    }.padding(.horizontal)
-                }
-
-                GroupBox {
-                    Button("View on Web") {
-                        self.urlString = job.jobURL
-                        showSafari = true
+                        GroupBox(label: Text("Criteria")) {
+                            Text(.init(job.jobCriteria))
+                                .font(.body)
+                                .frame(
+                                    maxWidth: .infinity,
+                                    alignment: .leading
+                                )
+                        }.padding(.horizontal)
                     }
-                    .buttonStyle(.borderedProminent)
-                    .frame(maxWidth: .infinity)
-                    .accessibilityHint("Opens the job posting in Safari")
+                    .padding(.bottom, 40)
                 }
             }
+        }
+        .overlay(alignment: .bottom) {
+            Group {
+                if #available(iOS 26.0, *) {
+                    jobButton
+                        .buttonStyle(.glass)
+                } else {
+                    jobButton
+                        .buttonStyle(.borderedProminent)
+                }
+            }
+            .controlSize(.large)
+            .accessibilityLabel("View \(job.jobTitle) on the web")
+            .accessibilityHint("Opens the job posting in Safari")
+            .padding(.bottom)
         }
         .sheet(isPresented: $showSafari,
                content: {
             SafariView(url: $urlString)
         })
+    }
+
+    private var jobButton: some View {
+        Button {
+            urlString = job.jobURL
+            showSafari = true
+        } label: {
+            Label("View on Web", systemImage: "arrow.up.forward.app")
+                .font(.headline)
+        }
+    }
+}
+
+struct CompactMapLocation: Identifiable {
+    let id = UUID()
+    let coordinate: CLLocationCoordinate2D
+}
+
+struct CompactLocationMap: View {
+    let locationName: String
+    let searchQuery: String
+    var coordinate: CLLocationCoordinate2D?
+
+    @State private var location: CompactMapLocation?
+    @State private var lookupFailed = false
+
+    var body: some View {
+        Group {
+            if let location {
+                Map(
+                    coordinateRegion: .constant(region(around: location.coordinate)),
+                    interactionModes: [],
+                    annotationItems: [location]
+                ) { location in
+                    MapMarker(coordinate: location.coordinate)
+                }
+                .accessibilityLabel("Map of \(locationName)")
+            } else if lookupFailed {
+                Label("Map unavailable", systemImage: "map")
+                    .font(.subheadline)
+                    .foregroundStyle(.secondary)
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .accessibilityLabel("Map unavailable for \(locationName)")
+            } else {
+                ProgressView("Loading map")
+                    .frame(maxWidth: .infinity, maxHeight: .infinity)
+                    .accessibilityLabel("Loading map for \(locationName)")
+            }
+        }
+        .frame(height: 120)
+        .background(Color(uiColor: .tertiarySystemGroupedBackground))
+        .clipShape(RoundedRectangle(cornerRadius: 12, style: .continuous))
+        .task(id: searchQuery) {
+            await loadLocation()
+        }
+    }
+
+    private func region(around coordinate: CLLocationCoordinate2D) -> MKCoordinateRegion {
+        MKCoordinateRegion(
+            center: coordinate,
+            span: MKCoordinateSpan(latitudeDelta: 0.08, longitudeDelta: 0.08)
+        )
+    }
+
+    @MainActor
+    private func loadLocation() async {
+        location = nil
+        lookupFailed = false
+
+        if let coordinate, CLLocationCoordinate2DIsValid(coordinate) {
+            location = CompactMapLocation(coordinate: coordinate)
+            return
+        }
+
+        let query = searchQuery.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty else {
+            lookupFailed = true
+            return
+        }
+
+        let request = MKLocalSearch.Request()
+        request.naturalLanguageQuery = query
+        request.resultTypes = .address
+
+        do {
+            let response = try await MKLocalSearch(request: request).start()
+            try Task.checkCancellation()
+
+            guard let coordinate = response.mapItems.first?.placemark.coordinate else {
+                lookupFailed = true
+                return
+            }
+
+            location = CompactMapLocation(coordinate: coordinate)
+        } catch is CancellationError {
+            return
+        } catch {
+            lookupFailed = true
+        }
     }
 }
 

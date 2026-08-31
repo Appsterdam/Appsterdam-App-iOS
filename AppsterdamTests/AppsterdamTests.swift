@@ -71,6 +71,14 @@ final class AppsterdamTests: XCTestCase {
         XCTAssertEqual(job.jobTitle, "iOS Engineer")
     }
 
+    func testModelRefreshRequestBypassesStaleCachedResponses() throws {
+        let url = try XCTUnwrap(URL(string: "https://appsterdam.rs/api/jobs.json"))
+        let request = Model<[JobsModel]>.request(for: url)
+
+        XCTAssertEqual(request.cachePolicy, .reloadIgnoringLocalCacheData)
+        XCTAssertEqual(request.value(forHTTPHeaderField: "Cache-Control"), "no-cache")
+    }
+
     func testEventUpdateDetectorFindsOnlyNewEvents() {
         let knownEvent = Mock.event
         var newEvent = Mock.event

@@ -29,20 +29,33 @@ struct EventView: View {
                     EventDescriptionCard(
                         description: displayEvent.description
                     )
-
-                    Button {
-                        openMeetupEvent()
-                    } label: {
-                        Label("\(attendanceAction) on Meetup", systemImage: "arrow.up.forward.app")
-                            .font(.headline)
-                            .frame(maxWidth: .infinity)
-                    }
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.large)
-                    .accessibilityLabel("\(attendanceAction) \(displayEvent.name) on Meetup")
-                    .accessibilityHint("Opens this event on Meetup")
+                }
+                .padding(.bottom, 40)
+            }
+        }
+        .overlay(alignment: .bottom) {
+            Group {
+                if #available(iOS 26.0, *) {
+                    meetupButton
+                        .buttonStyle(.glass)
+                } else {
+                    meetupButton
+                        .buttonStyle(.borderedProminent)
                 }
             }
+            .controlSize(.large)
+            .accessibilityLabel("\(attendanceAction) \(displayEvent.name) on Meetup")
+            .accessibilityHint("Opens this event on Meetup")
+            .padding(.bottom)
+        }
+    }
+
+    private var meetupButton: some View {
+        Button {
+            openMeetupEvent()
+        } label: {
+            Label("\(attendanceAction) on Meetup", systemImage: "arrow.up.forward.app")
+                .font(.headline)
         }
     }
 
@@ -56,7 +69,7 @@ struct EventView: View {
 
     private var isOnlineEvent: Bool {
         displayEvent.locationName.localizedCaseInsensitiveContains("http")
-            || displayEvent.locationName.localizedCaseInsensitiveContains("online")
+        || displayEvent.locationName.localizedCaseInsensitiveContains("online")
     }
 
     private var imageURL: URL? {
@@ -65,7 +78,6 @@ struct EventView: View {
             URLQueryItem(name: "eid", value: displayEvent.id),
             URLQueryItem(name: "for", value: displayEvent.name)
         ]
-        print("ICON: \(displayEvent.icon)")
 
         if displayEvent.icon.contains("http", caseSensitive: false) {
             return URL(string: displayEvent.icon)
@@ -364,7 +376,7 @@ enum EventDescriptionParser {
         guard
             let src = attribute("src", in: tag),
             let url = URL(string: src)
-        else {
+                else {
             return nil
         }
 
