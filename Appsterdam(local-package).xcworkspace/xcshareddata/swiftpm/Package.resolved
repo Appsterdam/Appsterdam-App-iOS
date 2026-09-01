@@ -1,5 +1,4 @@
 {
-  "originHash" : "98c9084e9d5ac7d78739df431b629404937c756743c6e84e742067107d169f42",
   "pins" : [
     {
       "identity" : "oslogviewer",
@@ -9,16 +8,7 @@
         "revision" : "f226e23a897b58640e09e4bedd53b93440c9152d",
         "version" : "1.1.5"
       }
-    },
-    {
-      "identity" : "swiftextras",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/0xWDG/SwiftExtras.git",
-      "state" : {
-        "branch" : "main",
-        "revision" : "af19ed37c5e33a6d416defea0312ca471374d8e1"
-      }
     }
   ],
-  "version" : 3
+  "version" : 2
 }

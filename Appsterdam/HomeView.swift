@@ -8,12 +8,11 @@
 import SwiftUI
 
 struct HomeView: View {
-    @StateObject private var app = Model<AppModel>.init(
-        url: "https://appsterdam.rs/api/app.json"
-    )
+    @Model("https://appsterdam.rs/api/app.json")
+    private var app: AppModel?
 
     var textSections: [String] {
-        let text = app.model?.home ?? Mock.app.home
+        let text = app?.home ?? Mock.app.home
         return text.components(separatedBy: "\r\n\r\n").filter { !$0.isEmpty }
     }
 
@@ -53,7 +52,7 @@ struct HomeView: View {
                 }
             }
             .refreshable {
-                await app.update()
+                await $app.update()
             }
         }
         .navigationViewStyle(.stack)

@@ -74,22 +74,19 @@ public class RefreshModel {
 
         refreshTask = Task { @MainActor in
             // Load App
-            async let app = Model<AppModel>.init(
-                url: "https://appsterdam.rs/api/app.json",
-                automaticallyLoads: false
-            ).update()
+            async let app = Model<AppModel>.refresh(
+                from: "https://appsterdam.rs/api/app.json"
+            )
 
             // Load Events
-            async let events = Model<[EventModel]>.init(
-                url: "https://appsterdam.rs/api/events.json",
-                automaticallyLoads: false
-            ).update()
+            async let events = Model<[EventModel]>.refresh(
+                from: "https://appsterdam.rs/api/events.json"
+            )
 
             // Load Jobs
-            async let jobs = Model<[JobsModel]>.init(
-                url: "https://appsterdam.rs/api/jobs.json",
-                automaticallyLoads: false
-            ).update()
+            async let jobs = Model<[JobsModel]>.refresh(
+                from: "https://appsterdam.rs/api/jobs.json"
+            )
 
             guard !Task.isCancelled else {
                 task.setTaskCompleted(success: false)

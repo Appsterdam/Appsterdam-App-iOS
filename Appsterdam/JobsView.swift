@@ -39,9 +39,8 @@ struct JobsModel: Codable, Equatable, Identifiable {
 struct JobsView: View {
     @State private var selectedJob: JobsModel?
 
-    @StateObject private var jobs = Model<[JobsModel]>.init(
-        url: "https://appsterdam.rs/api/jobs.json"
-    )
+    @Model("https://appsterdam.rs/api/jobs.json")
+    private var jobs: [JobsModel]
 
     var body: some View {
         NavigationView {
@@ -49,8 +48,8 @@ struct JobsView: View {
                 Section(
                     footer: Text(.init("_Please note: this job data is coming from our friends._"))
                 ) {
-                    if let loadedJobs = jobs.model {
-                        ForEach(loadedJobs) { job in
+                    if $jobs.model != nil {
+                        ForEach(jobs) { job in
                             Button {
                                 selectedJob = job
                             } label: {
@@ -65,6 +64,7 @@ struct JobsView: View {
                         ProgressView()
                             .controlSize(.large)
                             .frame(maxWidth: .infinity)
+                            .accessibilityLabel("Loading jobs")
                     }
                 }
             } // /list
@@ -73,10 +73,10 @@ struct JobsView: View {
             .navigationTitle("Jobs")
             .navigationBarTitleDisplayMode(.inline)
             .refreshable {
-                await jobs.update()
+                await $jobs.update()
             }
-            .onChange(of: jobs.model?.count) { _ in
-                Settings.shared.jobsCount = "\(jobs.model?.count ?? 0)"
+            .onChange(of: jobs.count) { _ in
+                Settings.shared.jobsCount = "\(jobs.count)"
             }
         } // /navigationview
         .navigationViewStyle(.stack)
@@ -168,7 +168,7 @@ struct JobView: View {
     let job: JobsModel
 
     var body: some View {
-        CardView(title: job.jobTitle) {
+        CardView(title: job.jobTitle, subtitle: job.jobProvider) {
             VStack {
                 VStack {
                     Text(job.jobProvider ?? "")
@@ -242,10 +242,9 @@ struct JobView: View {
             .accessibilityHint("Opens the job posting in Safari")
             .padding(.bottom)
         }
-        .sheet(isPresented: $showSafari,
-               content: {
+        .sheet(isPresented: $showSafari) {
             SafariView(url: $urlString)
-        })
+        }
     }
 
     private var jobButton: some View {
@@ -253,8 +252,11 @@ struct JobView: View {
             urlString = job.jobURL
             showSafari = true
         } label: {
-            Label("View on Web", systemImage: "arrow.up.forward.app")
-                .font(.headline)
+            Label(
+                "View on Web",
+                systemImage: "arrow.up.forward.app"
+            )
+            .font(.headline)
         }
     }
 }

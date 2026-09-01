@@ -22,9 +22,8 @@ struct AboutView: View {
     @State private var selectedPerson: Person?
 
     // Persons.
-    @StateObject private var persons = Model<AppModel>.init(
-        url: "https://appsterdam.rs/api/app.json"
-    )
+    @Model("https://appsterdam.rs/api/app.json")
+    private var persons: AppModel?
 
     private var releaseVersionNumber: String {
         Bundle.main.infoDictionary?["CFBundleShortVersionString"] as? String ?? "Unknown"
@@ -58,7 +57,7 @@ struct AboutView: View {
                     }
                 }
 
-                if let model = persons.model {
+                if let model = persons {
                     ForEach(model.people) { team in
                         Section(team.team) {
                             ScrollView(.horizontal, showsIndicators: false) {
@@ -80,6 +79,7 @@ struct AboutView: View {
                 } else {
                     ProgressView()
                         .controlSize(.large)
+                        .accessibilityLabel("Loading Appsterdam team")
                 }
 
                 Section("Socials") {
@@ -156,7 +156,7 @@ struct AboutView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .appGroupedBackground()
             .refreshable {
-                await persons.update()
+                await $persons.update()
             }
             .sheet(item: $selectedPerson, content: StaffPersonView.init)
             .sheet(isPresented: $showSafari) {

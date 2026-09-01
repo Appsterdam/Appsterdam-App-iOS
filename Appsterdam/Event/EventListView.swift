@@ -12,9 +12,8 @@ struct EventListView: View {
     @State private var enableSearch = Settings.shared.eventsEnableSearch
     @State private var selectedEvent: Event?
 
-    @StateObject private var events = Model<[EventModel]>.init(
-        url: "https://appsterdam.rs/api/events.json"
-    )
+    @Model("https://appsterdam.rs/api/events.json")
+    private var events: [EventModel]
 
     var body: some View {
         let navigation = NavigationView {
@@ -45,9 +44,9 @@ struct EventListView: View {
             .navigationTitle("Events")
             .navigationBarTitleDisplayMode(.inline)
             .refreshable {
-                await events.update()
+                await $events.update()
             }
-            .onChange(of: events.model?.count) { _ in
+            .onChange(of: events.count) { _ in
                 updateEventCount()
             }
             .onAppear {
@@ -69,27 +68,25 @@ struct EventListView: View {
 
     private var searchResults: [EventModel] {
         guard !searchText.isEmpty else {
-            return events.model ?? []
+            return events
         }
 
-        return events.model?.compactMap { section in
+        return events.compactMap { section in
             let matchingEvents = section.events.filter { event in
                 event.name.localizedStandardContains(searchText)
                     || event.description.localizedStandardContains(searchText)
                     || event.date.localizedStandardContains(searchText)
             }
             return matchingEvents.isEmpty ? nil : EventModel(name: section.name, events: matchingEvents)
-        } ?? []
+        }
     }
 
     private func updateEventCount() {
-        let eventCount = events.model?.map(\.events.count).reduce(0, +) ?? 0
+        let eventCount = events.map(\.events.count).reduce(0, +)
         Settings.shared.appEventsCount = "\(eventCount)"
 
-        if let eventSections = events.model {
-            let eventIDs = EventUpdateDetector.eventIDs(in: eventSections)
-            Settings.shared.eventsKnownIDs = EventUpdateDetector.storageString(from: eventIDs)
-        }
+        let eventIDs = EventUpdateDetector.eventIDs(in: events)
+        Settings.shared.eventsKnownIDs = EventUpdateDetector.storageString(from: eventIDs)
     }
 }
 
